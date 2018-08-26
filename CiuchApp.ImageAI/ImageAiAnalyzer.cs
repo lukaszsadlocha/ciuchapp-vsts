@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CiuchApp.ImageAI
 {
-    static class Program
+    public static class ImageAiAnalyzer
     {
         // Replace <Subscription Key> with your valid subscription key.
         const string subscriptionKey = "<Subscription Key>";
@@ -20,28 +20,20 @@ namespace CiuchApp.ImageAI
         // Free trial subscription keys are generated in the westcentralus region.
         // If you use a free trial subscription key, you shouldn't need to change
         // this region.
-        const string uriBase =
-            "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
+        const string uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
 
-        static void Main()
+        public static string Main()
         {
             // Get the path and filename to process from the user.
-            Console.WriteLine("Analyze an image:");
-            Console.Write("Enter the path to the image you wish to analyze: ");
-            string imageFilePath = Console.ReadLine();
+            string imageFilePath = @"C:/Images/Image.jpg";
 
             if (File.Exists(imageFilePath))
             {
                 // Make the REST API call.
-                Console.WriteLine("\nWait a moment for the results to appear.\n");
                 MakeAnalysisRequest(imageFilePath).Wait();
             }
-            else
-            {
-                Console.WriteLine("\nInvalid file path");
-            }
-            Console.WriteLine("\nPress Enter to exit...");
-            Console.ReadLine();
+
+            return "OK";
         }
 
         /// <summary>
@@ -76,8 +68,7 @@ namespace CiuchApp.ImageAI
                     // This example uses content type "application/octet-stream".
                     // The other content types you can use are "application/json"
                     // and "multipart/form-data".
-                    content.Headers.ContentType =
-                        new MediaTypeHeaderValue("application/octet-stream");
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
                     // Make the REST API call.
                     response = await client.PostAsync(uri, content);
@@ -87,8 +78,7 @@ namespace CiuchApp.ImageAI
                 string contentString = await response.Content.ReadAsStringAsync();
 
                 // Display the JSON response.
-                Console.WriteLine("\nResponse:\n\n{0}\n",
-                    JToken.Parse(contentString).ToString());
+                Console.WriteLine("\nResponse:\n\n{0}\n", JToken.Parse(contentString).ToString());
             }
             catch (Exception e)
             {

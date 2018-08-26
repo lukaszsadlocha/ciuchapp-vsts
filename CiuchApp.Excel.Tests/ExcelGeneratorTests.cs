@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CiuchApp.ImageAI.Tests
+namespace CiuchApp.Excel.Tests
 {
     [TestClass]
     public class UnitTest1
