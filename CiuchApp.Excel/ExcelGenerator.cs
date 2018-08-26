@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CiuchApp.Excel
 {
-    public static class ExcelGenerator
+    public class ExcelGenerator
     {
         //This project will be used to generate ~3 excels for internal systems
     }

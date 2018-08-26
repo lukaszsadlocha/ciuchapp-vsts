@@ -12,9 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.Dashboard", "CiuchApp.Dashboard\CiuchApp.Dashboard.csproj", "{045C866E-4A5C-47CA-BA1E-B65792D3C227}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.ImageAI.Tests", "CiuchApp.ImageAI.Tests\CiuchApp.ImageAI.Tests.csproj", "{FED75FF6-F07A-46C0-8A3C-1315615D538E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C3253D4F-ABD9-4E2B-9A29-457DC841860B} = {C3253D4F-ABD9-4E2B-9A29-457DC841860B}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A921F71-3666-4E21-B43C-A4B2A270B92A}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,11 +22,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.Domain", "CiuchApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.DataAccess", "CiuchApp.DataAccess\CiuchApp.DataAccess.csproj", "{62D03126-BCFF-4876-84D2-216170D127C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.Common", "CiuchApp.Common\CiuchApp.Common.csproj", "{1B46104B-1592-4C06-9F74-3D1B9BD2451E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.Settings", "CiuchApp.Settings\CiuchApp.Settings.csproj", "{8FCCBAA4-0FE6-439B-9E81-D64E75DC5ECD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Settings.Tests", "CiuchApp.Settings.Tests\CiuchApp.Settings.Tests.csproj", "{EA3AB38D-9138-4259-A9DE-315452C47D81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Excel.Tests", "CiuchApp.Excel.Tests\CiuchApp.Excel.Tests.csproj", "{C9A0ADD4-059B-45CA-A624-07C0688C7E03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.DataAccess.Tests", "CiuchApp.DataAccess.Tests\CiuchApp.DataAccess.Tests.csproj", "{715277FB-8548-4DCA-8139-49372FC04C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +66,6 @@ Global
 		{62D03126-BCFF-4876-84D2-216170D127C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62D03126-BCFF-4876-84D2-216170D127C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D03126-BCFF-4876-84D2-216170D127C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B46104B-1592-4C06-9F74-3D1B9BD2451E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B46104B-1592-4C06-9F74-3D1B9BD2451E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B46104B-1592-4C06-9F74-3D1B9BD2451E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B46104B-1592-4C06-9F74-3D1B9BD2451E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FCCBAA4-0FE6-439B-9E81-D64E75DC5ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8FCCBAA4-0FE6-439B-9E81-D64E75DC5ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FCCBAA4-0FE6-439B-9E81-D64E75DC5ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,6 +74,14 @@ Global
 		{EA3AB38D-9138-4259-A9DE-315452C47D81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA3AB38D-9138-4259-A9DE-315452C47D81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA3AB38D-9138-4259-A9DE-315452C47D81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9A0ADD4-059B-45CA-A624-07C0688C7E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9A0ADD4-059B-45CA-A624-07C0688C7E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9A0ADD4-059B-45CA-A624-07C0688C7E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9A0ADD4-059B-45CA-A624-07C0688C7E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715277FB-8548-4DCA-8139-49372FC04C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715277FB-8548-4DCA-8139-49372FC04C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715277FB-8548-4DCA-8139-49372FC04C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715277FB-8548-4DCA-8139-49372FC04C51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,11 +2,17 @@
 
 namespace CiuchApp.Settings
 {
-    public static class CiuchAppSettings
+    public static class CiuchAppSettingsFactory
     {
-        public static FolderSettingsSection GetSettings()
+        public static CiuchAppSettings GetSettings()
         {
-            return ConfigurationManager.GetSection("FolderSettings") as CiuchApp.Settings.FolderSettingsSection;
+            return new CiuchAppSettings()
+            {
+                LocalPhotoStorageFolder = new LocalPhotoStorageFolder()
+                {
+                    Path = @"C:/XamarinData"
+                }
+            };
         }
     }
 }

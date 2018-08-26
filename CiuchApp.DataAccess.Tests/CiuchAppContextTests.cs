@@ -7,8 +7,10 @@ namespace CiuchApp.DataAccess.Tests
     public class CiuchAppContextTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CiuchAppContext_CreateContext()
         {
+            var current = new CiuchAppContext();
+            Assert.IsNotNull(current);
         }
     }
 }

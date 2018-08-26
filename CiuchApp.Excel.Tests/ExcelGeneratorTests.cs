@@ -4,11 +4,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CiuchApp.Excel.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ExcelGeneratorTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ExcelGenerator_GetGenerator()
         {
+            var excelGenerator = new ExcelGenerator();
+
+            Assert.IsNotNull(excelGenerator);
+
         }
     }
 }

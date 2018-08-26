@@ -40,7 +40,7 @@ namespace CiuchApp.Android.Activities
             businessTripsListView.ItemClick += BusinessTripsListViewClicked;
 
 
-            var settings = CiuchApp.Settings.CiuchAppSettings.GetSettings();
+            var settings = CiuchApp.Settings.CiuchAppSettingsFactory.GetSettings();
 
         }
 
