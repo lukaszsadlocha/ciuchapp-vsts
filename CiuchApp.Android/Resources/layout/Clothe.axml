@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="300px"
+            android:minHeight="300px"
+            android:id="@+id/ClotheImage"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:id="@+id/gridLayout1"
+        android:padding="15dp">
+        <TextView
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView1" />
+        <EditText
+            android:id="@+id/ClotheName"
+            android:layout_width="match_parent" />
+        <TextView
+            android:text="Description"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView2" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:id="@+id/ClotheDestription"
+            android:layout_width="match_parent" />
+        <TextView
+            android:text="S"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView3" />
+        <EditText
+            android:inputType="numberSigned"
+            android:id="@+id/ClotheNumberOfSizeS" />
+        <TextView
+            android:text="M"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView4" />
+        <EditText
+            android:inputType="numberSigned"
+            android:id="@+id/ClotheNumberOfSizeM" />
+        <TextView
+            android:text="L"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView5" />
+        <EditText
+            android:inputType="numberSigned"
+            android:id="@+id/ClotheNumberOfSizeL" />
+    </GridLayout>
+</LinearLayout>

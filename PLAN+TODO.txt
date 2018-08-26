@@ -1,0 +1,37 @@
+Keep posting on blog.lukaszsadlocha.pl
+Add to git
+
+CiuchApp.Android - Xamarin App
+TO DO
+	Makes views
+		DONE: View to pick different Business trip
+		DONE: Show Business Trip (+ List of clothes)
+		
+		Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
+
+		Layout to add new business trip
+			County picker
+			City picker
+			View to add new Country
+			View to add new City
+
+
+Done
+Add two new project (.NET Standard to share between Xamarin, ASP.NET Core)
+Add custom Adapter to list view
+Add new view to pick business trip
+
+
+
+Resources:
+Xamarin:
+	Dropdown(s)
+	https://forums.xamarin.com/discussion/23776/radiobutton-and-dropdown-list
+	https://www.c-sharpcorner.com/article/creating-a-dropdown-list-using-spinner-in-xamarin-android-app-using-visual-studi/
+
+
+
+
+AI (Azure Cognitivity services)
+https://azure.microsoft.com/en-us/try/cognitive-services/?unauthorized=1
+https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts/csharp-analyze
