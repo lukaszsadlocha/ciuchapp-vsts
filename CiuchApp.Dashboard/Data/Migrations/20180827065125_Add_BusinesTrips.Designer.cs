@@ -11,9 +11,10 @@ using System;
 namespace CiuchApp.Dashboard.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180827065125_Add_BusinesTrips")]
+    partial class Add_BusinesTrips
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,30 +86,6 @@ namespace CiuchApp.Dashboard.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BusinessTrips");
-                });
-
-            modelBuilder.Entity("CiuchApp.Domain.Clothe", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BusinessTripId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ImagePath");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NumberOfSizeL");
-
-                    b.Property<int>("NumberOfSizeM");
-
-                    b.Property<int>("NumberOfSizeS");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clothe");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

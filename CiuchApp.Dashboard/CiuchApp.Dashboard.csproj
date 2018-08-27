@@ -27,4 +27,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CiuchApp.DataAccess\CiuchApp.DataAccess.csproj" />
+    <ProjectReference Include="..\CiuchApp.Domain\CiuchApp.Domain.csproj" />
+    <ProjectReference Include="..\CiuchApp.Settings\CiuchApp.Settings.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CiuchApp.Dashboard.Models;
+using CiuchApp.Domain;
 
 namespace CiuchApp.Dashboard.Data
 {
@@ -22,5 +23,9 @@ namespace CiuchApp.Dashboard.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<BusinessTrip> BusinessTrips { get; set; }
+
+        public DbSet<Clothe> Clothe { get; set; }
     }
 }
