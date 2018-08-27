@@ -12,22 +12,23 @@ namespace CiuchApp.Dashboard
 {
     [Produces("application/json")]
     [Route("api/Clothes")]
-    public class ClothesController : Controller
+    public class ClothesApiController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ClothesController(ApplicationDbContext context)
+        public ClothesApiController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         // GET: api/Clothes
         [HttpGet]
-        public IEnumerable<Clothe> GetClothe()
+        public IEnumerable<Piece> GetClothe()
         {
-            return _context.Clothe;
+            return _context.Pieces;
         }
 
+        //Details
         // GET: api/Clothes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClothe([FromRoute] int id)
@@ -37,7 +38,7 @@ namespace CiuchApp.Dashboard
                 return BadRequest(ModelState);
             }
 
-            var clothe = await _context.Clothe.SingleOrDefaultAsync(m => m.Id == id);
+            var clothe = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
 
             if (clothe == null)
             {
@@ -47,9 +48,10 @@ namespace CiuchApp.Dashboard
             return Ok(clothe);
         }
 
+        //Edit
         // PUT: api/Clothes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClothe([FromRoute] int id, [FromBody] Clothe clothe)
+        public async Task<IActionResult> PutClothe([FromRoute] int id, [FromBody] Piece clothe)
         {
             if (!ModelState.IsValid)
             {
@@ -82,16 +84,17 @@ namespace CiuchApp.Dashboard
             return NoContent();
         }
 
+        // ADD
         // POST: api/Clothes
         [HttpPost]
-        public async Task<IActionResult> PostClothe([FromBody] Clothe clothe)
+        public async Task<IActionResult> PostClothe([FromBody] Piece clothe)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Clothe.Add(clothe);
+            _context.Pieces.Add(clothe);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetClothe", new { id = clothe.Id }, clothe);
@@ -106,13 +109,13 @@ namespace CiuchApp.Dashboard
                 return BadRequest(ModelState);
             }
 
-            var clothe = await _context.Clothe.SingleOrDefaultAsync(m => m.Id == id);
+            var clothe = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
             if (clothe == null)
             {
                 return NotFound();
             }
 
-            _context.Clothe.Remove(clothe);
+            _context.Pieces.Remove(clothe);
             await _context.SaveChangesAsync();
 
             return Ok(clothe);
@@ -120,7 +123,7 @@ namespace CiuchApp.Dashboard
 
         private bool ClotheExists(int id)
         {
-            return _context.Clothe.Any(e => e.Id == id);
+            return _context.Pieces.Any(e => e.Id == id);
         }
     }
 }

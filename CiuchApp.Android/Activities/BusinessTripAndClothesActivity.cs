@@ -22,7 +22,7 @@ namespace CiuchApp.Android.Activities
     public class BusinessTripAndClothesActivity : CiuchAppBaseActivity
     {
         //private ImageView _imageView;
-        private List<Clothe> clothes;
+        private List<Piece> clothes;
         private ListView clothesListView;
         private BusinessTrip businessTrip;
 
@@ -35,7 +35,7 @@ namespace CiuchApp.Android.Activities
 
             // Set Business trip info
             businessTrip = BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
-            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip.City} | {businessTrip.Date}";
+            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip.City} | {businessTrip.DateFrom}";
 
             // Load Clothes
             clothesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
@@ -60,7 +60,7 @@ namespace CiuchApp.Android.Activities
             var clotheClicked = clothes[e.Position];
 
             var nextActivity = new Intent(this, typeof(ClotheActivity));
-            nextActivity.PutExtra(Clothe.JsonKey, clotheClicked.Serialize());
+            nextActivity.PutExtra(Piece.JsonKey, clotheClicked.Serialize());
             StartActivity(nextActivity);
         }
 
@@ -78,7 +78,7 @@ namespace CiuchApp.Android.Activities
             if (CameraAndImageSettings.bitmap != null)
             {
                 //Open Clothe with image loaded and data to fill
-                var newClothe = new Clothe
+                var newClothe = new Piece
                 {
                     BusinessTripId = this.businessTrip.Id,
                     Id = ciuchAppContext.GetClothes().Max(x => x.Id) + 1,
@@ -86,7 +86,7 @@ namespace CiuchApp.Android.Activities
                 };
 
                 var nextActivity = new Intent(this, typeof(ClotheActivity));
-                nextActivity.PutExtra(Clothe.JsonKey, newClothe.Serialize());
+                nextActivity.PutExtra(Piece.JsonKey, newClothe.Serialize());
                 StartActivity(nextActivity);
             }
 
@@ -114,7 +114,7 @@ namespace CiuchApp.Android.Activities
         private void TakeAPicture(object sender, EventArgs eventArgs)
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            CameraAndImageSettings._file = new File(CameraAndImageSettings._dir, String.Format($"Clothe_{businessTrip.Country}_{businessTrip.City}_{businessTrip.Date}_{Guid.NewGuid()}.jpg"));
+            CameraAndImageSettings._file = new File(CameraAndImageSettings._dir, String.Format($"Clothe_{businessTrip.Country}_{businessTrip.City}_{businessTrip.DateFrom}_{Guid.NewGuid()}.jpg"));
             intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(CameraAndImageSettings._file));
             StartActivityForResult(intent, 0);
         }

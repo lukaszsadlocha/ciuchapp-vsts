@@ -8,58 +8,42 @@ namespace CiuchApp.DataAccess
 {
     public class CiuchAppContext
     {
-        private List<Clothe> clothes = new List<Clothe>() {
-                new Clothe {
+        private List<Piece> clothes = new List<Piece>() {
+                new Piece {
                     Id = 1,
                    BusinessTripId=1,
                     Name = "Niebieskie spodnie",
-                    Description =  "Czinosy od Levis'a",
-                    NumberOfSizeS = 12,
-                    NumberOfSizeM = 20,
-                    NumberOfSizeL = 25 },
+                    Amount = 39},
 
-                new Clothe {
+                new Piece {
                     Id = 2,
                     BusinessTripId=2,
                     Name = "Żółty Sweterek",
-                    Description =  "Wygląda jak z filmu'a",
-                    NumberOfSizeS = 40,
-                    NumberOfSizeM = 120,
-                    NumberOfSizeL = 60 },
+                    Amount = 40},
 
-                new Clothe {
+                new Piece {
                     Id = 3,
                      BusinessTripId=3,
                     Name = "Bluza z kapturem",
-                    Description =  "Idealna na koncert O.S.T.R",
-                    NumberOfSizeS = 10,
-                    NumberOfSizeM = 40,
-                    NumberOfSizeL = 70 },
+                    Amount= 10},
 
-                new Clothe {
+                new Piece {
                     Id = 4,
                     BusinessTripId =2,
                     Name = "Białe buty",
-                    Description =  "Najlepsze na lato",
-                    NumberOfSizeS = 42,
-                    NumberOfSizeM = 70,
-                    NumberOfSizeL = 100 },
+                    Amount = 42},
 
-                new Clothe {
+                new Piece {
                     Id = 5,
                     BusinessTripId=2,
                     Name = "Skarpetki czarne",
-                    Description =  "na każdą okazje",
-                    NumberOfSizeS = 14,
-                    NumberOfSizeM = 80,
-                    NumberOfSizeL = 55 },
-
+                    Amount = 14},
             };
 
         private List<BusinessTrip> businessTrips =new List<BusinessTrip>() {
-                new BusinessTrip { Id = 1, Country = "Francja", City = "Paryż", Date = "14 Marca 2018" },
-                new BusinessTrip { Id = 2, Country = "Polska", City = "Wólka", Date = "11 Maja 2018" },
-                new BusinessTrip { Id = 3, Country = "Anglia", City = "London", Date = "7 Czerwca 2018" }
+                new BusinessTrip { Id = 1,  DateFrom = new DateTime(2018,04,11) },
+                new BusinessTrip { Id = 2,  DateFrom = new DateTime(2018,05,18) },
+                new BusinessTrip { Id = 3,  DateFrom = new DateTime(2018,07,02) }
             };
 
         public CiuchAppContext()
@@ -74,13 +58,13 @@ namespace CiuchApp.DataAccess
             return businessTrips;
         }
 
-        public List<Clothe> GetClothes()
+        public List<Piece> GetClothes()
         {
             return clothes;
         }
 
 
-        public List<Clothe> GetClothesByBusinessTripId(int businessTrip)
+        public List<Piece> GetClothesByBusinessTripId(int businessTrip)
         {
             return clothes.FindAll(x => x.BusinessTripId == businessTrip).ToList();
         }

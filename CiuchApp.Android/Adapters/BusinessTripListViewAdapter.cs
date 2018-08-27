@@ -45,9 +45,9 @@ namespace CiuchApp.Android.Adapters
             var CityTextView = view.FindViewById<TextView>(Resource.Id.CityTextView);
             var DateTextView = view.FindViewById<TextView>(Resource.Id.DateTextView);
 
-            CountryTextView.Text = businessTrips[position].Country;
-            CityTextView.Text = businessTrips[position].City;
-            DateTextView.Text = businessTrips[position].Date;
+            CountryTextView.Text = businessTrips[position].Country?.Name;
+            CityTextView.Text = businessTrips[position].City?.Name;
+            DateTextView.Text = businessTrips[position].DateFrom.ToShortDateString();
 
             return view;
         }

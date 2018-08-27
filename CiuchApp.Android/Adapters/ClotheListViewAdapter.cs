@@ -16,9 +16,9 @@ namespace CiuchApp.Android.Adapters
     public class ClotheListViewAdapter : BaseAdapter
     {
         private Activity activity;
-        private List<Clothe> clothe;
+        private List<Piece> clothe;
 
-        public ClotheListViewAdapter(Activity activity, List<Clothe> clothe)
+        public ClotheListViewAdapter(Activity activity, List<Piece> clothe)
         {
             this.activity = activity;
             this.clothe = clothe;

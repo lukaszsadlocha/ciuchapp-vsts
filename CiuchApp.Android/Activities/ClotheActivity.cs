@@ -25,7 +25,7 @@ namespace CiuchApp.Android.Activities
             base.OnCreate(bundle);
             
             SetContentView(Resource.Layout.Clothe);
-            var clothe = Clothe.Deserialize(Intent.GetStringExtra(Clothe.JsonKey));
+            var clothe = Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
 
             if(!string.IsNullOrEmpty(clothe.ImagePath))
             {
@@ -34,11 +34,11 @@ namespace CiuchApp.Android.Activities
                 FindViewById<ImageView>(Resource.Id.ClotheImage).SetImageBitmap(image);
             }
 
-            FindViewById<TextView>(Resource.Id.ClotheName).Text = clothe.Name;
-            FindViewById<TextView>(Resource.Id.ClotheDestription).Text = clothe.Description;
-            FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeS).Text = clothe.NumberOfSizeS.ToString();
-            FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeM).Text = clothe.NumberOfSizeM.ToString();
-            FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeL).Text = clothe.NumberOfSizeL.ToString();
+            FindViewById<NumberPicker>(Resource.Id.ClotheName).Value = clothe.Amount;
+            //FindViewById<TextView>(Resource.Id.ClotheDestription).Text = clothe.Description;
+            //FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeS).Text = clothe.NumberOfSizeS.ToString();
+            //FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeM).Text = clothe.NumberOfSizeM.ToString();
+            //FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeL).Text = clothe.NumberOfSizeL.ToString();
 
         }
 

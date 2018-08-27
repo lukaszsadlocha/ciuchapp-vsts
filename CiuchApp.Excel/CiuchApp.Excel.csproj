@@ -41,7 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelGenerator.cs" />
+    <Compile Include="ExcelPiece.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CiuchApp.Domain\CiuchApp.Domain.csproj">
+      <Project>{221EDA5A-AD4D-4CD8-B822-DCD322938F84}</Project>
+      <Name>CiuchApp.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

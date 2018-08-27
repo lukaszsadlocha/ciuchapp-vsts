@@ -26,6 +26,24 @@ namespace CiuchApp.Dashboard.Data
 
         public DbSet<BusinessTrip> BusinessTrips { get; set; }
 
-        public DbSet<Clothe> Clothe { get; set; }
+        public DbSet<Piece> Pieces { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<MainCategory> MainCategories { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Component> Components { get; set; }
+        public DbSet<CountryOfOrigin> CountryOfOrigin { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<CodeCn> CodeCns { get; set; }
+        public DbSet<Set> Sets { get; set; }
+        public DbSet<ColorName> ColorNames { get; set; }
+
+        //BusinessTrip Values
+
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Season> Seasons { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
     }
 }
