@@ -9,7 +9,7 @@ namespace CiuchApp.DataAccess.Tests
         [TestMethod]
         public void CiuchAppContext_CreateContext()
         {
-            var current = new CiuchAppContext();
+            var current = new CiuchAppDummyContext();
             Assert.IsNotNull(current);
         }
     }

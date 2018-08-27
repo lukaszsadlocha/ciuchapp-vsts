@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CiuchApp.Dashboard.Data;
 using CiuchApp.Dashboard.Models;
 using CiuchApp.Dashboard.Services;
+using CiuchApp.DataAccess;
+using CiuchApp.DataAccess.AspNetIdentity;
 
 namespace CiuchApp.Dashboard
 {

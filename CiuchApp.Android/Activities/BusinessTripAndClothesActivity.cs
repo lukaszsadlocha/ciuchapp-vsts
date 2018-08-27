@@ -81,7 +81,7 @@ namespace CiuchApp.Android.Activities
                 var newClothe = new Piece
                 {
                     BusinessTripId = this.businessTrip.Id,
-                    Id = ciuchAppContext.GetClothes().Max(x => x.Id) + 1,
+                    Id = ciuchAppContext.GetPieces().Max(x => x.Id) + 1,
                     ImagePath = CameraAndImageSettings._file.Path
                 };
 

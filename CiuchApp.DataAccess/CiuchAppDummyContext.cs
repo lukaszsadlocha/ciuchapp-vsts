@@ -6,7 +6,7 @@ using CiuchApp.Domain;
 
 namespace CiuchApp.DataAccess
 {
-    public class CiuchAppContext
+    public class CiuchAppDummyContext
     {
         private List<Piece> clothes = new List<Piece>() {
                 new Piece {
@@ -40,13 +40,13 @@ namespace CiuchApp.DataAccess
                     Amount = 14},
             };
 
-        private List<BusinessTrip> businessTrips =new List<BusinessTrip>() {
+        private readonly List<BusinessTrip> businessTrips =new List<BusinessTrip>() {
                 new BusinessTrip { Id = 1,  DateFrom = new DateTime(2018,04,11) },
                 new BusinessTrip { Id = 2,  DateFrom = new DateTime(2018,05,18) },
                 new BusinessTrip { Id = 3,  DateFrom = new DateTime(2018,07,02) }
             };
 
-        public CiuchAppContext()
+        public CiuchAppDummyContext()
         {
             //Upload demo images to Android Emulator
 
@@ -58,7 +58,7 @@ namespace CiuchApp.DataAccess
             return businessTrips;
         }
 
-        public List<Piece> GetClothes()
+        public List<Piece> GetPieces()
         {
             return clothes;
         }
@@ -68,7 +68,5 @@ namespace CiuchApp.DataAccess
         {
             return clothes.FindAll(x => x.BusinessTripId == businessTrip).ToList();
         }
-
-
     }
 }

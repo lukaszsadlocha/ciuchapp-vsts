@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using CiuchApp.Dashboard.Models;
 using CiuchApp.Dashboard.Models.AccountViewModels;
 using CiuchApp.Dashboard.Services;
+using CiuchApp.DataAccess.AspNetIdentity;
 
 namespace CiuchApp.Dashboard.Controllers
 {

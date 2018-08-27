@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CiuchApp.Dashboard.Models;
 using CiuchApp.Domain;
+using CiuchApp.DataAccess.AspNetIdentity;
 
-namespace CiuchApp.Dashboard.Data
+namespace CiuchApp.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -45,5 +45,23 @@ namespace CiuchApp.Dashboard.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+
+        public List<Piece> GetClothesByBusinessTripId(int id)
+        {
+            return this.Pieces.ToList();
+        }
+
+        public List<BusinessTrip> GetBusinessTrips()
+        {
+            return this.BusinessTrips.ToList();
+        }
+
+        public List<Piece> GetPieces()
+        {
+            return this.Pieces.ToList();
+        }
+
     }
+
+
 }

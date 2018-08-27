@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CiuchApp.Dashboard.Data;
 using CiuchApp.Domain;
+using CiuchApp.DataAccess;
 
 namespace CiuchApp.Dashboard
 {
