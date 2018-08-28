@@ -28,12 +28,21 @@
             <td>@Html.DisplayFor(modelItem => item.Id)</td>
             <td>@Html.DisplayFor(modelItem => item.DateFrom)</td>
             <td>@Html.DisplayFor(modelItem => item.DateTo)</td>
-            <td>@item.Country.Id</td>
-            <td>@Html.DisplayFor(modelItem => item.City.Id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Season.Id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Currency.Id)</td>
+            <td>@item.Country.Name</td>
+            <td>@Html.DisplayFor(modelItem => item.City.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Season.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Currency.Name)</td>
             @*<td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | <a asp-action="Details" asp-route-id="@item.Id">Details</a> | <a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>*@
         </tr>
 }
+        <tr class="add-row-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </tbody>
 </table>

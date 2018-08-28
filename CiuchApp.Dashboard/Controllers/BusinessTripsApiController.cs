@@ -22,44 +22,35 @@ namespace CiuchApp.Dashboard
         }
 
         // GET: api/BusinessTripsApi
-        [HttpGet]
-        public IEnumerable<BusinessTrip> GetBusinessTrips()
-        {
-            return _context.BusinessTrips;
-        }
+        //[HttpGet]
+        //public IEnumerable<BusinessTrip> GetBusinessTrips()
+        //{
+        //    return _context.BusinessTrips;
+        //}
 
         // GET: api/BusinessTripsApi/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var businessTrip = await _context.BusinessTrips.FindAsync(id);
+
+        //    if (businessTrip == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(businessTrip);
+        //}
+
+        //(EDIT)  PUT: api/BusinessTripsApi  
+        public async Task<IActionResult> PutBusinessTrip([FromForm]BusinessTrip businessTrip)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var businessTrip = await _context.BusinessTrips.FindAsync(id);
-
-            if (businessTrip == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(businessTrip);
-        }
-
-        // PUT: api/BusinessTripsApi/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusinessTrip([FromRoute] int id, [FromBody] BusinessTrip businessTrip)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != businessTrip.Id)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid)    return BadRequest(ModelState);
 
             _context.Entry(businessTrip).State = EntityState.Modified;
 
@@ -69,28 +60,21 @@ namespace CiuchApp.Dashboard
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessTripExists(id))
-                {
+                if (!BusinessTripExists(businessTrip.Id))   
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
         }
 
-        // POST: api/BusinessTripsApi
+        // POST: api/BusinessTripsApi (ADD)
         [HttpPost]
-        //public async Task<IActionResult> PostBusinessTrip([FromBody] BusinessTrip businessTrip)
-        public async Task<IActionResult> PostBusinessTrip(BusinessTrip businessTrip)
+        public async Task<IActionResult> PostBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             _context.BusinessTrips.Add(businessTrip);
             await _context.SaveChangesAsync();
@@ -99,24 +83,24 @@ namespace CiuchApp.Dashboard
         }
 
         // DELETE: api/BusinessTripsApi/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBusinessTrip([FromRoute] int id)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var businessTrip = await _context.BusinessTrips.FindAsync(id);
-            if (businessTrip == null)
+            var businessTripDb = await _context.BusinessTrips.FindAsync(businessTrip.Id);
+            if (businessTripDb == null)
             {
                 return NotFound();
             }
 
-            _context.BusinessTrips.Remove(businessTrip);
+            _context.BusinessTrips.Remove(businessTripDb);
             await _context.SaveChangesAsync();
 
-            return Ok(businessTrip);
+            return Ok(businessTripDb);
         }
 
         private bool BusinessTripExists(int id)

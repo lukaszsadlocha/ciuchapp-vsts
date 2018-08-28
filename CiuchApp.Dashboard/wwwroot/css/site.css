@@ -33,3 +33,12 @@
         display: none;
     }
 }
+
+.table > tbody > tr > td {
+    border-top: 0px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+hr{
+    margin-top:120px;
+}

@@ -6,7 +6,7 @@ namespace CiuchApp.Domain
 {
     public class BusinessTrip
     {
-        [DisplayName("Numer")]
+        [DisplayName("#")]
 //        [CiuchAppTranslatable]
         public int Id { get; set; }
 
@@ -17,13 +17,16 @@ namespace CiuchApp.Domain
         [DisplayName("Data do")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateTo { get; set; }
+        [DisplayName("Kraj")]
         public virtual Country Country { get; set; }
         public int CountryId { get; set; }
         [DisplayName("Miasto")]
         public virtual City City { get; set; }
         public int CityId { get; set; }
+        [DisplayName("Sezon")]
         public virtual Season Season { get; set; }
         public int SeasonId { get; set; }
+        [DisplayName("Waluta")]
         public virtual Currency Currency { get; set; }
         public int CurrencyId { get; set; }
 
