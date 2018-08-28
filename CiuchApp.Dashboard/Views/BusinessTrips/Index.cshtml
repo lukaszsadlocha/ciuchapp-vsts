@@ -12,53 +12,27 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DateFrom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateTo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Season)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Currency)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.DateFrom)</th>
+            <th>@Html.DisplayNameFor(model => model.DateTo)</th>
+            <th>@Html.DisplayNameFor(model => model.Country)</th>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.Season)</th>
+            <th>@Html.DisplayNameFor(model => model.Currency)</th>
+            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Season.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateFrom)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateTo)</td>
+            <td>@item.Country.Id</td>
+            <td>@Html.DisplayFor(modelItem => item.City.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Season.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Currency.Id)</td>
+            @*<td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | <a asp-action="Details" asp-route-id="@item.Id">Details</a> | <a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>*@
         </tr>
 }
     </tbody>

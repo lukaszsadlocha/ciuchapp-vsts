@@ -259,3 +259,12 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/LICENSE
+
+CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/README\.md
+
+CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/example\.php
+
+CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/CHANGELOG\.md
+
+CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/bower\.json

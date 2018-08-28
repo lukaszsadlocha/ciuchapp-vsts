@@ -84,7 +84,8 @@ namespace CiuchApp.Dashboard
 
         // POST: api/BusinessTripsApi
         [HttpPost]
-        public async Task<IActionResult> PostBusinessTrip([FromBody] BusinessTrip businessTrip)
+        //public async Task<IActionResult> PostBusinessTrip([FromBody] BusinessTrip businessTrip)
+        public async Task<IActionResult> PostBusinessTrip(BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
             {
