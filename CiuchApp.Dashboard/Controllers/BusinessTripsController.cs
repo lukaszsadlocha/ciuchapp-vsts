@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CiuchApp.Domain;
 using CiuchApp.DataAccess;
+using CiuchApp.Domain;
 
 namespace CiuchApp.Dashboard
 {
@@ -22,7 +22,17 @@ namespace CiuchApp.Dashboard
         // GET: BusinessTrips
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BusinessTrips.ToListAsync());
+            var applicationDbContext = _context.BusinessTrips
+                .Include(b => b.City)
+                .Include(b => b.Country)
+                .Include(b => b.Currency)
+                .Include(b => b.Season);
+
+            var cities = _context.Cities.ToList();
+
+            ViewBag.cities = cities;
+
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: BusinessTrips/Details/5
@@ -34,7 +44,11 @@ namespace CiuchApp.Dashboard
             }
 
             var businessTrip = await _context.BusinessTrips
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .Include(b => b.City)
+                .Include(b => b.Country)
+                .Include(b => b.Currency)
+                .Include(b => b.Season)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (businessTrip == null)
             {
                 return NotFound();
@@ -46,6 +60,10 @@ namespace CiuchApp.Dashboard
         // GET: BusinessTrips/Create
         public IActionResult Create()
         {
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id");
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
+            ViewData["CurrencyId"] = new SelectList(_context.Currencies, "Id", "Id");
+            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Id");
             return View();
         }
 
@@ -54,7 +72,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Country,City,Date")] BusinessTrip businessTrip)
+        public async Task<IActionResult> Create([Bind("Id,DateFrom,DateTo,CountryId,CityId,SeasonId,CurrencyId")] BusinessTrip businessTrip)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +80,10 @@ namespace CiuchApp.Dashboard
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", businessTrip.CityId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", businessTrip.CountryId);
+            ViewData["CurrencyId"] = new SelectList(_context.Currencies, "Id", "Id", businessTrip.CurrencyId);
+            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Id", businessTrip.SeasonId);
             return View(businessTrip);
         }
 
@@ -73,11 +95,15 @@ namespace CiuchApp.Dashboard
                 return NotFound();
             }
 
-            var businessTrip = await _context.BusinessTrips.SingleOrDefaultAsync(m => m.Id == id);
+            var businessTrip = await _context.BusinessTrips.FindAsync(id);
             if (businessTrip == null)
             {
                 return NotFound();
             }
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", businessTrip.CityId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", businessTrip.CountryId);
+            ViewData["CurrencyId"] = new SelectList(_context.Currencies, "Id", "Id", businessTrip.CurrencyId);
+            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Id", businessTrip.SeasonId);
             return View(businessTrip);
         }
 
@@ -86,7 +112,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Country,City,Date")] BusinessTrip businessTrip)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DateFrom,DateTo,CountryId,CityId,SeasonId,CurrencyId")] BusinessTrip businessTrip)
         {
             if (id != businessTrip.Id)
             {
@@ -113,6 +139,10 @@ namespace CiuchApp.Dashboard
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", businessTrip.CityId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", businessTrip.CountryId);
+            ViewData["CurrencyId"] = new SelectList(_context.Currencies, "Id", "Id", businessTrip.CurrencyId);
+            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Id", businessTrip.SeasonId);
             return View(businessTrip);
         }
 
@@ -125,7 +155,11 @@ namespace CiuchApp.Dashboard
             }
 
             var businessTrip = await _context.BusinessTrips
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .Include(b => b.City)
+                .Include(b => b.Country)
+                .Include(b => b.Currency)
+                .Include(b => b.Season)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (businessTrip == null)
             {
                 return NotFound();
@@ -139,7 +173,7 @@ namespace CiuchApp.Dashboard
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var businessTrip = await _context.BusinessTrips.SingleOrDefaultAsync(m => m.Id == id);
+            var businessTrip = await _context.BusinessTrips.FindAsync(id);
             _context.BusinessTrips.Remove(businessTrip);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

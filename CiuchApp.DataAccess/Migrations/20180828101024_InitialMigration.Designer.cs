@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CiuchApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180827225455_InitialMigration")]
+    [Migration("20180828101024_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,9 +80,7 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.Property<int>("CityId");
 
-                    b.Property<string>("CountryId");
-
-                    b.Property<int?>("CountryId1");
+                    b.Property<int>("CountryId");
 
                     b.Property<int>("CurrencyId");
 
@@ -96,13 +94,19 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("CountryId1");
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("CurrencyId");
 
                     b.HasIndex("SeasonId");
 
                     b.ToTable("BusinessTrips");
+
+                    b.HasData(
+                        new { Id = 1, CityId = 1, CountryId = 1, CurrencyId = 1, DateFrom = new DateTime(2018, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 3 },
+                        new { Id = 2, CityId = 5, CountryId = 3, CurrencyId = 2, DateFrom = new DateTime(2018, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 4 },
+                        new { Id = 3, CityId = 3, CountryId = 4, CurrencyId = 3, DateFrom = new DateTime(2018, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 4 }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.City", b =>
@@ -116,6 +120,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Wólka Kosowska" },
+                        new { Id = 2, Name = "Paryż" },
+                        new { Id = 3, Name = "Birnimgham" },
+                        new { Id = 4, Name = "Madryt" },
+                        new { Id = 5, Name = "Prato" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.CodeCn", b =>
@@ -129,6 +141,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CodeCns");
+
+                    b.HasData(
+                        new { Id = 1, Name = "QWERT" },
+                        new { Id = 2, Name = "ASDFG" },
+                        new { Id = 3, Name = "YUIO" },
+                        new { Id = 4, Name = "VBNM" },
+                        new { Id = 5, Name = "LKJHGF" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Color", b =>
@@ -142,6 +162,13 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
+
+                    b.HasData(
+                        new { Id = 1, Name = "KLAM212" },
+                        new { Id = 2, Name = "OWTR20" },
+                        new { Id = 3, Name = "BLEW32" },
+                        new { Id = 4, Name = "KKE2111" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.ColorName", b =>
@@ -155,6 +182,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ColorNames");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Zielony" },
+                        new { Id = 2, Name = "Biały" },
+                        new { Id = 3, Name = "Czarny" },
+                        new { Id = 4, Name = "Niebieski" },
+                        new { Id = 5, Name = "Żółty" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Component", b =>
@@ -168,6 +203,13 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Components");
+
+                    b.HasData(
+                        new { Id = 1, Name = "100% Bawełna" },
+                        new { Id = 2, Name = "98% Bawełna, 2 Poliester" },
+                        new { Id = 3, Name = "100% Poliester" },
+                        new { Id = 4, Name = "90% Poliester, 10% Elastan" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Country", b =>
@@ -181,6 +223,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Polska" },
+                        new { Id = 2, Name = "Hiszpania" },
+                        new { Id = 3, Name = "Włochy" },
+                        new { Id = 4, Name = "Wielka Brytania" },
+                        new { Id = 5, Name = "Francja" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.CountryOfOrigin", b =>
@@ -194,6 +244,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CountryOfOrigin");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Chiny" },
+                        new { Id = 2, Name = "Włochy" },
+                        new { Id = 3, Name = "Bangladesz" },
+                        new { Id = 4, Name = "Turcja" },
+                        new { Id = 5, Name = "Polska" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Currency", b =>
@@ -207,6 +265,12 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new { Id = 1, Name = "PLN" },
+                        new { Id = 2, Name = "EURO" },
+                        new { Id = 3, Name = "FUNT" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Group", b =>
@@ -220,6 +284,13 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Groups");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Eleganckie" },
+                        new { Id = 2, Name = "Sportowe" },
+                        new { Id = 3, Name = "Casual" },
+                        new { Id = 4, Name = "Wakacyjne" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.MainCategory", b =>
@@ -233,6 +304,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MainCategories");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Sukienki i tuniki" },
+                        new { Id = 2, Name = "Buty" },
+                        new { Id = 3, Name = "Sandały i klapki" },
+                        new { Id = 4, Name = "Jeansy" },
+                        new { Id = 5, Name = "Koszule" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Piece", b =>
@@ -319,6 +398,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Seasons");
+
+                    b.HasData(
+                        new { Id = 1, Name = "WW18" },
+                        new { Id = 2, Name = "WP18" },
+                        new { Id = 3, Name = "WW19" },
+                        new { Id = 4, Name = "WP19" },
+                        new { Id = 5, Name = "WW20" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Set", b =>
@@ -332,6 +419,14 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sets");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Adventure Explorer" },
+                        new { Id = 2, Name = "Animal Instinct" },
+                        new { Id = 3, Name = "Advanced Retailer" },
+                        new { Id = 4, Name = "Braveheart Warior" },
+                        new { Id = 5, Name = "Elegant Summer" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Size", b =>
@@ -345,6 +440,22 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sizes");
+
+                    b.HasData(
+                        new { Id = 1, Name = "XS" },
+                        new { Id = 2, Name = "S" },
+                        new { Id = 3, Name = "M" },
+                        new { Id = 4, Name = "L" },
+                        new { Id = 5, Name = "XL" },
+                        new { Id = 6, Name = "S/M" },
+                        new { Id = 7, Name = "M/L" },
+                        new { Id = 8, Name = "36" },
+                        new { Id = 9, Name = "37" },
+                        new { Id = 10, Name = "37" },
+                        new { Id = 11, Name = "39" },
+                        new { Id = 12, Name = "40" },
+                        new { Id = 13, Name = "41" }
+                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Supplier", b =>
@@ -358,6 +469,13 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Alvaro" },
+                        new { Id = 2, Name = "La Casa del Papel" },
+                        new { Id = 3, Name = "Ing Ung Wang" },
+                        new { Id = 4, Name = "Neapolitana" }
+                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -479,7 +597,8 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.HasOne("CiuchApp.Domain.Country", "Country")
                         .WithMany("BusinessTrips")
-                        .HasForeignKey("CountryId1");
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CiuchApp.Domain.Currency", "Currency")
                         .WithMany("BusinessTrips")

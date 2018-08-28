@@ -10,12 +10,12 @@ namespace CiuchApp.Domain
 
     public abstract class PieceDropdownValueBase : DropDownValueBase
     {
-        public List<Piece> Pieces { get; set; }
+        public virtual List<Piece> Pieces { get; set; }
     }
 
     public abstract class BusinessTripDropdownValueBase : DropDownValueBase
     {
-        public List<BusinessTrip> BusinessTrips { get; set; }
+        public virtual List<BusinessTrip> BusinessTrips { get; set; }
     }
 
     // Piece Values

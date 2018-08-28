@@ -343,8 +343,7 @@ namespace CiuchApp.DataAccess.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateFrom = table.Column<DateTime>(nullable: false),
                     DateTo = table.Column<DateTime>(nullable: false),
-                    CountryId1 = table.Column<int>(nullable: true),
-                    CountryId = table.Column<string>(nullable: true),
+                    CountryId = table.Column<int>(nullable: false),
                     CityId = table.Column<int>(nullable: false),
                     SeasonId = table.Column<int>(nullable: false),
                     CurrencyId = table.Column<int>(nullable: false)
@@ -359,11 +358,11 @@ namespace CiuchApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BusinessTrips_Countries_CountryId1",
-                        column: x => x.CountryId1,
+                        name: "FK_BusinessTrips_Countries_CountryId",
+                        column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BusinessTrips_Currencies_CurrencyId",
                         column: x => x.CurrencyId,
@@ -476,6 +475,191 @@ namespace CiuchApp.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Wólka Kosowska" },
+                    { 2, "Paryż" },
+                    { 3, "Birnimgham" },
+                    { 4, "Madryt" },
+                    { 5, "Prato" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CodeCns",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "QWERT" },
+                    { 2, "ASDFG" },
+                    { 3, "YUIO" },
+                    { 4, "VBNM" },
+                    { 5, "LKJHGF" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ColorNames",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Żółty" },
+                    { 4, "Niebieski" },
+                    { 2, "Biały" },
+                    { 1, "Zielony" },
+                    { 3, "Czarny" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Colors",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 3, "BLEW32" },
+                    { 2, "OWTR20" },
+                    { 1, "KLAM212" },
+                    { 4, "KKE2111" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Components",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "100% Bawełna" },
+                    { 2, "98% Bawełna, 2 Poliester" },
+                    { 3, "100% Poliester" },
+                    { 4, "90% Poliester, 10% Elastan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Francja" },
+                    { 4, "Wielka Brytania" },
+                    { 2, "Hiszpania" },
+                    { 1, "Polska" },
+                    { 3, "Włochy" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CountryOfOrigin",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Polska" },
+                    { 1, "Chiny" },
+                    { 2, "Włochy" },
+                    { 3, "Bangladesz" },
+                    { 4, "Turcja" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Currencies",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 2, "EURO" },
+                    { 3, "FUNT" },
+                    { 1, "PLN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Groups",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Eleganckie" },
+                    { 2, "Sportowe" },
+                    { 3, "Casual" },
+                    { 4, "Wakacyjne" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MainCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Koszule" },
+                    { 3, "Sandały i klapki" },
+                    { 4, "Jeansy" },
+                    { 1, "Sukienki i tuniki" },
+                    { 2, "Buty" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Seasons",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "WW18" },
+                    { 2, "WP18" },
+                    { 3, "WW19" },
+                    { 4, "WP19" },
+                    { 5, "WW20" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sets",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Elegant Summer" },
+                    { 4, "Braveheart Warior" },
+                    { 2, "Animal Instinct" },
+                    { 1, "Adventure Explorer" },
+                    { 3, "Advanced Retailer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sizes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 13, "41" },
+                    { 1, "XS" },
+                    { 2, "S" },
+                    { 3, "M" },
+                    { 4, "L" },
+                    { 5, "XL" },
+                    { 6, "S/M" },
+                    { 7, "M/L" },
+                    { 8, "36" },
+                    { 9, "37" },
+                    { 10, "37" },
+                    { 11, "39" },
+                    { 12, "40" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Suppliers",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 2, "La Casa del Papel" },
+                    { 3, "Ing Ung Wang" },
+                    { 1, "Alvaro" },
+                    { 4, "Neapolitana" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BusinessTrips",
+                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
+                values: new object[] { 1, 1, 1, 1, new DateTime(2018, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 });
+
+            migrationBuilder.InsertData(
+                table: "BusinessTrips",
+                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
+                values: new object[] { 2, 5, 3, 2, new DateTime(2018, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
+
+            migrationBuilder.InsertData(
+                table: "BusinessTrips",
+                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
+                values: new object[] { 3, 3, 4, 3, new DateTime(2018, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -521,9 +705,9 @@ namespace CiuchApp.DataAccess.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BusinessTrips_CountryId1",
+                name: "IX_BusinessTrips_CountryId",
                 table: "BusinessTrips",
-                column: "CountryId1");
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BusinessTrips_CurrencyId",

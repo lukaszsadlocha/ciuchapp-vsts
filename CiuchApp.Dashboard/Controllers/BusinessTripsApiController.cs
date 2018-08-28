@@ -5,65 +5,63 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CiuchApp.Domain;
 using CiuchApp.DataAccess;
+using CiuchApp.Domain;
 
 namespace CiuchApp.Dashboard
 {
-    [Produces("application/json")]
-    [Route("api/Clothes")]
-    public class ClothesApiController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BusinessTripsApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public ClothesApiController(ApplicationDbContext context)
+        public BusinessTripsApiController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Clothes
+        // GET: api/BusinessTripsApi
         [HttpGet]
-        public IEnumerable<Piece> GetClothe()
+        public IEnumerable<BusinessTrip> GetBusinessTrips()
         {
-            return _context.Pieces;
+            return _context.BusinessTrips;
         }
 
-        //Details
-        // GET: api/Clothes/5
+        // GET: api/BusinessTripsApi/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClothe([FromRoute] int id)
+        public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var clothe = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
+            var businessTrip = await _context.BusinessTrips.FindAsync(id);
 
-            if (clothe == null)
+            if (businessTrip == null)
             {
                 return NotFound();
             }
 
-            return Ok(clothe);
+            return Ok(businessTrip);
         }
 
-        //Edit
-        // PUT: api/Clothes/5
+        // PUT: api/BusinessTripsApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClothe([FromRoute] int id, [FromBody] Piece clothe)
+        public async Task<IActionResult> PutBusinessTrip([FromRoute] int id, [FromBody] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != clothe.Id)
+            if (id != businessTrip.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(clothe).State = EntityState.Modified;
+            _context.Entry(businessTrip).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +69,7 @@ namespace CiuchApp.Dashboard
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClotheExists(id))
+                if (!BusinessTripExists(id))
                 {
                     return NotFound();
                 }
@@ -84,46 +82,45 @@ namespace CiuchApp.Dashboard
             return NoContent();
         }
 
-        // ADD
-        // POST: api/Clothes
+        // POST: api/BusinessTripsApi
         [HttpPost]
-        public async Task<IActionResult> PostClothe([FromBody] Piece clothe)
+        public async Task<IActionResult> PostBusinessTrip([FromBody] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Pieces.Add(clothe);
+            _context.BusinessTrips.Add(businessTrip);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClothe", new { id = clothe.Id }, clothe);
+            return CreatedAtAction("GetBusinessTrip", new { id = businessTrip.Id }, businessTrip);
         }
 
-        // DELETE: api/Clothes/5
+        // DELETE: api/BusinessTripsApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClothe([FromRoute] int id)
+        public async Task<IActionResult> DeleteBusinessTrip([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var clothe = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
-            if (clothe == null)
+            var businessTrip = await _context.BusinessTrips.FindAsync(id);
+            if (businessTrip == null)
             {
                 return NotFound();
             }
 
-            _context.Pieces.Remove(clothe);
+            _context.BusinessTrips.Remove(businessTrip);
             await _context.SaveChangesAsync();
 
-            return Ok(clothe);
+            return Ok(businessTrip);
         }
 
-        private bool ClotheExists(int id)
+        private bool BusinessTripExists(int id)
         {
-            return _context.Pieces.Any(e => e.Id == id);
+            return _context.BusinessTrips.Any(e => e.Id == id);
         }
     }
 }
