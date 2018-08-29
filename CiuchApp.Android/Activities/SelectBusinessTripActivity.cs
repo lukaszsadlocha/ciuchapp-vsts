@@ -11,15 +11,15 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Provider;
 using Android.Content.PM;
-using CiuchApp.Android;
+using CiuchApp.Mobile;
 using CiuchApp.Domain;
 using CiuchApp.DataAccess;
-using CiuchApp.Android.Adapters;
+using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
 
-namespace CiuchApp.Android.Activities
+namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Ciuch", MainLauncher = true)]
+    [Activity(Label = "Ciuch")]
     public class ListBusinessTrips : CiuchAppBaseActivity
     {
         private Button newBusinessTripButton;
@@ -37,7 +37,7 @@ namespace CiuchApp.Android.Activities
             newBusinessTripButton.Click += NewBusinessTripClicked;
 
             //Get Business trips and show them in ListView + add events 
-            businessTrips = restClient.GetBusinessTrips();
+            businessTrips = apiClientService.GetList<BusinessTrip>();
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
             var adapter = new BusinessTripListViewAdapter(this, businessTrips);

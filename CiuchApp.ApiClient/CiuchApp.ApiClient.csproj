@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CiuchApp.Domain\CiuchApp.Domain.csproj" />
+    <ProjectReference Include="..\CiuchApp.Settings\CiuchApp.Settings.csproj" />
+  </ItemGroup>
+
+</Project>

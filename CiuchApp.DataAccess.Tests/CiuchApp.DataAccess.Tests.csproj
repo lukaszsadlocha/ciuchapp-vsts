@@ -59,6 +59,10 @@
       <Project>{62d03126-bcff-4876-84d2-216170d127c8}</Project>
       <Name>CiuchApp.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CiuchApp.Domain\CiuchApp.Domain.csproj">
+      <Project>{221eda5a-ad4d-4cd8-b822-dcd322938f84}</Project>
+      <Name>CiuchApp.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

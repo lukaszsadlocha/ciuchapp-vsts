@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CiuchApp.Android</RootNamespace>
+    <RootNamespace>CiuchApp.Mobile</RootNamespace>
     <AssemblyName>CiuchApp.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
@@ -229,12 +229,12 @@
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
     <Compile Include="Activities\SelectBusinessTripActivity.cs" />
     <Compile Include="CameraAndImageSettings.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Extensions\DatePickerFragment.cs" />
     <Compile Include="Activities\PieceActivity.cs" />
     <Compile Include="Activities\SelectPieceActivity.cs" />
     <Compile Include="Resources\BitmapHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\RestService.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -262,6 +262,10 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CiuchApp.ApiClient\CiuchApp.ApiClient.csproj">
+      <Project>{ff679f6b-94d4-40da-9039-b9454dfcf98e}</Project>
+      <Name>CiuchApp.ApiClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CiuchApp.DataAccess\CiuchApp.DataAccess.csproj">
       <Project>{62D03126-BCFF-4876-84D2-216170D127C8}</Project>
       <Name>CiuchApp.DataAccess</Name>
@@ -293,7 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\NewBusinessTrip.axml">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

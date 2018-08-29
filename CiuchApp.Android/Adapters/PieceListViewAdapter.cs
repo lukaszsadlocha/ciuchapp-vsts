@@ -5,7 +5,7 @@ using CiuchApp.Domain;
 using Java.Lang;
 using System.Collections.Generic;
 
-namespace CiuchApp.Android.Adapters
+namespace CiuchApp.Mobile.Adapters
 {
     public class ClotheViewHolder : Java.Lang.Object
     {

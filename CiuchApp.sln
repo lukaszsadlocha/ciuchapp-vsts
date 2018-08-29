@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Android", "CiuchApp.Android\CiuchApp.Android.csproj", "{2851DAA4-5229-46A6-98E7-24740B49B153}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Mobile", "CiuchApp.Android\CiuchApp.Mobile.csproj", "{2851DAA4-5229-46A6-98E7-24740B49B153}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Excel", "CiuchApp.Excel\CiuchApp.Excel.csproj", "{64D8F912-9AC3-4C9A-ABC8-EDA4560876B9}"
 EndProject
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Excel.Tests", "CiuchApp.Excel.Tests\CiuchApp.Excel.Tests.csproj", "{C9A0ADD4-059B-45CA-A624-07C0688C7E03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.DataAccess.Tests", "CiuchApp.DataAccess.Tests\CiuchApp.DataAccess.Tests.csproj", "{715277FB-8548-4DCA-8139-49372FC04C51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.ApiClient", "CiuchApp.ApiClient\CiuchApp.ApiClient.csproj", "{FF679F6B-94D4-40DA-9039-B9454DFCF98E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{715277FB-8548-4DCA-8139-49372FC04C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{715277FB-8548-4DCA-8139-49372FC04C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{715277FB-8548-4DCA-8139-49372FC04C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF679F6B-94D4-40DA-9039-B9454DFCF98E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF679F6B-94D4-40DA-9039-B9454DFCF98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF679F6B-94D4-40DA-9039-B9454DFCF98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF679F6B-94D4-40DA-9039-B9454DFCF98E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

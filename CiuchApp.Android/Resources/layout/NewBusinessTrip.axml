@@ -1,72 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:minWidth="25px"
-        android:minHeight="25px" />
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:id="@+id/gridLayout1"
-        android:padding="15dp">
-        <TextView
-            android:text="Kraj"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView1" />
-        <EditText
-            android:id="@+id/country"
-            android:layout_width="match_parent" />
-        <TextView
-            android:text="Miasto"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/city" />
-        <EditText
-            android:inputType="textMultiLine"
-            android:id="@+id/ClotheDestription"
-            android:layout_width="match_parent" />
-        <TextView
-            android:text="Data od"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dateFrom" />
-        <EditText
-            android:inputType="numberSigned"
-            android:id="@+id/ClotheNumberOfSizeS" />
-        <TextView
-            android:text="Data do"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView4" />
-        <EditText
-            android:inputType="numberSigned"
-            android:id="@+id/dateTo" />
-        <TextView
-            android:text="Kolekcja"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView5" />
-        <EditText
-            android:inputType="numberSigned"
-            android:id="@+id/Season" />
-        <TextView
-            android:text="Waluta"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView5" />
-        <EditText
-            android:inputType="numberSigned"
-            android:id="@+id/Currency" />
-    </GridLayout>
-    <Button
-        android:text="Dodaj podróż"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveNewBusinessTrip" />
-    <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker1" />
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:id="@+id/gridLayout1"
+                android:padding="15dp">
+                <TextView
+                    android:text="Kraj"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView1" />
+            <!--<EditText
+                android:id="@+id/country"
+                android:layout_width="match_parent" />-->
+            <!--<TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:text="@string/planet_prompt" />-->
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/planet_prompt" />
+                <TextView
+                    android:text="Miasto"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView2" />
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:id="@+id/city"
+                    android:layout_width="match_parent" />
+                <TextView
+                    android:text="Data od"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView3" />
+                <TextView
+                    android:inputType="date"
+                    android:id="@+id/dateFrom" />
+                <TextView
+                    android:text="Data do"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView4" />
+                <EditText
+                    android:inputType="date"
+                    android:id="@+id/dateTo" />
+                <TextView
+                    android:text="Kolekcja"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView5" />
+                <EditText
+                    android:inputType="numberSigned"
+                    android:id="@+id/Season" />
+                <TextView
+                    android:text="Waluta"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView6" />
+                <EditText
+                    android:inputType="numberSigned"
+                    android:id="@+id/Currency" />
+            </GridLayout>
+            <Button
+                android:text="ustaw date od"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/setDateFrom" />
+            <Button
+                android:text="Dodaj podróż"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveNewBusinessTrip" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("CiuchApp.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("CiuchApp.Mobile.Resource", IsApplication=true)]
 
-namespace CiuchApp.Android
+namespace CiuchApp.Mobile
 {
 	
 	
@@ -26,6 +26,22 @@ namespace CiuchApp.Android
 		
 		public static void UpdateIdValues()
 		{
+		}
+		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int planets_array = 2130968576;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
 		}
 		
 		public partial class Attribute
@@ -44,98 +60,101 @@ namespace CiuchApp.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int CityTextView = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int CityTextView = 2131034113;
 			
-			// aapt resource value: 0x7f040008
-			public const int ClotheDestription = 2130968584;
+			// aapt resource value: 0x7f050015
+			public const int ClotheDestription = 2131034133;
 			
-			// aapt resource value: 0x7f040012
-			public const int ClotheImage = 2130968594;
+			// aapt resource value: 0x7f050013
+			public const int ClotheImage = 2131034131;
 			
-			// aapt resource value: 0x7f040013
-			public const int ClotheName = 2130968595;
+			// aapt resource value: 0x7f050014
+			public const int ClotheName = 2131034132;
 			
-			// aapt resource value: 0x7f040017
-			public const int ClotheNumberOfSizeL = 2130968599;
+			// aapt resource value: 0x7f050018
+			public const int ClotheNumberOfSizeL = 2131034136;
 			
-			// aapt resource value: 0x7f040016
-			public const int ClotheNumberOfSizeM = 2130968598;
+			// aapt resource value: 0x7f050017
+			public const int ClotheNumberOfSizeM = 2131034135;
 			
-			// aapt resource value: 0x7f04000a
-			public const int ClotheNumberOfSizeS = 2130968586;
+			// aapt resource value: 0x7f050016
+			public const int ClotheNumberOfSizeS = 2131034134;
 			
-			// aapt resource value: 0x7f040000
-			public const int CountryTextView = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int CountryTextView = 2131034112;
 			
-			// aapt resource value: 0x7f04000f
-			public const int Currency = 2130968591;
+			// aapt resource value: 0x7f05000f
+			public const int Currency = 2131034127;
 			
-			// aapt resource value: 0x7f040002
-			public const int DatesTextView = 2130968578;
+			// aapt resource value: 0x7f050002
+			public const int DatesTextView = 2131034114;
 			
-			// aapt resource value: 0x7f04000e
-			public const int Season = 2130968590;
+			// aapt resource value: 0x7f05000d
+			public const int Season = 2131034125;
 			
-			// aapt resource value: 0x7f04001c
-			public const int businessTripTextInfo = 2130968604;
+			// aapt resource value: 0x7f05001d
+			public const int businessTripTextInfo = 2131034141;
 			
-			// aapt resource value: 0x7f04001b
-			public const int businessTripsListView = 2130968603;
+			// aapt resource value: 0x7f05001c
+			public const int businessTripsListView = 2131034140;
 			
-			// aapt resource value: 0x7f040007
-			public const int city = 2130968583;
+			// aapt resource value: 0x7f050007
+			public const int city = 2131034119;
 			
-			// aapt resource value: 0x7f040018
-			public const int clotheRowImage = 2130968600;
+			// aapt resource value: 0x7f050019
+			public const int clotheRowImage = 2131034137;
 			
-			// aapt resource value: 0x7f040019
-			public const int clotheRowName = 2130968601;
+			// aapt resource value: 0x7f05001a
+			public const int clotheRowName = 2131034138;
 			
-			// aapt resource value: 0x7f040006
-			public const int country = 2130968582;
+			// aapt resource value: 0x7f050009
+			public const int dateFrom = 2131034121;
 			
-			// aapt resource value: 0x7f040009
-			public const int dateFrom = 2130968585;
+			// aapt resource value: 0x7f05000b
+			public const int dateTo = 2131034123;
 			
-			// aapt resource value: 0x7f040011
-			public const int datePicker1 = 2130968593;
+			// aapt resource value: 0x7f050003
+			public const int gridLayout1 = 2131034115;
 			
-			// aapt resource value: 0x7f04000c
-			public const int dateTo = 2130968588;
+			// aapt resource value: 0x7f050012
+			public const int linearLayout1 = 2131034130;
 			
-			// aapt resource value: 0x7f040004
-			public const int gridLayout1 = 2130968580;
+			// aapt resource value: 0x7f05001b
+			public const int newBusinessTrip = 2131034139;
 			
-			// aapt resource value: 0x7f040003
-			public const int linearLayout1 = 2130968579;
+			// aapt resource value: 0x7f05001e
+			public const int newClothe = 2131034142;
 			
-			// aapt resource value: 0x7f04001a
-			public const int newBusinessTrip = 2130968602;
+			// aapt resource value: 0x7f050011
+			public const int saveNewBusinessTrip = 2131034129;
 			
-			// aapt resource value: 0x7f04001d
-			public const int newClothe = 2130968605;
+			// aapt resource value: 0x7f050010
+			public const int setDateFrom = 2131034128;
 			
-			// aapt resource value: 0x7f040010
-			public const int saveNewBusinessTrip = 2130968592;
+			// aapt resource value: 0x7f05001f
+			public const int showClothesListView = 2131034143;
 			
-			// aapt resource value: 0x7f04001e
-			public const int showClothesListView = 2130968606;
+			// aapt resource value: 0x7f050005
+			public const int spinner = 2131034117;
 			
-			// aapt resource value: 0x7f040005
-			public const int textView1 = 2130968581;
+			// aapt resource value: 0x7f050004
+			public const int textView1 = 2131034116;
 			
-			// aapt resource value: 0x7f040014
-			public const int textView2 = 2130968596;
+			// aapt resource value: 0x7f050006
+			public const int textView2 = 2131034118;
 			
-			// aapt resource value: 0x7f040015
-			public const int textView3 = 2130968597;
+			// aapt resource value: 0x7f050008
+			public const int textView3 = 2131034120;
 			
-			// aapt resource value: 0x7f04000b
-			public const int textView4 = 2130968587;
+			// aapt resource value: 0x7f05000a
+			public const int textView4 = 2131034122;
 			
-			// aapt resource value: 0x7f04000d
-			public const int textView5 = 2130968589;
+			// aapt resource value: 0x7f05000c
+			public const int textView5 = 2131034124;
+			
+			// aapt resource value: 0x7f05000e
+			public const int textView6 = 2131034126;
 			
 			static Id()
 			{
@@ -189,6 +208,9 @@ namespace CiuchApp.Android
 			
 			// aapt resource value: 0x7f030002
 			public const int openPiece = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int planet_prompt = 2130903043;
 			
 			static String()
 			{

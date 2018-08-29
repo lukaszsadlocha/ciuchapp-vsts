@@ -1,11 +1,11 @@
 ﻿using Android.App;
 using CiuchApp.DataAccess;
-using CiuchApp.Android.Services;
+using CiuchApp.ApiClient;
 
-namespace CiuchApp.Android.Activities
+namespace CiuchApp.Mobile.Activities
 {
     public abstract class CiuchAppBaseActivity : Activity
     {
-        protected RestService restClient = new RestService();
+        protected CiuchApp.ApiClient.ApiClient apiClientService = new CiuchApp.ApiClient.ApiClient();
     }
 }

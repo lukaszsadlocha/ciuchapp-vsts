@@ -11,10 +11,10 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Provider;
 using Android.Content.PM;
-using CiuchApp.Android.Resources;
+using CiuchApp.Mobile.Resources;
 using CiuchApp.Domain;
 
-namespace CiuchApp.Android.Activities
+namespace CiuchApp.Mobile.Activities
 {
 
     [Activity(Label = "CiuchyAndroid")]

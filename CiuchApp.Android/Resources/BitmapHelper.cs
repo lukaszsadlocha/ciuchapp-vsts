@@ -13,7 +13,7 @@ using Android.Widget;
 using System.IO;
 using Android.Graphics;
 
-namespace CiuchApp.Android.Resources
+namespace CiuchApp.Mobile.Resources
 {
     public static class BitmapHelpers
     {

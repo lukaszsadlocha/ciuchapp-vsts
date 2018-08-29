@@ -1,26 +1,13 @@
 Keep posting on blog.lukaszsadlocha.pl
 Add to git
 
-CiuchApp.Android - Xamarin App
-TO DO
-	Makes views
-		DONE: View to pick different Business trip
-		DONE: Show Business Trip (+ List of clothes)
-		
-		Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
+CiuchApp.Mobile - Xamarin App
 
-		Layout to add new business trip
-			County picker
-			City picker
-			View to add new Country
-			View to add new City
+USER STORIES
 
-
-Done
-Add two new project (.NET Standard to share between Xamarin, ASP.NET Core)
-Add custom Adapter to list view
-Add new view to pick business trip
-
+US1: Make calls ASYNC (Mobile -> Dashboard)
+US2: Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
+US3: Sepearte Dashboard and WebApi
 
 
 Resources:

@@ -3,4 +3,15 @@
   <string name="app_name">CiuchyAndroid</string>
   <string name="openCamera">Nowy Ciuch</string>
   <string name="openPiece">Widok Ciucha</string>
+  <string name="planet_prompt">PLANETY</string>
+  <string-array name="planets_array">
+    <item>Mercury</item>
+    <item>Venus</item>
+    <item>Earth</item>
+    <item>Mars</item>
+    <item>Jupiter</item>
+    <item>Saturn</item>
+    <item>Uranus</item>
+    <item>Neptune</item>
+  </string-array>
 </resources>

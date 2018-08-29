@@ -6,13 +6,20 @@ namespace CiuchApp.Settings
     {
         public static CiuchAppSettings GetSettings()
         {
-            return new CiuchAppSettings()
+            var settings = new CiuchAppSettings()
             {
                 LocalPhotoStorageFolder = new LocalPhotoStorageFolder()
                 {
                     Path = @"C:/XamarinData"
+                },
+
+                ApiUrls = new ApiUrls()
+                {
+                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api/"
                 }
             };
+
+            return settings;
         }
     }
 }
