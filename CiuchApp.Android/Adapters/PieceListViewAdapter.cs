@@ -13,12 +13,12 @@ namespace CiuchApp.Android.Adapters
         public TextView City { get; set; }
         public TextView Date { get; set; }
     }
-    public class ClotheListViewAdapter : BaseAdapter
+    public class PieceListViewAdapter : BaseAdapter
     {
         private Activity activity;
         private List<Piece> clothe;
 
-        public ClotheListViewAdapter(Activity activity, List<Piece> clothe)
+        public PieceListViewAdapter(Activity activity, List<Piece> clothe)
         {
             this.activity = activity;
             this.clothe = clothe;
@@ -39,7 +39,7 @@ namespace CiuchApp.Android.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.ClotheRow, parent, false);
+            var view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.PieceRow, parent, false);
 
             var NameTextView = view.FindViewById<TextView>(Resource.Id.clotheRowName);
             var ImageView =  view.FindViewById<ImageView>(Resource.Id.clotheRowImage);

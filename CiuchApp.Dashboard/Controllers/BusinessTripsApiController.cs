@@ -10,7 +10,7 @@ using CiuchApp.Domain;
 
 namespace CiuchApp.Dashboard
 {
-    [Route("api/[controller]")]
+    [Route("api/BusinessTrips")]
     [ApiController]
     public class BusinessTripsApiController : ControllerBase
     {
@@ -22,30 +22,31 @@ namespace CiuchApp.Dashboard
         }
 
         // GET: api/BusinessTripsApi
-        //[HttpGet]
-        //public IEnumerable<BusinessTrip> GetBusinessTrips()
-        //{
-        //    return _context.BusinessTrips;
-        //}
+        [HttpGet]
+        public IEnumerable<BusinessTrip> GetBusinessTrips()
+        {
+            var businessTrips = _context.BusinessTrips.Include(b => b.City).Include(b => b.Country).Include(b => b.Currency).Include(b => b.Season);
+            return businessTrips;
+        }
 
         // GET: api/BusinessTripsApi/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var businessTrip = await _context.BusinessTrips.FindAsync(id);
+            var businessTrip = await _context.BusinessTrips.FindAsync(id);
 
-        //    if (businessTrip == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (businessTrip == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(businessTrip);
-        //}
+            return Ok(businessTrip);
+        }
 
         //(EDIT)  PUT: api/BusinessTripsApi  
         public async Task<IActionResult> PutBusinessTrip([FromForm]BusinessTrip businessTrip)
@@ -82,7 +83,7 @@ namespace CiuchApp.Dashboard
             return CreatedAtAction("GetBusinessTrip", new { id = businessTrip.Id }, businessTrip);
         }
 
-        // DELETE: api/BusinessTripsApi/5
+        // DELETE: api/BusinessTripsApi
         [HttpDelete]
         public async Task<IActionResult> DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
         {

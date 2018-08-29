@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="30px">
     <TextView
         android:text="Country"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CountryTextView" />
@@ -16,9 +17,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/CityTextView" />
     <TextView
-        android:text="Date"
+        android:text="Dates"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/DateTextView" />
+        android:id="@+id/DatesTextView" />
 </LinearLayout>

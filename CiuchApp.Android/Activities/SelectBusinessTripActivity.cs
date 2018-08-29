@@ -22,25 +22,30 @@ namespace CiuchApp.Android.Activities
     [Activity(Label = "Ciuch", MainLauncher = true)]
     public class ListBusinessTrips : CiuchAppBaseActivity
     {
-        private List<BusinessTrip> businessTrips;
+        private Button newBusinessTripButton;
         private ListView businessTripsListView;
+        private List<BusinessTrip> businessTrips;
+        
+
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            SetContentView(Resource.Layout.SelectBusinessTrip);
 
-            SetContentView(Resource.Layout.BusinessTrips);
+            newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
+            newBusinessTripButton.Click += NewBusinessTripClicked;
 
+            //Get Business trips and show them in ListView + add events 
+            businessTrips = restClient.GetBusinessTrips();
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
-
-            businessTrips = ciuchAppContext.GetBusinessTrips();
 
             var adapter = new BusinessTripListViewAdapter(this, businessTrips);
             businessTripsListView.Adapter = adapter;
             businessTripsListView.ItemClick += BusinessTripsListViewClicked;
 
-
             var settings = CiuchApp.Settings.CiuchAppSettingsFactory.GetSettings();
+
 
         }
 
@@ -48,9 +53,14 @@ namespace CiuchApp.Android.Activities
         {
             var businessTripClicked = businessTrips[e.Position];
 
-            var nextActivity = new Intent(this, typeof(BusinessTripAndClothesActivity));
+            var nextActivity = new Intent(this, typeof(SelectPieceActivity));
             nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
             StartActivity(nextActivity);
+        }
+
+        private void NewBusinessTripClicked(object sender, EventArgs eventArgs)
+        {
+            StartActivity(new Intent(this, typeof(NewBusinessTrips)));
         }
     }
 }

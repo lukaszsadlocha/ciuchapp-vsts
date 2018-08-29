@@ -18,13 +18,13 @@ namespace CiuchApp.Android.Activities
 {
 
     [Activity(Label = "CiuchyAndroid")]
-    public class ClotheActivity : Activity
+    public class PieceActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             
-            SetContentView(Resource.Layout.Clothe);
+            SetContentView(Resource.Layout.Piece);
             var clothe = Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
 
             if(!string.IsNullOrEmpty(clothe.ImagePath))

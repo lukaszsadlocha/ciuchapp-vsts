@@ -94,6 +94,18 @@ if (typeof jQuery === 'undefined') {
          * @type {object}
          */
         var Draw = {
+
+            rows: {
+                add: function () {
+                    if (settings.addButton) {
+                        $table.find('tr:last').clone().appendTo('tbody');
+                        $table.find('tr:last td').html('');
+
+                    }
+                }
+
+            },
+
             columns: {
                 identifier: function() {
                     // Hide identifier column.
@@ -158,15 +170,17 @@ if (typeof jQuery === 'undefined') {
                        });
                     }
                 },
-                toolbar: function() {
+                toolbarButtons: function () {
+
+                    var editButton = '';
+                    var deleteButton = '';
+                    var saveButton = '';
+                    var restoreButton = '';
+                    var confirmButton = '';
+                    var addButton = '';
+                    var saveNewButton = '';
+
                     if (settings.editButton || settings.deleteButton) {
-                        var editButton = '';
-                        var deleteButton = '';
-                        var saveButton = '';
-                        var restoreButton = '';
-                        var confirmButton = '';
-                        var addButton = '';
-                        var saveNewButton = '';
 
                         // Add toolbar column header if not exists.
                         if ($table.find('th.tabledit-toolbar-column').length === 0) {
@@ -221,7 +235,6 @@ if (typeof jQuery === 'undefined') {
 
                         //Add toolbar with Add button
                         $table.find('tr:last').append('<td style="white-space: nowrap; width: 1%;">' + toolbarWithAddButton + '</td>');
-
                     }
                 }
             }
@@ -523,6 +536,7 @@ if (typeof jQuery === 'undefined') {
             return jqXHR;
         }
 
+        Draw.rows.add();
         Draw.columns.identifier();
         Draw.columns.editable();
         Draw.columns.toolbar();

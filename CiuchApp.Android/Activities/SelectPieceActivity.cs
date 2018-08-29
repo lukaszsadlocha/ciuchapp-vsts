@@ -19,7 +19,7 @@ using System.Linq;
 namespace CiuchApp.Android.Activities
 {
     [Activity(Label = "Ciuch")]
-    public class BusinessTripAndClothesActivity : CiuchAppBaseActivity
+    public class SelectPieceActivity : CiuchAppBaseActivity
     {
         //private ImageView _imageView;
         private List<Piece> clothes;
@@ -31,7 +31,7 @@ namespace CiuchApp.Android.Activities
             base.OnCreate(bundle);
 
             //Set Layout
-            SetContentView(Resource.Layout.BusinessTripAndClothes);
+            SetContentView(Resource.Layout.SelectPiece);
 
             // Set Business trip info
             businessTrip = BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
@@ -39,9 +39,9 @@ namespace CiuchApp.Android.Activities
 
             // Load Clothes
             clothesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
-            clothes = ciuchAppContext.GetClothesByBusinessTripId(businessTrip.Id);
+            clothes = restClient.GetClothesByBusinessTripId(businessTrip.Id);
 
-            var adapter = new ClotheListViewAdapter(this, clothes);
+            var adapter = new PieceListViewAdapter(this, clothes);
             clothesListView.Adapter = adapter;
             clothesListView.ItemClick += ClothesListViewClicked;
 
@@ -59,7 +59,7 @@ namespace CiuchApp.Android.Activities
         {
             var clotheClicked = clothes[e.Position];
 
-            var nextActivity = new Intent(this, typeof(ClotheActivity));
+            var nextActivity = new Intent(this, typeof(PieceActivity));
             nextActivity.PutExtra(Piece.JsonKey, clotheClicked.Serialize());
             StartActivity(nextActivity);
         }
@@ -81,11 +81,11 @@ namespace CiuchApp.Android.Activities
                 var newClothe = new Piece
                 {
                     BusinessTripId = this.businessTrip.Id,
-                    Id = ciuchAppContext.GetPieces().Max(x => x.Id) + 1,
+                    Id = restClient.GetPieces().Max(x => x.Id) + 1,
                     ImagePath = CameraAndImageSettings._file.Path
                 };
 
-                var nextActivity = new Intent(this, typeof(ClotheActivity));
+                var nextActivity = new Intent(this, typeof(PieceActivity));
                 nextActivity.PutExtra(Piece.JsonKey, newClothe.Serialize());
                 StartActivity(nextActivity);
             }

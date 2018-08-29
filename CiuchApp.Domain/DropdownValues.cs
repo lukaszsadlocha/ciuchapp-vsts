@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CiuchApp.Domain
 {
@@ -10,11 +11,13 @@ namespace CiuchApp.Domain
 
     public abstract class PieceDropdownValueBase : DropDownValueBase
     {
+        [JsonIgnore]
         public virtual List<Piece> Pieces { get; set; }
     }
 
     public abstract class BusinessTripDropdownValueBase : DropDownValueBase
     {
+        [JsonIgnore]
         public virtual List<BusinessTrip> BusinessTrips { get; set; }
     }
 

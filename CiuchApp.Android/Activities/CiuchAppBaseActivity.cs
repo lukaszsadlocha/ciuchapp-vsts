@@ -1,10 +1,11 @@
 ﻿using Android.App;
 using CiuchApp.DataAccess;
+using CiuchApp.Android.Services;
 
 namespace CiuchApp.Android.Activities
 {
     public abstract class CiuchAppBaseActivity : Activity
     {
-        protected CiuchAppDummyContext ciuchAppContext = new CiuchAppDummyContext();
+        protected RestService restClient = new RestService();
     }
 }
