@@ -8,8 +8,13 @@ USER STORIES
 US1: Make calls ASYNC (Mobile -> Dashboard)
 US2: Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
 US3: Sepearte Dashboard and WebApi
-US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
+----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
 US5: Fix issue with "+" adding additional item to list
+US6: (Mobile:NewBusinessTrip) fix datepicker
+US7: (Mobile:NewBusinessTrip) handle "Add new business trip"
+----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
+US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
+US10: (DevOps) Set simple deployment pipeline
 
 
 Resources:
