@@ -38,26 +38,42 @@ namespace CiuchApp.Mobile.Activities
             _dateSelectButton = FindViewById<Button>(Resource.Id.setDateFrom);
             _dateSelectButton.Click += DateSelect_OnClick;
 
+            //DROPDOWNS Values from API
+            var countries   = apiClientService.GetList<Country>().Select(x => x.Name).ToList();
+            var cities      = apiClientService.GetList<City>().Select(x => x.Name).ToList();
+            var seasons     = apiClientService.GetList<Season>().Select(x => x.Name).ToList();
+            var currencies  = apiClientService.GetList<Currency>().Select(x => x.Name).ToList();
 
-            //CITIES
+            //Adapters for spinners
+            var adapterCountries  = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, countries);
+            var adapterCities     = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, cities);
+            var adapterSeasons    = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, seasons);
+            var adapterCurrencies = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, currencies);
 
-            var cities = apiClientService.GetList<City>();
-            List<string> citiesNames = cities.Select(x => x.Name).ToList();
+            //SPINERS (DROPDOWN) SECTION 
+            Spinner spinnerCountries = FindViewById<Spinner>(Resource.Id.countrySpinner);
+            adapterCountries.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerCountries.Adapter = adapterCountries;
 
+            Spinner spinnerCities = FindViewById<Spinner>(Resource.Id.citySpinner);
+            adapterCities.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerCities.Adapter = adapterCities;
 
+            Spinner spinnerSeason = FindViewById<Spinner>(Resource.Id.seasonSpinner);
+            adapterSeasons.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerSeason.Adapter = adapterSeasons;
 
-            //SPINER SECTION (DROPDOWN)
-            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
-            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
-            
+            Spinner spinnerCurrencies = FindViewById<Spinner>(Resource.Id.currencySpinner);
+            adapterCurrencies.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerCurrencies.Adapter = adapterCurrencies;
+
+            //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+
             // ADAPTER STATIC VALUES
             //var adapter = ArrayAdapter.CreateFromResource(
             //        this, Resource.Array.planets_array, Android.Resource.Layout.SimpleSpinnerItem);
 
-            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, citiesNames);
 
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner.Adapter = adapter;
 
             //businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
