@@ -8,6 +8,8 @@ USER STORIES
 US1: Make calls ASYNC (Mobile -> Dashboard)
 US2: Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
 US3: Sepearte Dashboard and WebApi
+US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
+US5: Fix issue with "+" adding additional item to list
 
 
 Resources:
