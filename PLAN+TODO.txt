@@ -10,12 +10,19 @@ US2: Fix passing bitmap (not serializing but passing path or file) Make bitmap i
 US3: Sepearte Dashboard and WebApi
 ----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
 US5: Fix issue with "+" adding additional item to list
-US6: (Mobile:NewBusinessTrip) fix datepicker
+----------------------------------------------------------------------US6: (Mobile:NewBusinessTrip) fix datepicker
 US7: (Mobile:NewBusinessTrip) handle "Add new business trip"
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
 US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US10: (DevOps) Set simple deployment pipeline
 
+
+
+VSTS:
+	https://lukaszsadlochavsts.visualstudio.com/_git/CiuchApp/
+
+jquery-tabledit	
+	https://markcell.github.io/jquery-tabledit
 
 Resources:
 Xamarin:

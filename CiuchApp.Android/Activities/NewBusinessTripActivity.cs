@@ -21,22 +21,28 @@ using System.Linq;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Ciuch", MainLauncher = true)]
+
+    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class NewBusinessTrips : CiuchAppBaseActivity
     {
-        TextView _dateDisplay;
-        Button _dateSelectButton;
-
+        TextView _dateDisplayFrom;
+        TextView _dateDisplayTo;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.NewBusinessTrip);
 
-            //DATE PICKER
-            _dateDisplay = FindViewById<TextView>(Resource.Id.dateFrom);
-            _dateSelectButton = FindViewById<Button>(Resource.Id.setDateFrom);
-            _dateSelectButton.Click += DateSelect_OnClick;
+            //DATE PICKERS 
+            //Date from
+            _dateDisplayFrom = FindViewById<TextView>(Resource.Id.dateFrom);
+            _dateDisplayFrom.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            _dateDisplayFrom.Click += DateFromSelect_OnClick;
+            //Date to
+            _dateDisplayTo = FindViewById<TextView>(Resource.Id.dateTo);
+            _dateDisplayTo.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            _dateDisplayTo.Click += DateToSelect_OnClick;
+
 
             //DROPDOWNS Values from API
             var countries   = apiClientService.GetList<Country>().Select(x => x.Name).ToList();
@@ -90,11 +96,20 @@ namespace CiuchApp.Mobile.Activities
 
         }
 
-        void DateSelect_OnClick(object sender, EventArgs eventArgs)
+        void DateFromSelect_OnClick(object sender, EventArgs eventArgs)
         {
-            DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
+            DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime date)
             {
-                _dateDisplay.Text = time.ToLongDateString();
+                _dateDisplayFrom.Text = date.ToString("dd-MM-yyyy");
+            });
+            frag.Show(FragmentManager, DatePickerFragment.TAG);
+        }
+
+        void DateToSelect_OnClick(object sender, EventArgs eventArgs)
+        {
+            DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime date)
+            {
+                _dateDisplayTo.Text = date.ToString("dd-MM-yyyy");
             });
             frag.Show(FragmentManager, DatePickerFragment.TAG);
         }
