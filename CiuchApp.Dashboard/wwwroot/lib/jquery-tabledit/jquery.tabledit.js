@@ -387,8 +387,18 @@ if (typeof jQuery === 'undefined') {
                 });
             },
             submit: function (td) {
+                let id = 0;
+                const self = this;
                 // Send AJAX request to server.
-                var ajaxResult = ajax(settings.buttons.add.action);
+                var ajaxResult = ajax(settings.buttons.add.action)
+                    .done(function (data) {
+                        if (data.id) {
+                            id = data.id;
+                        }
+                    })
+                    .then(function (data) {
+                        console.log(self);
+                    });
 
                 if (ajaxResult === false) {
                     return;
@@ -640,9 +650,10 @@ if (typeof jQuery === 'undefined') {
             $table.on('click', 'button.tabledit-save-new-button', function (event) {
                 if (event.handled !== true) {
                     event.preventDefault();
+                    const row = $(this).parents('tr').find('td.tabledit-edit-mode');
 
                     // Submit and update all columns.
-                    Add.submit($(this).parents('tr').find('td.tabledit-edit-mode'));
+                    Add.submit(row);
 
                     event.handled = true;
                 }
