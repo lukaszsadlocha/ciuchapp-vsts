@@ -5,16 +5,17 @@ CiuchApp.Mobile - Xamarin App
 
 USER STORIES
 
-US1: Make calls ASYNC (Mobile -> Dashboard)
-US2: Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
-US3: Sepearte Dashboard and WebApi
+US1: (Mobile,Dashboard) Make calls ASYNC 
+US2: (Mobile) Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
+US3: (Dashboard) Sepearte Dashboard and WebApi
 ----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
-US5: Fix issue with "+" adding additional item to list
+US5: (Dashboard) Fix issue with "+" adding additional item to list
 ----------------------------------------------------------------------US6: (Mobile:NewBusinessTrip) fix datepicker
-US7: (Mobile:NewBusinessTrip) handle "Add new business trip"
+US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
 US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US10: (DevOps) Set simple deployment pipeline
+US11: (Mobile) Set Light Theme
 
 
 
