@@ -15,7 +15,7 @@ US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
 US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US10: (DevOps) Set simple deployment pipeline
-US11: (Mobile) Set Light Theme
+----------------------------------------------------------------------US11: (Mobile) Set Light Theme
 
 
 
