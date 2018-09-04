@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Reflection;
 
 namespace CiuchApp.Domain
 {
-    public class BusinessTrip
+    public class BusinessTrip : CiuchAppModelBase
     {
         [DisplayName("#")]
-//        [CiuchAppTranslatable]
+        //[CiuchAppTranslatable]
         public int Id { get; set; }
 
         [DisplayName("Data od")]
@@ -41,8 +44,5 @@ namespace CiuchApp.Domain
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<BusinessTrip>(json);
         }
-
-
-
     }
 }
