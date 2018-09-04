@@ -539,7 +539,7 @@ if (typeof jQuery === 'undefined') {
         Draw.rows.add();
         Draw.columns.identifier();
         Draw.columns.editable();
-        Draw.columns.toolbar();
+        Draw.columns.toolbarButtons();
 
         settings.onDraw();
 

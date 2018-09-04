@@ -63,11 +63,6 @@
                     android:layout_height="wrap_content" />
             </GridLayout>
             <Button
-                android:text="ustaw date od"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/setDateFrom" />
-            <Button
                 android:text="Dodaj podróż"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

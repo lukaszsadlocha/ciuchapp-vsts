@@ -1,6 +1,6 @@
 ﻿﻿$(function () {
     $('table.table').Tabledit({
-        url: '/api/BusinessTripsApi',
+        url: '/api/BusinessTrips',
         columns: {
             identifier: [0, 'Id'],
             editable: [

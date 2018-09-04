@@ -11,7 +11,7 @@ US3: (Dashboard) Sepearte Dashboard and WebApi
 ----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
 US5: (Dashboard) Fix issue with "+" adding additional item to list
 ----------------------------------------------------------------------US6: (Mobile:NewBusinessTrip) fix datepicker
-US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
+----------------------------------------------------------------------US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
 US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US10: (DevOps) Set simple deployment pipeline

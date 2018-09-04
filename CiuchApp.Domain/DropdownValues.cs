@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CiuchApp.Domain
 {
-    public abstract class DropDownValueBase
+    public abstract class DropDownValueBase : CiuchAppModelBase
     {
         public int Id { get; set; }
         public string Name { get; set; }

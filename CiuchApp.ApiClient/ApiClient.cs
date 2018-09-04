@@ -31,6 +31,33 @@ namespace CiuchApp.ApiClient
             }
         }
 
+        public void Add<T>(T newItem) where T : CiuchAppModelBase
+        {
+            string nameOfController = GetNameOfController<T>();
+            Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+
+            using (var httpClient = new HttpClient())
+            {
+                var values = newItem.ToKeyValuePairs<T>();
+                var content = new FormUrlEncodedContent(values);
+
+                httpClient.PostAsync(restApiUri, content);
+                var response = httpClient.GetAsync(restApiUri).Result;
+                var result = response.Content.ReadAsStringAsync().Result;
+            }
+        }
+
+
+        public List<Piece> GetClothesByBusinessTripId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Piece> GetPieces()
+        {
+            throw new NotImplementedException();
+        }
+
         private string GetNameOfController<T>()
         {
             string nameOfClass = typeof(T).Name;
@@ -47,30 +74,20 @@ namespace CiuchApp.ApiClient
             return nameOfController;
         }
 
-        public async Task<List<BusinessTrip>> GetBusinessTripsAsync()
-        {
+        //public async Task<List<BusinessTrip>> GetBusinessTripsAsync()
+        //{
 
-            var RestUrl = @"http://10.0.2.2:13121/api/BusinessTrips";
-            var uri = new Uri(string.Format(RestUrl, string.Empty));
-            var client = new HttpClient();
-            var response = await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                return await Task.Run(() => JsonConvert.DeserializeObject<List<BusinessTrip>>(content));
+        //    var RestUrl = @"http://10.0.2.2:13121/api/BusinessTrips";
+        //    var uri = new Uri(string.Format(RestUrl, string.Empty));
+        //    var client = new HttpClient();
+        //    var response = await client.GetAsync(uri);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var content = await response.Content.ReadAsStringAsync();
+        //        return await Task.Run(() => JsonConvert.DeserializeObject<List<BusinessTrip>>(content));
 
-            }
-            return null;
-        }
-
-        public List<Piece> GetClothesByBusinessTripId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Piece> GetPieces()
-        {
-            throw new NotImplementedException();
-        }
+        //    }
+        //    return null;
+        //}
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace CiuchApp.Domain
 {
-    public class Piece
+    public class Piece : CiuchAppModelBase
     {
         public int Id { get; set; }
         public string Name { get; set; } //Name from Producer
