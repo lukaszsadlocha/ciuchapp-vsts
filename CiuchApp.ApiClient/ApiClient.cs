@@ -11,7 +11,7 @@ namespace CiuchApp.ApiClient
 {
     public class ApiClient
     {
-        string apiBaseUrl;
+        readonly string apiBaseUrl;
         public ApiClient()
         {
             apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrlDevelopment;
@@ -31,20 +31,46 @@ namespace CiuchApp.ApiClient
             }
         }
 
-        public void Add<T>(T newItem) where T : CiuchAppModelBase
+        public bool Add<T>(T item) where T : CiuchAppModelBase
         {
-            string nameOfController = GetNameOfController<T>();
-            Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
-
-            using (var httpClient = new HttpClient())
+            if(item.IsValid<T>(newItem: true))
             {
-                var values = newItem.ToKeyValuePairs<T>();
-                var content = new FormUrlEncodedContent(values);
+                string nameOfController = GetNameOfController<T>();
+                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
 
-                httpClient.PostAsync(restApiUri, content);
-                var response = httpClient.GetAsync(restApiUri).Result;
-                var result = response.Content.ReadAsStringAsync().Result;
+                using (var httpClient = new HttpClient())
+                {
+                    var values = item.ToKeyValuePairs<T>(newItem: true);
+                    var content = new FormUrlEncodedContent(values);
+
+                    httpClient.PostAsync(restApiUri, content);
+                    var response = httpClient.GetAsync(restApiUri).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
+                }
+                return true;
             }
+            return false;
+        }
+
+        public bool Update<T>(T item) where T : CiuchAppModelBase
+        {
+            if(item.IsValid<T>(newItem: false))
+            {
+                string nameOfController = GetNameOfController<T>();
+                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+
+                using (var httpClient = new HttpClient())
+                {
+                    var values = item.ToKeyValuePairs<T>(newItem: false);
+                    var content = new FormUrlEncodedContent(values);
+
+                    httpClient.PutAsync(restApiUri, content);
+                    var response = httpClient.GetAsync(restApiUri).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
+                }
+                return true;
+            }
+            return false;
         }
 
 

@@ -19,8 +19,8 @@ using CiuchApp.Settings;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Ciuch")]
-    public class ListBusinessTrips : CiuchAppBaseActivity
+    [Activity(Label = "Wybierz wyjazd", MainLauncher = true)]
+    public class SelectBusinessTripActivity : CiuchAppBaseActivity
     {
         private Button newBusinessTripButton;
         private ListView businessTripsListView;
@@ -34,7 +34,7 @@ namespace CiuchApp.Mobile.Activities
             SetContentView(Resource.Layout.SelectBusinessTrip);
 
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
-            newBusinessTripButton.Click += NewBusinessTripClicked;
+            newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
             //Get Business trips and show them in ListView + add events 
             businessTrips = apiClientService.GetList<BusinessTrip>();
@@ -42,25 +42,23 @@ namespace CiuchApp.Mobile.Activities
 
             var adapter = new BusinessTripListViewAdapter(this, businessTrips);
             businessTripsListView.Adapter = adapter;
-            businessTripsListView.ItemClick += BusinessTripsListViewClicked;
+            businessTripsListView.ItemClick += (s, e) => {
+                var businessTripClicked = businessTrips[e.Position];
+
+                var nextActivity = new Intent(this, typeof(SelectPieceActivity));
+                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
+                StartActivity(nextActivity);
+            };
+
+            businessTripsListView.ItemLongClick += (s, e) => {
+
+                var businessTripClicked = businessTrips[e.Position];
+                var nextActivity = new Intent(this, typeof(UpdateBusinessTripActivity));
+                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
+                StartActivity(nextActivity);
+            };
 
             var settings = CiuchApp.Settings.CiuchAppSettingsFactory.GetSettings();
-
-
-        }
-
-        private void BusinessTripsListViewClicked(object sender, AdapterView.ItemClickEventArgs e)
-        {
-            var businessTripClicked = businessTrips[e.Position];
-
-            var nextActivity = new Intent(this, typeof(SelectPieceActivity));
-            nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
-            StartActivity(nextActivity);
-        }
-
-        private void NewBusinessTripClicked(object sender, EventArgs eventArgs)
-        {
-            StartActivity(new Intent(this, typeof(NewBusinessTrips)));
         }
     }
 }

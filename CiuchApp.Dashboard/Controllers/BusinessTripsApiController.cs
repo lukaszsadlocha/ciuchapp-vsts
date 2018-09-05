@@ -51,7 +51,10 @@ namespace CiuchApp.Dashboard
         //(EDIT)  PUT: api/BusinessTripsApi  
         public async Task<IActionResult> PutBusinessTrip([FromForm]BusinessTrip businessTrip)
         {
-            if (!ModelState.IsValid)    return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!businessTrip.IsValid<BusinessTrip>(newItem: false))
+                return BadRequest("Business Trip model is not valid");
 
             _context.Entry(businessTrip).State = EntityState.Modified;
 
@@ -76,6 +79,9 @@ namespace CiuchApp.Dashboard
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (!businessTrip.IsValid<BusinessTrip>(newItem: true))
+                return BadRequest("Business Trip model is not valid");
 
             _context.BusinessTrips.Add(businessTrip);
             await _context.SaveChangesAsync();
