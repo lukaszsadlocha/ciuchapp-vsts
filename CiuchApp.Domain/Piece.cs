@@ -1,7 +1,4 @@
-﻿using Android.Graphics;
-using Android.Widget;
-using Java.IO;
-using System;
+﻿using System;
 
 namespace CiuchApp.Domain
 {
