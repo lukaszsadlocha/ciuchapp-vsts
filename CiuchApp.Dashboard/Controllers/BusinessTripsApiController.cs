@@ -77,6 +77,9 @@ namespace CiuchApp.Dashboard
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!businessTrip.IsValid<BusinessTrip>(newItem: true))
+                return BadRequest("Business Trip model is not valid");
+
             _context.BusinessTrips.Add(businessTrip);
             await _context.SaveChangesAsync();
 
