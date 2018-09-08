@@ -159,9 +159,76 @@ namespace CiuchApp.DataAccess
 
             // Pieces
 
-
-
-
+            builder.Entity<Piece>().HasData(
+                new
+                {
+                    Id = 1,
+                    Name = "SHIRT1122",
+                    BusinessTripId = 1,
+                    ColorId = 1,
+                    MainCategoryId = 1,
+                    GroupId = 1,
+                    ComponentsId = 1,
+                    CountryOfOriginId = 1,
+                    BuyPrice = 10.36,
+                    SellPrice = 32.32,
+                    SupplierId = 1,
+                    SizeId = 1,
+                    OrderDate = new DateTime(2018, 09, 05),
+                    EstimatedDateOfShipment = new DateTime(2018, 09, 15),
+                    EstimatedTimeOfDelivery = new DateTime(2018, 09, 22),
+                    Amount = 60,
+                    CodeCnId = 1,
+                    SetId = 1,
+                    ColorNameId = 1,
+                    ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg"
+                },
+                new
+                {
+                    Id = 2,
+                    Name = "SHIRT1122",
+                    BusinessTripId = 1,
+                    ColorId = 1,
+                    MainCategoryId = 1,
+                    GroupId = 1,
+                    ComponentsId = 1,
+                    CountryOfOriginId = 1,
+                    BuyPrice = 10.36,
+                    SellPrice = 32.32,
+                    SupplierId = 1,
+                    SizeId = 2,
+                    OrderDate = new DateTime(2018, 09, 05),
+                    EstimatedDateOfShipment = new DateTime(2018, 09, 15),
+                    EstimatedTimeOfDelivery = new DateTime(2018, 09, 22),
+                    Amount = 80,
+                    CodeCnId = 1,
+                    SetId = 1,
+                    ColorNameId = 1,
+                    ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg"
+                },
+                new
+                {
+                    Id = 3,
+                    Name = "SHIRT1122",
+                    BusinessTripId = 1,
+                    ColorId = 1,
+                    MainCategoryId = 1,
+                    GroupId = 1,
+                    ComponentsId = 1,
+                    CountryOfOriginId = 1,
+                    BuyPrice = 10.36,
+                    SellPrice = 32.32,
+                    SupplierId = 1,
+                    SizeId = 3,
+                    OrderDate = new DateTime(2018, 09, 05),
+                    EstimatedDateOfShipment = new DateTime(2018, 09, 15),
+                    EstimatedTimeOfDelivery = new DateTime(2018, 09, 22),
+                    Amount = 100,
+                    CodeCnId = 1,
+                    SetId = 1,
+                    ColorNameId = 1,
+                    ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg"
+                });
         }
 
         public DbSet<BusinessTrip> BusinessTrips { get; set; }

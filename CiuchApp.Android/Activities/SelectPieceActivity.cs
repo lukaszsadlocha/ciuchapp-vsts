@@ -18,7 +18,7 @@ using System.Linq;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Ciuch")]
+    [Activity(Label = "Ciuchy z wyjazdu")]
     public class SelectPieceActivity : CiuchAppBaseActivity
     {
         //private ImageView _imageView;
@@ -39,7 +39,7 @@ namespace CiuchApp.Mobile.Activities
 
             // Load Clothes
             clothesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
-            clothes = apiClientService.GetClothesByBusinessTripId(businessTrip.Id);
+            clothes = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
 
             var adapter = new PieceListViewAdapter(this, clothes);
             clothesListView.Adapter = adapter;

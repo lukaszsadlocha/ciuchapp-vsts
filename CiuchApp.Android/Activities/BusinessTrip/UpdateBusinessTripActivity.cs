@@ -32,7 +32,8 @@ namespace CiuchApp.Mobile.Activities
 
             base.OnCreate(bundle);
 
-            // BUTTON - ADD NEW BUSINESS TRIP
+            // BUTTON - ADD/UPDATE BUSINESS TRIP
+            saveNewBusinessTrip.Text = "Zapisz";
             saveNewBusinessTrip.Click += (s, e) => {
                 apiClientService.Update<BusinessTrip>(model);
                 Next<SelectBusinessTripActivity>();

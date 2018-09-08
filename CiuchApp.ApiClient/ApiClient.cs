@@ -17,10 +17,17 @@ namespace CiuchApp.ApiClient
             apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrlDevelopment;
         }
 
-        public List<T> GetList<T>()
+        public List<T> GetList<T>(int id = 0, string baseController="")
         {
-            string nameOfController = GetNameOfController<T>();
-            Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+            Uri restApiUri;
+            if (id!=0 && !string.IsNullOrEmpty(baseController))
+            {
+                restApiUri = new Uri($@"{apiBaseUrl}/{baseController}/{id}/{GetNameOfController<T>()}");
+            }
+            else
+            {
+                restApiUri = new Uri(apiBaseUrl + GetNameOfController<T>());
+            }
 
             using (var httpClient = new HttpClient())
             {
@@ -74,9 +81,9 @@ namespace CiuchApp.ApiClient
         }
 
 
-        public List<Piece> GetClothesByBusinessTripId(int id)
+        public List<Piece> GetPiecesByBusinessTripId(int id)
         {
-            throw new NotImplementedException();
+            return GetList<Piece>(id, "BusinessTrips");
         }
 
         public List<Piece> GetPieces()
