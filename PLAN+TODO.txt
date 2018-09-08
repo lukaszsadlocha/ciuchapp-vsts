@@ -33,6 +33,11 @@ Xamarin:
 	https://forums.xamarin.com/discussion/23776/radiobutton-and-dropdown-list
 	https://www.c-sharpcorner.com/article/creating-a-dropdown-list-using-spinner-in-xamarin-android-app-using-visual-studi/
 
+	Recieps (Camera):
+	https://github.com/xamarin/recipes/tree/master/Recipes/android/other_ux/camera_intent/take_a_picture_and_save_using_camera_app
+
+Youtube Video (sending file from Xamarin to WebServer):
+	https://www.youtube.com/watch?v=IVvJX4CoLUY
 
 
 

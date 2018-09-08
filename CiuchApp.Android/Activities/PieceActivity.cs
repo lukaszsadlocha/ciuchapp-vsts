@@ -11,7 +11,7 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Provider;
 using Android.Content.PM;
-using CiuchApp.Mobile.Resources;
+using CiuchApp.Mobile.Helpers;
 using CiuchApp.Domain;
 
 namespace CiuchApp.Mobile.Activities
@@ -34,7 +34,7 @@ namespace CiuchApp.Mobile.Activities
                 FindViewById<ImageView>(Resource.Id.ClotheImage).SetImageBitmap(image);
             }
 
-            FindViewById<NumberPicker>(Resource.Id.ClotheName).Value = clothe.Amount;
+            //FindViewById<NumberPicker>(Resource.Id.ClotheName).Value = clothe.Amount;
             //FindViewById<TextView>(Resource.Id.ClotheDestription).Text = clothe.Description;
             //FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeS).Text = clothe.NumberOfSizeS.ToString();
             //FindViewById<TextView>(Resource.Id.ClotheNumberOfSizeM).Text = clothe.NumberOfSizeM.ToString();
