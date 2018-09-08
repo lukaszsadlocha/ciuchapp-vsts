@@ -223,8 +223,10 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BusinessTrip\BusinessTripsActivityBase.cs" />
+    <Compile Include="Activities\BusinessTrip\UpdateBusinessTripActivity.cs" />
     <Compile Include="Activities\CiuchAppBaseActivity.cs" />
-    <Compile Include="Activities\NewBusinessTripActivity.cs" />
+    <Compile Include="Activities\BusinessTrip\NewBusinessTripActivity.cs" />
     <Compile Include="Adapters\PieceListViewAdapter.cs" />
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
     <Compile Include="Activities\SelectBusinessTripActivity.cs" />

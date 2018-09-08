@@ -16,7 +16,7 @@ US5: (Dashboard) Fix issue with "+" adding additional item to list
 US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 ----------------------------------------------------------------------US10: (DevOps) Set simple deployment pipeline
 ----------------------------------------------------------------------US11: (Mobile) Set Light Theme
-US12: (Mobile) Update exisiting Business Trip
+----------------------------------------------------------------------US12: (Mobile) Update exisiting Business Trip   [Need to update Main view Select Business Trips]
 ----------------------------------------------------------------------US13: (Dashboard) Validate Model - Business Trip
 
 

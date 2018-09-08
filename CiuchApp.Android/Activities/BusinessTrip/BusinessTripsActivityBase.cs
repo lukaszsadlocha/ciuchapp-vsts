@@ -21,20 +21,19 @@ using System.Linq;
 
 namespace CiuchApp.Mobile.Activities
 {
-
-    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class NewBusinessTrips : CiuchAppBaseActivity
+    public abstract class BusinessTripsActivityBase : CiuchAppBaseActivity
     {
         //Controls
-        TextView _dateDisplayFrom;
-        TextView _dateDisplayTo;
-        Spinner _spinnerCountries;
-        Spinner _spinnerCities;
-        Spinner _spinnerSeason;
-        Spinner _spinnerCurrencies;
+        protected TextView _dateDisplayFrom;
+        protected TextView _dateDisplayTo;
+        protected Spinner _spinnerCountries;
+        protected Spinner _spinnerCities;
+        protected Spinner _spinnerSeason;
+        protected Spinner _spinnerCurrencies;
+        protected Button saveNewBusinessTrip;
 
         //Model 
-        BusinessTrip model;
+        protected BusinessTrip model;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -42,16 +41,7 @@ namespace CiuchApp.Mobile.Activities
 
             SetContentView(Resource.Layout.NewBusinessTrip);
 
-            //Set default Model that will be pass to call
-            model = new BusinessTrip {
-                DateFrom=DateTime.Now,
-                DateTo=DateTime.Now,
-                CountryId = 1,
-                CityId = 1,
-                SeasonId =1,
-                CurrencyId =1
-            };
-
+            //SET
             //DATE PICKERS 
             //Date from
             _dateDisplayFrom = FindViewById<TextView>(Resource.Id.dateFrom);
@@ -88,31 +78,28 @@ namespace CiuchApp.Mobile.Activities
             adapterCountries.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _spinnerCountries.Adapter = adapterCountries;
             _spinnerCountries.ItemSelected += (s, e) => { model.CountryId = e.Position + 1; };
+            _spinnerCountries.SetSelection(--model.CountryId);
 
             _spinnerCities = FindViewById<Spinner>(Resource.Id.citySpinner);
             adapterCities.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _spinnerCities.Adapter = adapterCities;
             _spinnerCities.ItemSelected += (s, e) => { model.CityId = e.Position + 1; };
+            _spinnerCities.SetSelection(--model.CityId);
 
             _spinnerSeason = FindViewById<Spinner>(Resource.Id.seasonSpinner);
             adapterSeasons.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _spinnerSeason.Adapter = adapterSeasons;
             _spinnerSeason.ItemSelected += (s, e) => { model.SeasonId = e.Position + 1; };
+            _spinnerSeason.SetSelection(--model.SeasonId);
 
             _spinnerCurrencies = FindViewById<Spinner>(Resource.Id.currencySpinner);
             adapterCurrencies.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _spinnerCurrencies.Adapter = adapterCurrencies;
             _spinnerCurrencies.ItemSelected += (s, e) => { model.CurrencyId = e.Position + 1; };
+            _spinnerCurrencies.SetSelection(--model.CurrencyId);
 
-            // BUTTON - ADD NEW BUSINESS TRIP
-            Button saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
-            saveNewBusinessTrip.Click += (s, e) => { apiClientService.Add<BusinessTrip>(model); };
-
-            //TODO: Nice info at the bottom that it was saved:
-            //  Spinner spinner = (Spinner)sender;
-            //  string toast = string.Format("The planet is {0}", spinner.GetItemAtPosition(e.Position));
-            //  Toast.MakeText(this, toast, ToastLength.Long).Show();
-
+            // BUTTON - GET BUTTON (action in derivered classes)
+            saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
 
         }
     }
