@@ -3,6 +3,7 @@ using CiuchApp.Settings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,17 @@ namespace CiuchApp.ApiClient
             apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrlDevelopment;
         }
 
-        public List<T> GetList<T>()
+        public List<T> GetList<T>(int id = 0, string baseController = "")
         {
-            string nameOfController = GetNameOfController<T>();
-            Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+            Uri restApiUri;
+            if (id != 0 && !string.IsNullOrEmpty(baseController))
+            {
+                restApiUri = new Uri($@"{apiBaseUrl}/{baseController}/{id}/{GetNameOfController<T>()}");
+            }
+            else
+            {
+                restApiUri = new Uri(apiBaseUrl + GetNameOfController<T>());
+            }
 
             using (var httpClient = new HttpClient())
             {
@@ -33,7 +41,7 @@ namespace CiuchApp.ApiClient
 
         public bool Add<T>(T item) where T : CiuchAppModelBase
         {
-            if(item.IsValid<T>(newItem: true))
+            if (item.IsValid<T>(newItem: true))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
@@ -54,7 +62,7 @@ namespace CiuchApp.ApiClient
 
         public bool Update<T>(T item) where T : CiuchAppModelBase
         {
-            if(item.IsValid<T>(newItem: false))
+            if (item.IsValid<T>(newItem: false))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
@@ -74,10 +82,50 @@ namespace CiuchApp.ApiClient
         }
 
 
-        public List<Piece> GetClothesByBusinessTripId(int id)
+        public List<Piece> GetPiecesByBusinessTripId(int id)
         {
-            throw new NotImplementedException();
+            return GetList<Piece>(id, "BusinessTrips");
         }
+
+        public bool UploadImage(Stream fileStream, string fileName)
+        {
+            HttpContent fileStreamContent = new StreamContent(fileStream);
+            fileStreamContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "file", FileName = fileName };
+            fileStreamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+            using (var client = new HttpClient())
+            using (var formData = new MultipartFormDataContent())
+            {
+                formData.Add(fileStreamContent);
+                var response = client.PostAsync(apiBaseUrl + "Images", formData).Result;
+                return response.IsSuccessStatusCode;
+            }
+        }
+
+        public void UploadImage(string localFilePath, string fileName)
+        {
+            var url = apiBaseUrl + "Images";
+            var file = localFilePath;
+
+            //read file into upfilebytes array
+            var upfilebytes = File.ReadAllBytes(file);
+
+            //create new HttpClient and MultipartFormDataContent and add our file, and StudentId
+            HttpClient client = new HttpClient();
+            client.Timeout = new TimeSpan(0, 20, 0);
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            ByteArrayContent baContent = new ByteArrayContent(upfilebytes);
+            content.Add(baContent, "File", fileName);
+
+
+            //upload MultipartFormDataContent content async and store response in response var
+            var response = client.PostAsync(url, content);
+
+            //read response result as a string async into json var
+            var responsestr = response.Result;
+
+        }
+
+
 
         public List<Piece> GetPieces()
         {

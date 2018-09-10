@@ -29,6 +29,15 @@ namespace CiuchApp.Dashboard
             return businessTrips;
         }
 
+        // GET: api/BusinessTripsApi
+        [HttpGet]
+        [Route("{id}/Pieces")]
+        public IEnumerable<Piece> GetBusinessTrips(int id)
+        {
+            var businessTripsPieces = _context.Pieces.Where(x=>x.BusinessTripId == id).Include(x => x.BusinessTrip);
+            return businessTripsPieces;
+        }
+
         // GET: api/BusinessTripsApi/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)

@@ -18,6 +18,7 @@ US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 ----------------------------------------------------------------------US11: (Mobile) Set Light Theme
 ----------------------------------------------------------------------US12: (Mobile) Update exisiting Business Trip   [Need to update Main view Select Business Trips]
 ----------------------------------------------------------------------US13: (Dashboard) Validate Model - Business Trip
+US14: (Mobile) Error handling for timeout request for Api Calls
 
 
 
@@ -33,6 +34,11 @@ Xamarin:
 	https://forums.xamarin.com/discussion/23776/radiobutton-and-dropdown-list
 	https://www.c-sharpcorner.com/article/creating-a-dropdown-list-using-spinner-in-xamarin-android-app-using-visual-studi/
 
+	Recieps (Camera):
+	https://github.com/xamarin/recipes/tree/master/Recipes/android/other_ux/camera_intent/take_a_picture_and_save_using_camera_app
+
+Youtube Video (sending file from Xamarin to WebServer):
+	https://www.youtube.com/watch?v=IVvJX4CoLUY
 
 
 

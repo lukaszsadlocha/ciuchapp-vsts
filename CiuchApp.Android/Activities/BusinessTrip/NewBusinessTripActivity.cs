@@ -41,6 +41,7 @@ namespace CiuchApp.Mobile.Activities
             base.OnCreate(bundle);
 
             // BUTTON - ADD NEW BUSINESS TRIP
+            saveNewBusinessTrip.Text = "Dodaj Podróż";
             saveNewBusinessTrip.Click += (s, e) => { apiClientService.Add<BusinessTrip>(model); };
 
             //TODO: Nice info at the bottom that it was saved:
