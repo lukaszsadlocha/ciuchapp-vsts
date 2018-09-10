@@ -11,6 +11,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http;
 using System.Collections;
+using CiuchApp.Settings;
 
 namespace CiuchApp.Dashboard
 {
@@ -20,10 +21,13 @@ namespace CiuchApp.Dashboard
     {
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _environment;
+        private readonly CiuchAppSettings _settings;
+
         public ImageApiController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
             _environment = env;
+            _settings = CiuchAppSettingsFactory.GetSettings();
         }
 
         // GET: api/BusinessTripsApi
@@ -42,16 +46,17 @@ namespace CiuchApp.Dashboard
             if(Request?.Form?.Files?.Count > 0)
             {
                 var file = Request.Form.Files[0];
-                var webrootFolder = _environment.WebRootPath;
+                var fileName = file.FileName;
 
+                //var webrootFolder = _environment.WebRootPath;
 
-                using (var fileStream = System.IO.File.Create(webrootFolder + @"/kupadupa.jpg"))
+                var localDir = _settings.PhotoStorageFolder.Server.Path;
+                var localPath = $@"{localDir}/{fileName}";
+
+                using (var fileStream = System.IO.File.Create(localPath))
                 {
                     file.CopyTo(fileStream);
                 }
-                //System.IO.File.WriteAllBytes(webrootFolder + @"/kupadupa.jpg", file.CopyTo
-
-
             }
         }
 

@@ -8,11 +8,11 @@ namespace CiuchApp.Settings
         {
             var settings = new CiuchAppSettings()
             {
-                LocalPhotoStorageFolder = new LocalPhotoStorageFolder()
+                PhotoStorageFolder = new PhotoStorageFolder()
                 {
-                    Path = @"C:/XamarinData"
+                    Mobile = new PathValue() { Path = @"C:/XamarinData" },
+                    Server = new PathValue() { Path = @"C:/CiuchAppPhotos" }
                 },
-
                 ApiUrls = new ApiUrls()
                 {
                     ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api/"
