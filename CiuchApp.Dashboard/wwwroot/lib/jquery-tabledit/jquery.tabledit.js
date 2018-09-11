@@ -348,11 +348,6 @@ if (typeof jQuery === 'undefined') {
                 // Send AJAX request to server.
                 var ajaxResult = ajax(settings.buttons.add.action)
                     .done(function (data) {
-                        if (data.id) {
-                            id = data.id;
-                        }
-                    })
-                    .then(function (data) {
                         // set id from call result
                         $(".table tr:last").attr("id", data.id);
                         $(".table tr:last td:first").html('<span class="tabledit-span tabledit-identifier">' + data.id + '</span><input class="tabledit-input tabledit-identifier" type="hidden" name="Id" value="' + data.id + '" disabled="">')
@@ -361,8 +356,17 @@ if (typeof jQuery === 'undefined') {
 
                         copyOfNewRow.appendTo(".table");
                         copyOfNewRow = $(".table tr:last").clone();
-                        
-                        
+                    })
+                    .fail(function (data) {
+                        if (data.responseText) {
+                            var issues = JSON.parse(data.responseText);
+                            for (var issue in issues) {
+                                if (issues.hasOwnProperty(issue)) {
+                                    var message = '<p>' + issue + " -> " + issues[issue] + "</p>";
+                                    $(message).appendTo('#tableErrorSection')
+                                }
+                            }
+                        }
                     });
 
                 if (ajaxResult === false) {
@@ -635,8 +639,10 @@ if (typeof jQuery === 'undefined') {
             $table.on('click', 'button.tabledit-save-new-button', function (event) {
                 if (event.handled !== true) {
                     event.preventDefault();
-                    const row = $(this).parents('tr').find('td.tabledit-edit-mode');
 
+                    $("#tableErrorSection").html("");
+
+                    const row = $(this).parents('tr').find('td.tabledit-edit-mode');
                     // Submit and update all columns.
                     Add.submit(row);
 
