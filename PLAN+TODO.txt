@@ -28,6 +28,10 @@ VSTS:
 jquery-tabledit	
 	https://markcell.github.io/jquery-tabledit
 
+alternative to jquery-tabledit: X-editable
+	https://vitalets.github.io/x-editable/demo.html?c=inline
+	https://stackoverflow.com/questions/38876772/use-x-editable-inline-in-a-table	=>	http://jsfiddle.net/xBB5x/348/   
+
 Resources:
 Xamarin:
 	Dropdown(s)
