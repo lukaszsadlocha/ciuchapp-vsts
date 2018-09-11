@@ -20,7 +20,7 @@ US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US14: (Mobile) Error handling for timeout request for Api Calls
 US15: (Dashboard) Feractor JS Codem remove stupid if-else, code that is not used, make it more portable
 US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all the rest
-US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
+---------------------US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
 US18: (Webio) Set Database on Webio
 
 Rather pointless US
