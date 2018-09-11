@@ -5,11 +5,10 @@ CiuchApp.Mobile - Xamarin App
 
 USER STORIES
 
-US1: (Mobile,Dashboard) Make calls ASYNC 
-US2: (Mobile) Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
-US3: (Dashboard) Sepearte Dashboard and WebApi
+US1: (Mobile,Dashboard) Make calls ASYNC - And whole logic more async
+----------------------------------------------------------------------US2: (Mobile) Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
 ----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
-US5: (Dashboard) Fix issue with "+" adding additional item to list
+----------------------------------------------------------------------US5: (Dashboard) Fix issue with "+" adding additional item to list
 ----------------------------------------------------------------------US6: (Mobile:NewBusinessTrip) fix datepicker
 ----------------------------------------------------------------------US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
@@ -19,7 +18,13 @@ US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 ----------------------------------------------------------------------US12: (Mobile) Update exisiting Business Trip   [Need to update Main view Select Business Trips]
 ----------------------------------------------------------------------US13: (Dashboard) Validate Model - Business Trip
 US14: (Mobile) Error handling for timeout request for Api Calls
+US15: (Dashboard) Feractor JS Codem remove stupid if-else, code that is not used, make it more portable
+US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all the rest
+US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
+US18: (Webio) Set Database on Webio
 
+Rather pointless US
+US3: (Dashboard) Sepearte Dashboard and WebApi
 
 
 VSTS:
