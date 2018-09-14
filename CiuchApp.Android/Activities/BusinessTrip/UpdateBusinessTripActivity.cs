@@ -23,7 +23,7 @@ namespace CiuchApp.Mobile.Activities
 {
 
     [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class UpdateBusinessTripActivity : BusinessTripsActivityBase
+    public class UpdateBusinessTripActivity : BaseBusinessTripsActivity
     {
         protected override void OnCreate(Bundle bundle)
         {

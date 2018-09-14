@@ -104,95 +104,98 @@ namespace CiuchApp.Mobile
 			// aapt resource value: 0x7f070001
 			public const int CityTextView = 2131165185;
 			
-			// aapt resource value: 0x7f070014
-			public const int ClotheDestription = 2131165204;
-			
-			// aapt resource value: 0x7f070012
-			public const int ClotheImage = 2131165202;
-			
-			// aapt resource value: 0x7f070013
-			public const int ClotheName = 2131165203;
-			
-			// aapt resource value: 0x7f070017
-			public const int ClotheNumberOfSizeL = 2131165207;
-			
-			// aapt resource value: 0x7f070016
-			public const int ClotheNumberOfSizeM = 2131165206;
-			
-			// aapt resource value: 0x7f070015
-			public const int ClotheNumberOfSizeS = 2131165205;
-			
 			// aapt resource value: 0x7f070000
 			public const int CountryTextView = 2131165184;
 			
 			// aapt resource value: 0x7f070002
 			public const int DatesTextView = 2131165186;
 			
-			// aapt resource value: 0x7f07001c
-			public const int businessTripTextInfo = 2131165212;
-			
-			// aapt resource value: 0x7f07001b
-			public const int businessTripsListView = 2131165211;
-			
-			// aapt resource value: 0x7f070007
-			public const int citySpinner = 2131165191;
-			
-			// aapt resource value: 0x7f070018
-			public const int clotheRowImage = 2131165208;
-			
-			// aapt resource value: 0x7f070019
-			public const int clotheRowName = 2131165209;
-			
-			// aapt resource value: 0x7f070005
-			public const int countrySpinner = 2131165189;
-			
-			// aapt resource value: 0x7f07000f
-			public const int currencySpinner = 2131165199;
-			
-			// aapt resource value: 0x7f070009
-			public const int dateFrom = 2131165193;
-			
-			// aapt resource value: 0x7f07000b
-			public const int dateTo = 2131165195;
-			
-			// aapt resource value: 0x7f070003
-			public const int gridLayout1 = 2131165187;
-			
 			// aapt resource value: 0x7f070011
-			public const int linearLayout1 = 2131165201;
+			public const int PieceImage = 2131165201;
 			
-			// aapt resource value: 0x7f07001a
-			public const int newBusinessTrip = 2131165210;
+			// aapt resource value: 0x7f070012
+			public const int PieceNameText = 2131165202;
 			
 			// aapt resource value: 0x7f07001d
-			public const int newClothe = 2131165213;
+			public const int businessTripTextInfo = 2131165213;
 			
-			// aapt resource value: 0x7f070010
-			public const int saveNewBusinessTrip = 2131165200;
-			
-			// aapt resource value: 0x7f07000d
-			public const int seasonSpinner = 2131165197;
-			
-			// aapt resource value: 0x7f07001e
-			public const int showClothesListView = 2131165214;
-			
-			// aapt resource value: 0x7f070004
-			public const int textView1 = 2131165188;
+			// aapt resource value: 0x7f07001c
+			public const int businessTripsListView = 2131165212;
 			
 			// aapt resource value: 0x7f070006
-			public const int textView2 = 2131165190;
+			public const int citySpinner = 2131165190;
 			
-			// aapt resource value: 0x7f070008
-			public const int textView3 = 2131165192;
+			// aapt resource value: 0x7f070019
+			public const int clotheRowImage = 2131165209;
 			
-			// aapt resource value: 0x7f07000a
-			public const int textView4 = 2131165194;
+			// aapt resource value: 0x7f07001a
+			public const int clotheRowName = 2131165210;
 			
-			// aapt resource value: 0x7f07000c
-			public const int textView5 = 2131165196;
+			// aapt resource value: 0x7f070004
+			public const int countrySpinner = 2131165188;
 			
 			// aapt resource value: 0x7f07000e
-			public const int textView6 = 2131165198;
+			public const int currencySpinner = 2131165198;
+			
+			// aapt resource value: 0x7f070008
+			public const int dateFrom = 2131165192;
+			
+			// aapt resource value: 0x7f07000a
+			public const int dateTo = 2131165194;
+			
+			// aapt resource value: 0x7f070010
+			public const int linearLayout1 = 2131165200;
+			
+			// aapt resource value: 0x7f07001b
+			public const int newBusinessTrip = 2131165211;
+			
+			// aapt resource value: 0x7f07001e
+			public const int newClothe = 2131165214;
+			
+			// aapt resource value: 0x7f070016
+			public const int pieceComponentSpinner = 2131165206;
+			
+			// aapt resource value: 0x7f070017
+			public const int pieceCountryOfOriginSpinner = 2131165207;
+			
+			// aapt resource value: 0x7f070015
+			public const int pieceGroupSpinner = 2131165205;
+			
+			// aapt resource value: 0x7f070014
+			public const int pieceMainCategorySpinner = 2131165204;
+			
+			// aapt resource value: 0x7f070013
+			public const int pieceNameSpinner = 2131165203;
+			
+			// aapt resource value: 0x7f07000f
+			public const int saveNewBusinessTrip = 2131165199;
+			
+			// aapt resource value: 0x7f070018
+			public const int savePieceButton = 2131165208;
+			
+			// aapt resource value: 0x7f07000c
+			public const int seasonSpinner = 2131165196;
+			
+			// aapt resource value: 0x7f07001f
+			public const int showClothesListView = 2131165215;
+			
+			// aapt resource value: 0x7f070003
+			public const int textView1 = 2131165187;
+			
+			// aapt resource value: 0x7f070005
+			public const int textView2 = 2131165189;
+			
+			// aapt resource value: 0x7f070007
+			public const int textView3 = 2131165191;
+			
+			// aapt resource value: 0x7f070009
+			public const int textView4 = 2131165193;
+			
+			// aapt resource value: 0x7f07000b
+			public const int textView5 = 2131165195;
+			
+			// aapt resource value: 0x7f07000d
+			public const int textView6 = 2131165197;
 			
 			static Id()
 			{

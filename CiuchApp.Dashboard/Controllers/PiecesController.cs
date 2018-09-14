@@ -22,7 +22,17 @@ namespace CiuchApp.Dashboard
         // GET: Pieces
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pieces.Include(p => p.BusinessTrip).Include(p => p.CodeCn).Include(p => p.Color).Include(p => p.ColorName).Include(p => p.CountryOfOrigin).Include(p => p.Group).Include(p => p.MainCategory).Include(p => p.Set).Include(p => p.Size).Include(p => p.Supplier);
+            var applicationDbContext = _context.Pieces
+                .Include(p => p.BusinessTrip)
+                .Include(p => p.CodeCn)
+                .Include(p => p.Color)
+                .Include(p => p.ColorName)
+                .Include(p => p.CountryOfOrigin)
+                .Include(p => p.Group)
+                .Include(p => p.MainCategory)
+                .Include(p => p.Set)
+                .Include(p => p.Size)
+                .Include(p => p.Supplier);
             return View(await applicationDbContext.ToListAsync());
         }
 

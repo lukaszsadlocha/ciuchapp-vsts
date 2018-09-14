@@ -29,14 +29,16 @@ namespace CiuchApp.DataAccess
 
         private void SeedData(ModelBuilder builder)
         {
-            // Piece Dropdown values
+            
 
+            #region Piece Dropdown values
+            ////////////////////////////////////////
             builder.Entity<Color>().HasData(
-                new { Id = 1, Name = "KLAM212" },
-                new { Id = 2, Name = "OWTR20" },
-                new { Id = 3, Name = "BLEW32" },
-                new { Id = 4, Name = "KKE2111" }
-                );
+                    new { Id = 1, Name = "KLAM212" },
+                    new { Id = 2, Name = "OWTR20" },
+                    new { Id = 3, Name = "BLEW32" },
+                    new { Id = 4, Name = "KKE2111" }
+                    );
 
             builder.Entity<MainCategory>().HasData(
                 new { Id = 1, Name = "Sukienki i tuniki" },
@@ -114,16 +116,17 @@ namespace CiuchApp.DataAccess
                 new { Id = 4, Name = "Niebieski" },
                 new { Id = 5, Name = "Żółty" }
                 );
+            #endregion
 
-            //Business Trip Dropdown Values
-
+            #region Business Trip Dropdown Values
+            ///////////////////////////////
             builder.Entity<Country>().HasData(
-                new { Id = 1, Name = "Polska" },
-                new { Id = 2, Name = "Hiszpania" },
-                new { Id = 3, Name = "Włochy" },
-                new { Id = 4, Name = "Wielka Brytania" },
-                new { Id = 5, Name = "Francja" }
-                );
+                   new { Id = 1, Name = "Polska" },
+                   new { Id = 2, Name = "Hiszpania" },
+                   new { Id = 3, Name = "Włochy" },
+                   new { Id = 4, Name = "Wielka Brytania" },
+                   new { Id = 5, Name = "Francja" }
+                   );
 
             builder.Entity<City>().HasData(
                new { Id = 1, Name = "Wólka Kosowska" },
@@ -145,7 +148,8 @@ namespace CiuchApp.DataAccess
                new { Id = 1, Name = "PLN" },
                new { Id = 2, Name = "EURO" },
                new { Id = 3, Name = "FUNT" }
-               );
+               ); 
+            #endregion
 
 
 

@@ -39,7 +39,7 @@ namespace CiuchApp.ApiClient
             }
         }
 
-        public bool Add<T>(T item) where T : CiuchAppModelBase
+        public T Add<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: true))
             {
@@ -54,10 +54,11 @@ namespace CiuchApp.ApiClient
                     httpClient.PostAsync(restApiUri, content);
                     var response = httpClient.GetAsync(restApiUri).Result;
                     var result = response.Content.ReadAsStringAsync().Result;
+
                 }
-                return true;
+                return item;
             }
-            return false;
+            return item;
         }
 
         public bool Update<T>(T item) where T : CiuchAppModelBase

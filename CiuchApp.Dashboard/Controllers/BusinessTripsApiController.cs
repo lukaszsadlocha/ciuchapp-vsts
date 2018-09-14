@@ -25,7 +25,11 @@ namespace CiuchApp.Dashboard
         [HttpGet]
         public IEnumerable<BusinessTrip> GetBusinessTrips()
         {
-            var businessTrips = _context.BusinessTrips.Include(b => b.City).Include(b => b.Country).Include(b => b.Currency).Include(b => b.Season);
+            var businessTrips = _context.BusinessTrips
+                .Include(b => b.City)
+                .Include(b => b.Country)
+                .Include(b => b.Currency)
+                .Include(b => b.Season);
             return businessTrips;
         }
 
@@ -40,13 +44,8 @@ namespace CiuchApp.Dashboard
 
         // GET: api/BusinessTripsApi/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBusinessTrip([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var businessTrip = await _context.BusinessTrips.FindAsync(id);
 
             if (businessTrip == null)
@@ -95,7 +94,7 @@ namespace CiuchApp.Dashboard
             _context.BusinessTrips.Add(businessTrip);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusinessTrip", new { id = businessTrip.Id }, businessTrip);
+            return CreatedAtAction(nameof(GetById), new { id = businessTrip.Id }, businessTrip);
         }
 
         // DELETE: api/BusinessTripsApi

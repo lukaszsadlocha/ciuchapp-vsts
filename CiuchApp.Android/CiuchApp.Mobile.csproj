@@ -223,7 +223,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\BusinessTrip\BusinessTripsActivityBase.cs" />
+    <Compile Include="Activities\BusinessTrip\BaseBusinessTripsActivity.cs" />
     <Compile Include="Activities\BusinessTrip\UpdateBusinessTripActivity.cs" />
     <Compile Include="Activities\CiuchAppBaseActivity.cs" />
     <Compile Include="Activities\BusinessTrip\NewBusinessTripActivity.cs" />
@@ -231,7 +231,7 @@
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
     <Compile Include="Activities\SelectBusinessTripActivity.cs" />
     <Compile Include="Extensions\DatePickerFragment.cs" />
-    <Compile Include="Activities\PieceActivity.cs" />
+    <Compile Include="Activities\Piece\PieceActivity.cs" />
     <Compile Include="Activities\SelectPieceActivity.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

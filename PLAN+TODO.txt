@@ -22,6 +22,8 @@ US15: (Dashboard) Feractor JS Codem remove stupid if-else, code that is not used
 US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all the rest
 ---------------------US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
 US18: (Webio) Set Database on Webio
+US19: (Domain) Add custom errors to domain models in polish
+US20: (Excel) Prepare dummy excel with some reusabe logic for rules
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi

@@ -23,7 +23,7 @@ namespace CiuchApp.Mobile.Activities
 {
 
     [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class NewBusinessTrips : BusinessTripsActivityBase
+    public class NewBusinessTrips : BaseBusinessTripsActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -42,7 +42,12 @@ namespace CiuchApp.Mobile.Activities
 
             // BUTTON - ADD NEW BUSINESS TRIP
             saveNewBusinessTrip.Text = "Dodaj Podróż";
-            saveNewBusinessTrip.Click += (s, e) => { apiClientService.Add<BusinessTrip>(model); };
+            saveNewBusinessTrip.Click += (s, e) => {
+                model = apiClientService.Add<BusinessTrip>(model);
+                var nextActivity = new Intent(this, typeof(SelectPieceActivity));
+                nextActivity.PutExtra(BusinessTrip.JsonKey, model.Serialize());
+                StartActivity(nextActivity);
+            };
 
             //TODO: Nice info at the bottom that it was saved:
             //  Spinner spinner = (Spinner)sender;
