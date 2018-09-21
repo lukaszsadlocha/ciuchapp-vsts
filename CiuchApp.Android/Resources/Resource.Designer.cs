@@ -152,6 +152,9 @@ namespace CiuchApp.Mobile
 			// aapt resource value: 0x7f07001e
 			public const int newClothe = 2131165214;
 			
+			// aapt resource value: 0x7f070013
+			public const int pieceColorSpinner = 2131165203;
+			
 			// aapt resource value: 0x7f070016
 			public const int pieceComponentSpinner = 2131165206;
 			
@@ -163,9 +166,6 @@ namespace CiuchApp.Mobile
 			
 			// aapt resource value: 0x7f070014
 			public const int pieceMainCategorySpinner = 2131165204;
-			
-			// aapt resource value: 0x7f070013
-			public const int pieceNameSpinner = 2131165203;
 			
 			// aapt resource value: 0x7f07000f
 			public const int saveNewBusinessTrip = 2131165199;

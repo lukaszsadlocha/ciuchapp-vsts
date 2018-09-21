@@ -38,7 +38,7 @@
                     android:text="Kolor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <Spinner
-                    android:id="@+id/pieceNameSpinner"
+                    android:id="@+id/pieceColorSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
                 <TextView

@@ -1,19 +1,9 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-
-using Java.IO;
-using Environment = Android.OS.Environment;
-using Uri = Android.Net.Uri;
-using Android.Graphics;
-using System;
 using Android.Content;
-using System.Collections.Generic;
-using Android.Provider;
-using Android.Content.PM;
 using CiuchApp.Mobile.Helpers;
 using CiuchApp.Domain;
-using System.Linq;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -21,8 +11,6 @@ namespace CiuchApp.Mobile.Activities
     [Activity(Label = "Ciuch")]
     public class PieceActivity : CiuchAppBaseActivity
     {
-        
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -38,7 +26,11 @@ namespace CiuchApp.Mobile.Activities
                 FindViewById<ImageView>(Resource.Id.PieceImage).SetImageBitmap(image);
             }
 
+            SpinnerFor<Color>(Resource.Id.pieceColorSpinner, piece);
             SpinnerFor<Group>(Resource.Id.pieceGroupSpinner, piece);
+            SpinnerFor<CountryOfOrigin>(Resource.Id.pieceCountryOfOriginSpinner, piece);
+            SpinnerFor<Component>(Resource.Id.pieceComponentSpinner, piece);
+            SpinnerFor<MainCategory>(Resource.Id.pieceMainCategorySpinner, piece);
         }
     }
 }
