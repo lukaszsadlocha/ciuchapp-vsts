@@ -44,9 +44,8 @@ namespace CiuchApp.Mobile.Activities
             saveNewBusinessTrip.Text = "Dodaj Podróż";
             saveNewBusinessTrip.Click += (s, e) => {
                 model = apiClientService.Add<BusinessTrip>(model);
-                var nextActivity = new Intent(this, typeof(SelectPieceActivity));
-                nextActivity.PutExtra(BusinessTrip.JsonKey, model.Serialize());
-                StartActivity(nextActivity);
+
+                Next<SelectPieceActivity>(model);
             };
 
             //TODO: Nice info at the bottom that it was saved:

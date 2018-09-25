@@ -42,16 +42,14 @@ namespace CiuchApp.Mobile.Activities
             businessTripsListView.Adapter = adapter;
             businessTripsListView.ItemClick += (s, e) => {
                 var businessTripClicked = businessTrips[e.Position];
-                var nextActivity = new Intent(this, typeof(SelectPieceActivity));
-                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
-                StartActivity(nextActivity);
+
+                Next<SelectPieceActivity>(businessTripClicked);
             };
 
             businessTripsListView.ItemLongClick += (s, e) => {
                 var businessTripClicked = businessTrips[e.Position];
-                var nextActivity = new Intent(this, typeof(UpdateBusinessTripActivity));
-                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTripClicked.Serialize());
-                StartActivity(nextActivity);
+
+                Next<UpdateBusinessTripActivity>(businessTripClicked);
             };
 
             var settings = CiuchApp.Settings.CiuchAppSettingsFactory.GetSettings();

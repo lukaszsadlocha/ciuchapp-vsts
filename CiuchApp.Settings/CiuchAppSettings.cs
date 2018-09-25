@@ -15,7 +15,7 @@ namespace CiuchApp.Settings
                 },
                 ApiUrls = new ApiUrls()
                 {
-                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api/"
+                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api"
                 }
             };
 

@@ -13,10 +13,42 @@ namespace CiuchApp.Mobile.Activities
     public abstract class CiuchAppBaseActivity : Activity
     {
         protected CiuchApp.ApiClient.ApiClient apiClientService = new CiuchApp.ApiClient.ApiClient();
+
+        protected void Next<T>(BusinessTrip businessTrip) where T : Activity
+        {
+            Next<T>(businessTrip, null);
+        }
+
+        protected void Next<T>(BusinessTrip businessTrip, Piece piece) where T : Activity
+        {
+            var nextActivity = new Intent(this, typeof(T));
+
+            if (businessTrip != null)
+            {
+                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTrip.Serialize());
+            }
+            if (piece != null)
+            {
+                nextActivity.PutExtra(Piece.JsonKey, piece.Serialize());
+            }
+
+            StartActivity(nextActivity);
+        }
         protected void Next<T>() where T : Activity
         {
-            StartActivity(new Intent(this, typeof(T)));
+            Next<T>(null, null);
         }
+
+        protected Piece GetPiece()
+        {
+            return Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
+        }
+
+        protected BusinessTrip GetBusinessTrip()
+        {
+            return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
+        }
+
 
         protected void DatePickerFor(int datePickerId, DateTime value)
         {
@@ -61,7 +93,11 @@ namespace CiuchApp.Mobile.Activities
 
             var propName = prop.Name + "Id";
             model.GetType().GetProperty(propName).SetValue(model, value);
+        }
 
+        public T Deserialize<T>(string json)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
         }
     }
 }

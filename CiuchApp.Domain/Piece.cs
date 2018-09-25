@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +6,7 @@ namespace CiuchApp.Domain
 {
     public class Piece : CiuchAppModelBase
     {
+        #region Domain Properties
         [DisplayName("#")]
         public int Id { get; set; }
 
@@ -46,7 +47,7 @@ namespace CiuchApp.Domain
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
-        public int ComponentsId { get; set; }
+        public int ComponentId { get; set; }
 
         [DisplayName("Kraj pochodzenia")]
         public CountryOfOrigin CountryOfOrigin { get; set; }
@@ -116,9 +117,10 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int ColorNameId { get; set; }
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; } 
+        #endregion
 
-        public static string JsonKey = nameof(Piece) + "Json";
+        public static string JsonKey => nameof(Piece) + "Json";
 
         public string Serialize()
         {

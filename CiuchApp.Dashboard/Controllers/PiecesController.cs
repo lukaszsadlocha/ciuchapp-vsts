@@ -27,6 +27,7 @@ namespace CiuchApp.Dashboard
                 .Include(p => p.CodeCn)
                 .Include(p => p.Color)
                 .Include(p => p.ColorName)
+                .Include(p => p.Component)
                 .Include(p => p.CountryOfOrigin)
                 .Include(p => p.Group)
                 .Include(p => p.MainCategory)

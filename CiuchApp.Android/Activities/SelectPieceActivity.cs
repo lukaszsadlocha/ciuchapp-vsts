@@ -25,11 +25,10 @@ namespace CiuchApp.Mobile.Activities
     public class SelectPieceActivity : CiuchAppBaseActivity
     {
         //controls
-        private Button newPiece;
-        private ListView clothesListView;
+        private ListView piecesListView;
 
         //models
-        private List<Piece> clothes;
+        private List<Piece> pieces;
         private BusinessTrip businessTrip;
 
         //Helper class to be passed to take picture Intent
@@ -53,22 +52,21 @@ namespace CiuchApp.Mobile.Activities
             SetContentView(Resource.Layout.SelectPiece);
 
             // Set Business trip info
-            businessTrip = BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
+            businessTrip = GetBusinessTrip();
+
             FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip.City} | {businessTrip.DateFrom}";
 
             // Load Clothes
-            clothesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
-            clothes = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
+            piecesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
+            pieces = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
 
-            var adapter = new PieceListViewAdapter(this, clothes);
-            clothesListView.Adapter = adapter;
-            clothesListView.ItemClick += (s, e) =>
+            var adapter = new PieceListViewAdapter(this, pieces);
+            piecesListView.Adapter = adapter;
+            piecesListView.ItemClick += (s, e) =>
             {
-                var clotheClicked = clothes[e.Position];
+                var pieceClicked = pieces[e.Position];
 
-                var nextActivity = new Intent(this, typeof(PieceActivity));
-                nextActivity.PutExtra(Piece.JsonKey, clotheClicked.Serialize());
-                StartActivity(nextActivity);
+                Next<PieceActivity>(businessTrip, pieceClicked);
             };
 
             //Handle camera

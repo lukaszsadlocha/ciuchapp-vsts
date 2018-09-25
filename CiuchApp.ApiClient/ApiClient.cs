@@ -27,7 +27,7 @@ namespace CiuchApp.ApiClient
             }
             else
             {
-                restApiUri = new Uri(apiBaseUrl + GetNameOfController<T>());
+                restApiUri = new Uri($@"{apiBaseUrl}/{GetNameOfController<T>()}");
             }
 
             using (var httpClient = new HttpClient())

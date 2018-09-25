@@ -9,6 +9,7 @@ namespace CiuchApp.Domain
 {
     public class BusinessTrip : CiuchAppModelBase
     {
+        #region Domain Properties
         [DisplayName("#")]
         //[CiuchAppTranslatable]
         public int Id { get; set; }
@@ -42,8 +43,9 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int CurrencyId { get; set; }
+        #endregion
 
-        public static string JsonKey = nameof(BusinessTrip)+"Json";
+        public static string JsonKey => nameof(BusinessTrip) + "Json";
 
         public string Serialize()
         {
