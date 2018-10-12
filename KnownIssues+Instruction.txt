@@ -6,3 +6,6 @@
 2. New DB Migration cannot be created
 	Set Startup project as CiuchApp.Dashboard
 	In Package Manager Console set Default Project as CiuchAPp.DataAccess
+
+3. Apply migration to remote database
+	replace DefaultConnection with connection to webio. delete all migrations, remove __migration table, add migration "Initial", update database, remove  production connection string

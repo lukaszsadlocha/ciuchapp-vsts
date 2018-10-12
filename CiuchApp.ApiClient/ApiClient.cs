@@ -15,7 +15,7 @@ namespace CiuchApp.ApiClient
         readonly string apiBaseUrl;
         public ApiClient()
         {
-            apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrlDevelopment;
+            apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrl;
         }
 
         public List<T> GetList<T>(int id = 0, string baseController = "")

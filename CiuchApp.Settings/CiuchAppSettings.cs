@@ -15,7 +15,8 @@ namespace CiuchApp.Settings
                 },
                 ApiUrls = new ApiUrls()
                 {
-                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api"
+                    //ApiBaseUrl = @"http://10.0.2.2:13121/api"
+                    ApiBaseUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
                 }
             };
 

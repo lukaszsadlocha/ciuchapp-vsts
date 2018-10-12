@@ -16,7 +16,7 @@ namespace CiuchApp.Settings
 
     public class ApiUrls
     {
-        public string ApiBaseUrlDevelopment { get; set; }
+        public string ApiBaseUrl { get; set; }
     }
 
     public class PathValue
