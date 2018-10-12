@@ -7,16 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
+using Microsoft.AspNetCore.Hosting;
+using CiuchApp.Settings;
+using System.IO;
 
 namespace CiuchApp.Dashboard
 {
     public class PiecesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _environment;
+        private readonly CiuchAppSettings _settings;
+        private readonly string _photoStoragePath;
 
-        public PiecesController(ApplicationDbContext context)
+        public PiecesController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _environment = env;
+            _settings = CiuchAppSettingsFactory.GetSettings();
+
+            var rootPath = _environment.WebRootPath;
+            var localDir = _settings.PhotoStorageFolder.Server.Name;
+            _photoStoragePath = _settings.PhotoStorageFolder.Server.Name; // Path.Combine(rootPath, localDir);
         }
 
         // GET: Pieces
@@ -34,6 +46,9 @@ namespace CiuchApp.Dashboard
                 .Include(p => p.Set)
                 .Include(p => p.Size)
                 .Include(p => p.Supplier);
+
+            ViewBag.PhotoStoragePath = _photoStoragePath;
+
             return View(await applicationDbContext.ToListAsync());
         }
 

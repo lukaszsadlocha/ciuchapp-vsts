@@ -3,7 +3,7 @@ Keep posting on blog.lukaszsadlocha.pl
 Add to git
 -------------------------------------------------
 ::CURRENT::
-Check if after renaming ImagePath to ImageName - piece values are sent correctly
+
 ------------------------------------------------
 
 USER STORIES
@@ -27,6 +27,7 @@ US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all th
 US18: (Webio) Set Database on Webio
 US19: (Domain) Add custom errors to domain models in polish
 US20: (Excel) Prepare dummy excel with some reusabe logic for rules
+US21: (Dashboard) ability to change image of Piece from disk
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi

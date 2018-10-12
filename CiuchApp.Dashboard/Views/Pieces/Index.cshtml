@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    string localStoragePath = ViewBag.PhotoStoragePath;
 }
 
 <h2>Index</h2>
@@ -130,7 +131,10 @@
                 @Html.DisplayFor(modelItem => item.ColorName.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageName)
+                @if (!string.IsNullOrEmpty(item.ImageName))
+                {
+                    <img class="list-piece--image" src="@System.IO.Path.Combine(localStoragePath, item.ImageName)" alt="@item.ImageName" />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
