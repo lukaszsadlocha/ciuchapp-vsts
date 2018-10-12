@@ -7,6 +7,7 @@ using Android.Widget;
 using CiuchApp.Domain;
 using System;
 using CiuchApp.Mobile.Extensions;
+using System.Linq.Expressions;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -49,16 +50,46 @@ namespace CiuchApp.Mobile.Activities
             return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
         }
 
+        protected void DatePickerFor(int datePickerId, object model, string dateFieldName)
+        {
+            DatePickerFor(datePickerId, model, dateFieldName, DateTime.Now);
+        }
 
-        protected void DatePickerFor(int datePickerId, DateTime value)
+        protected void DatePickerFor(int datePickerId, object model, string dateFieldName, DateTime defaultValue)
         {
             var _datePicker = FindViewById<TextView>(datePickerId);
-            _datePicker.Text = value.ToString("dd-MM-yyyy");
-            _datePicker.Click += (s, e) => {
-                    DatePickerFragment.NewInstance(delegate (DateTime date) {
+
+            var dateTimeValue = GetValue(model, dateFieldName);
+            if (dateTimeValue == default(DateTime))
+            {
+                dateTimeValue = defaultValue;
+            }
+
+            _datePicker.Text = dateTimeValue.ToString("dd-MM-yyyy");
+            SetValue(model, dateFieldName, dateTimeValue);
+
+            _datePicker.Click += (s, e) =>
+            {
+                DatePickerFragment.NewInstance(delegate (DateTime date)
+                {
                     _datePicker.Text = date.ToString("dd-MM-yyyy");
-                    value = date;
+                    SetValue(model, dateFieldName, date);
                 }).Show(FragmentManager, DatePickerFragment.TAG);
+            };
+        }
+
+        protected void EditTextFor(int resourceId, object model, string fieldName, object defaultValue = null)
+        {
+            var _editText = FindViewById<EditText>(resourceId);
+
+            if (defaultValue != null)
+            {
+                SetValue(model, fieldName, defaultValue);
+            }
+
+            _editText.TextChanged += (s, e) =>
+            {
+                SetValue(model, fieldName, _editText.Text);
             };
         }
 
@@ -83,6 +114,17 @@ namespace CiuchApp.Mobile.Activities
             }
             throw new NullReferenceException();
         }
+
+        protected static DateTime GetValue(object model, string fieldName)
+        {
+            var prop = model.GetType().GetProperties().Where(x => x.Name == fieldName).FirstOrDefault();
+            if (prop != null)
+            {
+                return DateTime.Parse(model.GetType().GetProperty(prop.Name).GetValue(model, null).ToString());
+            }
+            throw new NullReferenceException();
+        }
+
         protected static void SetValue<T>(object model, object value)
         {
             var prop = model.GetType().GetProperties().Where(x => x.PropertyType == typeof(T)).FirstOrDefault();
@@ -93,6 +135,24 @@ namespace CiuchApp.Mobile.Activities
 
             var propName = prop.Name + "Id";
             model.GetType().GetProperty(propName).SetValue(model, value);
+        }
+
+        protected static void SetValue(object model, string fieldName, object value)
+        {
+            var prop = model.GetType().GetProperties().Where(x => x.Name == fieldName).FirstOrDefault();
+            if (prop == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            if(value == null)
+            {
+                Type t = prop.PropertyType;
+                object defaultValue = t.IsValueType ? Activator.CreateInstance(t) : null;
+                value = defaultValue;
+            }
+
+            prop.SetValue(model, Convert.ChangeType(value, prop.PropertyType), null);
         }
 
         public T Deserialize<T>(string json)

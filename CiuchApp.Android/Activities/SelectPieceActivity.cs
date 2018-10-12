@@ -39,9 +39,11 @@ namespace CiuchApp.Mobile.Activities
             public static Bitmap bitmap;
         }
 
+        private readonly CiuchAppSettings settings;
+
         public SelectPieceActivity()
         {
-            var settings = CiuchAppSettingsFactory.GetSettings();
+            settings = CiuchAppSettingsFactory.GetSettings();
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -73,7 +75,7 @@ namespace CiuchApp.Mobile.Activities
 
             if (IsThereAnAppToTakePictures())
             {
-                CreateDirectoryForPictures();
+                EnsureDirectoryForPictures();
 
                 Button button = FindViewById<Button>(Resource.Id.newClothe);
                 //_imageView = FindViewById<ImageView>(Resource.Id.imageView1);
@@ -89,11 +91,9 @@ namespace CiuchApp.Mobile.Activities
             StartActivityForResult(intent, 0);
         }
 
-        private void CreateDirectoryForPictures()
+        private void EnsureDirectoryForPictures()
         {
-            App._dir = new File(
-                Environment.GetExternalStoragePublicDirectory(
-                    Environment.DirectoryPictures), "CameraAppDemo");
+            App._dir = EnvironmentHelper.GetPhotoStorageFolder();
             if (!App._dir.Exists())
             {
                 App._dir.Mkdirs();
@@ -150,6 +150,15 @@ namespace CiuchApp.Mobile.Activities
 
             // Dispose of the Java side bitmap.
             GC.Collect();
+
+            var newPieceWithImage = new Piece
+            {
+                BusinessTripId = businessTrip.Id,
+                ImageName = App._file.Name
+            };
+
+
+            Next<PieceActivity>(businessTrip, newPieceWithImage);
         }
     }
 }

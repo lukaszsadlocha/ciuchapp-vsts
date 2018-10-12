@@ -86,7 +86,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImagePath")] Piece piece)
+        public async Task<IActionResult> Create([Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImageName")] Piece piece)
         {
             if (ModelState.IsValid)
             {
@@ -138,7 +138,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImagePath")] Piece piece)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImageName")] Piece piece)
         {
             if (id != piece.Id)
             {

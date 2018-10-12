@@ -117,7 +117,8 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int ColorNameId { get; set; }
-        public string ImagePath { get; set; } 
+
+        public string ImageName { get; set; } 
         #endregion
 
         public static string JsonKey => nameof(Piece) + "Json";

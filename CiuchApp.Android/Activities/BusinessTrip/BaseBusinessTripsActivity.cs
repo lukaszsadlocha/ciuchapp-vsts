@@ -43,8 +43,8 @@ namespace CiuchApp.Mobile.Activities
 
             //Date from
 
-            DatePickerFor(Resource.Id.dateFrom, model.DateFrom);
-            DatePickerFor(Resource.Id.dateTo, model.DateTo);
+            DatePickerFor(Resource.Id.dateFrom, model, nameof(model.DateFrom));
+            DatePickerFor(Resource.Id.dateTo, model, nameof(model.DateTo));
 
             //DROPDOWNS
             SpinnerFor<Country>(Resource.Id.countrySpinner, model);

@@ -30,12 +30,20 @@ namespace CiuchApp.ApiClient
                 restApiUri = new Uri($@"{apiBaseUrl}/{GetNameOfController<T>()}");
             }
 
-            using (var httpClient = new HttpClient())
+            try
             {
-                var response = httpClient.GetAsync(restApiUri).Result;
-                var result = response.Content.ReadAsStringAsync().Result;
+                using (var httpClient = new HttpClient())
+                {
+                    var response = httpClient.GetAsync(restApiUri).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
 
-                return JsonConvert.DeserializeObject<List<T>>(result);
+                    return JsonConvert.DeserializeObject<List<T>>(result);
+                }
+            }
+            catch (TimeoutException e)
+            {
+                //Todo: timeout execption
+                return null;
             }
         }
 
@@ -44,7 +52,7 @@ namespace CiuchApp.ApiClient
             if (item.IsValid<T>(newItem: true))
             {
                 string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
 
                 using (var httpClient = new HttpClient())
                 {
@@ -66,7 +74,7 @@ namespace CiuchApp.ApiClient
             if (item.IsValid<T>(newItem: false))
             {
                 string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
 
                 using (var httpClient = new HttpClient())
                 {
@@ -104,7 +112,7 @@ namespace CiuchApp.ApiClient
 
         public void UploadImage(string localFilePath, string fileName)
         {
-            var url = apiBaseUrl + "Images";
+            var url = apiBaseUrl + "/Images";
             var file = localFilePath;
 
             //read file into upfilebytes array

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Net.Http;
 using System.Collections;
 using CiuchApp.Settings;
+using Microsoft.AspNetCore;
 
 namespace CiuchApp.Dashboard
 {
@@ -50,8 +51,10 @@ namespace CiuchApp.Dashboard
 
                 //var webrootFolder = _environment.WebRootPath;
 
-                var localDir = _settings.PhotoStorageFolder.Server.Path;
-                var localPath = $@"{localDir}/{fileName}";
+                var rootPath = _environment.WebRootPath;
+                var localDir = _settings.PhotoStorageFolder.Server.Name;
+
+                var localPath = Path.Combine(rootPath, localDir, fileName);
 
                 using (var fileStream = System.IO.File.Create(localPath))
                 {

@@ -99,7 +99,7 @@ namespace CiuchApp.Dashboard
 
         // POST: api/PiecesApi
         [HttpPost]
-        public async Task<IActionResult> PostPiece([FromBody] Piece piece)
+        public async Task<IActionResult> PostPiece([FromForm] Piece piece)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace CiuchApp.Dashboard
             _context.Pieces.Add(piece);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPiece", new { id = piece.Id }, piece);
+            return CreatedAtAction($@"GetPiece/{piece.Id}", piece);
         }
 
         // DELETE: api/PiecesApi/5

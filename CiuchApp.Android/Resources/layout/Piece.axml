@@ -69,6 +69,73 @@
                     android:id="@+id/pieceCountryOfOriginSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Cena Zakupu"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/PieceBuyPriceText"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent" />
+                <TextView
+                    android:text="Dostawca"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceSupplierSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Rozmiar"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceSizeSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Data zamówienia"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:inputType="date"
+                    android:id="@+id/PieceOrderDate" />
+                <TextView
+                    android:text="Data wysyłki"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:inputType="date"
+                    android:id="@+id/PieceEstimatedDateOfShipmentDate" />
+                <TextView
+                    android:text="Data dostawy"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:inputType="date"
+                    android:id="@+id/PieceEstimatedTimeOfDeliveryDate" />
+                <TextView
+                    android:text="Ilość"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/PieceAmountText"
+                    android:inputType="number"
+                    android:layout_width="match_parent" />
+                <TextView
+                    android:text="Kod CN"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceCodeCnSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Set"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceSetSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Nazwa koloru"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceColorNameSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </GridLayout>
             <Button
                 android:text="Button Text"

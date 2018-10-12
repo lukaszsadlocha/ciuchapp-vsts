@@ -16,7 +16,11 @@ namespace CiuchApp.Domain
                 // Add all DateTime fields, all dropdown values and Id if not new item
                 if ((!newItem && property.PropertyType == typeof(Int32) && property.Name == "Id")
                     || property.PropertyType == typeof(DateTime)
-                    || (property.PropertyType == typeof(Int32) && property.Name != "Id" && property.Name.EndsWith("Id")))
+                    || (property.PropertyType == typeof(Int32) && property.Name != "Id" && property.Name.EndsWith("Id"))
+                    || (property.PropertyType == typeof(Double) && property.Name.Contains("Price"))
+                    || (property.PropertyType == typeof(Int32) && property.Name.Contains("Amount")) 
+                    || (property.PropertyType == typeof(string) && property.Name == "Name")
+                    || (property.PropertyType == typeof(string) && property.Name == "ImageName"))
                 {
                     list.Add(new KeyValuePair<string, string>(property.Name, property.GetValue(this).ToString()));
                 }

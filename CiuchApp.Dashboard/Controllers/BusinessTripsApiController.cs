@@ -57,6 +57,7 @@ namespace CiuchApp.Dashboard
         }
 
         //(EDIT)  PUT: api/BusinessTripsApi  
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutBusinessTrip([FromForm]BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
@@ -81,8 +82,8 @@ namespace CiuchApp.Dashboard
             return NoContent();
         }
 
-        // POST: api/BusinessTripsApi (ADD)
-        [HttpPost]
+        
+        [HttpPost] // POST: (ADD)
         public async Task<IActionResult> PostBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
@@ -97,8 +98,7 @@ namespace CiuchApp.Dashboard
             return CreatedAtAction(nameof(GetById), new { id = businessTrip.Id }, businessTrip);
         }
 
-        // DELETE: api/BusinessTripsApi
-        [HttpDelete]
+        [HttpDelete]// DELETE:
         public async Task<IActionResult> DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)

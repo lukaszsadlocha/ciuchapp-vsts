@@ -1,7 +1,10 @@
+-------------------------------------------------
 Keep posting on blog.lukaszsadlocha.pl
 Add to git
-
-CiuchApp.Mobile - Xamarin App
+-------------------------------------------------
+::CURRENT::
+Check if after renaming ImagePath to ImageName - piece values are sent correctly
+------------------------------------------------
 
 USER STORIES
 
