@@ -1,0 +1,8 @@
+1. Xamarin cannot call localhost API
+	In .vs folder in '.vs\config\applicationhost.config' add full binding:
+	<binding protocol="http" bindingInformation="*:13121:*" />
+	To site CiuchApp.Dashboard (around line: 164)
+
+2. New DB Migration cannot be created
+	Set Startup project as CiuchApp.Dashboard
+	In Package Manager Console set Default Project as CiuchAPp.DataAccess

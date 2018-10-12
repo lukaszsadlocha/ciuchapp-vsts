@@ -4,14 +4,16 @@ using CiuchApp.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CiuchApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180924223922_fix_for_component_s_id")]
+    partial class fix_for_component_s_id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,7 +352,7 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.Property<int>("GroupId");
 
-                    b.Property<string>("ImageName");
+                    b.Property<string>("ImagePath");
 
                     b.Property<int>("MainCategoryId");
 
@@ -394,9 +396,9 @@ namespace CiuchApp.DataAccess.Migrations
                     b.ToTable("Pieces");
 
                     b.HasData(
-                        new { Id = 1, Amount = 60, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 1, SupplierId = 1 },
-                        new { Id = 2, Amount = 80, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 2, SupplierId = 1 },
-                        new { Id = 3, Amount = 100, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 3, SupplierId = 1 }
+                        new { Id = 1, Amount = 60, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg", MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 1, SupplierId = 1 },
+                        new { Id = 2, Amount = 80, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg", MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 2, SupplierId = 1 },
+                        new { Id = 3, Amount = 100, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, ImagePath = "fotyzwyjazdu/wyjazd1/SHIRT1122.jpg", MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 3, SupplierId = 1 }
                     );
                 });
 

@@ -27,24 +27,32 @@ namespace CiuchApp.ApiClient
             }
             else
             {
-                restApiUri = new Uri(apiBaseUrl + GetNameOfController<T>());
+                restApiUri = new Uri($@"{apiBaseUrl}/{GetNameOfController<T>()}");
             }
 
-            using (var httpClient = new HttpClient())
+            try
             {
-                var response = httpClient.GetAsync(restApiUri).Result;
-                var result = response.Content.ReadAsStringAsync().Result;
+                using (var httpClient = new HttpClient())
+                {
+                    var response = httpClient.GetAsync(restApiUri).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
 
-                return JsonConvert.DeserializeObject<List<T>>(result);
+                    return JsonConvert.DeserializeObject<List<T>>(result);
+                }
+            }
+            catch (TimeoutException e)
+            {
+                //Todo: timeout execption
+                return null;
             }
         }
 
-        public bool Add<T>(T item) where T : CiuchAppModelBase
+        public T Add<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: true))
             {
                 string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
 
                 using (var httpClient = new HttpClient())
                 {
@@ -54,10 +62,11 @@ namespace CiuchApp.ApiClient
                     httpClient.PostAsync(restApiUri, content);
                     var response = httpClient.GetAsync(restApiUri).Result;
                     var result = response.Content.ReadAsStringAsync().Result;
+
                 }
-                return true;
+                return item;
             }
-            return false;
+            return item;
         }
 
         public bool Update<T>(T item) where T : CiuchAppModelBase
@@ -65,7 +74,7 @@ namespace CiuchApp.ApiClient
             if (item.IsValid<T>(newItem: false))
             {
                 string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri(apiBaseUrl + nameOfController);
+                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
 
                 using (var httpClient = new HttpClient())
                 {
@@ -103,7 +112,7 @@ namespace CiuchApp.ApiClient
 
         public void UploadImage(string localFilePath, string fileName)
         {
-            var url = apiBaseUrl + "Images";
+            var url = apiBaseUrl + "/Images";
             var file = localFilePath;
 
             //read file into upfilebytes array

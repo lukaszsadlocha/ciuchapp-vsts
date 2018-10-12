@@ -10,12 +10,12 @@ namespace CiuchApp.Settings
             {
                 PhotoStorageFolder = new PhotoStorageFolder()
                 {
-                    Mobile = new PathValue() { Path = @"C:/XamarinData" },
-                    Server = new PathValue() { Path = @"C:/CiuchAppPhotos" }
+                    Mobile = new PathValue() { Name = @"CiuchAppPhotos" },
+                    Server = new PathValue() { Name = @"CiuchAppPhotos" }
                 },
                 ApiUrls = new ApiUrls()
                 {
-                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api/"
+                    ApiBaseUrlDevelopment = @"http://10.0.2.2:13121/api"
                 }
             };
 

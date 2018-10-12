@@ -7,22 +7,48 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
+using Microsoft.AspNetCore.Hosting;
+using CiuchApp.Settings;
+using System.IO;
 
 namespace CiuchApp.Dashboard
 {
     public class PiecesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _environment;
+        private readonly CiuchAppSettings _settings;
+        private readonly string _photoStoragePath;
 
-        public PiecesController(ApplicationDbContext context)
+        public PiecesController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _environment = env;
+            _settings = CiuchAppSettingsFactory.GetSettings();
+
+            var rootPath = _environment.WebRootPath;
+            var localDir = _settings.PhotoStorageFolder.Server.Name;
+            _photoStoragePath = _settings.PhotoStorageFolder.Server.Name; // Path.Combine(rootPath, localDir);
         }
 
         // GET: Pieces
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pieces.Include(p => p.BusinessTrip).Include(p => p.CodeCn).Include(p => p.Color).Include(p => p.ColorName).Include(p => p.CountryOfOrigin).Include(p => p.Group).Include(p => p.MainCategory).Include(p => p.Set).Include(p => p.Size).Include(p => p.Supplier);
+            var applicationDbContext = _context.Pieces
+                .Include(p => p.BusinessTrip)
+                .Include(p => p.CodeCn)
+                .Include(p => p.Color)
+                .Include(p => p.ColorName)
+                .Include(p => p.Component)
+                .Include(p => p.CountryOfOrigin)
+                .Include(p => p.Group)
+                .Include(p => p.MainCategory)
+                .Include(p => p.Set)
+                .Include(p => p.Size)
+                .Include(p => p.Supplier);
+
+            ViewBag.PhotoStoragePath = _photoStoragePath;
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -75,7 +101,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImagePath")] Piece piece)
+        public async Task<IActionResult> Create([Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImageName")] Piece piece)
         {
             if (ModelState.IsValid)
             {
@@ -127,7 +153,7 @@ namespace CiuchApp.Dashboard
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImagePath")] Piece piece)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BusinessTripId,ColorId,MainCategoryId,GroupId,ComponentsId,CountryOfOriginId,BuyPrice,SellPrice,SupplierId,SizeId,OrderDate,EstimatedDateOfShipment,EstimatedTimeOfDelivery,Amount,CodeCnId,SetId,ColorNameId,ImageName")] Piece piece)
         {
             if (id != piece.Id)
             {

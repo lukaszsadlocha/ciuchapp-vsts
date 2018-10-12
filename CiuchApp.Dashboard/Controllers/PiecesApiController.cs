@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CiuchApp.Dashboard
 {
-    [Route("api/[controller]")]
+    [Route("api/Pieces")]
     [ApiController]
     public class PiecesApiController : ControllerBase
     {
@@ -27,7 +27,20 @@ namespace CiuchApp.Dashboard
         [HttpGet]
         public IEnumerable<Piece> GetPieces()
         {
-            return _context.Pieces;
+            return _context.Pieces
+                .Include(p => p.BusinessTrip).ThenInclude(b => b.City)
+                .Include(p => p.BusinessTrip).ThenInclude(b => b.Country)
+                .Include(p => p.BusinessTrip).ThenInclude(b => b.Currency)
+                .Include(p => p.BusinessTrip).ThenInclude(b => b.Season)
+                .Include(p => p.CodeCn)
+                .Include(p => p.Color)
+                .Include(p => p.ColorName)
+                .Include(p => p.CountryOfOrigin)
+                .Include(p => p.Group)
+                .Include(p => p.MainCategory)
+                .Include(p => p.Set)
+                .Include(p => p.Size)
+                .Include(p => p.Supplier);
         }
 
         // GET: api/PiecesApi/5
@@ -86,7 +99,7 @@ namespace CiuchApp.Dashboard
 
         // POST: api/PiecesApi
         [HttpPost]
-        public async Task<IActionResult> PostPiece([FromBody] Piece piece)
+        public async Task<IActionResult> PostPiece([FromForm] Piece piece)
         {
             if (!ModelState.IsValid)
             {
@@ -96,7 +109,7 @@ namespace CiuchApp.Dashboard
             _context.Pieces.Add(piece);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPiece", new { id = piece.Id }, piece);
+            return CreatedAtAction($@"GetPiece/{piece.Id}", piece);
         }
 
         // DELETE: api/PiecesApi/5

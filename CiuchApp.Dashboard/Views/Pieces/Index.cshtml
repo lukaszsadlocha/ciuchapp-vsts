@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    string localStoragePath = ViewBag.PhotoStoragePath;
 }
 
 <h2>Index</h2>
@@ -28,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.Group)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ComponentsId)
+                @Html.DisplayNameFor(model => model.ComponentId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CountryOfOrigin)
@@ -67,7 +68,7 @@
                 @Html.DisplayNameFor(model => model.ColorName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
+                @Html.DisplayNameFor(model => model.ImageName)
             </th>
             <th></th>
         </tr>
@@ -91,7 +92,7 @@
                 @Html.DisplayFor(modelItem => item.Group.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ComponentsId)
+                @Html.DisplayFor(modelItem => item.ComponentId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CountryOfOrigin.Id)
@@ -130,7 +131,10 @@
                 @Html.DisplayFor(modelItem => item.ColorName.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
+                @if (!string.IsNullOrEmpty(item.ImageName))
+                {
+                    <img class="list-piece--image" src="@System.IO.Path.Combine(localStoragePath, item.ImageName)" alt="@item.ImageName" />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

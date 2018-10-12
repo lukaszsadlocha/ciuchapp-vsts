@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CiuchApp.Domain
 {
     public abstract class DropDownValueBase : CiuchAppModelBase
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 

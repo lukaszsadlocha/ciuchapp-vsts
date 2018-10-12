@@ -21,7 +21,7 @@ namespace CiuchApp.Settings
 
     public class PathValue
     {
-        public string Path { get; set; }
+        public string Name { get; set; }
     }
 
 }

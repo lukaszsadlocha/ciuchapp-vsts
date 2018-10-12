@@ -1,42 +1,127 @@
-﻿using System;
+using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CiuchApp.Domain
 {
     public class Piece : CiuchAppModelBase
     {
+        #region Domain Properties
+        [DisplayName("#")]
         public int Id { get; set; }
-        public string Name { get; set; } //Name from Producer
-        public BusinessTrip BusinessTrip { get; set; }
-        public int BusinessTripId { get; set; }
-        public Color Color { get; set; }
-        public int ColorId { get; set; }
-        public MainCategory MainCategory { get; set; }
-        public int MainCategoryId { get; set; }
-        public Group Group { get; set; }
-        public int GroupId { get; set; }
-        public Component Component { get; set; }
-        public int ComponentsId { get; set; }
-        public CountryOfOrigin CountryOfOrigin { get; set; }
-        public int CountryOfOriginId { get; set; }
-        public double BuyPrice { get; set; }
-        public double SellPrice { get; set; }
-        public Supplier Supplier { get; set; }
-        public int SupplierId { get; set; }
-        public Size Size { get; set; }
-        public int SizeId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime EstimatedDateOfShipment { get; set; }
-        public DateTime EstimatedTimeOfDelivery { get; set; }
-        public int Amount { get; set; }
-        public CodeCn CodeCn { get; set; }
-        public int CodeCnId { get; set; }
-        public Set Set { get; set; }
-        public int SetId { get; set; }
-        public ColorName ColorName { get; set; }
-        public int ColorNameId { get; set; }
-        public string ImagePath { get; set; }
 
-        public static string JsonKey = nameof(Piece) + "Json";
+        [Required]
+        [DisplayName("Nazwa")]
+        public string Name { get; set; } //Name from Producer
+
+        [DisplayName("Wyjazd")]
+        public BusinessTrip BusinessTrip { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int BusinessTripId { get; set; }
+
+        [DisplayName("Kolor")]
+        public Color Color { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int ColorId { get; set; }
+
+        [DisplayName("Kategoria główna")]
+        public MainCategory MainCategory { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int MainCategoryId { get; set; }
+
+        [DisplayName("Grupa")]
+        public Group Group { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int GroupId { get; set; }
+
+        [DisplayName("Skład")]
+        public Component Component { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int ComponentId { get; set; }
+
+        [DisplayName("Kraj pochodzenia")]
+        public CountryOfOrigin CountryOfOrigin { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int CountryOfOriginId { get; set; }
+
+        [Required]
+        [DisplayName("Cena zakupu")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public double BuyPrice { get; set; }
+
+        [Required]
+        [DisplayName("Cena sprzedaży")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public double SellPrice { get; set; }
+
+        [DisplayName("Dostawca")]
+        public Supplier Supplier { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int SupplierId { get; set; }
+
+        [DisplayName("Rozmiar")]
+        public Size Size { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int SizeId { get; set; }
+
+        [DisplayName("Data zamówienia")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime OrderDate { get; set; }
+
+        [DisplayName("Data wysyłki")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EstimatedDateOfShipment { get; set; }
+
+        [DisplayName("Data dostawy")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EstimatedTimeOfDelivery { get; set; }
+
+        [Required]
+        [DisplayName("Ilość")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int Amount { get; set; }
+
+        [DisplayName("Kod CN")]
+        public CodeCn CodeCn { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int CodeCnId { get; set; }
+
+        [DisplayName("Set")]
+        public Set Set { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int SetId { get; set; }
+
+        [DisplayName("Nazwa koloru")]
+        public ColorName ColorName { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int ColorNameId { get; set; }
+
+        public string ImageName { get; set; } 
+        #endregion
+
+        public static string JsonKey => nameof(Piece) + "Json";
 
         public string Serialize()
         {
