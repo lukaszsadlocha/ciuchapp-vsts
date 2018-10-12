@@ -3,7 +3,7 @@ Keep posting on blog.lukaszsadlocha.pl
 Add to git
 -------------------------------------------------
 ::CURRENT::
-
+Deploy database to Webio (from VS for now...)
 ------------------------------------------------
 
 USER STORIES
@@ -15,7 +15,7 @@ US1: (Mobile,Dashboard) Make calls ASYNC - And whole logic more async
 ----------------------------------------------------------------------US6: (Mobile:NewBusinessTrip) fix datepicker
 ----------------------------------------------------------------------US7: (Mobile) handle "Add new business trip" on NewBusinessTrip
 ----------------------------------------------------------------------US8: (GIT) Set VSTS Project and push code there
-US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
+----------------------------------------------------------------------US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 ----------------------------------------------------------------------US10: (DevOps) Set simple deployment pipeline
 ----------------------------------------------------------------------US11: (Mobile) Set Light Theme
 ----------------------------------------------------------------------US12: (Mobile) Update exisiting Business Trip   [Need to update Main view Select Business Trips]
@@ -23,11 +23,12 @@ US9: (DevOps) Push Dashboard + Api to Webio and try to connect from Mobile
 US14: (Mobile) Error handling for timeout request for Api Calls
 US15: (Dashboard) Feractor JS Codem remove stupid if-else, code that is not used, make it more portable
 US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all the rest
----------------------US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
-US18: (Webio) Set Database on Webio
+----------------------------------------------------------------------US17: (Mobile/Dashboard) Pieces: Layouts/Controllers/views/JS and all the rest
+----------------------------------------------------------------------US18: (Webio) Set Database on Webio
 US19: (Domain) Add custom errors to domain models in polish
 US20: (Excel) Prepare dummy excel with some reusabe logic for rules
 US21: (Dashboard) ability to change image of Piece from disk
+US22: (Mobile) Swich to use Development/Prod BaseApiUrl (Relese/Debug) configuration
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi

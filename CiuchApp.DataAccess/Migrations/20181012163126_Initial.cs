@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CiuchApp.DataAccess.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,7 +53,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,7 +66,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,7 +79,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,7 +92,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +105,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,7 +118,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,7 +131,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,7 +144,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,7 +157,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,7 +170,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -183,7 +183,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,7 +196,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,7 +209,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,7 +222,7 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -383,13 +383,12 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     BusinessTripId = table.Column<int>(nullable: false),
                     ColorId = table.Column<int>(nullable: false),
                     MainCategoryId = table.Column<int>(nullable: false),
                     GroupId = table.Column<int>(nullable: false),
-                    ComponentId = table.Column<int>(nullable: true),
-                    ComponentsId = table.Column<int>(nullable: false),
+                    ComponentId = table.Column<int>(nullable: false),
                     CountryOfOriginId = table.Column<int>(nullable: false),
                     BuyPrice = table.Column<double>(nullable: false),
                     SellPrice = table.Column<double>(nullable: false),
@@ -402,7 +401,7 @@ namespace CiuchApp.DataAccess.Migrations
                     CodeCnId = table.Column<int>(nullable: false),
                     SetId = table.Column<int>(nullable: false),
                     ColorNameId = table.Column<int>(nullable: false),
-                    ImagePath = table.Column<string>(nullable: true)
+                    ImageName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -436,7 +435,7 @@ namespace CiuchApp.DataAccess.Migrations
                         column: x => x.ComponentId,
                         principalTable: "Components",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pieces_CountryOfOrigin_CountryOfOriginId",
                         column: x => x.CountryOfOriginId,
@@ -659,6 +658,21 @@ namespace CiuchApp.DataAccess.Migrations
                 table: "BusinessTrips",
                 columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
                 values: new object[] { 3, 3, 4, 3, new DateTime(2018, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
+
+            migrationBuilder.InsertData(
+                table: "Pieces",
+                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
+                values: new object[] { 1, 60, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Pieces",
+                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
+                values: new object[] { 2, 80, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Pieces",
+                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
+                values: new object[] { 3, 100, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
