@@ -13,10 +13,10 @@ namespace CiuchApp.Settings
                     Mobile = new PathValue() { Name = @"CiuchAppPhotos" },
                     Server = new PathValue() { Name = @"CiuchAppPhotos" }
                 },
-                ApiUrls = new ApiUrls()
+                Urls = new Urls()
                 {
-                    //ApiBaseUrl = @"http://10.0.2.2:13121/api"
-                    ApiBaseUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
+                    LocalApiUrl = @"http://10.0.2.2:13121/api",
+                    RemoteApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
                 }
             };
 

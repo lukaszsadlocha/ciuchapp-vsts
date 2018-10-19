@@ -15,7 +15,7 @@ namespace CiuchApp.ApiClient
         readonly string apiBaseUrl;
         public ApiClient()
         {
-            apiBaseUrl = CiuchAppSettingsFactory.GetSettings().ApiUrls.ApiBaseUrl;
+            apiBaseUrl = CiuchAppSettingsFactory.GetSettings().Urls.ApiUrl;
         }
 
         public List<T> GetList<T>(int id = 0, string baseController = "")
@@ -40,10 +40,9 @@ namespace CiuchApp.ApiClient
                     return JsonConvert.DeserializeObject<List<T>>(result);
                 }
             }
-            catch (TimeoutException e)
+            catch (Exception e)
             {
-                //Todo: timeout execption
-                return null;
+                throw new Exception($"Cound not connect to ApiUrl: {restApiUri}. Check if page works fine");
             }
         }
 

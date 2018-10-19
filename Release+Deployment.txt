@@ -1,0 +1,2 @@
+1. Preparing an Application for Release
+	https://docs.microsoft.com/en-us/xamarin/android/deploy-test/release-prep/?tabs=windows

@@ -19,9 +19,10 @@ using CiuchApp.Settings;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Wybierz wyjazd", MainLauncher = true)]
+    [Activity(Label = "CiuchApp - Answear", MainLauncher = true)]
     public class SelectBusinessTripActivity : CiuchAppBaseActivity
     {
+        private TextView loadingText;
         private Button newBusinessTripButton;
         private ListView businessTripsListView;
         private List<BusinessTrip> businessTrips;
@@ -29,13 +30,27 @@ namespace CiuchApp.Mobile.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
             SetContentView(Resource.Layout.SelectBusinessTrip);
+
+            var settings = CiuchAppSettingsFactory.GetSettings();
+            loadingText = FindViewById<TextView>(Resource.Id.loadingText);
+            loadingText.Text = $"Łacze z: {settings.Urls.ApiUrl}";
 
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
             newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
             //Get Business trips and show them in ListView + add events 
-            businessTrips = apiClientService.GetList<BusinessTrip>();
+            try
+            {
+                businessTrips = apiClientService.GetList<BusinessTrip>();
+            }
+            catch(Exception e)
+            {
+                loadingText.Text = e.Message;
+                return;
+            }
+
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
             var adapter = new BusinessTripListViewAdapter(this, businessTrips);
@@ -51,8 +66,6 @@ namespace CiuchApp.Mobile.Activities
 
                 Next<UpdateBusinessTripActivity>(businessTripClicked);
             };
-
-            var settings = CiuchApp.Settings.CiuchAppSettingsFactory.GetSettings();
         }
     }
 }
