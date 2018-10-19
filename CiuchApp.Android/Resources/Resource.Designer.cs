@@ -131,11 +131,11 @@ namespace CiuchApp.Mobile
 			// aapt resource value: 0x7f07001b
 			public const int PieceOrderDate = 2131165211;
 			
-			// aapt resource value: 0x7f070027
-			public const int businessTripTextInfo = 2131165223;
+			// aapt resource value: 0x7f070028
+			public const int businessTripTextInfo = 2131165224;
 			
-			// aapt resource value: 0x7f070026
-			public const int businessTripsListView = 2131165222;
+			// aapt resource value: 0x7f070027
+			public const int businessTripsListView = 2131165223;
 			
 			// aapt resource value: 0x7f070006
 			public const int citySpinner = 2131165190;
@@ -162,10 +162,13 @@ namespace CiuchApp.Mobile
 			public const int linearLayout1 = 2131165200;
 			
 			// aapt resource value: 0x7f070025
-			public const int newBusinessTrip = 2131165221;
+			public const int loadingText = 2131165221;
 			
-			// aapt resource value: 0x7f070028
-			public const int newClothe = 2131165224;
+			// aapt resource value: 0x7f070026
+			public const int newBusinessTrip = 2131165222;
+			
+			// aapt resource value: 0x7f070029
+			public const int newClothe = 2131165225;
 			
 			// aapt resource value: 0x7f07001f
 			public const int pieceCodeCnSpinner = 2131165215;
@@ -206,8 +209,8 @@ namespace CiuchApp.Mobile
 			// aapt resource value: 0x7f07000c
 			public const int seasonSpinner = 2131165196;
 			
-			// aapt resource value: 0x7f070029
-			public const int showClothesListView = 2131165225;
+			// aapt resource value: 0x7f07002a
+			public const int showClothesListView = 2131165226;
 			
 			// aapt resource value: 0x7f070003
 			public const int textView1 = 2131165187;

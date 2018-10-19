@@ -1,11 +1,12 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
 
 namespace CiuchApp.Settings
 {
     public class CiuchAppSettings
     {
         public PhotoStorageFolder PhotoStorageFolder { get; set; }
-        public ApiUrls ApiUrls { get; set; }
+        public Urls Urls { get; set; }
     }
 
     public class PhotoStorageFolder
@@ -14,9 +15,22 @@ namespace CiuchApp.Settings
         public PathValue Server { get; set; }
     }
 
-    public class ApiUrls
+    public class Urls
     {
-        public string ApiBaseUrl { get; set; }
+        public string ApiUrl
+        {
+            get
+            {
+                if(Debugger.IsAttached)
+                {
+                    return LocalApiUrl;
+                }
+                return RemoteApiUrl;
+            }
+        }
+
+        public string LocalApiUrl { get; set; }
+        public string RemoteApiUrl { get; set; }
     }
 
     public class PathValue

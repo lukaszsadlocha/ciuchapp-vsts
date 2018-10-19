@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		BusinessRequirements.txt = BusinessRequirements.txt
 		KnownIssues+Instruction.txt = KnownIssues+Instruction.txt
 		PLAN+TODO.txt = PLAN+TODO.txt
+		Release+Deployment.txt = Release+Deployment.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CiuchApp.Domain", "CiuchApp.Domain\CiuchApp.Domain.csproj", "{221EDA5A-AD4D-4CD8-B822-DCD322938F84}"

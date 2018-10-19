@@ -28,7 +28,7 @@ US16: (Mobile/Dashboard) DropDown Valus: Layouts/Controllers/views/JS and all th
 US19: (Domain) Add custom errors to domain models in polish
 US20: (Excel) Prepare dummy excel with some reusabe logic for rules
 US21: (Dashboard) ability to change image of Piece from disk
-US22: (Mobile) Swich to use Development/Prod BaseApiUrl (Relese/Debug) configuration
+----------------------------------------------------------------------US22: (Mobile) Swich to use Development/Prod BaseApiUrl (Relese/Debug) configuration + deploy app to mobile phone
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi
