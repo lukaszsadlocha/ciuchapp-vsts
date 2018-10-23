@@ -159,5 +159,16 @@ namespace CiuchApp.Mobile.Activities
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
         }
+
+        protected void ShowPopUp(string title, string message, Action funcOnClick)
+        {
+            var builder = new AlertDialog.Builder(this);
+            builder.SetTitle(title);
+            builder.SetMessage(message);
+            builder.SetNeutralButton("OK", delegate {
+                funcOnClick();
+                builder.Dispose(); });
+            builder.Show();
+        }
     }
 }
