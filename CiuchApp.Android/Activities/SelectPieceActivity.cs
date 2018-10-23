@@ -56,7 +56,7 @@ namespace CiuchApp.Mobile.Activities
             // Set Business trip info
             businessTrip = GetBusinessTrip();
 
-            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip.City} | {businessTrip.DateFrom}";
+            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip?.City?.Name} | {businessTrip?.DateFrom}";
 
             // Load Clothes
             piecesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
