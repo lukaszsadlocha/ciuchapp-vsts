@@ -13,7 +13,7 @@ using CiuchApp.Dashboard.Services;
 using CiuchApp.DataAccess;
 using CiuchApp.DataAccess.AspNetIdentity;
 using Microsoft.Extensions.Logging;
-//using Serilog.Extensions.Logging;
+using Serilog;
 
 namespace CiuchApp.Dashboard
 {
@@ -45,9 +45,7 @@ namespace CiuchApp.Dashboard
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //Logging section
-            //loggerFactory.AddSerilog();
-
+            loggerFactory.AddSerilog();
 
             if (env.IsDevelopment())
             {

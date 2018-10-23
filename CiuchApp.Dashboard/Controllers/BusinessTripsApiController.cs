@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
+using Microsoft.Extensions.Logging;
 
 namespace CiuchApp.Dashboard
 {
@@ -15,16 +16,19 @@ namespace CiuchApp.Dashboard
     public class BusinessTripsApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<BusinessTripsApiController> _logger;
 
-        public BusinessTripsApiController(ApplicationDbContext context)
+        public BusinessTripsApiController(ApplicationDbContext context, ILogger<BusinessTripsApiController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/BusinessTripsApi
         [HttpGet]
         public IEnumerable<BusinessTrip> GetBusinessTrips()
         {
+            _logger.Log(LogLevel.Information, $"GetBusinessTrips() {DateTime.Now}");
             var businessTrips = _context.BusinessTrips
                 .Include(b => b.City)
                 .Include(b => b.Country)
