@@ -18,7 +18,7 @@ namespace CiuchApp.Dashboard
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File(@"Serilog/log.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(@"Serilog/log.log", rollingInterval: RollingInterval.Day)
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .CreateLogger();

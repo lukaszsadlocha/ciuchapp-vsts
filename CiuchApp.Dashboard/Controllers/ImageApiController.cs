@@ -40,11 +40,11 @@ namespace CiuchApp.Dashboard
         }
 
         // POST:
-        
+
         [HttpPost]
-        public async Task PostImage()
+        public void PostImage()
         {
-            if(Request?.Form?.Files?.Count > 0)
+            if (Request?.Form?.Files?.Count > 0)
             {
                 var file = Request.Form.Files[0];
                 var fileName = file.FileName;

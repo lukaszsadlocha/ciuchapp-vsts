@@ -18,6 +18,7 @@ using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
 using CiuchApp.Mobile.Extensions;
 using System.Linq;
+using Android.Util;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -27,6 +28,8 @@ namespace CiuchApp.Mobile.Activities
     {
         protected override void OnCreate(Bundle bundle)
         {
+            Log.Info("CiuchApp:NewBusinessTrips", "On create");
+
             //Set default Model that will be pass to call
             model = new BusinessTrip
             {
