@@ -9,3 +9,8 @@
 
 3. Apply migration to remote database
 	replace DefaultConnection with connection to webio. delete all migrations, remove __migration table, add migration "Initial", update database, remove  production connection string
+
+
+BUGs
+1. After deployment to phisical device - unable to send data (Release mode + RemoteApi)
+	There was an iisue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)

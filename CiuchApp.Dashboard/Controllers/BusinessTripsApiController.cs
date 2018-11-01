@@ -90,6 +90,39 @@ namespace CiuchApp.Dashboard
         [HttpPost] // POST: (ADD)
         public async Task<IActionResult> PostBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
+            //Change method header to:
+            //public string PostBusinessTrip()
+
+            //var form = Request.Form;
+
+            //var DateFrom = form["DateFrom"];
+            //var DateTo = form["DateTo"];
+            //var CountryId = form["CountryId"];
+            //var CityId = form["CityId"];
+            //var CurrencyId = form["CurrencyId"];
+            //var SeasonId = form["CurrencyId"]; 
+
+            //_logger.LogInformation($"BusinessTrip values- " +
+            //    $"DateFrom:{DateFrom} " +
+            //    $"DateTo:{DateTo} " +
+            //    $"CountryId:{CountryId} " +
+            //    $"CityId:{CityId}" +
+            //    $"CurrencyId: {CurrencyId}" +
+            //    $"SeasonId:{SeasonId}");
+
+            //BusinessTrip businessTrip = new BusinessTrip
+            //{
+            //    DateFrom = DateTime.Parse(DateFrom),
+            //    DateTo = DateTime.Parse(DateTo),
+            //    CountryId = int.Parse(CountryId),
+            //    CityId = int.Parse(CityId),
+            //    CurrencyId = int.Parse(CurrencyId),
+            //    SeasonId = int.Parse(SeasonId)
+            //};
+
+
+            //_logger.LogInformation($"BusinessTrip SERIALIZED: {businessTrip.Serialize()}");
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
