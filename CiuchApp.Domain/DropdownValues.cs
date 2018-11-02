@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace CiuchApp.Domain
 {
+    [DebuggerDisplay("Name={Name} Id={Id}")]
     public abstract class DropDownValueBase : CiuchAppModelBase
     {
         public int Id { get; set; }

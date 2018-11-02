@@ -63,17 +63,12 @@ namespace CiuchApp.Dashboard
         }
 
         // PUT: api/PiecesApi/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPiece([FromRoute] int id, [FromBody] Piece piece)
+        [HttpPut]
+        public async Task<IActionResult> PutPiece([FromForm] Piece piece)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != piece.Id)
-            {
-                return BadRequest();
             }
 
             _context.Entry(piece).State = EntityState.Modified;
@@ -84,7 +79,7 @@ namespace CiuchApp.Dashboard
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PieceExists(id))
+                if (!PieceExists(piece.Id))
                 {
                     return NotFound();
                 }

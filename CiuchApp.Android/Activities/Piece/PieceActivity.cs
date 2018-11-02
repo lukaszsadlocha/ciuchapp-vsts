@@ -36,7 +36,7 @@ namespace CiuchApp.Mobile.Activities
             }
 
             //Set Text fields
-            EditTextFor(Resource.Id.PieceNameText, model, nameof(model.Name), "__CIUCH__");
+            EditTextFor(Resource.Id.PieceNameText, model, nameof(model.Name));
             EditTextFor(Resource.Id.PieceBuyPriceText, model, nameof(model.BuyPrice));
             EditTextFor(Resource.Id.PieceAmountText, model, nameof(model.Amount));
 

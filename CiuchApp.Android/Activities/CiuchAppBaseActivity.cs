@@ -8,6 +8,7 @@ using CiuchApp.Domain;
 using System;
 using CiuchApp.Mobile.Extensions;
 using System.Linq.Expressions;
+using System.ComponentModel;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -59,7 +60,7 @@ namespace CiuchApp.Mobile.Activities
         {
             var _datePicker = FindViewById<TextView>(datePickerId);
 
-            var dateTimeValue = GetValue(model, dateFieldName);
+            var dateTimeValue = GetValue<DateTime>(model, dateFieldName);
             if (dateTimeValue == default(DateTime))
             {
                 dateTimeValue = defaultValue;
@@ -82,9 +83,17 @@ namespace CiuchApp.Mobile.Activities
         {
             var _editText = FindViewById<EditText>(resourceId);
 
-            if (defaultValue != null)
+            //Text field is always a string
+            var value = GetValue<string>(model, fieldName);
+            if (value != default(string))
+            {
+                SetValue(model, fieldName, value);
+                _editText.Text = value;
+            }
+            else if (defaultValue != null)
             {
                 SetValue(model, fieldName, defaultValue);
+                _editText.Text = value;
             }
 
             _editText.TextChanged += (s, e) =>
@@ -115,15 +124,32 @@ namespace CiuchApp.Mobile.Activities
             throw new NullReferenceException();
         }
 
-        protected static DateTime GetValue(object model, string fieldName)
+        protected static T GetValue<T>(object model, string fieldName)
         {
             var prop = model.GetType().GetProperties().Where(x => x.Name == fieldName).FirstOrDefault();
-            if (prop != null)
-            {
-                return DateTime.Parse(model.GetType().GetProperty(prop.Name).GetValue(model, null).ToString());
-            }
-            throw new NullReferenceException();
+            if (prop == null)
+                throw new NullReferenceException();
+
+            var propValue = model.GetType().GetProperty(prop.Name).GetValue(model, null);
+            if (propValue == null)
+                return default(T);
+
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+            if (converter == null)
+                return default(T);
+
+            return (T)converter.ConvertFromString(propValue.ToString());
         }
+
+        //protected static DateTime GetValue(object model, string fieldName)
+        //{
+        //    var prop = model.GetType().GetProperties().Where(x => x.Name == fieldName).FirstOrDefault();
+        //    if (prop != null)
+        //    {
+        //        return DateTime.Parse(model.GetType().GetProperty(prop.Name).GetValue(model, null).ToString());
+        //    }
+        //    throw new NullReferenceException();
+        //}
 
         protected static void SetValue<T>(object model, object value)
         {
@@ -145,7 +171,7 @@ namespace CiuchApp.Mobile.Activities
                 throw new NullReferenceException();
             }
 
-            if(value == null)
+            if (value == null)
             {
                 Type t = prop.PropertyType;
                 object defaultValue = t.IsValueType ? Activator.CreateInstance(t) : null;
@@ -165,9 +191,11 @@ namespace CiuchApp.Mobile.Activities
             var builder = new AlertDialog.Builder(this);
             builder.SetTitle(title);
             builder.SetMessage(message);
-            builder.SetNeutralButton("OK", delegate {
+            builder.SetNeutralButton("OK", delegate
+            {
                 funcOnClick();
-                builder.Dispose(); });
+                builder.Dispose();
+            });
             builder.Show();
         }
     }
