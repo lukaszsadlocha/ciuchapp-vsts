@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -123,14 +124,33 @@ namespace CiuchApp.Domain
 
         public static string JsonKey => nameof(Piece) + "Json";
 
+        public static string JsonListKey => nameof(Piece) + "ListJson";
+
         public string Serialize()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
 
+        public static string SerializeList(List<Piece> pieces)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(pieces);
+        }
+
         public static Piece Deserialize(string json)
         {
+            if (string.IsNullOrEmpty(json))
+                return null;
+
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Piece>(json);
         }
+
+        public static List<Piece> DeserializeList(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+                return null;
+
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Piece>>(json);
+        }
+
     }
 }

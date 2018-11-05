@@ -46,47 +46,48 @@ namespace CiuchApp.ApiClient
             }
         }
 
-        public T Add<T>(T item) where T : CiuchAppModelBase
+        public string Add<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: true))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
+                var returnJson = "{}";
 
                 using (var httpClient = new HttpClient())
                 {
                     var values = item.ToKeyValuePairs<T>(newItem: true);
                     var content = new FormUrlEncodedContent(values);
 
-                    httpClient.PostAsync(restApiUri, content);
+                    var postResult = httpClient.PostAsync(restApiUri, content).Result;
                     var response = httpClient.GetAsync(restApiUri).Result;
-                    var result = response.Content.ReadAsStringAsync().Result;
-
+                    returnJson = response.Content.ReadAsStringAsync().Result;
                 }
-                return item;
+                return returnJson;
             }
-            return item;
+            throw new FormatException("Model is not valid to be added");
         }
 
-        public bool Update<T>(T item) where T : CiuchAppModelBase
+        public string Update<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: false))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
+                var returnJson = "{}";
 
                 using (var httpClient = new HttpClient())
                 {
                     var values = item.ToKeyValuePairs<T>(newItem: false);
                     var content = new FormUrlEncodedContent(values);
 
-                    httpClient.PutAsync(restApiUri, content);
+                    var putResult = httpClient.PutAsync(restApiUri, content).Result;
                     var response = httpClient.GetAsync(restApiUri).Result;
-                    var result = response.Content.ReadAsStringAsync().Result;
+                    returnJson = response.Content.ReadAsStringAsync().Result;
                 }
-                return true;
+                return returnJson;
             }
-            return false;
+            throw new FormatException("Model is not valid to be updated");
         }
 
 

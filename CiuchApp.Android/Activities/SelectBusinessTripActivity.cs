@@ -40,15 +40,22 @@ namespace CiuchApp.Mobile.Activities
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
             newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
-            //Get Business trips and show them in ListView + add events 
-            try
+            // Try get Business trips from previous action.
+            // If null then call to api
+            // finally show them in ListView + add events 
+
+            businessTrips = GetBusinessTrips();
+            if(businessTrips == null)
             {
-                businessTrips = apiClientService.GetList<BusinessTrip>();
-            }
-            catch(Exception e)
-            {
-                loadingText.Text = e.Message;
-                return;
+                try
+                {
+                    businessTrips = apiClientService.GetList<BusinessTrip>();
+                }
+                catch (Exception e)
+                {
+                    loadingText.Text = e.Message;
+                    return;
+                }
             }
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);

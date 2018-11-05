@@ -36,10 +36,7 @@ US26 + : (Mobile/Dashoboard) create custom control for sizes and amount of piece
 US27 + : (Mobile) create different sizes of image + refactor name (add datetime there)
 ----------------------------------------------------------------------US28 + : (Mobile) Edit Piece - fill name, prices with data (not empty)
 US29 + : (Mobile) Add "loading" screen while savings
-
-!NEXT! US30 + : (Mobile/Dashboard) pouplate right data (piece/bt) back to list. 
-			Option 1: Add Piece/BusinessTrip Service that will do CRUD Operations (+ DI) and will do is sync 
-			Option 2: (better) after update/add - call service with return URL ad pass data back to list (as .net core suggest)
+----------------------------------------------------------------------US30 + : (Mobile/Dashboard) pouplate right data (piece/bt) back to list. 
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi
