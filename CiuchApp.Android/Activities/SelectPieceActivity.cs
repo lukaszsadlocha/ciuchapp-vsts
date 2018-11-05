@@ -60,7 +60,13 @@ namespace CiuchApp.Mobile.Activities
 
             // Load Clothes
             piecesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
-            pieces = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
+
+            pieces = GetPieces();
+            if(pieces == null)
+            {
+                pieces = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
+            }
+            pieces = pieces.Where(x => x.BusinessTripId == businessTrip.Id).ToList();
 
             var adapter = new PieceListViewAdapter(this, pieces);
             piecesListView.Adapter = adapter;

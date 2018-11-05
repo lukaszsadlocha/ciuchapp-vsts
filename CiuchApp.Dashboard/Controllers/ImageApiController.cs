@@ -31,16 +31,7 @@ namespace CiuchApp.Dashboard
             _settings = CiuchAppSettingsFactory.GetSettings();
         }
 
-        // GET: api/BusinessTripsApi
-        [HttpGet]
-        public IEnumerable<BusinessTrip> GetBusinessTrips()
-        {
-            var businessTrips = _context.BusinessTrips.Include(b => b.City).Include(b => b.Country).Include(b => b.Currency).Include(b => b.Season);
-            return businessTrips;
-        }
-
         // POST:
-
         [HttpPost]
         public void PostImage()
         {

@@ -11,7 +11,6 @@ namespace CiuchApp.Domain
     {
         #region Domain Properties
         [DisplayName("#")]
-        //[CiuchAppTranslatable]
         public int Id { get; set; }
 
         [DisplayName("Data od")]
@@ -35,6 +34,7 @@ namespace CiuchApp.Domain
         public int CityId { get; set; }
         [DisplayName("Sezon")]
         public virtual Season Season { get; set; }
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int SeasonId { get; set; }
@@ -46,15 +46,30 @@ namespace CiuchApp.Domain
         #endregion
 
         public static string JsonKey => nameof(BusinessTrip) + "Json";
+        public static string JsonListKey => nameof(BusinessTrip) + "List" + "Json";
 
         public string Serialize()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
 
+        public static string SerializeList(List<BusinessTrip> businessTrips)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(businessTrips);
+        }
         public static BusinessTrip Deserialize(string json)
         {
+            if (string.IsNullOrEmpty(json))
+                return null;
             return Newtonsoft.Json.JsonConvert.DeserializeObject<BusinessTrip>(json);
+        }
+
+        public static List<BusinessTrip> DeserializeList(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+                return null;
+
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<BusinessTrip>>(json);
         }
     }
 }

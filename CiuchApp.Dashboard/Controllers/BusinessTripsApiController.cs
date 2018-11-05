@@ -39,7 +39,7 @@ namespace CiuchApp.Dashboard
 
         [HttpGet]
         [Route("{id}/Pieces")]
-        public IEnumerable<Piece> GetBusinessTrips(int id)
+        public IEnumerable<Piece> GetBusinessTripPieces(int id)
         {
             var businessTripsPieces = _context.Pieces.Where(x=>x.BusinessTripId == id).Include(x => x.BusinessTrip);
             return businessTripsPieces;

@@ -104,7 +104,8 @@ namespace CiuchApp.Dashboard
             _context.Pieces.Add(piece);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction($@"GetPiece/{piece.Id}", piece);
+            return CreatedAtAction("GetBusinessTripPieces", nameof(BusinessTripsApiController), piece.BusinessTripId);
+            //return CreatedAtAction($@"GetPiece/{piece.Id}", piece);
         }
 
         // DELETE: api/PiecesApi/5

@@ -63,15 +63,16 @@ namespace CiuchApp.Mobile.Activities
             _saveButton.Text = "Zapisz";
             _saveButton.Click += (s, e) =>
             {
+                var jsonPieces = "";
                 if(model.Id==0)
                 {
-                    apiClientService.Add<Piece>(model);
+                    jsonPieces = apiClientService.Add<Piece>(model);
                 }
                 else
                 {
-                    apiClientService.Update<Piece>(model);
+                    jsonPieces = apiClientService.Update<Piece>(model);
                 }
-                Next<SelectPieceActivity>(businessTrip);
+                Next<SelectPieceActivity>(businessTrip: businessTrip, jsonPieces: jsonPieces);
             };
         }
     }

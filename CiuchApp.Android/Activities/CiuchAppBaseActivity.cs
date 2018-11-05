@@ -1,14 +1,12 @@
 ﻿using Android.App;
-using CiuchApp.DataAccess;
-using CiuchApp.ApiClient;
 using Android.Content;
 using System.Linq;
 using Android.Widget;
 using CiuchApp.Domain;
 using System;
 using CiuchApp.Mobile.Extensions;
-using System.Linq.Expressions;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -16,39 +14,49 @@ namespace CiuchApp.Mobile.Activities
     {
         protected CiuchApp.ApiClient.ApiClient apiClientService = new CiuchApp.ApiClient.ApiClient();
 
-        protected void Next<T>(BusinessTrip businessTrip) where T : Activity
-        {
-            Next<T>(businessTrip, null);
-        }
-
-        protected void Next<T>(BusinessTrip businessTrip, Piece piece) where T : Activity
+        public void Next<T>(BusinessTrip businessTrip = null, Piece piece = null, List<BusinessTrip> businessTrips = null, List<Piece> pieces = null, string jsonBusinessTrips = null, string jsonPieces = null) where T : Activity
         {
             var nextActivity = new Intent(this, typeof(T));
 
             if (businessTrip != null)
-            {
                 nextActivity.PutExtra(BusinessTrip.JsonKey, businessTrip.Serialize());
-            }
             if (piece != null)
-            {
                 nextActivity.PutExtra(Piece.JsonKey, piece.Serialize());
-            }
+            if (businessTrips != null)
+                nextActivity.PutExtra(BusinessTrip.JsonListKey, BusinessTrip.SerializeList(businessTrips));
+            if (pieces != null)
+                nextActivity.PutExtra(Piece.JsonListKey, Piece.SerializeList(pieces));
+
+            if (!string.IsNullOrEmpty(jsonBusinessTrips))
+                nextActivity.PutExtra(BusinessTrip.JsonListKey, jsonBusinessTrips);
+
+            if (!string.IsNullOrEmpty(jsonPieces))
+                nextActivity.PutExtra(Piece.JsonListKey, jsonPieces);
 
             StartActivity(nextActivity);
         }
         protected void Next<T>() where T : Activity
         {
-            Next<T>(null, null);
+            Next<T>();
         }
 
         protected Piece GetPiece()
         {
             return Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
         }
+        protected List<Piece> GetPieces()
+        {
+            return Piece.DeserializeList(Intent.GetStringExtra(Piece.JsonListKey));
+        }
 
         protected BusinessTrip GetBusinessTrip()
         {
             return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
+        }
+
+        protected List<BusinessTrip> GetBusinessTrips()
+        {
+            return BusinessTrip.DeserializeList(Intent.GetStringExtra(BusinessTrip.JsonListKey));
         }
 
         protected void DatePickerFor(int datePickerId, object model, string dateFieldName)
@@ -171,7 +179,7 @@ namespace CiuchApp.Mobile.Activities
                 throw new NullReferenceException();
             }
 
-            if (value == null)
+            if (value == null || (value is string && string.IsNullOrEmpty((string)value)))
             {
                 Type t = prop.PropertyType;
                 object defaultValue = t.IsValueType ? Activator.CreateInstance(t) : null;
