@@ -10,12 +10,15 @@ using System.Threading.Tasks;
 
 namespace CiuchApp.ApiClient
 {
-    public class ApiClient
+    public class ApiClient : IApiClient
     {
-        readonly string apiBaseUrl;
-        public ApiClient()
+        private readonly ICiuchAppSettings _settings;
+        private readonly string apiBaseUrl;
+
+        public ApiClient(ICiuchAppSettings settings)
         {
-            apiBaseUrl = CiuchAppSettingsFactory.GetSettings().Urls.ApiUrl;
+            _settings = settings;
+            apiBaseUrl = _settings.Urls.ApiUrl;
         }
 
         public List<T> GetList<T>(int id = 0, string baseController = "")
@@ -40,52 +43,52 @@ namespace CiuchApp.ApiClient
                     return JsonConvert.DeserializeObject<List<T>>(result);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 throw new Exception($"Cound not connect to ApiUrl: {restApiUri}. Check if page works fine");
             }
         }
 
-        public string Add<T>(T item) where T : CiuchAppModelBase
+        public bool Add<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: true))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
-                var returnJson = "{}";
 
                 using (var httpClient = new HttpClient())
                 {
                     var values = item.ToKeyValuePairs<T>(newItem: true);
                     var content = new FormUrlEncodedContent(values);
 
-                    var postResult = httpClient.PostAsync(restApiUri, content).Result;
-                    var response = httpClient.GetAsync(restApiUri).Result;
-                    returnJson = response.Content.ReadAsStringAsync().Result;
+                    var result = httpClient.PostAsync(restApiUri, content).Result;
+                    if (result.IsSuccessStatusCode)
+                        return true;
+                    else
+                        return false;
                 }
-                return returnJson;
             }
             throw new FormatException("Model is not valid to be added");
         }
 
-        public string Update<T>(T item) where T : CiuchAppModelBase
+        public bool Update<T>(T item) where T : CiuchAppModelBase
         {
             if (item.IsValid<T>(newItem: false))
             {
                 string nameOfController = GetNameOfController<T>();
                 Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
-                var returnJson = "{}";
 
                 using (var httpClient = new HttpClient())
                 {
                     var values = item.ToKeyValuePairs<T>(newItem: false);
                     var content = new FormUrlEncodedContent(values);
 
-                    var putResult = httpClient.PutAsync(restApiUri, content).Result;
-                    var response = httpClient.GetAsync(restApiUri).Result;
-                    returnJson = response.Content.ReadAsStringAsync().Result;
+                    var result = httpClient.PutAsync(restApiUri, content).Result;
+                    if (result.IsSuccessStatusCode)
+                        return true;
+                    else
+                        return false;
                 }
-                return returnJson;
             }
             throw new FormatException("Model is not valid to be updated");
         }
@@ -96,21 +99,21 @@ namespace CiuchApp.ApiClient
             return GetList<Piece>(id, "BusinessTrips");
         }
 
-        public bool UploadImage(Stream fileStream, string fileName)
-        {
-            HttpContent fileStreamContent = new StreamContent(fileStream);
-            fileStreamContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "file", FileName = fileName };
-            fileStreamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-            using (var client = new HttpClient())
-            using (var formData = new MultipartFormDataContent())
-            {
-                formData.Add(fileStreamContent);
-                var response = client.PostAsync(apiBaseUrl + "Images", formData).Result;
-                return response.IsSuccessStatusCode;
-            }
-        }
+        //public bool UploadImage(Stream fileStream, string fileName)
+        //{
+        //    HttpContent fileStreamContent = new StreamContent(fileStream);
+        //    fileStreamContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "file", FileName = fileName };
+        //    fileStreamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+        //    using (var client = new HttpClient())
+        //    using (var formData = new MultipartFormDataContent())
+        //    {
+        //        formData.Add(fileStreamContent);
+        //        var response = client.PostAsync(apiBaseUrl + "Images", formData).Result;
+        //        return response.IsSuccessStatusCode;
+        //    }
+        //}
 
-        public void UploadImage(string localFilePath, string fileName)
+        public bool UploadImage(string localFilePath, string fileName)
         {
             var url = apiBaseUrl + "/Images";
             var file = localFilePath;
@@ -125,13 +128,11 @@ namespace CiuchApp.ApiClient
             ByteArrayContent baContent = new ByteArrayContent(upfilebytes);
             content.Add(baContent, "File", fileName);
 
-
             //upload MultipartFormDataContent content async and store response in response var
             var response = client.PostAsync(url, content);
 
             //read response result as a string async into json var
-            var responsestr = response.Result;
-
+            return response.Result.IsSuccessStatusCode;
         }
 
 

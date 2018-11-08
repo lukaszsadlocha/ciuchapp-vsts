@@ -73,14 +73,7 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int SupplierId { get; set; }
-
-        [DisplayName("Rozmiar")]
-        public Size Size { get; set; }
-
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
-        public int SizeId { get; set; }
-
+        
         [DisplayName("Data zamówienia")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime OrderDate { get; set; }
@@ -92,11 +85,6 @@ namespace CiuchApp.Domain
         [DisplayName("Data dostawy")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstimatedTimeOfDelivery { get; set; }
-
-        [Required]
-        [DisplayName("Ilość")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
-        public int Amount { get; set; }
 
         [DisplayName("Kod CN")]
         public CodeCn CodeCn { get; set; }
@@ -120,6 +108,9 @@ namespace CiuchApp.Domain
         public int ColorNameId { get; set; }
 
         public string ImageName { get; set; } 
+
+        public virtual List<SizeAmountPair> SizeAmountPairs { get; set; }
+
         #endregion
 
         public static string JsonKey => nameof(Piece) + "Json";

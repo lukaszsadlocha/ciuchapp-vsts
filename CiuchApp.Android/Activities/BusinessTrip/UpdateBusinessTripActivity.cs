@@ -18,6 +18,7 @@ using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
 using CiuchApp.Mobile.Extensions;
 using System.Linq;
+using CiuchApp.ApiClient;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -35,8 +36,9 @@ namespace CiuchApp.Mobile.Activities
             // BUTTON - ADD/UPDATE BUSINESS TRIP
             saveNewBusinessTrip.Text = "Zapisz";
             saveNewBusinessTrip.Click += (s, e) => {
-                var json = apiClientService.Update<BusinessTrip>(model);
-                Next<SelectBusinessTripActivity>(jsonBusinessTrips: json);
+                if(_apiClient.Update<BusinessTrip>(model))
+                    Next<SelectBusinessTripActivity>();
+                // TODO: log error + render error activity
             };
 
             //TODO: Nice info at the bottom that it was saved:

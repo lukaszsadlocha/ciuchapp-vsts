@@ -9,6 +9,7 @@ using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using CiuchApp.DataAccess.AspNetIdentity;
 using Microsoft.AspNetCore.Identity;
+using CiuchApp.Dashboard.Services;
 
 namespace CiuchApp.Dashboard
 {
@@ -16,122 +17,89 @@ namespace CiuchApp.Dashboard
     [ApiController]
     public class PiecesApiController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPieceService _pieceService;
 
-        public PiecesApiController(ApplicationDbContext context)
+        public PiecesApiController(IPieceService pieceService)
         {
-            _context = context;
+            this._pieceService = pieceService;
         }
         public UserManager<ApplicationUser> UserManager { get; private set; }
-        // GET: api/PiecesApi
+
         [HttpGet]
         public IEnumerable<Piece> GetPieces()
         {
-            return _context.Pieces
-                .Include(p => p.BusinessTrip).ThenInclude(b => b.City)
-                .Include(p => p.BusinessTrip).ThenInclude(b => b.Country)
-                .Include(p => p.BusinessTrip).ThenInclude(b => b.Currency)
-                .Include(p => p.BusinessTrip).ThenInclude(b => b.Season)
-                .Include(p => p.CodeCn)
-                .Include(p => p.Color)
-                .Include(p => p.ColorName)
-                .Include(p => p.CountryOfOrigin)
-                .Include(p => p.Group)
-                .Include(p => p.MainCategory)
-                .Include(p => p.Set)
-                .Include(p => p.Size)
-                .Include(p => p.Supplier);
+            return _pieceService.GetPieces();
         }
 
-        // GET: api/PiecesApi/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPiece([FromRoute] int id)
+        [HttpPut]
+        public IActionResult PutPiece([FromForm] Piece piece)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var piece = await _context.Pieces.FindAsync(id);
-
-            if (piece == null)
+            if(_pieceService.UpdatePiece(piece))
             {
-                return NotFound();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult PostPiece([FromForm] Piece piece)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_pieceService.AddPiece(piece))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpDelete]
+        public IActionResult DeletePiece([FromForm] Piece piece)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
-            return Ok(piece);
+            if (_pieceService.DeletePiece(piece))
+            {
+                return Ok();
+            }
+            return NotFound();
         }
+
+        //// GET: api/PiecesApi/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetPiece([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var piece = await _context.Pieces.FindAsync(id);
+
+        //    if (piece == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(piece);
+        //}
 
         // PUT: api/PiecesApi/5
-        [HttpPut]
-        public async Task<IActionResult> PutPiece([FromForm] Piece piece)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            _context.Entry(piece).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PieceExists(piece.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/PiecesApi
-        [HttpPost]
-        public async Task<IActionResult> PostPiece([FromForm] Piece piece)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Pieces.Add(piece);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBusinessTripPieces", nameof(BusinessTripsApiController), piece.BusinessTripId);
-            //return CreatedAtAction($@"GetPiece/{piece.Id}", piece);
-        }
-
-        // DELETE: api/PiecesApi/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePiece([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var piece = await _context.Pieces.FindAsync(id);
-            if (piece == null)
-            {
-                return NotFound();
-            }
-
-            _context.Pieces.Remove(piece);
-            await _context.SaveChangesAsync();
-
-            return Ok(piece);
-        }
-
-        private bool PieceExists(int id)
-        {
-            return _context.Pieces.Any(e => e.Id == id);
-        }
+        //private bool PieceExists(int id)
+        //{
+        //    return _context.Pieces.Any(e => e.Id == id);
+        //}
     }
 }

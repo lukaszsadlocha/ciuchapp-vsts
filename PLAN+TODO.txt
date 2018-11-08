@@ -32,11 +32,12 @@ US21: (Dashboard) ability to change image of Piece from disk
 ----------------------------------------------------------------------US23: (Dashboard) Logging
 US24: (Android) Logging
 US25: (WebAPi) add tests for POST, PUT methods
-US26 + : (Mobile/Dashoboard) create custom control for sizes and amount of pieces
+---------------------US26 + : (Mobile/Dashoboard) create custom control for sizes and amount of pieces
 US27 + : (Mobile) create different sizes of image + refactor name (add datetime there)
 ----------------------------------------------------------------------US28 + : (Mobile) Edit Piece - fill name, prices with data (not empty)
 US29 + : (Mobile) Add "loading" screen while savings
 ----------------------------------------------------------------------US30 + : (Mobile/Dashboard) pouplate right data (piece/bt) back to list. 
+----------------------------------------------------------------------US31 + : (Mobile/Dashboard) Dependency Injection
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi

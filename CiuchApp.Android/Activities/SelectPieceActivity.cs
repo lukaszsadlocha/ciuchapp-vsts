@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Provider;
 using Android.Runtime;
 using Android.Widget;
+using CiuchApp.ApiClient;
 using CiuchApp.Domain;
 using CiuchApp.Mobile.Adapters;
 using CiuchApp.Mobile.Helpers;
@@ -39,13 +40,6 @@ namespace CiuchApp.Mobile.Activities
             public static Bitmap bitmap;
         }
 
-        private readonly CiuchAppSettings settings;
-
-        public SelectPieceActivity()
-        {
-            settings = CiuchAppSettingsFactory.GetSettings();
-        }
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -64,7 +58,7 @@ namespace CiuchApp.Mobile.Activities
             pieces = GetPieces();
             if(pieces == null)
             {
-                pieces = apiClientService.GetPiecesByBusinessTripId(businessTrip.Id);
+                pieces = _apiClient.GetPiecesByBusinessTripId(businessTrip.Id);
             }
             pieces = pieces.Where(x => x.BusinessTripId == businessTrip.Id).ToList();
 
@@ -99,7 +93,7 @@ namespace CiuchApp.Mobile.Activities
 
         private void EnsureDirectoryForPictures()
         {
-            App._dir = EnvironmentHelper.GetPhotoStorageFolder();
+            App._dir = _environmentHelper.GetPhotoStorageFolder();
             if (!App._dir.Exists())
             {
                 App._dir.Mkdirs();
@@ -148,7 +142,7 @@ namespace CiuchApp.Mobile.Activities
                 var fpath = App._file.Path;
                 var fname = App._file.Name;
 
-                apiClientService.UploadImage(fpath, fname);
+                _apiClient.UploadImage(fpath, fname);
 
 
                 App.bitmap = null;

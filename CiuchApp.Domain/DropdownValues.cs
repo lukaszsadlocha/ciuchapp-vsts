@@ -38,6 +38,8 @@ namespace CiuchApp.Domain
     public class Set : PieceDropdownValueBase { }
     public class ColorName : PieceDropdownValueBase { }
 
+    public class PieceType : PieceDropdownValueBase { }
+
     //BusinessTrip Values
 
     public class Country : BusinessTripDropdownValueBase { }

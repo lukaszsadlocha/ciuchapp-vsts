@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.Extensions.Logging;
+using CiuchApp.Dashboard.Services;
 
 namespace CiuchApp.Dashboard
 {
@@ -15,12 +16,12 @@ namespace CiuchApp.Dashboard
     [ApiController]
     public class BusinessTripsApiController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBusinessTripService _businessTripService;
         private readonly ILogger<BusinessTripsApiController> _logger;
 
-        public BusinessTripsApiController(ApplicationDbContext context, ILogger<BusinessTripsApiController> logger)
+        public BusinessTripsApiController(IBusinessTripService businessTripService, ILogger<BusinessTripsApiController> logger)
         {
-            _context = context;
+            _businessTripService = businessTripService;
             _logger = logger;
         }
 
@@ -28,101 +29,69 @@ namespace CiuchApp.Dashboard
         [HttpGet]
         public IEnumerable<BusinessTrip> GetBusinessTrips()
         {
-            _logger.Log(LogLevel.Information, $"GetBusinessTrips() {DateTime.Now}");
-            var businessTrips = _context.BusinessTrips
-                .Include(b => b.City)
-                .Include(b => b.Country)
-                .Include(b => b.Currency)
-                .Include(b => b.Season);
-            return businessTrips;
+            return _businessTripService.GetBusinessTrips();
         }
 
         [HttpGet]
         [Route("{id}/Pieces")]
         public IEnumerable<Piece> GetBusinessTripPieces(int id)
         {
-            var businessTripsPieces = _context.Pieces.Where(x=>x.BusinessTripId == id).Include(x => x.BusinessTrip);
-            return businessTripsPieces;
+            return _businessTripService.GetBusinessTripsPieces(id);
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
-        {
-            var businessTrip = await _context.BusinessTrips.FindAsync(id);
-
-            if (businessTrip == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(businessTrip);
-        }
-
-        
         [HttpPut] // EDIT Business Trip
-        public async Task<IActionResult> PutBusinessTrip([FromForm]BusinessTrip businessTrip)
+        public IActionResult PutBusinessTrip([FromForm]BusinessTrip businessTrip)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: false))
                 return BadRequest(ModelState);
-            if (!businessTrip.IsValid<BusinessTrip>(newItem: false))
-                return BadRequest("Business Trip model is not valid");
 
-            _context.Entry(businessTrip).State = EntityState.Modified;
+            if (_businessTripService.UpdateBusinessTrip(businessTrip))
+                return Ok();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BusinessTripExists(businessTrip.Id))   
-                    return NotFound();
-                else
-                    throw;
-            }
-
-            return NoContent();
+            return NotFound();
         }
 
-        
         [HttpPost] // ADD Business Trip
-        public async Task<IActionResult> PostBusinessTrip([FromForm] BusinessTrip businessTrip)
+        public IActionResult PostBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: true))
                 return BadRequest(ModelState);
 
-            if (!businessTrip.IsValid<BusinessTrip>(newItem: true))
-                return BadRequest("Business Trip model is not valid");
+            if (_businessTripService.AddBusinessTrip(businessTrip))
+                return Ok();
 
-            _context.BusinessTrips.Add(businessTrip);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = businessTrip.Id }, businessTrip);
+            return NotFound();
         }
 
         [HttpDelete]// DELETE:
-        public async Task<IActionResult> DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
+        public IActionResult DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var businessTripDb = await _context.BusinessTrips.FindAsync(businessTrip.Id);
-            if (businessTripDb == null)
-            {
-                return NotFound();
-            }
+            if (_businessTripService.DeleteBusinessTrip(businessTrip))
+                return Ok();
 
-            _context.BusinessTrips.Remove(businessTripDb);
-            await _context.SaveChangesAsync();
-
-            return Ok(businessTripDb);
+            return NotFound();
         }
 
-        private bool BusinessTripExists(int id)
-        {
-            return _context.BusinessTrips.Any(e => e.Id == id);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetById([FromRoute] int id)
+        //{
+        //    var businessTrip = await _context.BusinessTrips.FindAsync(id);
+
+        //    if (businessTrip == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(businessTrip);
+        //}
+
+        //private bool BusinessTripExists(int id)
+        //{
+        //    return _context.BusinessTrips.Any(e => e.Id == id);
+        //}
     }
 }

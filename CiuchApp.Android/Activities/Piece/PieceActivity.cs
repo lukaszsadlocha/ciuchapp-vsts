@@ -7,6 +7,8 @@ using Android.OS;
 using Android.Content;
 using CiuchApp.Mobile.Helpers;
 using CiuchApp.Domain;
+using CiuchApp.Settings;
+using CiuchApp.ApiClient;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -29,7 +31,7 @@ namespace CiuchApp.Mobile.Activities
             //Set image
             if(!string.IsNullOrEmpty(model.ImageName))
             {
-                string imageParh = EnvironmentHelper.GetImageFullPath(model.ImageName);
+                string imageParh = _environmentHelper.GetImageFullPath(model.ImageName);
                 var image = imageParh.LoadAndResizeBitmap(100, 100);
 
                 FindViewById<ImageView>(Resource.Id.PieceImage).SetImageBitmap(image);
@@ -38,7 +40,6 @@ namespace CiuchApp.Mobile.Activities
             //Set Text fields
             EditTextFor(Resource.Id.PieceNameText, model, nameof(model.Name));
             EditTextFor(Resource.Id.PieceBuyPriceText, model, nameof(model.BuyPrice));
-            EditTextFor(Resource.Id.PieceAmountText, model, nameof(model.Amount));
 
             //Set spinners 
             SpinnerFor<Color>(Resource.Id.pieceColorSpinner, model);
@@ -48,7 +49,6 @@ namespace CiuchApp.Mobile.Activities
             SpinnerFor<MainCategory>(Resource.Id.pieceMainCategorySpinner, model);
 
             SpinnerFor<Supplier>(Resource.Id.pieceSupplierSpinner, model);
-            SpinnerFor<Size>(Resource.Id.pieceSizeSpinner, model);
             SpinnerFor<CodeCn>(Resource.Id.pieceCodeCnSpinner, model);
             SpinnerFor<Set>(Resource.Id.pieceSetSpinner, model);
             SpinnerFor<ColorName>(Resource.Id.pieceColorNameSpinner, model);
@@ -63,16 +63,15 @@ namespace CiuchApp.Mobile.Activities
             _saveButton.Text = "Zapisz";
             _saveButton.Click += (s, e) =>
             {
-                var jsonPieces = "";
                 if(model.Id==0)
                 {
-                    jsonPieces = apiClientService.Add<Piece>(model);
+                    _apiClient.Add<Piece>(model);
                 }
                 else
                 {
-                    jsonPieces = apiClientService.Update<Piece>(model);
+                    _apiClient.Update<Piece>(model);
                 }
-                Next<SelectPieceActivity>(businessTrip: businessTrip, jsonPieces: jsonPieces);
+                Next<SelectPieceActivity>(businessTrip: businessTrip);
             };
         }
     }

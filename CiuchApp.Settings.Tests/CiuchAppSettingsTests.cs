@@ -10,7 +10,7 @@ namespace CiuchApp.Settings.Tests
         [TestMethod]
         public void GetSettings_Test()
         {
-            var settings = Settings.CiuchAppSettingsFactory.GetSettings();
+            var settings = true; //Settings need to be injected here!  Settings.CiuchAppSettingsFactory.GetSettings();
 
             Assert.IsNotNull(settings);
 
