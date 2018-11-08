@@ -231,6 +231,7 @@
     <Compile Include="Adapters\PieceListViewAdapter.cs" />
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
     <Compile Include="Activities\SelectBusinessTripActivity.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Extensions\DatePickerFragment.cs" />
     <Compile Include="Activities\Piece\PieceActivity.cs" />
     <Compile Include="Activities\SelectPieceActivity.cs" />

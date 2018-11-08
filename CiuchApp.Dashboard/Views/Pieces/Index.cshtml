@@ -44,9 +44,6 @@
                 @Html.DisplayNameFor(model => model.Supplier)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
             <th>
@@ -56,9 +53,6 @@
                 @Html.DisplayNameFor(model => model.EstimatedTimeOfDelivery)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CodeCn)
             </th>
             <th>
@@ -66,6 +60,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ColorName)
+            </th>
+            <th>
+                Rozmiary i ilości
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageName)
@@ -80,22 +77,22 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BusinessTrip.Id)
+                @Html.DisplayFor(modelItem => item.BusinessTrip.Country.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color.Id)
+                @Html.DisplayFor(modelItem => item.Color.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MainCategory.Id)
+                @Html.DisplayFor(modelItem => item.MainCategory.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Group.Id)
+                @Html.DisplayFor(modelItem => item.Group.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ComponentId)
+                @Html.DisplayFor(modelItem => item.Component.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CountryOfOrigin.Id)
+                @Html.DisplayFor(modelItem => item.CountryOfOrigin.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BuyPrice)
@@ -104,10 +101,7 @@
                 @Html.DisplayFor(modelItem => item.SellPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size.Id)
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
@@ -119,16 +113,21 @@
                 @Html.DisplayFor(modelItem => item.EstimatedTimeOfDelivery)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.DisplayFor(modelItem => item.CodeCn.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodeCn.Id)
+                @Html.DisplayFor(modelItem => item.Set.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Set.Id)
+                @Html.DisplayFor(modelItem => item.ColorName.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ColorName.Id)
+                @foreach(var sa in item.SizeAmountPairs)
+                {
+                <span>@sa.Size.Name : @sa.Amount</span><br/>
+
+                }
+                @*@Html.DisplayFor(modelItem => item.SizeAmountPairs)*@
             </td>
             <td>
                 @if (!string.IsNullOrEmpty(item.ImageName))

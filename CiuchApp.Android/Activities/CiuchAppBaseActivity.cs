@@ -7,12 +7,24 @@ using System;
 using CiuchApp.Mobile.Extensions;
 using System.ComponentModel;
 using System.Collections.Generic;
+using CiuchApp.Settings;
+using CiuchApp.ApiClient;
+using CiuchApp.Mobile.Helpers;
 
 namespace CiuchApp.Mobile.Activities
 {
-    public abstract class CiuchAppBaseActivity : Activity
+    public class CiuchAppBaseActivity : Activity
     {
-        protected CiuchApp.ApiClient.ApiClient apiClientService = new CiuchApp.ApiClient.ApiClient();
+        public ICiuchAppSettings _settings;
+        public IApiClient _apiClient;
+        public IEnvironmentHelper _environmentHelper;
+
+        public CiuchAppBaseActivity()
+        {
+            _settings = (ICiuchAppSettings)App.Container.GetService(typeof(ICiuchAppSettings));
+            _apiClient = (IApiClient)App.Container.GetService(typeof(IApiClient));
+            _environmentHelper = (IEnvironmentHelper)App.Container.GetService(typeof(IEnvironmentHelper));
+        }
 
         public void Next<T>(BusinessTrip businessTrip = null, Piece piece = null, List<BusinessTrip> businessTrips = null, List<Piece> pieces = null, string jsonBusinessTrips = null, string jsonPieces = null) where T : Activity
         {
@@ -112,7 +124,7 @@ namespace CiuchApp.Mobile.Activities
 
         protected void SpinnerFor<T>(int spinnerId, object model) where T : DropDownValueBase
         {
-            var values = apiClientService.GetList<T>().Select(x => x.Name).ToList();
+            var values = _apiClient.GetList<T>().Select(x => x.Name).ToList();
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, values);
             var spinner = FindViewById<Spinner>(spinnerId);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);

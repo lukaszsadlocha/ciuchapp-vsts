@@ -22,13 +22,13 @@ namespace CiuchApp.Dashboard
     {
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _environment;
-        private readonly CiuchAppSettings _settings;
+        private readonly ICiuchAppSettings _settings;
 
-        public ImageApiController(ApplicationDbContext context, IHostingEnvironment env)
+        public ImageApiController(ApplicationDbContext context, IHostingEnvironment env, ICiuchAppSettings settings)
         {
             _context = context;
             _environment = env;
-            _settings = CiuchAppSettingsFactory.GetSettings();
+            _settings = settings;
         }
 
         // POST:

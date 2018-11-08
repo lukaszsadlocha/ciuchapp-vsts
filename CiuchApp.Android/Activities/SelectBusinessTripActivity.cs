@@ -16,6 +16,7 @@ using CiuchApp.Domain;
 using CiuchApp.DataAccess;
 using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
+using CiuchApp.ApiClient;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -33,9 +34,8 @@ namespace CiuchApp.Mobile.Activities
 
             SetContentView(Resource.Layout.SelectBusinessTrip);
 
-            var settings = CiuchAppSettingsFactory.GetSettings();
             loadingText = FindViewById<TextView>(Resource.Id.loadingText);
-            loadingText.Text = $"Łacze z: {settings.Urls.ApiUrl}";
+            loadingText.Text = $"Łacze z: {_settings.Urls.ApiUrl}";
 
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
             newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
@@ -49,7 +49,7 @@ namespace CiuchApp.Mobile.Activities
             {
                 try
                 {
-                    businessTrips = apiClientService.GetList<BusinessTrip>();
+                    businessTrips = _apiClient.GetList<BusinessTrip>();
                 }
                 catch (Exception e)
                 {

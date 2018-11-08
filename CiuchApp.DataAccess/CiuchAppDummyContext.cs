@@ -12,32 +12,28 @@ namespace CiuchApp.DataAccess
                 new Piece {
                     Id = 1,
                    BusinessTripId=1,
-                    Name = "Niebieskie spodnie",
-                    Amount = 39},
+                    Name = "Niebieskie spodnie"
+                    },
 
                 new Piece {
                     Id = 2,
                     BusinessTripId=2,
-                    Name = "Żółty Sweterek",
-                    Amount = 40},
+                    Name = "Żółty Sweterek"},
 
                 new Piece {
                     Id = 3,
                      BusinessTripId=3,
-                    Name = "Bluza z kapturem",
-                    Amount= 10},
+                    Name = "Bluza z kapturem"},
 
                 new Piece {
                     Id = 4,
                     BusinessTripId =2,
-                    Name = "Białe buty",
-                    Amount = 42},
+                    Name = "Białe buty"},
 
                 new Piece {
                     Id = 5,
                     BusinessTripId=2,
-                    Name = "Skarpetki czarne",
-                    Amount = 14},
+                    Name = "Skarpetki czarne"},
             };
 
         private readonly List<BusinessTrip> businessTrips =new List<BusinessTrip>() {

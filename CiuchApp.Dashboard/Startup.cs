@@ -14,6 +14,7 @@ using CiuchApp.DataAccess;
 using CiuchApp.DataAccess.AspNetIdentity;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using CiuchApp.Settings;
 
 namespace CiuchApp.Dashboard
 {
@@ -38,6 +39,9 @@ namespace CiuchApp.Dashboard
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ICiuchAppSettings, CiuchAppSettings>();
+            services.AddTransient<IBusinessTripService, BusinessTripService>();
+            services.AddTransient<IPieceService, PieceService>();
 
             services.AddMvc();
         }

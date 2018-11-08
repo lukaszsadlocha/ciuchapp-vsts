@@ -6,21 +6,31 @@ using Java.IO;
 
 namespace CiuchApp.Mobile.Helpers
 {
-    public static class EnvironmentHelper
+    public interface IEnvironmentHelper
     {
-        private readonly static CiuchAppSettings Settings = CiuchAppSettingsFactory.GetSettings();
+        string GetImageFullPath(string imageName);
+        Java.IO.File GetPhotoStorageFolder();
+    }
+    public class EnvironmentHelper : IEnvironmentHelper
+    {
+        private readonly ICiuchAppSettings _settings;
 
-        private static Java.IO.File LocalStorageFolder()
+        public EnvironmentHelper(ICiuchAppSettings settings)
+        {
+            this._settings = settings;
+        }
+
+        private Java.IO.File LocalStorageFolder()
         {
             return Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures);
         }
 
-        public static Java.IO.File GetPhotoStorageFolder()
+        public Java.IO.File GetPhotoStorageFolder()
         {
-            return new Java.IO.File(LocalStorageFolder(), Settings.PhotoStorageFolder.Mobile.Name);
+            return new Java.IO.File(LocalStorageFolder(), _settings.PhotoStorageFolder.Mobile.Name);
         }
 
-        internal static string GetImageFullPath(string imageName)
+        public string GetImageFullPath(string imageName)
         {
             return Path.Combine(GetPhotoStorageFolder().ToString(), imageName);
         }
