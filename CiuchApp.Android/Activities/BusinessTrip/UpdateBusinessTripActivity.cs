@@ -24,20 +24,33 @@ namespace CiuchApp.Mobile.Activities
 {
 
     [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class UpdateBusinessTripActivity : BaseBusinessTripsActivity
+    public class UpdateBusinessTripActivity : CiuchAppBaseActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
-            //Get model
-            model = BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
-
             base.OnCreate(bundle);
+
+            SetContentView(Resource.Layout.NewBusinessTrip);
+
+            //Date from
+
+            DatePickerFor(Resource.Id.dateFrom, CurrentBusinessTrip, nameof(CurrentBusinessTrip.DateFrom));
+            DatePickerFor(Resource.Id.dateTo, CurrentBusinessTrip, nameof(CurrentBusinessTrip.DateTo));
+
+            //DROPDOWNS
+            SpinnerFor<Country>(Resource.Id.countrySpinner, CurrentBusinessTrip);
+            SpinnerFor<City>(Resource.Id.citySpinner, CurrentBusinessTrip);
+            SpinnerFor<Currency>(Resource.Id.currencySpinner, CurrentBusinessTrip);
+            SpinnerFor<Season>(Resource.Id.seasonSpinner, CurrentBusinessTrip);
+
+            // BUTTON - GET BUTTON (action in derivered classes)
+            var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
 
             // BUTTON - ADD/UPDATE BUSINESS TRIP
             saveNewBusinessTrip.Text = "Zapisz";
             saveNewBusinessTrip.Click += (s, e) => {
-                if(_apiClient.Update<BusinessTrip>(model))
-                    Next<SelectBusinessTripActivity>();
+                if(_apiClient.Update<BusinessTrip>(CurrentBusinessTrip))
+                    Next<AllBusinessTripActivity>();
                 // TODO: log error + render error activity
             };
 

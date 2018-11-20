@@ -8,7 +8,6 @@ namespace CiuchApp.Domain
     [DebuggerDisplay("Name={Name} Id={Id}")]
     public abstract class DropDownValueBase : CiuchAppModelBase
     {
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
     }

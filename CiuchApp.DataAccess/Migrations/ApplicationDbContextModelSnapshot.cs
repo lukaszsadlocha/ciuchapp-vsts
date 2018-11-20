@@ -490,7 +490,7 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("SizeAmountPair");
+                    b.ToTable("SizeAmountPairs");
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Supplier", b =>
@@ -650,7 +650,7 @@ namespace CiuchApp.DataAccess.Migrations
             modelBuilder.Entity("CiuchApp.Domain.Piece", b =>
                 {
                     b.HasOne("CiuchApp.Domain.BusinessTrip", "BusinessTrip")
-                        .WithMany()
+                        .WithMany("Pieces")
                         .HasForeignKey("BusinessTripId")
                         .OnDelete(DeleteBehavior.Cascade);
 

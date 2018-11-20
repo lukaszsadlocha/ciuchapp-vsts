@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -7,8 +8,8 @@ namespace CiuchApp.Domain
 {
     public class SizeAmountPair : CiuchAppModelBase
     {
-        public int Id { get; set; }
         public int PieceId { get; set; }
+        [JsonIgnore]
         public Piece Piece { get; set; }
         public int SizeId { get; set; }
         [DisplayName("Rozmiar")]

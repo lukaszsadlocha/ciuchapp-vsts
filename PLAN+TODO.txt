@@ -38,6 +38,7 @@ US27 + : (Mobile) create different sizes of image + refactor name (add datetime 
 US29 + : (Mobile) Add "loading" screen while savings
 ----------------------------------------------------------------------US30 + : (Mobile/Dashboard) pouplate right data (piece/bt) back to list. 
 ----------------------------------------------------------------------US31 + : (Mobile/Dashboard) Dependency Injection
+----------------------------------------------------------------------US32 : (MobileTests) Introduce UI tests
 
 Rather pointless US
 US3: (Dashboard) Sepearte Dashboard and WebApi

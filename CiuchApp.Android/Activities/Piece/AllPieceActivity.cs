@@ -23,14 +23,10 @@ using Uri = Android.Net.Uri;
 namespace CiuchApp.Mobile.Activities
 {
     [Activity(Label = "Ciuchy z wyjazdu")]
-    public class SelectPieceActivity : CiuchAppBaseActivity
+    public class AllPieceActivity : CiuchAppBaseActivity
     {
         //controls
         private ListView piecesListView;
-
-        //models
-        private List<Piece> pieces;
-        private BusinessTrip businessTrip;
 
         //Helper class to be passed to take picture Intent
         public static class App
@@ -45,30 +41,21 @@ namespace CiuchApp.Mobile.Activities
             base.OnCreate(bundle);
 
             //Set Layout
-            SetContentView(Resource.Layout.SelectPiece);
+            SetContentView(Resource.Layout.AllPiece);
 
-            // Set Business trip info
-            businessTrip = GetBusinessTrip();
-
-            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{businessTrip?.City?.Name} | {businessTrip?.DateFrom}";
-
-            // Load Clothes
+            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{CurrentBusinessTrip?.City?.Name} | {CurrentBusinessTrip?.DateFrom}";
             piecesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
 
-            pieces = GetPieces();
-            if(pieces == null)
-            {
-                pieces = _apiClient.GetPiecesByBusinessTripId(businessTrip.Id);
-            }
-            pieces = pieces.Where(x => x.BusinessTripId == businessTrip.Id).ToList();
-
+            // Load Clothes
+            var pieces = CurrentBusinessTrip.Pieces.ToList();
+            
             var adapter = new PieceListViewAdapter(this, pieces);
             piecesListView.Adapter = adapter;
             piecesListView.ItemClick += (s, e) =>
             {
                 var pieceClicked = pieces[e.Position];
 
-                Next<PieceActivity>(businessTrip, pieceClicked);
+                Next<NewUpdatePieceActivity>(CurrentBusinessTrip.Id, pieceClicked.Id);
             };
 
             //Handle camera
@@ -129,8 +116,8 @@ namespace CiuchApp.Mobile.Activities
             App.bitmap = App._file.Path.LoadAndResizeBitmap(width, height);
             if (App.bitmap != null)
             {
+                //TODO: Make coupe sizes of images:
                 //_imageView.SetImageBitmap(App.bitmap);
-
                 //byte[] bitmapData;
                 //using (var stream = new System.IO.MemoryStream())
                 //{
@@ -153,12 +140,13 @@ namespace CiuchApp.Mobile.Activities
 
             var newPieceWithImage = new Piece
             {
-                BusinessTripId = businessTrip.Id,
+                BusinessTripId = CurrentBusinessTrip.Id,
                 ImageName = App._file.Name
             };
 
+            CacheContext.NewPiece = newPieceWithImage;
 
-            Next<PieceActivity>(businessTrip, newPieceWithImage);
+            Next<NewUpdatePieceActivity>(CurrentBusinessTrip.Id);
         }
     }
 }

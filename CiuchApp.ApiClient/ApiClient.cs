@@ -21,6 +21,26 @@ namespace CiuchApp.ApiClient
             apiBaseUrl = _settings.Urls.ApiUrl;
         }
 
+        public CacheContext GetCache()
+        {
+            var restApiUri = new Uri($@"{apiBaseUrl}/Cache");
+            
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var response = httpClient.GetAsync(restApiUri).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<CacheContext>(result);
+                }
+            }
+            catch
+            {
+                throw new Exception($"Cound not connect to ApiUrl: {restApiUri}. Check if page works fine");
+            }
+        }
+
         public List<T> GetList<T>(int id = 0, string baseController = "")
         {
             Uri restApiUri;
@@ -63,7 +83,12 @@ namespace CiuchApp.ApiClient
 
                     var result = httpClient.PostAsync(restApiUri, content).Result;
                     if (result.IsSuccessStatusCode)
+                    {
+                        var response = result.Content.ReadAsStringAsync().Result;
+                        //there should be id of newly added item in the resposne
+                        item.Id = int.Parse(response);
                         return true;
+                    }
                     else
                         return false;
                 }

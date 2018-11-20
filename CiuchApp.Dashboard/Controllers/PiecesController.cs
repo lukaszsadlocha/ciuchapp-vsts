@@ -1,38 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CiuchApp.DataAccess;
-using CiuchApp.Domain;
-using Microsoft.AspNetCore.Hosting;
-using CiuchApp.Settings;
-using System.IO;
+﻿using CiuchApp.Domain;
 using CiuchApp.Dashboard.Services;
+using Microsoft.Extensions.Logging;
+using CiuchApp.Settings;
 
 namespace CiuchApp.Dashboard
 {
-    public class PiecesController : Controller
+    public class PiecesController : CiuchAppBaseController<Piece>
     {
-        private readonly IPieceService _pieceService;
-        private readonly IHostingEnvironment _environment;
-        private readonly ICiuchAppSettings _settings;
-
-        public PiecesController(IPieceService pieceService, IHostingEnvironment environment, ICiuchAppSettings settings)
+        public PiecesController(ICrudService<Piece> serviceProvider, ILogger<Piece> logger, ICiuchAppSettings settings) : base(serviceProvider, logger, settings)
         {
-            _pieceService = pieceService;
-            _environment = environment;
-            _settings = settings;
         }
+        //private readonly IPieceService _pieceService;
+        //private readonly IHostingEnvironment _environment;
+        //private readonly ICiuchAppSettings _settings;
 
-        // GET: Pieces
-        public IActionResult Index()
-        {
-            ViewBag.PhotoStoragePath = _settings.PhotoStorageFolder.Server.Name;
-            return View(_pieceService.GetPieces());
-        }
+        //public PiecesController(IPieceService pieceService, IHostingEnvironment environment, ICiuchAppSettings settings)
+        //{
+        //    _pieceService = pieceService;
+        //    _environment = environment;
+        //    _settings = settings;
+        //}
+
+        //// GET: Pieces
+        //public IActionResult Index()
+        //{
+        //    ViewBag.PhotoStoragePath = _settings.PhotoStorageFolder.Server.Name;
+        //    return View(_pieceService.GetPieces());
+        //}
 
         //[HttpPost, ActionName("Delete")]
         ////[ValidateAntiForgeryToken]

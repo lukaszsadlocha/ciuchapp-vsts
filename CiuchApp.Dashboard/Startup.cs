@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CiuchApp.Dashboard.Models;
 using CiuchApp.Dashboard.Services;
 using CiuchApp.DataAccess;
 using CiuchApp.DataAccess.AspNetIdentity;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using CiuchApp.Settings;
+using CiuchApp.Domain;
 
 namespace CiuchApp.Dashboard
 {
@@ -40,8 +36,9 @@ namespace CiuchApp.Dashboard
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ICiuchAppSettings, CiuchAppSettings>();
-            services.AddTransient<IBusinessTripService, BusinessTripService>();
-            services.AddTransient<IPieceService, PieceService>();
+            services.AddTransient<ICrudService<BusinessTrip>, BusinessTripService>();
+            services.AddTransient<ICrudService<Piece>, PieceService>();
+            services.AddTransient<ICrudService<SizeAmountPair>, SizeAmountPairService>();
 
             services.AddMvc();
         }
@@ -74,6 +71,6 @@ namespace CiuchApp.Dashboard
             });
 
         }
-         
+
     }
 }

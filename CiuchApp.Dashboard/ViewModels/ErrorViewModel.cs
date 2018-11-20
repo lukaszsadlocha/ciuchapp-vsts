@@ -1,5 +1,3 @@
-using System;
-
 namespace CiuchApp.Dashboard.Models
 {
     public class ErrorViewModel

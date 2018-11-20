@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,13 +9,12 @@ namespace CiuchApp.Domain
     public class Piece : CiuchAppModelBase
     {
         #region Domain Properties
-        [DisplayName("#")]
-        public int Id { get; set; }
 
         [Required]
         [DisplayName("Nazwa")]
         public string Name { get; set; } //Name from Producer
 
+        [JsonIgnore]
         [DisplayName("Wyjazd")]
         public BusinessTrip BusinessTrip { get; set; }
 
@@ -109,7 +109,7 @@ namespace CiuchApp.Domain
 
         public string ImageName { get; set; } 
 
-        public virtual List<SizeAmountPair> SizeAmountPairs { get; set; }
+        public virtual ICollection<SizeAmountPair> SizeAmountPairs { get; set; }
 
         #endregion
 

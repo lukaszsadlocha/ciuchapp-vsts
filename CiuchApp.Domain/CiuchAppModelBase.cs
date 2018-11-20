@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CiuchApp.Domain
 {
     public abstract class CiuchAppModelBase
     {
+        [DisplayName("#")]
+        public int Id { get; set; }
+
         public List<KeyValuePair<string, string>> ToKeyValuePairs<T>(bool newItem)
         {
             var list = new List<KeyValuePair<string, string>>();

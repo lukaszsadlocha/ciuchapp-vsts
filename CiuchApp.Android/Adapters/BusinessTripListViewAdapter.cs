@@ -16,9 +16,9 @@ namespace CiuchApp.Mobile.Adapters
     public class BusinessTripListViewAdapter : BaseAdapter
     {
         private Activity activity;
-        private List<BusinessTrip> businessTrips;
+        private IList<BusinessTrip> businessTrips;
 
-        public BusinessTripListViewAdapter(Activity activity, List<BusinessTrip> businessTrips)
+        public BusinessTripListViewAdapter(Activity activity, IList<BusinessTrip> businessTrips)
         {
             this.activity = activity;
             this.businessTrips = businessTrips;

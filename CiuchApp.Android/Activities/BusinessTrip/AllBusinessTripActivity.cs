@@ -21,18 +21,18 @@ using CiuchApp.ApiClient;
 namespace CiuchApp.Mobile.Activities
 {
     [Activity(Label = "CiuchApp - Answear", MainLauncher = true)]
-    public class SelectBusinessTripActivity : CiuchAppBaseActivity
+    public class AllBusinessTripActivity : CiuchAppBaseActivity
     {
         private TextView loadingText;
         private Button newBusinessTripButton;
         private ListView businessTripsListView;
-        private List<BusinessTrip> businessTrips;
+        //private List<BusinessTrip> businessTrips;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.SelectBusinessTrip);
+            SetContentView(Resource.Layout.AllBusinessTrip);
 
             loadingText = FindViewById<TextView>(Resource.Id.loadingText);
             loadingText.Text = $"Łacze z: {_settings.Urls.ApiUrl}";
@@ -40,38 +40,31 @@ namespace CiuchApp.Mobile.Activities
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
             newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
-            // Try get Business trips from previous action.
-            // If null then call to api
-            // finally show them in ListView + add events 
-
-            businessTrips = GetBusinessTrips();
-            if(businessTrips == null)
+            try
             {
-                try
-                {
-                    businessTrips = _apiClient.GetList<BusinessTrip>();
-                }
-                catch (Exception e)
-                {
-                    loadingText.Text = e.Message;
-                    return;
-                }
+                EnsureCahceContext();
+            }
+            catch (Exception e)
+            {
+                loadingText.Text = e.Message;
+                return;
             }
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
-            var adapter = new BusinessTripListViewAdapter(this, businessTrips);
+            var adapter = new BusinessTripListViewAdapter(this, CacheContext.BusinessTrips);
             businessTripsListView.Adapter = adapter;
-            businessTripsListView.ItemClick += (s, e) => {
-                var businessTripClicked = businessTrips[e.Position];
-
-                Next<SelectPieceActivity>(businessTripClicked);
+            businessTripsListView.ItemClick += (s, e) =>
+            {
+                var businessTripClicked = CacheContext.BusinessTrips[e.Position];
+                Next<AllPieceActivity>(businessTripClicked.Id);
             };
 
-            businessTripsListView.ItemLongClick += (s, e) => {
-                var businessTripClicked = businessTrips[e.Position];
+            businessTripsListView.ItemLongClick += (s, e) =>
+            {
+                var businessTripClicked = CacheContext.BusinessTrips[e.Position];
 
-                Next<UpdateBusinessTripActivity>(businessTripClicked);
+                Next<UpdateBusinessTripActivity>(businessTripClicked.Id);
             };
         }
     }

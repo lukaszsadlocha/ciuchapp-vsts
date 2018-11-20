@@ -1,79 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CiuchApp.DataAccess;
+﻿using Microsoft.AspNetCore.Mvc;
 using CiuchApp.Domain;
-using CiuchApp.DataAccess.AspNetIdentity;
-using Microsoft.AspNetCore.Identity;
 using CiuchApp.Dashboard.Services;
+using Microsoft.Extensions.Logging;
 
 namespace CiuchApp.Dashboard
 {
-    [Route("api/Pieces")]
     [ApiController]
-    public class PiecesApiController : ControllerBase
+    [Route("api/Pieces")]
+    public class PiecesApiController : CiuchAppBaseApiController<Piece>
     {
-        private readonly IPieceService _pieceService;
-
-        public PiecesApiController(IPieceService pieceService)
+        public PiecesApiController(ICrudService<Piece> serviceProvider, ILogger<Piece> logger) : base(serviceProvider, logger)
         {
-            this._pieceService = pieceService;
-        }
-        public UserManager<ApplicationUser> UserManager { get; private set; }
-
-        [HttpGet]
-        public IEnumerable<Piece> GetPieces()
-        {
-            return _pieceService.GetPieces();
         }
 
-        [HttpPut]
-        public IActionResult PutPiece([FromForm] Piece piece)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //private readonly IPieceService _pieceService;
 
-            if(_pieceService.UpdatePiece(piece))
-            {
-                return Ok();
-            }
-            return NotFound();
-        }
+        //public PiecesApiController(IPieceService pieceService)
+        //{
+        //    this._pieceService = pieceService;
+        //}
+        //public UserManager<ApplicationUser> UserManager { get; private set; }
 
-        [HttpPost]
-        public IActionResult PostPiece([FromForm] Piece piece)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (_pieceService.AddPiece(piece))
-            {
-                return Ok();
-            }
-            return NotFound();
-        }
+        //[HttpGet]
+        //public IEnumerable<Piece> GetPieces()
+        //{
+        //    return _pieceService.GetPieces();
+        //}
 
-        [HttpDelete]
-        public IActionResult DeletePiece([FromForm] Piece piece)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPut]
+        //public IActionResult PutPiece([FromForm] Piece piece)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (_pieceService.DeletePiece(piece))
-            {
-                return Ok();
-            }
-            return NotFound();
-        }
+        //    if(_pieceService.UpdatePiece(piece))
+        //    {
+        //        return Ok();
+        //    }
+        //    return NotFound();
+        //}
+
+        //[HttpPost]
+        //public IActionResult PostPiece([FromForm] Piece piece)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    if (_pieceService.AddPiece(piece))
+        //    {
+        //        return Ok();
+        //    }
+        //    return NotFound();
+        //}
+
+        //[HttpDelete]
+        //public IActionResult DeletePiece([FromForm] Piece piece)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (_pieceService.DeletePiece(piece))
+        //    {
+        //        return Ok();
+        //    }
+        //    return NotFound();
+        //}
 
         //// GET: api/PiecesApi/5
         //[HttpGet("{id}")]
