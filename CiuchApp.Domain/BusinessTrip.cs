@@ -10,9 +10,6 @@ namespace CiuchApp.Domain
     public class BusinessTrip : CiuchAppModelBase
     {
         #region Domain Properties
-        [DisplayName("#")]
-        public int Id { get; set; }
-
         [DisplayName("Data od")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
@@ -43,6 +40,8 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int CurrencyId { get; set; }
+
+        public virtual ICollection<Piece> Pieces { get; set; }
         #endregion
 
         public static string JsonKey => nameof(BusinessTrip) + "Json";

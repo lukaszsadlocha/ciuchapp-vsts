@@ -236,9 +236,7 @@ namespace CiuchApp.DataAccess
         }
 
         public DbSet<BusinessTrip> BusinessTrips { get; set; }
-
         public DbSet<Piece> Pieces { get; set; }
-
         public DbSet<Color> Colors { get; set; }
         public DbSet<MainCategory> MainCategories { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -249,6 +247,7 @@ namespace CiuchApp.DataAccess
         public DbSet<CodeCn> CodeCns { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<ColorName> ColorNames { get; set; }
+        public DbSet<SizeAmountPair> SizeAmountPairs { get; set; }
 
         //BusinessTrip Values
 
@@ -257,20 +256,20 @@ namespace CiuchApp.DataAccess
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Currency> Currencies { get; set; }
 
-        public List<Piece> GetClothesByBusinessTripId(int id)
-        {
-            return this.Pieces.ToList();
-        }
+        //public List<Piece> GetClothesByBusinessTripId(int id)
+        //{
+        //    return this.Pieces.ToList();
+        //}
 
-        public List<BusinessTrip> GetBusinessTrips()
-        {
-            return this.BusinessTrips.ToList();
-        }
+        //public List<BusinessTrip> GetBusinessTrips()
+        //{
+        //    return this.BusinessTrips.ToList();
+        //}
 
-        public List<Piece> GetPieces()
-        {
-            return this.Pieces.ToList();
-        }
+        //public List<Piece> GetPieces()
+        //{
+        //    return this.Pieces.ToList();
+        //}
 
     }
 

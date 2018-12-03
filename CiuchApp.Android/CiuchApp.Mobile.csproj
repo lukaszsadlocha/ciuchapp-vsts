@@ -32,9 +32,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -224,17 +224,19 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\BusinessTrip\BaseBusinessTripsActivity.cs" />
     <Compile Include="Activities\BusinessTrip\UpdateBusinessTripActivity.cs" />
-    <Compile Include="Activities\CiuchAppBaseActivity.cs" />
+    <Compile Include="Activities\Base\CiuchAppBaseActivity.cs" />
     <Compile Include="Activities\BusinessTrip\NewBusinessTripActivity.cs" />
+    <Compile Include="Activities\SizeAmount\AllSizeAmountActivity.cs" />
+    <Compile Include="Activities\SizeAmount\NewUpdateSizeAmountActivity.cs" />
+    <Compile Include="Adapters\SizeAmountListViewAdapter.cs" />
     <Compile Include="Adapters\PieceListViewAdapter.cs" />
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
-    <Compile Include="Activities\SelectBusinessTripActivity.cs" />
+    <Compile Include="Activities\BusinessTrip\AllBusinessTripActivity.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Extensions\DatePickerFragment.cs" />
-    <Compile Include="Activities\Piece\PieceActivity.cs" />
-    <Compile Include="Activities\SelectPieceActivity.cs" />
+    <Compile Include="Activities\Piece\NewUpdatePieceActivity.cs" />
+    <Compile Include="Activities\Piece\AllPieceActivity.cs" />
     <Compile Include="Helpers\EnvironmentHelper.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,7 +254,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\SelectPiece.axml">
+    <AndroidResource Include="Resources\layout\AllPiece.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -283,7 +285,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\SelectBusinessTrip.axml">
+    <AndroidResource Include="Resources\layout\AllBusinessTrip.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -314,6 +316,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AllSizeAmount.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SizeAmountRow.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SizeAmount.axml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>

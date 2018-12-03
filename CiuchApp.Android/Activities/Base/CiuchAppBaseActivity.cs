@@ -19,6 +19,69 @@ namespace CiuchApp.Mobile.Activities
         public IApiClient _apiClient;
         public IEnvironmentHelper _environmentHelper;
 
+        private CacheContext _cacheContext;
+        protected CacheContext CacheContext {
+            get
+            {
+                if(_cacheContext == null)
+                {
+                    EnsureCahceContext();
+                }
+                return _cacheContext;
+            }
+        }
+        /*..................................................................................................*/
+        private readonly string currentBusinessTripJsonKey = nameof(currentBusinessTripJsonKey);
+        private BusinessTrip _currentbusinessTrip;
+        protected BusinessTrip CurrentBusinessTrip
+        {
+            get
+            {
+                if(_currentbusinessTrip == null && int.TryParse(Intent.GetStringExtra(currentBusinessTripJsonKey), out int id))
+                {
+                    _currentbusinessTrip = CacheContext.BusinessTrips.FirstOrDefault(x => x.Id == id);
+                }
+                return _currentbusinessTrip;
+            }
+        }
+        /*..................................................................................................*/
+        private readonly string currentPieceJsonKey = nameof(currentPieceJsonKey);
+        private Piece _currentPiece;
+        protected Piece CurrentPiece
+        {
+            get
+            {
+                if (_currentPiece == null && int.TryParse(Intent.GetStringExtra(currentPieceJsonKey), out int id))
+                {
+                    _currentPiece = CurrentBusinessTrip.Pieces.FirstOrDefault(x => x.Id == id);
+                }
+                return _currentPiece;
+            }
+        }
+        protected void SetCurrentPiece(Piece newPiece)
+        {
+            _currentPiece = newPiece;
+        }
+        /*..................................................................................................*/
+        private readonly string currentSizeAmountJsonKey = nameof(currentSizeAmountJsonKey);
+        private SizeAmountPair _currentSizeAmount;
+        protected SizeAmountPair CurrentSizeAmount
+        {
+            get
+            {
+                if (_currentSizeAmount == null && int.TryParse(Intent.GetStringExtra(currentSizeAmountJsonKey), out int id))
+                {
+                    _currentSizeAmount = CurrentPiece.SizeAmountPairs.FirstOrDefault(x => x.Id == id);
+                }
+                return _currentSizeAmount;
+            }
+        }
+        protected void SetCurrentSizeAmount(SizeAmountPair newSizeAmount)
+        {
+            _currentSizeAmount = newSizeAmount;
+        }
+        /*..................................................................................................*/
+
         public CiuchAppBaseActivity()
         {
             _settings = (ICiuchAppSettings)App.Container.GetService(typeof(ICiuchAppSettings));
@@ -26,50 +89,79 @@ namespace CiuchApp.Mobile.Activities
             _environmentHelper = (IEnvironmentHelper)App.Container.GetService(typeof(IEnvironmentHelper));
         }
 
-        public void Next<T>(BusinessTrip businessTrip = null, Piece piece = null, List<BusinessTrip> businessTrips = null, List<Piece> pieces = null, string jsonBusinessTrips = null, string jsonPieces = null) where T : Activity
+        /// <summary>
+        /// Try get cacheContext from previous action.
+        /// If null then call to api
+        /// </summary>
+        protected void EnsureCahceContext()
+        {
+            _cacheContext = CacheContext.Deserialize(Intent.GetStringExtra(CacheContext.JsonKey));
+            if (_cacheContext == null)
+                _cacheContext = _apiClient.GetCache();
+        }
+
+        public void Next<T>(int? currentBusinessTrip=null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity
         {
             var nextActivity = new Intent(this, typeof(T));
 
-            if (businessTrip != null)
-                nextActivity.PutExtra(BusinessTrip.JsonKey, businessTrip.Serialize());
-            if (piece != null)
-                nextActivity.PutExtra(Piece.JsonKey, piece.Serialize());
-            if (businessTrips != null)
-                nextActivity.PutExtra(BusinessTrip.JsonListKey, BusinessTrip.SerializeList(businessTrips));
-            if (pieces != null)
-                nextActivity.PutExtra(Piece.JsonListKey, Piece.SerializeList(pieces));
+            nextActivity.PutExtra(CacheContext.JsonKey, CacheContext.Serialize());
 
-            if (!string.IsNullOrEmpty(jsonBusinessTrips))
-                nextActivity.PutExtra(BusinessTrip.JsonListKey, jsonBusinessTrips);
-
-            if (!string.IsNullOrEmpty(jsonPieces))
-                nextActivity.PutExtra(Piece.JsonListKey, jsonPieces);
+            if (currentBusinessTrip != null)
+                nextActivity.PutExtra(currentBusinessTripJsonKey, currentBusinessTrip.ToString());
+            if (currentPiece != null)
+                nextActivity.PutExtra(currentPieceJsonKey, currentPiece.ToString());
+            if (currentSizeAmount != null)
+                nextActivity.PutExtra(currentPieceJsonKey, currentPiece.ToString());
 
             StartActivity(nextActivity);
         }
-        protected void Next<T>() where T : Activity
-        {
-            Next<T>();
-        }
 
-        protected Piece GetPiece()
-        {
-            return Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
-        }
-        protected List<Piece> GetPieces()
-        {
-            return Piece.DeserializeList(Intent.GetStringExtra(Piece.JsonListKey));
-        }
 
-        protected BusinessTrip GetBusinessTrip()
-        {
-            return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
-        }
 
-        protected List<BusinessTrip> GetBusinessTrips()
-        {
-            return BusinessTrip.DeserializeList(Intent.GetStringExtra(BusinessTrip.JsonListKey));
-        }
+        //public void Next<T>(BusinessTrip businessTrip = null, Piece piece = null, List<BusinessTrip> businessTrips = null, List<Piece> pieces = null, string jsonBusinessTrips = null, string jsonPieces = null) where T : Activity
+        //{
+        //    var nextActivity = new Intent(this, typeof(T));
+
+        //    if (businessTrip != null)
+        //        nextActivity.PutExtra(BusinessTrip.JsonKey, businessTrip.Serialize());
+        //    if (piece != null)
+        //        nextActivity.PutExtra(Piece.JsonKey, piece.Serialize());
+        //    if (businessTrips != null)
+        //        nextActivity.PutExtra(BusinessTrip.JsonListKey, BusinessTrip.SerializeList(businessTrips));
+        //    if (pieces != null)
+        //        nextActivity.PutExtra(Piece.JsonListKey, Piece.SerializeList(pieces));
+
+        //    if (!string.IsNullOrEmpty(jsonBusinessTrips))
+        //        nextActivity.PutExtra(BusinessTrip.JsonListKey, jsonBusinessTrips);
+
+        //    if (!string.IsNullOrEmpty(jsonPieces))
+        //        nextActivity.PutExtra(Piece.JsonListKey, jsonPieces);
+
+        //    StartActivity(nextActivity);
+        //}
+        //protected void Next<T>() where T : Activity
+        //{
+        //    Next<T>();
+        //}
+
+        //protected Piece GetPiece()
+        //{
+        //    return Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
+        //}
+        //protected List<Piece> GetPieces()
+        //{
+        //    return Piece.DeserializeList(Intent.GetStringExtra(Piece.JsonListKey));
+        //}
+
+        //protected BusinessTrip GetBusinessTrip()
+        //{
+        //    return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
+        //}
+
+        //protected List<BusinessTrip> GetBusinessTrips()
+        //{
+        //    return BusinessTrip.DeserializeList(Intent.GetStringExtra(BusinessTrip.JsonListKey));
+        //}
 
         protected void DatePickerFor(int datePickerId, object model, string dateFieldName)
         {

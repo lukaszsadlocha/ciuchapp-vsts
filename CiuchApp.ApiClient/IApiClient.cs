@@ -6,6 +6,7 @@ namespace CiuchApp.ApiClient
 {
     public interface IApiClient
     {
+        CacheContext GetCache();
         bool Add<T>(T item) where T : CiuchAppModelBase;
         List<T> GetList<T>(int id = 0, string baseController = "");
         List<Piece> GetPieces();

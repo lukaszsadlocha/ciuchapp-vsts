@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace CiuchApp.Dashboard.Services
 {
-    public class BusinessTripService : IBusinessTripService
+    public class BusinessTripService : ICrudService<BusinessTrip>
     {
         private readonly ApplicationDbContext _context;
-
         public BusinessTripService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<BusinessTrip> GetBusinessTrips()
+        public IList<BusinessTrip> GetAll()
         {
             return _context.BusinessTrips
                 .Include(b => b.City)
@@ -25,27 +22,28 @@ namespace CiuchApp.Dashboard.Services
                 .Include(b => b.Currency)
                 .Include(b => b.Season).ToList();
         }
-        public IEnumerable<Piece> GetBusinessTripsPieces(int id)
-        {
-            return _context.Pieces.Where(x => x.BusinessTripId == id).Include(x => x.BusinessTrip);
-        }
 
-        public bool AddBusinessTrip(BusinessTrip businessTrip)
+        public bool Add(BusinessTrip item)
         {
-            _context.BusinessTrips.Add(businessTrip);
+            _context.BusinessTrips.Add(item);
             return _context.SaveChanges() > 0;
         }
 
-        public bool UpdateBusinessTrip(BusinessTrip businessTrip)
+        public bool Update(BusinessTrip item)
         {
-            _context.Entry(businessTrip).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
 
-        public bool DeleteBusinessTrip(BusinessTrip businessTrip)
+        public bool Delete(BusinessTrip item)
         {
-            _context.BusinessTrips.Remove(businessTrip);
+            _context.BusinessTrips.Remove(item);
             return _context.SaveChanges() > 0;
+        }
+
+        public ApplicationDbContext GetContext()
+        {
+            return _context;
         }
 
         //public IList<Piece> GetPieces()

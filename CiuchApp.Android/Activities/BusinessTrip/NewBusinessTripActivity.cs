@@ -25,14 +25,16 @@ namespace CiuchApp.Mobile.Activities
 {
 
     [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class NewBusinessTrips : BaseBusinessTripsActivity
+    public class NewBusinessTrips : CiuchAppBaseActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
-            Log.Info("CiuchApp:NewBusinessTrips", "On create");
+            base.OnCreate(bundle);
+
+            SetContentView(Resource.Layout.NewBusinessTrip);
 
             //Set default Model that will be pass to call
-            model = new BusinessTrip
+            var model = new BusinessTrip
             {
                 DateFrom = DateTime.Now,
                 DateTo = DateTime.Now,
@@ -42,13 +44,27 @@ namespace CiuchApp.Mobile.Activities
                 CurrencyId = 1
             };
 
-            base.OnCreate(bundle);
+            //Date from
+            DatePickerFor(Resource.Id.dateFrom, model, nameof(model.DateFrom));
+            DatePickerFor(Resource.Id.dateTo, model, nameof(model.DateTo));
+
+            //DROPDOWNS
+            SpinnerFor<Country>(Resource.Id.countrySpinner, model);
+            SpinnerFor<City>(Resource.Id.citySpinner, model);
+            SpinnerFor<Currency>(Resource.Id.currencySpinner, model);
+            SpinnerFor<Season>(Resource.Id.seasonSpinner, model);
+
+            // BUTTON - GET BUTTON (action in derivered classes)
+            var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
+
 
             // BUTTON - ADD NEW BUSINESS TRIP
             saveNewBusinessTrip.Text = "Dodaj Podróż";
             saveNewBusinessTrip.Click += (s, e) => {
-                if(_apiClient.Add<BusinessTrip>(model))
-                    Next<SelectPieceActivity>();
+                if (_apiClient.Add<BusinessTrip>(model))
+                    //TODO: model need to have ID as a result of call to webApi
+                    CacheContext.BusinessTrips.Add(model);
+                    Next<AllPieceActivity>(model.Id);
                 // TODO: log error + render error activity
             };
 

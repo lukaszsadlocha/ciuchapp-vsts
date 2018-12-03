@@ -1,31 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CiuchApp.DataAccess;
-using CiuchApp.Domain;
+﻿using CiuchApp.Domain;
 using CiuchApp.Dashboard.Services;
+using Microsoft.Extensions.Logging;
+using CiuchApp.Settings;
 
 namespace CiuchApp.Dashboard
 {
-    public class BusinessTripsController : Controller
+    public class BusinessTripsController : CiuchAppBaseController<BusinessTrip>
     {
-        private readonly IBusinessTripService _businessTripService;
-
-        public BusinessTripsController(IBusinessTripService businessTripService)
+        public BusinessTripsController(ICrudService<BusinessTrip> serviceProvider, ILogger<BusinessTrip> logger, ICiuchAppSettings settings) : base(serviceProvider, logger, settings)
         {
-            _businessTripService = businessTripService;
         }
-
-        // GET: BusinessTrips
-        public IActionResult Index()
-        {
-            return View(_businessTripService.GetBusinessTrips());
-        }
-
         //// GET: BusinessTrips/Details/5
         //public async Task<IActionResult> Details(int? id)
         //{

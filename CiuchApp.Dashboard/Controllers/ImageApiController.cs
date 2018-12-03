@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using CiuchApp.DataAccess;
-using CiuchApp.Domain;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-using System.Net.Http;
-using System.Collections;
 using CiuchApp.Settings;
-using Microsoft.AspNetCore;
 
 namespace CiuchApp.Dashboard
 {

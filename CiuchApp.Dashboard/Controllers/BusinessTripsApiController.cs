@@ -1,80 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CiuchApp.DataAccess;
+﻿using Microsoft.AspNetCore.Mvc;
 using CiuchApp.Domain;
 using Microsoft.Extensions.Logging;
 using CiuchApp.Dashboard.Services;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CiuchApp.Dashboard
 {
-    [Route("api/BusinessTrips")]
     [ApiController]
-    public class BusinessTripsApiController : ControllerBase
+    [Route("api/BusinessTrips")]
+    public class BusinessTripsApiController : CiuchAppBaseApiController<BusinessTrip>
     {
-        private readonly IBusinessTripService _businessTripService;
-        private readonly ILogger<BusinessTripsApiController> _logger;
-
-        public BusinessTripsApiController(IBusinessTripService businessTripService, ILogger<BusinessTripsApiController> logger)
+        public BusinessTripsApiController(ICrudService<BusinessTrip> service, ILogger<BusinessTrip> logger) : base(service, logger)
         {
-            _businessTripService = businessTripService;
-            _logger = logger;
-        }
-
-        // GET: api/BusinessTripsApi
-        [HttpGet]
-        public IEnumerable<BusinessTrip> GetBusinessTrips()
-        {
-            return _businessTripService.GetBusinessTrips();
         }
 
         [HttpGet]
         [Route("{id}/Pieces")]
         public IEnumerable<Piece> GetBusinessTripPieces(int id)
         {
-            return _businessTripService.GetBusinessTripsPieces(id);
-        }
-        [HttpPut] // EDIT Business Trip
-        public IActionResult PutBusinessTrip([FromForm]BusinessTrip businessTrip)
-        {
-            if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: false))
-                return BadRequest(ModelState);
-
-            if (_businessTripService.UpdateBusinessTrip(businessTrip))
-                return Ok();
-
-            return NotFound();
+            return _service.GetContext().Pieces.Where(x => x.BusinessTripId == id)
+                .Include(x => x.BusinessTrip)
+                .Include(x => x.SizeAmountPairs)
+                .ToList();
         }
 
-        [HttpPost] // ADD Business Trip
-        public IActionResult PostBusinessTrip([FromForm] BusinessTrip businessTrip)
-        {
-            if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: true))
-                return BadRequest(ModelState);
+        // TODO: fix this method ? move it to piece??
+        //[HttpGet]
+        //[Route("{id}/Pieces")]
+        //public IEnumerable<Piece> GetBusinessTripPieces(int id)
+        //{
+        //    return _businessTripService.GetBusinessTripsPieces(id);
+        //}
 
-            if (_businessTripService.AddBusinessTrip(businessTrip))
-                return Ok();
+        //// GET: api/BusinessTripsApi
+        //[HttpGet]
+        //public IEnumerable<BusinessTrip> GetBusinessTrips()
+        //{
+        //    return _businessTripService.GetAll();
+        //}
 
-            return NotFound();
-        }
 
-        [HttpDelete]// DELETE:
-        public IActionResult DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPut] // EDIT Business Trip
+        //public IActionResult PutBusinessTrip([FromForm]BusinessTrip businessTrip)
+        //{
+        //    if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: false))
+        //        return BadRequest(ModelState);
 
-            if (_businessTripService.DeleteBusinessTrip(businessTrip))
-                return Ok();
+        //    if (_businessTripService.UpdateBusinessTrip(businessTrip))
+        //        return Ok();
 
-            return NotFound();
-        }
+        //    return NotFound();
+        //}
+
+        //[HttpPost] // ADD Business Trip
+        //public IActionResult PostBusinessTrip([FromForm] BusinessTrip businessTrip)
+        //{
+        //    if (!ModelState.IsValid || !businessTrip.IsValid<BusinessTrip>(newItem: true))
+        //        return BadRequest(ModelState);
+
+        //    if (_businessTripService.AddBusinessTrip(businessTrip))
+        //        return Ok();
+
+        //    return NotFound();
+        //}
+
+        //[HttpDelete]// DELETE:
+        //public IActionResult DeleteBusinessTrip([FromForm] BusinessTrip businessTrip)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (_businessTripService.DeleteBusinessTrip(businessTrip))
+        //        return Ok();
+
+        //    return NotFound();
+        //}
 
         //[HttpGet("{id}")]
         //public async Task<IActionResult> GetById([FromRoute] int id)
