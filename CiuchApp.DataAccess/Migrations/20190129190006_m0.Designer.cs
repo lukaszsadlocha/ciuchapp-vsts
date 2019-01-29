@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CiuchApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181127155019_Change_SizeAmountPairs_From_List_To_ICollection")]
-    partial class Change_SizeAmountPairs_From_List_To_ICollection
+    [Migration("20190129190006_m0")]
+    partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,12 +101,6 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasIndex("SeasonId");
 
                     b.ToTable("BusinessTrips");
-
-                    b.HasData(
-                        new { Id = 1, CityId = 1, CountryId = 1, CurrencyId = 1, DateFrom = new DateTime(2018, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 3 },
-                        new { Id = 2, CityId = 5, CountryId = 3, CurrencyId = 2, DateFrom = new DateTime(2018, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 4 },
-                        new { Id = 3, CityId = 3, CountryId = 4, CurrencyId = 3, DateFrom = new DateTime(2018, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), DateTo = new DateTime(2018, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), SeasonId = 4 }
-                    );
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.City", b =>
@@ -287,18 +281,165 @@ namespace CiuchApp.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MainCategoryId");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MainCategoryId");
+
                     b.ToTable("Groups");
 
                     b.HasData(
-                        new { Id = 1, Name = "Eleganckie" },
-                        new { Id = 2, Name = "Sportowe" },
-                        new { Id = 3, Name = "Casual" },
-                        new { Id = 4, Name = "Wakacyjne" }
+                        new { Id = 1, MainCategoryId = 1, Name = "Bielizna" },
+                        new { Id = 2, MainCategoryId = 1, Name = "Buty wysokie" },
+                        new { Id = 3, MainCategoryId = 1, Name = "Buty wysokie" },
+                        new { Id = 4, MainCategoryId = 1, Name = "Czapki i kapelusze" },
+                        new { Id = 5, MainCategoryId = 1, Name = "Zimowe" },
+                        new { Id = 6, MainCategoryId = 2, Name = "Stroje kąpielowe" },
+                        new { Id = 7, MainCategoryId = 3, Name = "Spodnie" },
+                        new { Id = 8, MainCategoryId = 3, Name = "T-shirty i polo" },
+                        new { Id = 9, MainCategoryId = 4, Name = "Kombinezony" },
+                        new { Id = 10, MainCategoryId = 5, Name = "Topy" },
+                        new { Id = 11, MainCategoryId = 6, Name = "Czapki i kapelusze" },
+                        new { Id = 12, MainCategoryId = 6, Name = "Czapki i kapelusze" },
+                        new { Id = 13, MainCategoryId = 7, Name = "Spodnie" },
+                        new { Id = 14, MainCategoryId = 7, Name = "Szorty" },
+                        new { Id = 15, MainCategoryId = 8, Name = "Czapki i kapelusze" },
+                        new { Id = 16, MainCategoryId = 8, Name = "Kozaki i botki" },
+                        new { Id = 17, MainCategoryId = 8, Name = "Mokasyny i półbuty" },
+                        new { Id = 18, MainCategoryId = 8, Name = "Spódnice" },
+                        new { Id = 19, MainCategoryId = 8, Name = "Szpilki" },
+                        new { Id = 20, MainCategoryId = 9, Name = "Klapki i sandały" },
+                        new { Id = 21, MainCategoryId = 9, Name = "Klapki i sandały" },
+                        new { Id = 22, MainCategoryId = 9, Name = "Outdoor" },
+                        new { Id = 23, MainCategoryId = 10, Name = "Szpilki" },
+                        new { Id = 24, MainCategoryId = 10, Name = "Szpilki" },
+                        new { Id = 25, MainCategoryId = 11, Name = "Szaliki i chusty" },
+                        new { Id = 26, MainCategoryId = 12, Name = "Outdoor" },
+                        new { Id = 27, MainCategoryId = 12, Name = "Trampki i tenisówki" },
+                        new { Id = 28, MainCategoryId = 12, Name = "Trampki i tenisówki" },
+                        new { Id = 29, MainCategoryId = 13, Name = "Bluzy" },
+                        new { Id = 30, MainCategoryId = 13, Name = "Swetry" },
+                        new { Id = 31, MainCategoryId = 13, Name = "Swetry" },
+                        new { Id = 32, MainCategoryId = 14, Name = "Kozaki i botki" },
+                        new { Id = 33, MainCategoryId = 14, Name = "Sportowe i lifestyle" },
+                        new { Id = 34, MainCategoryId = 14, Name = "Żakiety" },
+                        new { Id = 35, MainCategoryId = 15, Name = "Bielizna" },
+                        new { Id = 36, MainCategoryId = 15, Name = "Kozaki i botki" },
+                        new { Id = 37, MainCategoryId = 15, Name = "Mokasyny i półbuty" },
+                        new { Id = 38, MainCategoryId = 15, Name = "Szpilki" },
+                        new { Id = 39, MainCategoryId = 16, Name = "Bielizna" },
+                        new { Id = 40, MainCategoryId = 17, Name = "Bluzki" },
+                        new { Id = 41, MainCategoryId = 17, Name = "Mokasyny i półbuty" },
+                        new { Id = 42, MainCategoryId = 18, Name = "Koszule" },
+                        new { Id = 43, MainCategoryId = 18, Name = "Topy" },
+                        new { Id = 44, MainCategoryId = 19, Name = "Bielizna" },
+                        new { Id = 45, MainCategoryId = 19, Name = "Klapki i sandały" },
+                        new { Id = 46, MainCategoryId = 19, Name = "Rajstopy i skarpetki" },
+                        new { Id = 47, MainCategoryId = 20, Name = "Kurtki i płaszcze" },
+                        new { Id = 48, MainCategoryId = 20, Name = "Mokasyny i półbuty" },
+                        new { Id = 49, MainCategoryId = 20, Name = "Sportowe i lifestyle" },
+                        new { Id = 50, MainCategoryId = 20, Name = "T-shirty i polo" },
+                        new { Id = 51, MainCategoryId = 21, Name = "Spodnie" },
+                        new { Id = 52, MainCategoryId = 21, Name = "Spodnie i legginsy" },
+                        new { Id = 53, MainCategoryId = 22, Name = "Bielizna" },
+                        new { Id = 54, MainCategoryId = 22, Name = "Kozaki i botki" },
+                        new { Id = 55, MainCategoryId = 22, Name = "Skarpety" },
+                        new { Id = 56, MainCategoryId = 23, Name = "Torebki" },
+                        new { Id = 57, MainCategoryId = 24, Name = "Pielęgnacja obuwia" },
+                        new { Id = 58, MainCategoryId = 24, Name = "Rajstopy i skarpetki" },
+                        new { Id = 59, MainCategoryId = 25, Name = "Pielęgnacja obuwia" },
+                        new { Id = 60, MainCategoryId = 26, Name = "Biżuteria" },
+                        new { Id = 61, MainCategoryId = 27, Name = "Biżuteria" },
+                        new { Id = 62, MainCategoryId = 27, Name = "Biżuteria" },
+                        new { Id = 63, MainCategoryId = 27, Name = "Portfele" },
+                        new { Id = 64, MainCategoryId = 27, Name = "Zegarki" },
+                        new { Id = 65, MainCategoryId = 28, Name = "Bielizna" },
+                        new { Id = 66, MainCategoryId = 28, Name = "Gadżety i akcesoria" },
+                        new { Id = 67, MainCategoryId = 28, Name = "Krawaty i muchy" },
+                        new { Id = 68, MainCategoryId = 28, Name = "Szaliki i chusty" },
+                        new { Id = 69, MainCategoryId = 29, Name = "Bielizna" },
+                        new { Id = 70, MainCategoryId = 29, Name = "Gadżety i akcesoria" },
+                        new { Id = 71, MainCategoryId = 29, Name = "Rajstopy i skarpetki" },
+                        new { Id = 72, MainCategoryId = 29, Name = "Rowery" },
+                        new { Id = 73, MainCategoryId = 30, Name = "Pielęgnacja obuwia" },
+                        new { Id = 74, MainCategoryId = 30, Name = "Pielęgnacja obuwia" },
+                        new { Id = 75, MainCategoryId = 31, Name = "Bielizna" },
+                        new { Id = 76, MainCategoryId = 31, Name = "Okulary" },
+                        new { Id = 77, MainCategoryId = 32, Name = "Bielizna" },
+                        new { Id = 78, MainCategoryId = 32, Name = "Krawaty i muchy" },
+                        new { Id = 79, MainCategoryId = 32, Name = "Krawaty i muchy" },
+                        new { Id = 80, MainCategoryId = 32, Name = "Słuchawki" },
+                        new { Id = 81, MainCategoryId = 33, Name = "Biżuteria" },
+                        new { Id = 82, MainCategoryId = 33, Name = "Książki i albumy" },
+                        new { Id = 83, MainCategoryId = 34, Name = "Biżuteria" },
+                        new { Id = 84, MainCategoryId = 35, Name = "Bielizna" },
+                        new { Id = 85, MainCategoryId = 35, Name = "Bokserki" },
+                        new { Id = 86, MainCategoryId = 35, Name = "Kalesony" },
+                        new { Id = 87, MainCategoryId = 35, Name = "Komplety" },
+                        new { Id = 88, MainCategoryId = 35, Name = "Kosmetyki" },
+                        new { Id = 89, MainCategoryId = 35, Name = "Kosmetyki" },
+                        new { Id = 90, MainCategoryId = 35, Name = "Pasy do pończoch" },
+                        new { Id = 91, MainCategoryId = 35, Name = "Slipy" },
+                        new { Id = 92, MainCategoryId = 35, Name = "Szaliki i chusty" },
+                        new { Id = 93, MainCategoryId = 36, Name = "Biżuteria" },
+                        new { Id = 94, MainCategoryId = 36, Name = "Breloki" },
+                        new { Id = 95, MainCategoryId = 36, Name = "Broszki" },
+                        new { Id = 96, MainCategoryId = 36, Name = "Dziecko" },
+                        new { Id = 97, MainCategoryId = 36, Name = "Dziecko" },
+                        new { Id = 98, MainCategoryId = 36, Name = "Dziecko" },
+                        new { Id = 99, MainCategoryId = 36, Name = "Dziecko" },
+                        new { Id = 100, MainCategoryId = 36, Name = "Inne" },
+                        new { Id = 101, MainCategoryId = 36, Name = "Pierścionki" },
+                        new { Id = 102, MainCategoryId = 37, Name = "Gadżety i akcesoria" },
+                        new { Id = 103, MainCategoryId = 37, Name = "Gadżety i akcesoria" },
+                        new { Id = 104, MainCategoryId = 37, Name = "Kosmetyki" },
+                        new { Id = 105, MainCategoryId = 37, Name = "Parasole" },
+                        new { Id = 106, MainCategoryId = 38, Name = "Autorskie grafiki" },
+                        new { Id = 107, MainCategoryId = 38, Name = "Dziecko" },
+                        new { Id = 108, MainCategoryId = 38, Name = "Elektronika" },
+                        new { Id = 109, MainCategoryId = 38, Name = "Kosmetyczki" },
+                        new { Id = 110, MainCategoryId = 38, Name = "Pokrowce" },
+                        new { Id = 111, MainCategoryId = 38, Name = "Ręczniki" },
+                        new { Id = 112, MainCategoryId = 39, Name = "Do ciała" },
+                        new { Id = 113, MainCategoryId = 39, Name = "Do makijażu" },
+                        new { Id = 114, MainCategoryId = 39, Name = "Do paznokci" },
+                        new { Id = 115, MainCategoryId = 39, Name = "Do twarzy" },
+                        new { Id = 116, MainCategoryId = 39, Name = "Do włosów" },
+                        new { Id = 117, MainCategoryId = 40, Name = "Krawaty" },
+                        new { Id = 118, MainCategoryId = 40, Name = "Muchy" },
+                        new { Id = 119, MainCategoryId = 40, Name = "Poszetki" },
+                        new { Id = 120, MainCategoryId = 41, Name = "Książki i albumy" },
+                        new { Id = 121, MainCategoryId = 42, Name = "Okulary" },
+                        new { Id = 122, MainCategoryId = 43, Name = "Parasole" },
+                        new { Id = 123, MainCategoryId = 44, Name = "Dziecko" },
+                        new { Id = 124, MainCategoryId = 45, Name = "Inne" },
+                        new { Id = 125, MainCategoryId = 45, Name = "Pasty i impregnaty" },
+                        new { Id = 126, MainCategoryId = 45, Name = "Szczotki i czyściki" },
+                        new { Id = 127, MainCategoryId = 45, Name = "Wkładki" },
+                        new { Id = 128, MainCategoryId = 46, Name = "Plecaki" },
+                        new { Id = 129, MainCategoryId = 47, Name = "Portfele" },
+                        new { Id = 130, MainCategoryId = 48, Name = "Kosmetyki" },
+                        new { Id = 131, MainCategoryId = 48, Name = "Pończochy" },
+                        new { Id = 132, MainCategoryId = 48, Name = "Skarpetki" },
+                        new { Id = 133, MainCategoryId = 49, Name = "Torby i walizki" },
+                        new { Id = 134, MainCategoryId = 50, Name = "Rowery" },
+                        new { Id = 135, MainCategoryId = 51, Name = "Kosmetyki" },
+                        new { Id = 136, MainCategoryId = 52, Name = "Słuchawki" },
+                        new { Id = 137, MainCategoryId = 53, Name = "Snowboard" },
+                        new { Id = 138, MainCategoryId = 54, Name = "Biżuteria" },
+                        new { Id = 139, MainCategoryId = 54, Name = "Chusty" },
+                        new { Id = 140, MainCategoryId = 54, Name = "Kominy" },
+                        new { Id = 141, MainCategoryId = 54, Name = "Szaliki" },
+                        new { Id = 142, MainCategoryId = 55, Name = "Na laptopa" },
+                        new { Id = 143, MainCategoryId = 55, Name = "Torby" },
+                        new { Id = 144, MainCategoryId = 55, Name = "Walizki" },
+                        new { Id = 145, MainCategoryId = 56, Name = "Casual (na co dzień)" },
+                        new { Id = 146, MainCategoryId = 56, Name = "Eleganckie" },
+                        new { Id = 147, MainCategoryId = 57, Name = "Zegarki" }
                     );
                 });
 
@@ -311,16 +452,72 @@ namespace CiuchApp.DataAccess.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<int>("TopCategoryId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TopCategoryId");
 
                     b.ToTable("MainCategories");
 
                     b.HasData(
-                        new { Id = 1, Name = "Sukienki i tuniki" },
-                        new { Id = 2, Name = "Buty" },
-                        new { Id = 3, Name = "Sandały i klapki" },
-                        new { Id = 4, Name = "Jeansy" },
-                        new { Id = 5, Name = "Koszule" }
+                        new { Id = 1, Name = "Bielizna", TopCategoryId = 1 },
+                        new { Id = 2, Name = "Bluzki", TopCategoryId = 1 },
+                        new { Id = 3, Name = "Bluzy", TopCategoryId = 1 },
+                        new { Id = 4, Name = "Jeansy", TopCategoryId = 1 },
+                        new { Id = 5, Name = "Kombinezony", TopCategoryId = 1 },
+                        new { Id = 6, Name = "Komplety i dresy", TopCategoryId = 1 },
+                        new { Id = 7, Name = "Koszule", TopCategoryId = 1 },
+                        new { Id = 8, Name = "Kurtki i płaszcze", TopCategoryId = 1 },
+                        new { Id = 9, Name = "Marynarki i garnitury", TopCategoryId = 1 },
+                        new { Id = 10, Name = "Materiały", TopCategoryId = 1 },
+                        new { Id = 11, Name = "Odzież niemowlęca", TopCategoryId = 1 },
+                        new { Id = 12, Name = "Snowboard", TopCategoryId = 1 },
+                        new { Id = 13, Name = "Spódnice", TopCategoryId = 1 },
+                        new { Id = 14, Name = "Spodnie", TopCategoryId = 1 },
+                        new { Id = 15, Name = "Spodnie i legginsy", TopCategoryId = 1 },
+                        new { Id = 16, Name = "Stroje kąpielowe", TopCategoryId = 1 },
+                        new { Id = 17, Name = "Sukienki i tuniki", TopCategoryId = 1 },
+                        new { Id = 18, Name = "Swetry", TopCategoryId = 1 },
+                        new { Id = 19, Name = "Szorty", TopCategoryId = 1 },
+                        new { Id = 20, Name = "T-shirty i polo", TopCategoryId = 1 },
+                        new { Id = 21, Name = "Topy", TopCategoryId = 1 },
+                        new { Id = 22, Name = "Żakiety", TopCategoryId = 1 },
+                        new { Id = 23, Name = "Baleriny", TopCategoryId = 2 },
+                        new { Id = 24, Name = "Buty wysokie", TopCategoryId = 2 },
+                        new { Id = 25, Name = "Dziecko", TopCategoryId = 2 },
+                        new { Id = 26, Name = "Kalosze", TopCategoryId = 2 },
+                        new { Id = 27, Name = "Klapki i sandały", TopCategoryId = 2 },
+                        new { Id = 28, Name = "Kozaki i botki", TopCategoryId = 2 },
+                        new { Id = 29, Name = "Mokasyny i półbuty", TopCategoryId = 2 },
+                        new { Id = 30, Name = "Outdoor", TopCategoryId = 2 },
+                        new { Id = 31, Name = "Sportowe i lifestyle", TopCategoryId = 2 },
+                        new { Id = 32, Name = "Szpilki", TopCategoryId = 2 },
+                        new { Id = 33, Name = "Trampki i tenisówki", TopCategoryId = 2 },
+                        new { Id = 34, Name = "Zimowe", TopCategoryId = 2 },
+                        new { Id = 35, Name = "Bielizna", TopCategoryId = 3 },
+                        new { Id = 36, Name = "Biżuteria", TopCategoryId = 3 },
+                        new { Id = 37, Name = "Czapki i kapelusze", TopCategoryId = 3 },
+                        new { Id = 38, Name = "Gadżety i akcesoria", TopCategoryId = 3 },
+                        new { Id = 39, Name = "Kosmetyki", TopCategoryId = 3 },
+                        new { Id = 40, Name = "Krawaty i muchy", TopCategoryId = 3 },
+                        new { Id = 41, Name = "Książki i albumy", TopCategoryId = 3 },
+                        new { Id = 42, Name = "Okulary", TopCategoryId = 3 },
+                        new { Id = 43, Name = "Parasole", TopCategoryId = 3 },
+                        new { Id = 44, Name = "Paski", TopCategoryId = 3 },
+                        new { Id = 45, Name = "Pielęgnacja obuwia", TopCategoryId = 3 },
+                        new { Id = 46, Name = "Plecaki", TopCategoryId = 3 },
+                        new { Id = 47, Name = "Portfele", TopCategoryId = 3 },
+                        new { Id = 48, Name = "Rajstopy i skarpetki", TopCategoryId = 3 },
+                        new { Id = 49, Name = "Rękawiczki", TopCategoryId = 3 },
+                        new { Id = 50, Name = "Rowery", TopCategoryId = 3 },
+                        new { Id = 51, Name = "Skarpety", TopCategoryId = 3 },
+                        new { Id = 52, Name = "Słuchawki", TopCategoryId = 3 },
+                        new { Id = 53, Name = "Snowboard", TopCategoryId = 3 },
+                        new { Id = 54, Name = "Szaliki i chusty", TopCategoryId = 3 },
+                        new { Id = 55, Name = "Torby i walizki", TopCategoryId = 3 },
+                        new { Id = 56, Name = "Torebki", TopCategoryId = 3 },
+                        new { Id = 57, Name = "Zegarki", TopCategoryId = 3 }
                     );
                 });
 
@@ -367,6 +564,8 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.Property<int>("SupplierId");
 
+                    b.Property<int>("TopCategoryId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessTripId");
@@ -391,13 +590,9 @@ namespace CiuchApp.DataAccess.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Pieces");
+                    b.HasIndex("TopCategoryId");
 
-                    b.HasData(
-                        new { Id = 1, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 1, SupplierId = 1 },
-                        new { Id = 2, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 2, SupplierId = 1 },
-                        new { Id = 3, BusinessTripId = 1, BuyPrice = 10.36, CodeCnId = 1, ColorId = 1, ColorNameId = 1, ComponentId = 1, CountryOfOriginId = 1, EstimatedDateOfShipment = new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), EstimatedTimeOfDelivery = new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), GroupId = 1, MainCategoryId = 1, Name = "SHIRT1122", OrderDate = new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), SellPrice = 32.32, SetId = 1, SizeId = 3, SupplierId = 1 }
-                    );
+                    b.ToTable("Pieces");
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.Season", b =>
@@ -513,6 +708,26 @@ namespace CiuchApp.DataAccess.Migrations
                         new { Id = 2, Name = "La Casa del Papel" },
                         new { Id = 3, Name = "Ing Ung Wang" },
                         new { Id = 4, Name = "Neapolitana" }
+                    );
+                });
+
+            modelBuilder.Entity("CiuchApp.Domain.TopCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TopCategories");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Odzież" },
+                        new { Id = 2, Name = "Obuwie" },
+                        new { Id = 3, Name = "Akcesoria" }
                     );
                 });
 
@@ -649,6 +864,22 @@ namespace CiuchApp.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("CiuchApp.Domain.Group", b =>
+                {
+                    b.HasOne("CiuchApp.Domain.MainCategory", "MainCategory")
+                        .WithMany("Groups")
+                        .HasForeignKey("MainCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CiuchApp.Domain.MainCategory", b =>
+                {
+                    b.HasOne("CiuchApp.Domain.TopCategory", "TopCategory")
+                        .WithMany("MainCategories")
+                        .HasForeignKey("TopCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CiuchApp.Domain.Piece", b =>
                 {
                     b.HasOne("CiuchApp.Domain.BusinessTrip", "BusinessTrip")
@@ -684,12 +915,12 @@ namespace CiuchApp.DataAccess.Migrations
                     b.HasOne("CiuchApp.Domain.Group", "Group")
                         .WithMany("Pieces")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CiuchApp.Domain.MainCategory", "MainCategory")
                         .WithMany("Pieces")
                         .HasForeignKey("MainCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CiuchApp.Domain.Set", "Set")
                         .WithMany("Pieces")
@@ -704,6 +935,11 @@ namespace CiuchApp.DataAccess.Migrations
                         .WithMany("Pieces")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CiuchApp.Domain.TopCategory", "TopCategory")
+                        .WithMany("Pieces")
+                        .HasForeignKey("TopCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("CiuchApp.Domain.SizeAmountPair", b =>

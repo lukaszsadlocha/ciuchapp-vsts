@@ -2,6 +2,7 @@
 using Android.Views;
 using Android.Widget;
 using CiuchApp.Domain;
+using CiuchApp.Mobile.Helpers;
 using Java.Lang;
 using System.Collections.Generic;
 
@@ -16,16 +17,17 @@ namespace CiuchApp.Mobile.Adapters
     public class PieceListViewAdapter : BaseAdapter
     {
         private Activity activity;
-        private List<Piece> clothe;
+        private List<Piece> pieces;
+        private readonly IEnvironmentHelper environmentHelper;
 
-        public PieceListViewAdapter(Activity activity, List<Piece> clothe)
+        public PieceListViewAdapter(Activity activity, List<Piece> pieces, IEnvironmentHelper environmentHelper)
         {
             this.activity = activity;
-            this.clothe = clothe;
-
+            this.pieces = pieces;
+            this.environmentHelper = environmentHelper;
         }
 
-        public override int Count => clothe.Count;
+        public override int Count => pieces.Count;
 
         public override Object GetItem(int position)
         {
@@ -34,18 +36,22 @@ namespace CiuchApp.Mobile.Adapters
 
         public override long GetItemId(int position)
         {
-            return clothe[position].Id;
+            return pieces[position].Id;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.PieceRow, parent, false);
+            var currentPiece = pieces[position];
+            view.FindViewById<TextView>(Resource.Id.pieceRowName).Text = currentPiece.Name;
 
-            var NameTextView = view.FindViewById<TextView>(Resource.Id.clotheRowName);
-            var ImageView =  view.FindViewById<ImageView>(Resource.Id.clotheRowImage);
+            if (!string.IsNullOrEmpty(currentPiece.ImageName))
+            {
+                string imageParh = environmentHelper.GetImageFullPath(currentPiece.ImageName);
+                var image = imageParh.LoadAndResizeBitmap(100, 100);
 
-            NameTextView.Text = clothe[position].Name;
-            //ImageView.Text = clothe[position].Image;
+                view.FindViewById<ImageView>(Resource.Id.pieceRowImage).SetImageBitmap(image);
+            }
 
             return view;
         }

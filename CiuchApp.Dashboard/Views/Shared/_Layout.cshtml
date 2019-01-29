@@ -14,11 +14,12 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="margin-40">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -39,11 +40,11 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="margin-40 body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - CiuchApp.Dashboard</p>
+            <p>&copy; 2018 - CiuchApp - Answear</p>
         </footer>
     </div>
 

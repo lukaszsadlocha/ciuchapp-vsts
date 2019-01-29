@@ -29,6 +29,7 @@ namespace CiuchApp.Dashboard
 
                 Colors = _context.Colors.ToList(),
                 MainCategories = _context.MainCategories.ToList(),
+                TopCategories = _context.TopCategories.ToList(),
                 Groups = _context.Groups.ToList(),
                 Components = _context.Components.ToList(),
                 CountryOfOrigin = _context.CountryOfOrigin.ToList(),

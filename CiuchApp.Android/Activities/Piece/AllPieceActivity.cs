@@ -49,7 +49,7 @@ namespace CiuchApp.Mobile.Activities
             // Load Clothes
             var pieces = CurrentBusinessTrip.Pieces.ToList();
             
-            var adapter = new PieceListViewAdapter(this, pieces);
+            var adapter = new PieceListViewAdapter(this, pieces, _environmentHelper);
             piecesListView.Adapter = adapter;
             piecesListView.ItemClick += (s, e) =>
             {

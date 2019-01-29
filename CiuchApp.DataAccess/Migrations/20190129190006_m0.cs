@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CiuchApp.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class m0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -152,32 +152,6 @@ namespace CiuchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Groups",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Groups", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MainCategories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MainCategories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Seasons",
                 columns: table => new
                 {
@@ -227,6 +201,19 @@ namespace CiuchApp.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Suppliers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TopCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TopCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -378,6 +365,46 @@ namespace CiuchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MainCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    TopCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MainCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MainCategories_TopCategories_TopCategoryId",
+                        column: x => x.TopCategoryId,
+                        principalTable: "TopCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    MainCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Groups_MainCategories_MainCategoryId",
+                        column: x => x.MainCategoryId,
+                        principalTable: "MainCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pieces",
                 columns: table => new
                 {
@@ -386,6 +413,7 @@ namespace CiuchApp.DataAccess.Migrations
                     Name = table.Column<string>(nullable: false),
                     BusinessTripId = table.Column<int>(nullable: false),
                     ColorId = table.Column<int>(nullable: false),
+                    TopCategoryId = table.Column<int>(nullable: false),
                     MainCategoryId = table.Column<int>(nullable: false),
                     GroupId = table.Column<int>(nullable: false),
                     ComponentId = table.Column<int>(nullable: false),
@@ -393,15 +421,14 @@ namespace CiuchApp.DataAccess.Migrations
                     BuyPrice = table.Column<double>(nullable: false),
                     SellPrice = table.Column<double>(nullable: false),
                     SupplierId = table.Column<int>(nullable: false),
-                    SizeId = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
                     EstimatedDateOfShipment = table.Column<DateTime>(nullable: false),
                     EstimatedTimeOfDelivery = table.Column<DateTime>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
                     CodeCnId = table.Column<int>(nullable: false),
                     SetId = table.Column<int>(nullable: false),
                     ColorNameId = table.Column<int>(nullable: false),
-                    ImageName = table.Column<string>(nullable: true)
+                    ImageName = table.Column<string>(nullable: true),
+                    SizeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -447,13 +474,13 @@ namespace CiuchApp.DataAccess.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pieces_MainCategories_MainCategoryId",
                         column: x => x.MainCategoryId,
                         principalTable: "MainCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pieces_Sets_SetId",
                         column: x => x.SetId,
@@ -465,11 +492,44 @@ namespace CiuchApp.DataAccess.Migrations
                         column: x => x.SizeId,
                         principalTable: "Sizes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pieces_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pieces_TopCategories_TopCategoryId",
+                        column: x => x.TopCategoryId,
+                        principalTable: "TopCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SizeAmountPairs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PieceId = table.Column<int>(nullable: false),
+                    SizeId = table.Column<int>(nullable: false),
+                    Amount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SizeAmountPairs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SizeAmountPairs_Pieces_PieceId",
+                        column: x => x.PieceId,
+                        principalTable: "Pieces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SizeAmountPairs_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -505,9 +565,9 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     { 5, "Żółty" },
                     { 4, "Niebieski" },
+                    { 3, "Czarny" },
                     { 2, "Biały" },
-                    { 1, "Zielony" },
-                    { 3, "Czarny" }
+                    { 1, "Zielony" }
                 });
 
             migrationBuilder.InsertData(
@@ -515,10 +575,10 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 4, "KKE2111" },
                     { 3, "BLEW32" },
                     { 2, "OWTR20" },
-                    { 1, "KLAM212" },
-                    { 4, "KKE2111" }
+                    { 1, "KLAM212" }
                 });
 
             migrationBuilder.InsertData(
@@ -537,11 +597,11 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 5, "Francja" },
-                    { 4, "Wielka Brytania" },
-                    { 2, "Hiszpania" },
                     { 1, "Polska" },
-                    { 3, "Włochy" }
+                    { 2, "Hiszpania" },
+                    { 3, "Włochy" },
+                    { 4, "Wielka Brytania" },
+                    { 5, "Francja" }
                 });
 
             migrationBuilder.InsertData(
@@ -549,11 +609,11 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 4, "Turcja" },
+                    { 3, "Bangladesz" },
                     { 5, "Polska" },
                     { 1, "Chiny" },
-                    { 2, "Włochy" },
-                    { 3, "Bangladesz" },
-                    { 4, "Turcja" }
+                    { 2, "Włochy" }
                 });
 
             migrationBuilder.InsertData(
@@ -561,32 +621,9 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 1, "PLN" },
                     { 2, "EURO" },
-                    { 3, "FUNT" },
-                    { 1, "PLN" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Groups",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Eleganckie" },
-                    { 2, "Sportowe" },
-                    { 3, "Casual" },
-                    { 4, "Wakacyjne" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "MainCategories",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 5, "Koszule" },
-                    { 3, "Sandały i klapki" },
-                    { 4, "Jeansy" },
-                    { 1, "Sukienki i tuniki" },
-                    { 2, "Buty" }
+                    { 3, "FUNT" }
                 });
 
             migrationBuilder.InsertData(
@@ -608,8 +645,8 @@ namespace CiuchApp.DataAccess.Migrations
                 {
                     { 5, "Elegant Summer" },
                     { 4, "Braveheart Warior" },
-                    { 2, "Animal Instinct" },
                     { 1, "Adventure Explorer" },
+                    { 2, "Animal Instinct" },
                     { 3, "Advanced Retailer" }
                 });
 
@@ -618,19 +655,19 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 13, "41" },
-                    { 1, "XS" },
-                    { 2, "S" },
-                    { 3, "M" },
-                    { 4, "L" },
-                    { 5, "XL" },
-                    { 6, "S/M" },
-                    { 7, "M/L" },
-                    { 8, "36" },
                     { 9, "37" },
-                    { 10, "37" },
+                    { 12, "40" },
                     { 11, "39" },
-                    { 12, "40" }
+                    { 13, "41" },
+                    { 10, "37" },
+                    { 8, "36" },
+                    { 3, "M" },
+                    { 6, "S/M" },
+                    { 5, "XL" },
+                    { 4, "L" },
+                    { 2, "S" },
+                    { 1, "XS" },
+                    { 7, "M/L" }
                 });
 
             migrationBuilder.InsertData(
@@ -638,41 +675,239 @@ namespace CiuchApp.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 1, "Alvaro" },
                     { 2, "La Casa del Papel" },
                     { 3, "Ing Ung Wang" },
-                    { 1, "Alvaro" },
                     { 4, "Neapolitana" }
                 });
 
             migrationBuilder.InsertData(
-                table: "BusinessTrips",
-                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
-                values: new object[] { 1, 1, 1, 1, new DateTime(2018, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 });
+                table: "TopCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 2, "Obuwie" },
+                    { 1, "Odzież" },
+                    { 3, "Akcesoria" }
+                });
 
             migrationBuilder.InsertData(
-                table: "BusinessTrips",
-                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
-                values: new object[] { 2, 5, 3, 2, new DateTime(2018, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
+                table: "MainCategories",
+                columns: new[] { "Id", "Name", "TopCategoryId" },
+                values: new object[,]
+                {
+                    { 1, "Bielizna", 1 },
+                    { 31, "Sportowe i lifestyle", 2 },
+                    { 32, "Szpilki", 2 },
+                    { 33, "Trampki i tenisówki", 2 },
+                    { 34, "Zimowe", 2 },
+                    { 35, "Bielizna", 3 },
+                    { 36, "Biżuteria", 3 },
+                    { 37, "Czapki i kapelusze", 3 },
+                    { 38, "Gadżety i akcesoria", 3 },
+                    { 39, "Kosmetyki", 3 },
+                    { 40, "Krawaty i muchy", 3 },
+                    { 41, "Książki i albumy", 3 },
+                    { 42, "Okulary", 3 },
+                    { 43, "Parasole", 3 },
+                    { 44, "Paski", 3 },
+                    { 45, "Pielęgnacja obuwia", 3 },
+                    { 46, "Plecaki", 3 },
+                    { 47, "Portfele", 3 },
+                    { 48, "Rajstopy i skarpetki", 3 },
+                    { 49, "Rękawiczki", 3 },
+                    { 50, "Rowery", 3 },
+                    { 51, "Skarpety", 3 },
+                    { 52, "Słuchawki", 3 },
+                    { 53, "Snowboard", 3 },
+                    { 54, "Szaliki i chusty", 3 },
+                    { 55, "Torby i walizki", 3 },
+                    { 30, "Outdoor", 2 },
+                    { 56, "Torebki", 3 },
+                    { 29, "Mokasyny i półbuty", 2 },
+                    { 27, "Klapki i sandały", 2 },
+                    { 2, "Bluzki", 1 },
+                    { 3, "Bluzy", 1 },
+                    { 4, "Jeansy", 1 },
+                    { 5, "Kombinezony", 1 },
+                    { 6, "Komplety i dresy", 1 },
+                    { 7, "Koszule", 1 },
+                    { 8, "Kurtki i płaszcze", 1 },
+                    { 9, "Marynarki i garnitury", 1 },
+                    { 10, "Materiały", 1 },
+                    { 11, "Odzież niemowlęca", 1 },
+                    { 12, "Snowboard", 1 },
+                    { 13, "Spódnice", 1 },
+                    { 14, "Spodnie", 1 },
+                    { 15, "Spodnie i legginsy", 1 },
+                    { 16, "Stroje kąpielowe", 1 },
+                    { 17, "Sukienki i tuniki", 1 },
+                    { 18, "Swetry", 1 },
+                    { 19, "Szorty", 1 },
+                    { 20, "T-shirty i polo", 1 },
+                    { 21, "Topy", 1 },
+                    { 22, "Żakiety", 1 },
+                    { 23, "Baleriny", 2 },
+                    { 24, "Buty wysokie", 2 },
+                    { 25, "Dziecko", 2 },
+                    { 26, "Kalosze", 2 },
+                    { 28, "Kozaki i botki", 2 },
+                    { 57, "Zegarki", 3 }
+                });
 
             migrationBuilder.InsertData(
-                table: "BusinessTrips",
-                columns: new[] { "Id", "CityId", "CountryId", "CurrencyId", "DateFrom", "DateTo", "SeasonId" },
-                values: new object[] { 3, 3, 4, 3, new DateTime(2018, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
-
-            migrationBuilder.InsertData(
-                table: "Pieces",
-                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
-                values: new object[] { 1, 60, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Pieces",
-                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
-                values: new object[] { 2, 80, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 2, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Pieces",
-                columns: new[] { "Id", "Amount", "BusinessTripId", "BuyPrice", "CodeCnId", "ColorId", "ColorNameId", "ComponentId", "CountryOfOriginId", "EstimatedDateOfShipment", "EstimatedTimeOfDelivery", "GroupId", "ImageName", "MainCategoryId", "Name", "OrderDate", "SellPrice", "SetId", "SizeId", "SupplierId" },
-                values: new object[] { 3, 100, 1, 10.36, 1, 1, 1, 1, 1, new DateTime(2018, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "SHIRT1122", new DateTime(2018, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 32.32, 1, 3, 1 });
+                table: "Groups",
+                columns: new[] { "Id", "MainCategoryId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 1, "Bielizna" },
+                    { 95, 36, "Broszki" },
+                    { 96, 36, "Dziecko" },
+                    { 97, 36, "Dziecko" },
+                    { 98, 36, "Dziecko" },
+                    { 99, 36, "Dziecko" },
+                    { 100, 36, "Inne" },
+                    { 94, 36, "Breloki" },
+                    { 101, 36, "Pierścionki" },
+                    { 103, 37, "Gadżety i akcesoria" },
+                    { 104, 37, "Kosmetyki" },
+                    { 105, 37, "Parasole" },
+                    { 106, 38, "Autorskie grafiki" },
+                    { 107, 38, "Dziecko" },
+                    { 108, 38, "Elektronika" },
+                    { 102, 37, "Gadżety i akcesoria" },
+                    { 93, 36, "Biżuteria" },
+                    { 92, 35, "Szaliki i chusty" },
+                    { 91, 35, "Slipy" },
+                    { 76, 31, "Okulary" },
+                    { 77, 32, "Bielizna" },
+                    { 78, 32, "Krawaty i muchy" },
+                    { 79, 32, "Krawaty i muchy" },
+                    { 80, 32, "Słuchawki" },
+                    { 81, 33, "Biżuteria" },
+                    { 82, 33, "Książki i albumy" },
+                    { 83, 34, "Biżuteria" },
+                    { 84, 35, "Bielizna" },
+                    { 85, 35, "Bokserki" },
+                    { 86, 35, "Kalesony" },
+                    { 87, 35, "Komplety" },
+                    { 88, 35, "Kosmetyki" },
+                    { 89, 35, "Kosmetyki" },
+                    { 90, 35, "Pasy do pończoch" },
+                    { 109, 38, "Kosmetyczki" },
+                    { 75, 31, "Bielizna" },
+                    { 110, 38, "Pokrowce" },
+                    { 112, 39, "Do ciała" },
+                    { 132, 48, "Skarpetki" },
+                    { 133, 49, "Torby i walizki" },
+                    { 134, 50, "Rowery" },
+                    { 135, 51, "Kosmetyki" },
+                    { 136, 52, "Słuchawki" },
+                    { 137, 53, "Snowboard" },
+                    { 131, 48, "Pończochy" },
+                    { 138, 54, "Biżuteria" },
+                    { 140, 54, "Kominy" },
+                    { 141, 54, "Szaliki" },
+                    { 142, 55, "Na laptopa" },
+                    { 143, 55, "Torby" },
+                    { 144, 55, "Walizki" },
+                    { 145, 56, "Casual (na co dzień)" },
+                    { 139, 54, "Chusty" },
+                    { 130, 48, "Kosmetyki" },
+                    { 129, 47, "Portfele" },
+                    { 128, 46, "Plecaki" },
+                    { 113, 39, "Do makijażu" },
+                    { 114, 39, "Do paznokci" },
+                    { 115, 39, "Do twarzy" },
+                    { 116, 39, "Do włosów" },
+                    { 117, 40, "Krawaty" },
+                    { 118, 40, "Muchy" },
+                    { 119, 40, "Poszetki" },
+                    { 120, 41, "Książki i albumy" },
+                    { 121, 42, "Okulary" },
+                    { 122, 43, "Parasole" },
+                    { 123, 44, "Dziecko" },
+                    { 124, 45, "Inne" },
+                    { 125, 45, "Pasty i impregnaty" },
+                    { 126, 45, "Szczotki i czyściki" },
+                    { 127, 45, "Wkładki" },
+                    { 111, 38, "Ręczniki" },
+                    { 146, 56, "Eleganckie" },
+                    { 74, 30, "Pielęgnacja obuwia" },
+                    { 72, 29, "Rowery" },
+                    { 21, 9, "Klapki i sandały" },
+                    { 22, 9, "Outdoor" },
+                    { 23, 10, "Szpilki" },
+                    { 24, 10, "Szpilki" },
+                    { 25, 11, "Szaliki i chusty" },
+                    { 26, 12, "Outdoor" },
+                    { 20, 9, "Klapki i sandały" },
+                    { 27, 12, "Trampki i tenisówki" },
+                    { 29, 13, "Bluzy" },
+                    { 30, 13, "Swetry" },
+                    { 31, 13, "Swetry" },
+                    { 32, 14, "Kozaki i botki" },
+                    { 33, 14, "Sportowe i lifestyle" },
+                    { 34, 14, "Żakiety" },
+                    { 28, 12, "Trampki i tenisówki" },
+                    { 19, 8, "Szpilki" },
+                    { 18, 8, "Spódnice" },
+                    { 17, 8, "Mokasyny i półbuty" },
+                    { 2, 1, "Buty wysokie" },
+                    { 3, 1, "Buty wysokie" },
+                    { 4, 1, "Czapki i kapelusze" },
+                    { 5, 1, "Zimowe" },
+                    { 6, 2, "Stroje kąpielowe" },
+                    { 7, 3, "Spodnie" },
+                    { 8, 3, "T-shirty i polo" },
+                    { 9, 4, "Kombinezony" },
+                    { 10, 5, "Topy" },
+                    { 11, 6, "Czapki i kapelusze" },
+                    { 12, 6, "Czapki i kapelusze" },
+                    { 13, 7, "Spodnie" },
+                    { 14, 7, "Szorty" },
+                    { 15, 8, "Czapki i kapelusze" },
+                    { 16, 8, "Kozaki i botki" },
+                    { 35, 15, "Bielizna" },
+                    { 73, 30, "Pielęgnacja obuwia" },
+                    { 36, 15, "Kozaki i botki" },
+                    { 38, 15, "Szpilki" },
+                    { 58, 24, "Rajstopy i skarpetki" },
+                    { 59, 25, "Pielęgnacja obuwia" },
+                    { 60, 26, "Biżuteria" },
+                    { 61, 27, "Biżuteria" },
+                    { 62, 27, "Biżuteria" },
+                    { 63, 27, "Portfele" },
+                    { 57, 24, "Pielęgnacja obuwia" },
+                    { 64, 27, "Zegarki" },
+                    { 66, 28, "Gadżety i akcesoria" },
+                    { 67, 28, "Krawaty i muchy" },
+                    { 68, 28, "Szaliki i chusty" },
+                    { 69, 29, "Bielizna" },
+                    { 70, 29, "Gadżety i akcesoria" },
+                    { 71, 29, "Rajstopy i skarpetki" },
+                    { 65, 28, "Bielizna" },
+                    { 56, 23, "Torebki" },
+                    { 55, 22, "Skarpety" },
+                    { 54, 22, "Kozaki i botki" },
+                    { 39, 16, "Bielizna" },
+                    { 40, 17, "Bluzki" },
+                    { 41, 17, "Mokasyny i półbuty" },
+                    { 42, 18, "Koszule" },
+                    { 43, 18, "Topy" },
+                    { 44, 19, "Bielizna" },
+                    { 45, 19, "Klapki i sandały" },
+                    { 46, 19, "Rajstopy i skarpetki" },
+                    { 47, 20, "Kurtki i płaszcze" },
+                    { 48, 20, "Mokasyny i półbuty" },
+                    { 49, 20, "Sportowe i lifestyle" },
+                    { 50, 20, "T-shirty i polo" },
+                    { 51, 21, "Spodnie" },
+                    { 52, 21, "Spodnie i legginsy" },
+                    { 53, 22, "Bielizna" },
+                    { 37, 15, "Mokasyny i półbuty" },
+                    { 147, 57, "Zegarki" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -734,6 +969,16 @@ namespace CiuchApp.DataAccess.Migrations
                 column: "SeasonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Groups_MainCategoryId",
+                table: "Groups",
+                column: "MainCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MainCategories_TopCategoryId",
+                table: "MainCategories",
+                column: "TopCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pieces_BusinessTripId",
                 table: "Pieces",
                 column: "BusinessTripId");
@@ -787,6 +1032,21 @@ namespace CiuchApp.DataAccess.Migrations
                 name: "IX_Pieces_SupplierId",
                 table: "Pieces",
                 column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_TopCategoryId",
+                table: "Pieces",
+                column: "TopCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SizeAmountPairs_PieceId",
+                table: "SizeAmountPairs",
+                column: "PieceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SizeAmountPairs_SizeId",
+                table: "SizeAmountPairs",
+                column: "SizeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -807,13 +1067,16 @@ namespace CiuchApp.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Pieces");
+                name: "SizeAmountPairs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Pieces");
 
             migrationBuilder.DropTable(
                 name: "BusinessTrips");
@@ -837,9 +1100,6 @@ namespace CiuchApp.DataAccess.Migrations
                 name: "Groups");
 
             migrationBuilder.DropTable(
-                name: "MainCategories");
-
-            migrationBuilder.DropTable(
                 name: "Sets");
 
             migrationBuilder.DropTable(
@@ -859,6 +1119,12 @@ namespace CiuchApp.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Seasons");
+
+            migrationBuilder.DropTable(
+                name: "MainCategories");
+
+            migrationBuilder.DropTable(
+                name: "TopCategories");
         }
     }
 }

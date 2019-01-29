@@ -34,7 +34,7 @@ namespace CiuchApp.Mobile.Activities
             EditTextFor(Resource.Id.sizeAmountAmountEditText, CurrentSizeAmount, nameof(CurrentSizeAmount.Amount));
 
             //Set spinners 
-            SpinnerFor<Size>(Resource.Id.sizeAmountSizeSpinner, CurrentSizeAmount);
+            SpinnerFor<Size>(Resource.Id.sizeAmountSizeSpinner, CurrentSizeAmount, CacheContext.Sizes);
             
             //Save button
             _saveButton = FindViewById<Button>(Resource.Id.saveNewSizeAmount);
@@ -46,6 +46,10 @@ namespace CiuchApp.Mobile.Activities
                     if (_apiClient.Add<SizeAmountPair>(CurrentSizeAmount))
                     {
                         CurrentSizeAmount.Size = CacheContext.Sizes.First(x => x.Id == CurrentSizeAmount.SizeId);
+                        if(CurrentPiece.SizeAmountPairs == null)
+                        {
+                            CurrentPiece.SizeAmountPairs = new List<SizeAmountPair>();
+                        }
                         CurrentPiece.SizeAmountPairs.Add(CurrentSizeAmount);
                     }
                     CacheContext.NewSizeAmount = null;
@@ -54,7 +58,7 @@ namespace CiuchApp.Mobile.Activities
                 {
                     _apiClient.Update<Piece>(CurrentPiece);
                 }
-                Next<NewUpdatePieceActivity>(CurrentBusinessTrip.Id, CurrentPiece.Id);
+                Next<AllSizeAmountActivity>(CurrentBusinessTrip.Id, CurrentPiece.Id);
             };
         }
     }

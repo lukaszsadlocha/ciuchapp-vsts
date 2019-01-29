@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
 namespace CiuchApp.Domain
@@ -27,8 +28,25 @@ namespace CiuchApp.Domain
     // Piece Values
 
     public class Color : PieceDropdownValueBase { }
-    public class MainCategory : PieceDropdownValueBase { }
-    public class Group : PieceDropdownValueBase { }
+
+    public class TopCategory : PieceDropdownValueBase
+    {
+        public List<MainCategory> MainCategories { get; set; }
+    }
+
+    public class MainCategory : PieceDropdownValueBase
+    {
+        public int TopCategoryId { get; set; }
+        [JsonIgnore]
+        public TopCategory TopCategory { get; set; }
+        public List<Group> Groups { get; set; }
+    }
+    public class Group : PieceDropdownValueBase {
+        public int MainCategoryId { get; set; }
+
+        [JsonIgnore]
+        public MainCategory MainCategory { get; set; }
+    }
     public class Component : PieceDropdownValueBase { }
     public class CountryOfOrigin : PieceDropdownValueBase { }
     public class Supplier : PieceDropdownValueBase { }

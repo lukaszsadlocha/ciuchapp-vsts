@@ -13,9 +13,17 @@ namespace CiuchApp.Mobile.UITests
 	public class Tests
 	{
 		IApp app;
-		Platform platform;
+        private readonly Platform platform;
 
-		public Tests(Platform platform)
+        private readonly int newBusinessTripButtonId = Resource.Id.newBusinessTrip;
+        private readonly int addNewBusinessTripButtonId = Resource.Id.saveNewBusinessTrip;
+        private readonly int addPiecepButtonId = Resource.Id.newClothe;
+        private readonly int countrySpinnerId = Resource.Id.countrySpinner;
+        private readonly int citySpinnerId = Resource.Id.citySpinner;
+        private readonly int currencySpinnerId = Resource.Id.currencySpinner;
+        private readonly int pieceImage = Resource.Id.PieceImage;
+
+        public Tests(Platform platform)
 		{
 			this.platform = platform;
 		}
@@ -35,21 +43,103 @@ namespace CiuchApp.Mobile.UITests
 		}
 
         [Test]
-        public void AllBusinessTrips_ClickOnNewBusinessTrip_AddNewBusinessTrip()
+        public void AllBusinessTrips_ClickOnNewBusinessTrip_AddNewSpainBusinessTrip()
         {
-            var newBusinessTripButtonId = Resource.Id.newBusinessTrip;
-            var addNewBusinessTripButtonId = Resource.Id.saveNewBusinessTrip;
-            var addPiecepButtonId = Resource.Id.newClothe;
-
             app.WaitForElement(c => c.Id(newBusinessTripButtonId));
 
-            app.Tap(x => x.Id(newBusinessTripButtonId));
-            app.WaitForElement(c => c.Id(addNewBusinessTripButtonId));
+            MoveTo_NewBusinessTrip();
+            NewBusinessTrip_ChangeCurrencyTo("EURO");
+            NewBusinessTrip_ChangeCountryTo("Hiszpania");
+            NewBusinessTrip_ChangeCityTo("Madryt");
+
             app.Tap(x => x.Id(addNewBusinessTripButtonId));
 
             app.WaitForElement(c => c.Id(addPiecepButtonId));
 
             app.Screenshot($"Test - Add business Trip {DateTime.Now.ToString()}");
+        }
+
+        [Test]
+        public void AllBusinessTrips_ClickOnNewBusinessTrip_GoBack()
+        {
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+
+            MoveTo_NewBusinessTrip();
+
+            app.Back();
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+        }
+
+        [Test]
+        public void AllBusinessTrips_ClickOnNewBusinessTrip_ChangeCurrency_GoBack()
+        {
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+
+            MoveTo_NewBusinessTrip();
+            NewBusinessTrip_ChangeCurrencyTo("EURO");
+            app.Back();
+
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+
+            app.Screenshot($"Test - Add business Trip {DateTime.Now.ToString()}");
+        }
+
+        [Test]
+        public void AllBusinessTrips_OpenSpainBusinessTrip_NewPiece()
+        {
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+
+            app.Tap(x => x.Text("Hiszpania"));
+
+            app.Tap(x => x.Id(addPiecepButtonId));
+
+            app.Repl();
+
+            app.Back();
+        }
+
+        [Test]
+        public void AllBusinessTrips_OpenSpainBusinessTrip_EditPiece()
+        {
+            app.WaitForElement(c => c.Id(newBusinessTripButtonId));
+
+            app.Tap(x => x.Text("Hiszpania"));
+
+            app.WaitForElement(c => c.Id(addPiecepButtonId));
+
+            app.Tap(x => x.Text("test 1"));
+
+            app.WaitForElement(c => c.Id(pieceImage));
+
+            app.Back();
+        }
+
+        private void MoveTo_NewBusinessTrip()
+        {
+            app.Tap(x => x.Id(newBusinessTripButtonId));
+            app.WaitForElement(c => c.Id(addNewBusinessTripButtonId));
+        }
+
+        private void NewBusinessTrip_ChangeCurrencyTo(string v)
+        {
+            app.Tap(x => x.Id(currencySpinnerId));
+            app.Tap(x => x.Text(v));
+            app.WaitForElement(c => c.Id(addNewBusinessTripButtonId));
+        }
+
+
+        private void NewBusinessTrip_ChangeCityTo(string v)
+        {
+            app.Tap(x => x.Id(citySpinnerId));
+            app.Tap(x => x.Text(v));
+            app.WaitForElement(c => c.Id(addNewBusinessTripButtonId));
+        }
+
+        private void NewBusinessTrip_ChangeCountryTo(string v)
+        {
+            app.Tap(x => x.Id(countrySpinnerId));
+            app.Tap(x => x.Text(v));
+            app.WaitForElement(c => c.Id(addNewBusinessTripButtonId));
         }
     }
 }

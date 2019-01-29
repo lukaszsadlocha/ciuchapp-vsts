@@ -9,6 +9,7 @@ namespace CiuchApp.Domain
         public IList<BusinessTrip> BusinessTrips { get; set; }
 
         public IList<Color>             Colors { get; set; }
+        public IList<TopCategory>       TopCategories { get; set; }
         public IList<MainCategory>      MainCategories { get; set; }
         public IList<Group>             Groups { get; set; }
         public IList<Component>         Components { get; set; }
@@ -40,6 +41,5 @@ namespace CiuchApp.Domain
 
         public Piece NewPiece { get; set; }
         public SizeAmountPair NewSizeAmount { get; set; }
-
     }
 }

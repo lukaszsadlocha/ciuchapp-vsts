@@ -35,10 +35,10 @@
                     android:id="@+id/PieceNameText"
                     android:layout_width="match_parent" />
                 <TextView
-                    android:text="Kolor"
+                    android:text="Typ produktu"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <Spinner
-                    android:id="@+id/pieceColorSpinner"
+                    android:id="@+id/pieceTopCategorySpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -53,6 +53,13 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <Spinner
                     android:id="@+id/pieceGroupSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Kolor"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/pieceColorSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
                 <TextView
