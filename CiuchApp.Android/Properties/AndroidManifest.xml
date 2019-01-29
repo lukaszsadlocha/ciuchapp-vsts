@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="CiuchyAndroid.CiuchyAndroid" android:installLocation="auto" android:versionName="8" android:versionCode="8">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="CiuchyAndroid.CiuchyAndroid" android:installLocation="auto" android:versionName="9" android:versionCode="9">
 	<uses-sdk />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

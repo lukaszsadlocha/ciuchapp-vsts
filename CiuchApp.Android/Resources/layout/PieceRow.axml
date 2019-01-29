@@ -7,11 +7,11 @@
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/clotheRowImage" />
+        android:id="@+id/pieceRowImage" />
     <TextView
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/clotheRowName" />
+        android:id="@+id/pieceRowName" />
 </LinearLayout>

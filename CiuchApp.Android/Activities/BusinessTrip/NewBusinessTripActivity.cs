@@ -49,10 +49,10 @@ namespace CiuchApp.Mobile.Activities
             DatePickerFor(Resource.Id.dateTo, model, nameof(model.DateTo));
 
             //DROPDOWNS
-            SpinnerFor<Country>(Resource.Id.countrySpinner, model);
-            SpinnerFor<City>(Resource.Id.citySpinner, model);
-            SpinnerFor<Currency>(Resource.Id.currencySpinner, model);
-            SpinnerFor<Season>(Resource.Id.seasonSpinner, model);
+            SpinnerFor<Country>(Resource.Id.countrySpinner, model, CacheContext.Countries);
+            SpinnerFor<City>(Resource.Id.citySpinner, model, CacheContext.Cities);
+            SpinnerFor<Currency>(Resource.Id.currencySpinner, model, CacheContext.Currencies);
+            SpinnerFor<Season>(Resource.Id.seasonSpinner, model, CacheContext.Seasons);
 
             // BUTTON - GET BUTTON (action in derivered classes)
             var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);

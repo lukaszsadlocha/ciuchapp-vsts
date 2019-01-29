@@ -31,7 +31,9 @@ namespace CiuchApp.Dashboard.Services
                .Include(p => p.MainCategory)
                .Include(p => p.Set)
                .Include(p => p.Supplier)
+               .Include(p => p.TopCategory)
                .Include(p => p.SizeAmountPairs).ThenInclude(q => q.Size).ToList();
+               
         }
 
         public bool Add(Piece item)

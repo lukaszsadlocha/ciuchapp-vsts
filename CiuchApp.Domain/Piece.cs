@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CiuchApp.Domain
 {
@@ -28,6 +29,13 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int ColorId { get; set; }
+
+        [DisplayName("Typ produktu")]
+        public TopCategory TopCategory { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
+        public int TopCategoryId { get; set; }
 
         [DisplayName("Kategoria główna")]
         public MainCategory MainCategory { get; set; }

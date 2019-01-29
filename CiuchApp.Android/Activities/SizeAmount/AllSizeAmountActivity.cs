@@ -19,6 +19,7 @@ namespace CiuchApp.Mobile.Activities
     public class AllSizeAmountActivity : CiuchAppBaseActivity
     {
         private Button newSizeAmountButton;
+        private Button backSizeAmountButton;
         private ListView sizeAmountListView;
         private List<SizeAmountPair> SizeAmountPairs;
 
@@ -39,13 +40,19 @@ namespace CiuchApp.Mobile.Activities
             };
 
             sizeAmountListView = FindViewById<ListView>(Resource.Id.sizeAmountListView);
-            SizeAmountPairs = CurrentPiece.SizeAmountPairs.ToList();
+            SizeAmountPairs = CurrentPiece.SizeAmountPairs != null ? CurrentPiece.SizeAmountPairs.ToList() : new List<SizeAmountPair>();
             var adapter = new SizeAmountListViewAdapter(this, SizeAmountPairs, _apiClient);
             sizeAmountListView.Adapter = adapter;
             sizeAmountListView.ItemClick += (s, e) =>
             {
                 var itemClicked = SizeAmountPairs[e.Position];
                 Next<NewUpdateSizeAmountActivity>(CurrentBusinessTrip.Id, CurrentPiece.Id, itemClicked.Id);
+            };
+
+            backSizeAmountButton = FindViewById<Button>(Resource.Id.backSizeAmount);
+            backSizeAmountButton.Click += (s, e) =>
+            {
+                Next<NewUpdatePieceActivity>(CurrentBusinessTrip.Id, CurrentPiece.Id);
             };
         }
     }

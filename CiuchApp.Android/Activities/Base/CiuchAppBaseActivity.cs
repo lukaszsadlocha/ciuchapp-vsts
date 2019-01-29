@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using CiuchApp.Settings;
 using CiuchApp.ApiClient;
 using CiuchApp.Mobile.Helpers;
+using System.Linq.Expressions;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -214,16 +215,48 @@ namespace CiuchApp.Mobile.Activities
             };
         }
 
-        protected void SpinnerFor<T>(int spinnerId, object model) where T : DropDownValueBase
+        protected Spinner SpinnerFor<T>(int spinnerId, object model, IList<T> values) where T : DropDownValueBase
         {
-            var values = _apiClient.GetList<T>().Select(x => x.Name).ToList();
-            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, values);
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, values.Select(x => x.Name).ToList());
             var spinner = FindViewById<Spinner>(spinnerId);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
             spinner.SetSelection(GetValue<T>(model) - 1);
-            spinner.ItemSelected += (s, e) => { SetValue<T>(model, e.Position + 1); };
+            spinner.ItemSelected += (s, e) => { SetValue<T>(model, values.ElementAt(e.Position).Id); }; //eventOnItemChanged(model);
+
+            return spinner;
         }
+
+        //private static EventHandler<AdapterView.ItemSelectedEventArgs> SetSpinnerValueOnModel<T>(object model) where T : DropDownValueBase
+        //{
+        //    return (s, e) => { SetValue<T>(model, e.Position + 1); };
+        //}
+
+        //protected void CascadeSpinnersFor<TTrigger, TDestination>(int triggerSpinnerId, int destinationSpinnerId, Func<TDestination, int> triggerField, object model) where TTrigger : DropDownValueBase where TDestination: DropDownValueBase
+        //{
+        //    //top indicates main
+        //    SpinnerFor<TTrigger>(triggerSpinnerId, model);
+        //    var triggerSpinner = FindViewById<Spinner>(triggerSpinnerId);
+
+        //    triggerSpinner.ItemSelected += (s, e) =>
+        //    {
+        //        var triggerCurrentValue = _apiClient.GetList<TTrigger>().ElementAtOrDefault(e.Position);
+        //        if (triggerCurrentValue != null)
+        //        {
+        //            var allRelatedValues = _apiClient.GetList<TDestination>().Where(x => triggerField(x) == triggerCurrentValue.Id).Select(x => x.Name).ToList();
+        //            SpinnerFor<MainCategory>(Resource.Id.pieceMainCategorySpinner, CurrentPiece, allRelatedValues, (m) =>
+        //            {
+        //                return (ss, ee) =>
+        //                {
+        //                    var pos = ee.Position;
+        //                    var item = allRelatedValues[pos];
+        //                    SetValue<TDestination>(model, item);
+        //                };
+        //            });
+        //        }
+        //    };
+
+        //}
 
         protected static int GetValue<T>(object model)
         {

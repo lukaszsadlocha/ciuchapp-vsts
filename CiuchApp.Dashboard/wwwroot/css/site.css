@@ -44,5 +44,10 @@ hr{
 }
 
 .list-piece--image{
-    width:120px;
+    max-height: 200px
+}
+
+.margin-40 {
+    margin-left:40px;
+    margin-right:40px;
 }
