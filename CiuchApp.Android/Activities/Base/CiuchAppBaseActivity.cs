@@ -117,53 +117,6 @@ namespace CiuchApp.Mobile.Activities
             StartActivity(nextActivity);
         }
 
-
-
-        //public void Next<T>(BusinessTrip businessTrip = null, Piece piece = null, List<BusinessTrip> businessTrips = null, List<Piece> pieces = null, string jsonBusinessTrips = null, string jsonPieces = null) where T : Activity
-        //{
-        //    var nextActivity = new Intent(this, typeof(T));
-
-        //    if (businessTrip != null)
-        //        nextActivity.PutExtra(BusinessTrip.JsonKey, businessTrip.Serialize());
-        //    if (piece != null)
-        //        nextActivity.PutExtra(Piece.JsonKey, piece.Serialize());
-        //    if (businessTrips != null)
-        //        nextActivity.PutExtra(BusinessTrip.JsonListKey, BusinessTrip.SerializeList(businessTrips));
-        //    if (pieces != null)
-        //        nextActivity.PutExtra(Piece.JsonListKey, Piece.SerializeList(pieces));
-
-        //    if (!string.IsNullOrEmpty(jsonBusinessTrips))
-        //        nextActivity.PutExtra(BusinessTrip.JsonListKey, jsonBusinessTrips);
-
-        //    if (!string.IsNullOrEmpty(jsonPieces))
-        //        nextActivity.PutExtra(Piece.JsonListKey, jsonPieces);
-
-        //    StartActivity(nextActivity);
-        //}
-        //protected void Next<T>() where T : Activity
-        //{
-        //    Next<T>();
-        //}
-
-        //protected Piece GetPiece()
-        //{
-        //    return Piece.Deserialize(Intent.GetStringExtra(Piece.JsonKey));
-        //}
-        //protected List<Piece> GetPieces()
-        //{
-        //    return Piece.DeserializeList(Intent.GetStringExtra(Piece.JsonListKey));
-        //}
-
-        //protected BusinessTrip GetBusinessTrip()
-        //{
-        //    return BusinessTrip.Deserialize(Intent.GetStringExtra(BusinessTrip.JsonKey));
-        //}
-
-        //protected List<BusinessTrip> GetBusinessTrips()
-        //{
-        //    return BusinessTrip.DeserializeList(Intent.GetStringExtra(BusinessTrip.JsonListKey));
-        //}
-
         protected void DatePickerFor(int datePickerId, object model, string dateFieldName)
         {
             DatePickerFor(datePickerId, model, dateFieldName, DateTime.Now);
@@ -227,37 +180,6 @@ namespace CiuchApp.Mobile.Activities
             return spinner;
         }
 
-        //private static EventHandler<AdapterView.ItemSelectedEventArgs> SetSpinnerValueOnModel<T>(object model) where T : DropDownValueBase
-        //{
-        //    return (s, e) => { SetValue<T>(model, e.Position + 1); };
-        //}
-
-        //protected void CascadeSpinnersFor<TTrigger, TDestination>(int triggerSpinnerId, int destinationSpinnerId, Func<TDestination, int> triggerField, object model) where TTrigger : DropDownValueBase where TDestination: DropDownValueBase
-        //{
-        //    //top indicates main
-        //    SpinnerFor<TTrigger>(triggerSpinnerId, model);
-        //    var triggerSpinner = FindViewById<Spinner>(triggerSpinnerId);
-
-        //    triggerSpinner.ItemSelected += (s, e) =>
-        //    {
-        //        var triggerCurrentValue = _apiClient.GetList<TTrigger>().ElementAtOrDefault(e.Position);
-        //        if (triggerCurrentValue != null)
-        //        {
-        //            var allRelatedValues = _apiClient.GetList<TDestination>().Where(x => triggerField(x) == triggerCurrentValue.Id).Select(x => x.Name).ToList();
-        //            SpinnerFor<MainCategory>(Resource.Id.pieceMainCategorySpinner, CurrentPiece, allRelatedValues, (m) =>
-        //            {
-        //                return (ss, ee) =>
-        //                {
-        //                    var pos = ee.Position;
-        //                    var item = allRelatedValues[pos];
-        //                    SetValue<TDestination>(model, item);
-        //                };
-        //            });
-        //        }
-        //    };
-
-        //}
-
         protected static int GetValue<T>(object model)
         {
             var prop = model.GetType().GetProperties().Where(x => x.PropertyType == typeof(T)).FirstOrDefault();
@@ -285,16 +207,6 @@ namespace CiuchApp.Mobile.Activities
 
             return (T)converter.ConvertFromString(propValue.ToString());
         }
-
-        //protected static DateTime GetValue(object model, string fieldName)
-        //{
-        //    var prop = model.GetType().GetProperties().Where(x => x.Name == fieldName).FirstOrDefault();
-        //    if (prop != null)
-        //    {
-        //        return DateTime.Parse(model.GetType().GetProperty(prop.Name).GetValue(model, null).ToString());
-        //    }
-        //    throw new NullReferenceException();
-        //}
 
         protected static void SetValue<T>(object model, object value)
         {

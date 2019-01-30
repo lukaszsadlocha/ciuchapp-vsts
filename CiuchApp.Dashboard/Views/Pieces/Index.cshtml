@@ -1,16 +1,33 @@
 ﻿@model IEnumerable<CiuchApp.Domain.Piece>
 
 @{
-    ViewData["Title"] = "Index";
     string localStoragePath = ViewBag.PhotoStoragePath;
 }
 
-<h2>Index</h2>
+<div class="row">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-img-wrapper" style="background-image:url(@System.IO.Path.Combine(localStoragePath, item.ImageName).Replace(@"\",@"/"))">
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                <div class="card-text">@Html.DisplayFor(modelItem => item.MainCategory.Name)</div>
+                <div class="card-text">@Html.DisplayFor(modelItem => item.Group.Name)</div>
+                <div class="card-text">@Html.DisplayFor(modelItem => item.Color.Name)</div>
+                <div class="card-text">@Html.DisplayNameFor(model => model.BuyPrice): @Html.DisplayFor(model => item.BuyPrice) @item.BusinessTrip.Currency.Name</div>
+                <a href="#" class="btn btn-primary card-button">Edytuj</a>
+                <a href="#" class="btn btn-outline-secondary card-button">Usuń</a>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+    </p>
+<table class="table" style="margin-top:700px; max-width:1000px">
     <thead>
         <tr>
             <th>
@@ -28,30 +45,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Group)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ComponentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryOfOrigin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BuyPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Supplier)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstimatedDateOfShipment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstimatedTimeOfDelivery)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ComponentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CountryOfOrigin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BuyPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SellPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstimatedDateOfShipment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstimatedTimeOfDelivery)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CodeCn)
             </th>
@@ -71,76 +88,77 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessTrip.Country.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainCategory.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Group.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Component.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryOfOrigin.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuyPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Supplier.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedDateOfShipment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedTimeOfDelivery)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodeCn.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Set.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ColorName.Name)
-            </td>
-            <td>
-                @foreach(var sa in item.SizeAmountPairs)
-                {
-                <span>@sa.Size.Name : @sa.Amount</span><br/>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessTrip.Country.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainCategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group.Name)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Component.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryOfOrigin.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BuyPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SellPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstimatedDateOfShipment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstimatedTimeOfDelivery)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodeCn.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Set.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ColorName.Name)
+                </td>
+                <td>
+                    @foreach (var sa in item.SizeAmountPairs)
+                    {
+                        <span>@sa.Size.Name : @sa.Amount</span><br />
 
-                }
-                @*@Html.DisplayFor(modelItem => item.SizeAmountPairs)*@
-            </td>
-            <td>
-                @if (!string.IsNullOrEmpty(item.ImageName))
-                {
-                    <img class="list-piece--image" src="@System.IO.Path.Combine(localStoragePath, item.ImageName)" alt="@item.ImageName" />
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                    }
+                    @*@Html.DisplayFor(modelItem => item.SizeAmountPairs)*@
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageName))
+                    {
+                        <img class="list-piece--image" src="@System.IO.Path.Combine(localStoragePath, item.ImageName)" alt="@item.ImageName" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
