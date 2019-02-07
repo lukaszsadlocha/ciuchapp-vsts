@@ -69,7 +69,7 @@ namespace CiuchApp.ApiClient
             }
         }
 
-        public bool Add<T>(T item) where T : CiuchAppModelBase
+        public bool Add<T>(T item) where T : CiuchAppBaseModel
         {
             if (item.IsValid<T>(newItem: true))
             {
@@ -96,7 +96,7 @@ namespace CiuchApp.ApiClient
             throw new FormatException("Model is not valid to be added");
         }
 
-        public bool Update<T>(T item) where T : CiuchAppModelBase
+        public bool Update<T>(T item) where T : CiuchAppBaseModel
         {
             if (item.IsValid<T>(newItem: false))
             {
@@ -147,8 +147,10 @@ namespace CiuchApp.ApiClient
             var upfilebytes = File.ReadAllBytes(file);
 
             //create new HttpClient and MultipartFormDataContent and add our file, and StudentId
-            HttpClient client = new HttpClient();
-            client.Timeout = new TimeSpan(0, 20, 0);
+            HttpClient client = new HttpClient
+            {
+                Timeout = new TimeSpan(0, 20, 0)
+            };
             MultipartFormDataContent content = new MultipartFormDataContent();
             ByteArrayContent baContent = new ByteArrayContent(upfilebytes);
             content.Add(baContent, "File", fileName);

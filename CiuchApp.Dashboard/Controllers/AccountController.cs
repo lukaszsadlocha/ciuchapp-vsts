@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using CiuchApp.Dashboard.Models.AccountViewModels;
 using CiuchApp.Dashboard.Services;
 using CiuchApp.DataAccess.AspNetIdentity;
+using CiuchApp.Dashboard.Extensions.Attributes;
 
 namespace CiuchApp.Dashboard.Controllers
 {
@@ -37,6 +38,7 @@ namespace CiuchApp.Dashboard.Controllers
         public string ErrorMessage { get; set; }
 
         [HttpGet]
+        [ViewLayout("_LoginLayout")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
@@ -49,6 +51,7 @@ namespace CiuchApp.Dashboard.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ViewLayout("_LoginLayout")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
@@ -60,7 +63,7 @@ namespace CiuchApp.Dashboard.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Użytkownik jest zalogowany");
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -69,12 +72,12 @@ namespace CiuchApp.Dashboard.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Konto użytkownika jest zablokowane.");
                     return RedirectToAction(nameof(Lockout));
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Nieudana próba logowania.");
                     return View(model);
                 }
             }
@@ -201,6 +204,7 @@ namespace CiuchApp.Dashboard.Controllers
         }
 
         [HttpGet]
+        [ViewLayout("_LoginLayout")]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
@@ -210,6 +214,7 @@ namespace CiuchApp.Dashboard.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ViewLayout("_LoginLayout")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -343,6 +348,7 @@ namespace CiuchApp.Dashboard.Controllers
         }
 
         [HttpGet]
+        [ViewLayout("_LoginLayout")]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {

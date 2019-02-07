@@ -10,6 +10,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\flaticon\**" />
+    <Compile Remove="wwwroot\icons\**" />
+    <Content Remove="wwwroot\flaticon\**" />
+    <Content Remove="wwwroot\icons\**" />
+    <EmbeddedResource Remove="wwwroot\flaticon\**" />
+    <EmbeddedResource Remove="wwwroot\icons\**" />
+    <None Remove="wwwroot\flaticon\**" />
+    <None Remove="wwwroot\icons\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.4" />
@@ -34,7 +45,13 @@
   <ItemGroup>
     <ProjectReference Include="..\CiuchApp.DataAccess\CiuchApp.DataAccess.csproj" />
     <ProjectReference Include="..\CiuchApp.Domain\CiuchApp.Domain.csproj" />
+    <ProjectReference Include="..\CiuchApp.Excel\CiuchApp.Excel.csproj" />
     <ProjectReference Include="..\CiuchApp.Settings\CiuchApp.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\ExcelFiles\" />
+    <Folder Include="wwwroot\images\BusinessTrips\" />
   </ItemGroup>
 
 </Project>

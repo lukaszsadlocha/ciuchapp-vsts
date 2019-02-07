@@ -4,21 +4,25 @@
     string localStoragePath = ViewBag.PhotoStoragePath;
 }
 
-<div class="row">
+@await Component.InvokeAsync("IndexButtonRow", new { includeExcelActions = true})
+
+<div class="row ciuchapp-card">
 
     @foreach (var item in Model)
     {
         <div class="card">
-            <div class="card-img-wrapper" style="background-image:url(@System.IO.Path.Combine(localStoragePath, item.ImageName).Replace(@"\",@"/"))">
+            <div class="card-img-wrapper" style="background-image:url(/@localStoragePath/@item.ImageName)">
             </div>
             <div class="card-body">
                 <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
                 <div class="card-text">@Html.DisplayFor(modelItem => item.MainCategory.Name)</div>
                 <div class="card-text">@Html.DisplayFor(modelItem => item.Group.Name)</div>
                 <div class="card-text">@Html.DisplayFor(modelItem => item.Color.Name)</div>
-                <div class="card-text">@Html.DisplayNameFor(model => model.BuyPrice): @Html.DisplayFor(model => item.BuyPrice) @item.BusinessTrip.Currency.Name</div>
-                <a href="#" class="btn btn-primary card-button">Edytuj</a>
-                <a href="#" class="btn btn-outline-secondary card-button">Usuń</a>
+                <div class="card-text">@Html.DisplayNameFor(model => model.BuyPrice): @Html.DisplayFor(model => item.BuyPrice)</div>
+
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-pen"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-trash"></i></a>
+
             </div>
         </div>
 
@@ -26,7 +30,6 @@
 </div>
 
 
-    </p>
 <table class="table" style="margin-top:700px; max-width:1000px">
     <thead>
         <tr>
@@ -150,7 +153,7 @@
                 <td>
                     @if (!string.IsNullOrEmpty(item.ImageName))
                     {
-                        <img class="list-piece--image" src="@System.IO.Path.Combine(localStoragePath, item.ImageName)" alt="@item.ImageName" />
+                        <img class="list-piece--image" src="/@localStoragePath/@item.ImageName" alt="@item.ImageName" />
                     }
                 </td>
                 <td>

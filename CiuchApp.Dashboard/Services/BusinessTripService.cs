@@ -3,24 +3,17 @@ using System.Linq;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CiuchApp.Dashboard.Services
 {
-    public class BusinessTripService : ICrudService<BusinessTrip>
+    public class BusinessTripService : BaseService<BusinessTrip>, ICrudService<BusinessTrip>
     {
-        private readonly ApplicationDbContext _context;
-        public BusinessTripService(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public BusinessTripService(ApplicationDbContext context): base(context){}
 
         public IList<BusinessTrip> GetAll()
         {
-            return _context.BusinessTrips
-                .Include(b => b.City)
-                .Include(b => b.Country)
-                .Include(b => b.Currency)
-                .Include(b => b.Season).ToList();
+            return GetBusinessTripsAndIncludedValues().ToList();
         }
 
         public bool Add(BusinessTrip item)
@@ -41,48 +34,25 @@ namespace CiuchApp.Dashboard.Services
             return _context.SaveChanges() > 0;
         }
 
-        public ApplicationDbContext GetContext()
+        public bool Delete(int id)
         {
-            return _context;
+            _context.BusinessTrips.Remove(_context.BusinessTrips.First(x => x.Id == id));
+            return _context.SaveChanges() > 0;
         }
 
-        //public IList<Piece> GetPieces()
-        //{
-        //    return _context.Pieces
-        //        .Include(p => p.BusinessTrip).ThenInclude(b => b.City)
-        //        .Include(p => p.BusinessTrip).ThenInclude(b => b.Country)
-        //        .Include(p => p.BusinessTrip).ThenInclude(b => b.Currency)
-        //        .Include(p => p.BusinessTrip).ThenInclude(b => b.Season)
-        //        .Include(p => p.CodeCn)
-        //        .Include(p => p.Color)
-        //        .Include(p => p.ColorName)
-        //        .Include(p => p.Component)
-        //        .Include(p => p.CountryOfOrigin)
-        //        .Include(p => p.Group)
-        //        .Include(p => p.MainCategory)
-        //        .Include(p => p.Set)
-        //        .Include(p => p.Supplier)
-        //        .Include(p => p.SizeAmountPairs).ThenInclude(q => q.Size).ToList();
-        //}
+        public BusinessTrip GetById(int id)
+        {
+            return GetBusinessTripsAndIncludedValues().GetById(id);
+        }
 
-        //public bool AddPiece(Piece piece)
-        //{
-        //    //Model is valid at this point
-        //    _context.Pieces.Add(piece);
-        //    return _context.SaveChanges() > 0;
-        //}
 
-        //public bool UpdatePiece(Piece piece)
-        //{
-        //    _context.Entry(piece).State = EntityState.Modified;
-        //    return _context.SaveChanges() > 0;
-        //}
-
-        //public bool DeletePiece(Piece piece)
-        //{
-        //    _context.Pieces.Remove(piece);
-        //    return _context.SaveChanges() > 0;
-        //}
-
+        private IIncludableQueryable<BusinessTrip, Season> GetBusinessTripsAndIncludedValues()
+        {
+            return _context.BusinessTrips
+                            .Include(b => b.City)
+                            .Include(b => b.Country)
+                            .Include(b => b.Currency)
+                            .Include(b => b.Season);
+        }
     }
 }

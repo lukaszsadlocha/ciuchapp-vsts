@@ -4,10 +4,12 @@ using System.ComponentModel;
 
 namespace CiuchApp.Domain
 {
-    public abstract class CiuchAppModelBase
+    public abstract class CiuchAppBaseModel
     {
         [DisplayName("#")]
         public int Id { get; set; }
+        [DisplayName("Obraz")]
+        public string ImageName { get; set; }
 
         public List<KeyValuePair<string, string>> ToKeyValuePairs<T>(bool newItem)
         {

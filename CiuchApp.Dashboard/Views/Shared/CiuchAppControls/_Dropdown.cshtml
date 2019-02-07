@@ -1,0 +1,12 @@
+﻿@model CiuchApp.Domain.Piece
+@{
+    var values = (IEnumerable<SelectListItem>)ViewData["values"];
+    string forFieldLabel = (string)ViewData["forFieldLabel"];
+    string forFieldSelect = (string)ViewData["forFieldSelect"];
+    }
+
+    <div class="form-group">
+        <label asp-for="@forFieldLabel" class="control-label"></label>
+        <select asp-for="@(forFieldSelect)" class="form-control" asp-items="@values"></select>
+        <span asp-validation-for="@forFieldSelect" class="text-danger"></span>
+    </div>

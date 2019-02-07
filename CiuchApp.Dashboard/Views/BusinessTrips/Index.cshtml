@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<CiuchApp.Domain.BusinessTrip>
 
-<div class="row">
+@Html.Partial("CiuchAppPartials/_ItemActionSection")
+
+<div class="row ciuchapp-card">
 
     @foreach (var item in Model)
     {
@@ -10,12 +12,19 @@
             <div class="card-img-wrapper" style="background-image:url(@businessTripImage)">
             </div>
             <div class="card-body">
-                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Id). @Html.DisplayFor(modelItem => item.Country.Name) - @Html.DisplayFor(modelItem => item.City.Name)</h4>
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Country.Name) - @Html.DisplayFor(modelItem => item.City.Name)</h4>
                 <div class="card-text">@Html.DisplayFor(modelItem => item.DateFrom) - @Html.DisplayFor(modelItem => item.DateTo)</div>
                 <div class="card-text">@Html.DisplayNameFor(model => model.Season): @Html.DisplayFor(modelItem => item.Season.Name)</div>
                 <div class="card-text">@Html.DisplayNameFor(model => model.Currency): @Html.DisplayFor(modelItem => item.Currency.Name)</div>
-                <a href="#" class="btn btn-primary card-button">Edytuj</a>
-                <a href="#" class="btn btn-outline-secondary card-button">Usuń</a>
+
+                @*<a asp-controller="Pieces" asp-action="BusinessTrip" asp-route-id="@item.Id" class="btn btn-success card-button">Ciuchy</a>
+                <a asp-controller="BusinessTrips" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary card-button">Edytuj</a>
+                <a href="#" class="btn btn-outline-secondary card-button">Usuń</a>*@
+
+                <a asp-controller="Pieces" asp-action="BusinessTrip" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-tshirt"></i>Ciuchy</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-pen"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-trash"></i></a>
+
             </div>
         </div>
 
@@ -36,17 +45,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-            <td>@Html.DisplayFor(modelItem => item.DateFrom)</td>
-            <td>@Html.DisplayFor(modelItem => item.DateTo)</td>
-            <td>@item.Country.Name</td>
-            <td>@Html.DisplayFor(modelItem => item.City.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Season.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Currency.Name)</td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.DateFrom)</td>
+                <td>@Html.DisplayFor(modelItem => item.DateTo)</td>
+                <td>@item.Country.Name</td>
+                <td>@Html.DisplayFor(modelItem => item.City.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Season.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Currency.Name)</td>
+            </tr>
+        }
     </tbody>
 </table>
 <div id="tableErrorSection" style="color:red"></div>

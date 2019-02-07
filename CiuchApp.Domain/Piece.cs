@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CiuchApp.Domain
 {
-    public class Piece : CiuchAppModelBase
+    public class Piece : CiuchAppBaseModel
     {
         #region Domain Properties
 
@@ -83,14 +83,17 @@ namespace CiuchApp.Domain
         public int SupplierId { get; set; }
         
         [DisplayName("Data zamówienia")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime OrderDate { get; set; }
 
         [DisplayName("Data wysyłki")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstimatedDateOfShipment { get; set; }
 
         [DisplayName("Data dostawy")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EstimatedTimeOfDelivery { get; set; }
 
@@ -114,8 +117,6 @@ namespace CiuchApp.Domain
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a correct value")]
         public int ColorNameId { get; set; }
-
-        public string ImageName { get; set; } 
 
         public virtual ICollection<SizeAmountPair> SizeAmountPairs { get; set; }
 

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CiuchApp.Domain.DropDownValueBase>
+
+<div class="row ciuchapp-itemsactions-row">
+    <div>
+        <a asp-action="Create" class="btn btn-light"><i class="fa fa-plus"></i>Dodaj</a>
+    </div>
+</div>
+
+<div class="row ciuchapp-card">
+
+    @foreach (var item in Model)
+    {
+    <div class="card">
+
+        @await Component.InvokeAsync("CardImage", new { itemId = item.Id })
+        <div class="card-body">
+            <h4 class="card-title">@item.Id - @item.Name</h4>
+
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-pen"></i></a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-secondary card-button"><i class="fa fa-trash"></i></a>
+        </div>
+    </div>
+    }
+</div>

@@ -271,3 +271,5 @@ CiuchApp\.Dashboard/wwwroot/lib/jquery-tabledit/bower\.json
 CiuchApp\.Dashboard/Serilog/
 
 CiuchApp\.Dashboard/wwwroot/CiuchAppPhotos/
+
+CiuchApp\.Dashboard/wwwroot/ExcelFiles/

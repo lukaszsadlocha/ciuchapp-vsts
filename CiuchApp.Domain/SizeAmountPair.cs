@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CiuchApp.Domain
 {
-    public class SizeAmountPair : CiuchAppModelBase
+    public class SizeAmountPair : CiuchAppBaseModel
     {
         public int PieceId { get; set; }
         [JsonIgnore]

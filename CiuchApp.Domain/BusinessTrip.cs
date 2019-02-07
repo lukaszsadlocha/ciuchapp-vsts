@@ -7,16 +7,18 @@ using System.Reflection;
 
 namespace CiuchApp.Domain
 {
-    public class BusinessTrip : CiuchAppModelBase
+    public class BusinessTrip : CiuchAppBaseModel
     {
         #region Domain Properties
         [DisplayName("Data od")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = false)]
         [Required]
         public DateTime DateFrom { get; set; }
 
         [DisplayName("Data do")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = false)]
         [Required]
         public DateTime DateTo { get; set; }
         [DisplayName("Kraj")]

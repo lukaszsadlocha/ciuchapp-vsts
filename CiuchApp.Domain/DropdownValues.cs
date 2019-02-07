@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace CiuchApp.Domain
 {
     [DebuggerDisplay("Name={Name} Id={Id}")]
-    public abstract class DropDownValueBase : CiuchAppModelBase
+    public abstract class DropDownValueBase : CiuchAppBaseModel
     {
         [Required]
         public string Name { get; set; }
@@ -42,13 +42,17 @@ namespace CiuchApp.Domain
         public List<Group> Groups { get; set; }
     }
     public class Group : PieceDropdownValueBase {
+        public string GroupCode { get; set; }
+        public string CnCode { get; set; }
         public int MainCategoryId { get; set; }
 
         [JsonIgnore]
         public MainCategory MainCategory { get; set; }
     }
     public class Component : PieceDropdownValueBase { }
-    public class CountryOfOrigin : PieceDropdownValueBase { }
+    public class CountryOfOrigin : PieceDropdownValueBase {
+        public string CountryOfOriginCode { get; set; }
+    }
     public class Supplier : PieceDropdownValueBase { }
     public class Size : PieceDropdownValueBase { }
     public class CodeCn : PieceDropdownValueBase { }
@@ -59,8 +63,15 @@ namespace CiuchApp.Domain
 
     //BusinessTrip Values
 
-    public class Country : BusinessTripDropdownValueBase { }
-    public class City : BusinessTripDropdownValueBase { }
+    public class Country : BusinessTripDropdownValueBase {
+        public List<City> Cities { get; set; }
+    }
+    public class City : BusinessTripDropdownValueBase {
+        public int CountryId { get; set; }
+
+        [JsonIgnore]
+        public Country Country { get; set; }
+    }
     public class Season : BusinessTripDropdownValueBase { }
     public class Currency : BusinessTripDropdownValueBase { }
 

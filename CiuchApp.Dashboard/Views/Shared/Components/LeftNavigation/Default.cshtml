@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BusinessTrip>
+
+<ul class="gn-menu">
+    <li class="gn-search-item">
+        @*<input placeholder="Szukaj" type="search">*@
+        <a><i class="fa ciuchapp-icon fa-search"></i><span>Szukaj</span></a>
+    </li>
+    <li>
+        <a asp-controller="BusinessTrips" asp-action="Index"><i class="fa ciuchapp-icon fa-plane-departure"></i>Wyjazdy</a>
+
+    </li>
+    <li id="gn-pieces-menu">
+        <a class="trigger"><i class="fa ciuchapp-icon fa-tshirt"></i>Ciuchy</a>
+        <ul class="gn-submenu">
+            <li><a asp-controller="Pieces" asp-action="Index"><i class="fa ciuchapp-icon fa-tshirt"></i>Wszystkie ciuchy</a></li>
+            @foreach (var bt in Model)
+            {
+                <li><a asp-controller="Pieces" asp-action="BusinessTrip" asp-route-id="@bt.Id"><i class="fa ciuchapp-icon fa-map"></i>@bt.Country.Name - @bt.City.Name (@bt.DateFrom.ToShortDateString())</a></li>
+            }
+        </ul>
+    </li>
+
+    <li id="gn-settings-menu">
+        <a class="trigger"><i class="fa ciuchapp-icon fa-cog"></i>Ustawienia</a>
+        <ul class="gn-submenu">
+
+            <li><a asp-controller="Countries" asp-action="Index"><i class="fa ciuchapp-icon fa-map"></i>Kraje</a></li>
+            <li><a asp-controller="Cities" asp-action="Index"><i class="fa ciuchapp-icon fa-city"></i>Miasta</a></li>
+            <li><a asp-controller="Currencies" asp-action="Index"><i class="fa ciuchapp-icon fa-dollar-sign"></i>Waluty</a></li>
+            <li><a asp-controller="Seasons" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Sezony</a></li>
+            <li><a asp-controller="Colors" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Kolory</a></li>
+            <li><a asp-controller="TopCategories" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Typy produktów</a></li>
+            <li><a asp-controller="MainCategories" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Kategorie główne</a></li>
+            <li><a asp-controller="Groups" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Grupy</a></li>
+            <li><a asp-controller="CountryOfOrigins" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Kraje pochodzenia</a></li>
+            <li><a asp-controller="Suppliers" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Dostawcy</a></li>
+            <li><a asp-controller="CodeCns" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Kody CN</a></li>
+            <li><a asp-controller="Sets" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Sety</a></li>
+            <li><a asp-controller="ColorNames" asp-action="Index"><i class="fa ciuchapp-icon fa-cog"></i>Nazwy kolorów</a></li>
+        </ul>
+    </li>
+    <li><a><i class="fa ciuchapp-icon fa-question-circle"></i>Pomoc</a></li>
+
+    <!-- <li>
+            <a class="gn-icon gn-icon-archive">Archives</a>
+            <ul class="gn-submenu">
+        <li><a class="gn-icon gn-icon-article">Articles</a></li>
+        <li><a class="gn-icon gn-icon-pictures">Images</a></li>
+        <li><a class="gn-icon gn-icon-videos">Videos</a></li>
+    </ul>
+    </li> -->
+</ul>
