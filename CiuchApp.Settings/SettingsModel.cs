@@ -22,10 +22,10 @@ namespace CiuchApp.Settings
             };
             Urls = new Urls()
             {
-                //LocalApiUrl = @"http://10.0.2.2:13121/api",
-                //RemoteApiUrl = @"http://10.0.2.2:13121/api"
-                LocalApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api",
-                RemoteApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
+                LocalApiUrl = @"http://10.0.2.2:13121/api",
+                RemoteApiUrl = @"http://10.0.2.2:13121/api"
+                //LocalApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api",
+                //RemoteApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
             };
             Excel = new ExcelSettings()
             {
