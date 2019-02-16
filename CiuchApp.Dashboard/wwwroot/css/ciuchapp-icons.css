@@ -1,0 +1,38 @@
+﻿.ciuchapp-icon {
+    display: inline-block;
+    /* font-size: 20px; */
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    text-transform: none;
+    /* font-weight: normal; */
+    font-style: normal;
+    font-variant: normal;
+    /* font-family: 'ecoicons'; */
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.gn-menu-main a.ciuchapp-menu-icon {
+    padding-left: 0px;
+}
+
+.ciuchapp-shop-icon{
+    padding-right:20px;
+}
+
+.ciuchapp-answear-logo:hover img {
+    filter: invert(100%);
+}
+
+.ciuchapp-itemsactions-row {
+    padding-left: 10px;
+}
+
+.ciuchapp-itemsactions-row a {
+    margin-right: 5px;
+}
+.ciuchapp-itemsactions-row a i {
+    margin-right: 5px;
+}

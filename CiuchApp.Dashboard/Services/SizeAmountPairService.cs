@@ -6,14 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CiuchApp.Dashboard.Services
 {
-    public class SizeAmountPairService : ICrudService<SizeAmountPair>
-
+    public class SizeAmountPairService : BaseService<SizeAmountPair>, ICrudService<SizeAmountPair>
     {
-        private readonly ApplicationDbContext _context;
-
-        public SizeAmountPairService(ApplicationDbContext context)
+        public SizeAmountPairService(ApplicationDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public bool Add(SizeAmountPair item)
@@ -40,9 +36,16 @@ namespace CiuchApp.Dashboard.Services
             _context.Entry(item).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
-        public ApplicationDbContext GetContext()
+
+        public SizeAmountPair GetById(int id)
         {
-            return _context;
+            return _context.SizeAmountPairs.First(x => x.Id == id);
+        }
+
+        public bool Delete(int id)
+        {
+            _context.SizeAmountPairs.Remove(_context.SizeAmountPairs.First(x => x.Id == id));
+            return _context.SaveChanges() > 0;
         }
     }
 }

@@ -1,12 +1,11 @@
 -------------------------------------------------
 Keep posting on blog.lukaszsadlocha.pl
 Add to git
--------------------------------------------------
-::CURRENT::
-Deploy database to Webio (from VS for now...)
 ------------------------------------------------
 
-USER STORIES
+-----------------
+|  USER STORIES |
+-----------------
 
 US1: (Mobile,Dashboard) Make calls ASYNC - And whole logic more async
 ----------------------------------------------------------------------US2: (Mobile) Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
@@ -40,8 +39,17 @@ US29 + : (Mobile) Add "loading" screen while savings
 ----------------------------------------------------------------------US31 + : (Mobile/Dashboard) Dependency Injection
 ----------------------------------------------------------------------US32 : (MobileTests) Introduce UI tests
 ----------------------------------------------------------------------US33 : (Mobile) Cascade dropdowns
+-----------------------------------US34 : (Dashboard) Refresh web design
 
-Rather pointless US
+-----------------
+|     BUGS      |
+-----------------
+BUG1 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
+
+
+-----------------
+|  DEPRICATED   |
+-----------------
 US3: (Dashboard) Sepearte Dashboard and WebApi
 
 

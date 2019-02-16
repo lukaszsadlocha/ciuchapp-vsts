@@ -5,7 +5,7 @@ namespace CiuchApp.Dashboard.Models.AccountViewModels
     public class ResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         public string Email { get; set; }
 
         [Required]

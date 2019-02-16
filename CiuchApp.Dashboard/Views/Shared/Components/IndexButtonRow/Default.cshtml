@@ -1,0 +1,10 @@
+﻿@model bool
+<div class="row ciuchapp-itemsactions-row">
+    <div>
+        <a asp-action="Create" class="btn btn-light"><i class="fa fa-plus"></i>Dodaj</a>
+        @if (Model)
+        {
+            <a asp-controller="Excel" asp-action="GenerateKpcExcel" class="btn btn-light"><i class="fa fa-file-excel"></i>Wygeneruj plik do KPC</a>
+        }
+    </div>
+</div>

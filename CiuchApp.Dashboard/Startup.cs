@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using CiuchApp.Settings;
 using CiuchApp.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CiuchApp.Dashboard
 {
@@ -33,14 +34,47 @@ namespace CiuchApp.Dashboard
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ICiuchAppSettings, CiuchAppSettings>();
             services.AddTransient<ICrudService<BusinessTrip>, BusinessTripService>();
             services.AddTransient<ICrudService<Piece>, PieceService>();
             services.AddTransient<ICrudService<SizeAmountPair>, SizeAmountPairService>();
+            services.AddTransient<IDropdownServices, DropdownServices>();
 
-            services.AddMvc();
+            AddTransientDropdownService<Country>(services);
+            AddTransientDropdownService<City>(services);
+            AddTransientDropdownService<Season>(services);
+            AddTransientDropdownService<Currency>(services);
+            AddTransientDropdownService<Color>(services);
+            AddTransientDropdownService<TopCategory>(services);
+            AddTransientDropdownService<MainCategory>(services);
+            AddTransientDropdownService<Group>(services);
+            AddTransientDropdownService<Component>(services);
+            AddTransientDropdownService<CountryOfOrigin>(services);
+            AddTransientDropdownService<Supplier>(services);
+            AddTransientDropdownService<CodeCn>(services);
+            AddTransientDropdownService<Set>(services);
+            AddTransientDropdownService<ColorName>(services);
+
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Account/Login");
+            }); ;
+        }
+
+        private static void AddTransientDropdownService<T>(IServiceCollection services) where T : DropDownValueBase
+        {
+            services.AddTransient<ICrudService<T>, DropdownService<T>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +84,7 @@ namespace CiuchApp.Dashboard
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+              app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
@@ -62,6 +96,7 @@ namespace CiuchApp.Dashboard
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
 
             app.UseMvc(routes =>
             {
