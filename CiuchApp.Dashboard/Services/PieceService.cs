@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,11 @@ namespace CiuchApp.Dashboard.Services
         public IList<Piece> GetAll()
         {
             return GetPiecesAndIncludedValues().ToList();
+        }
+
+        public async Task<List<Piece>> GetAllAsync()
+        {
+            return await GetPiecesAndIncludedValues().ToListAsync();
         }
 
         public bool Add(Piece item)

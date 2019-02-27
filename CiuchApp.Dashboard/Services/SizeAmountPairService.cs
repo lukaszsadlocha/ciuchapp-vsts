@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,11 @@ namespace CiuchApp.Dashboard.Services
         {
             _context.SizeAmountPairs.Remove(_context.SizeAmountPairs.First(x => x.Id == id));
             return _context.SaveChanges() > 0;
+        }
+
+        public async Task<List<SizeAmountPair>> GetAllAsync()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
