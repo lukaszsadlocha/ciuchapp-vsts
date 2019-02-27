@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Countries")]
     [ApiController]
-    public class CountriesApiController : CiuchAppBaseApiController<Country>
+    public class CountriesApiController : CiuchAppBaseApiAsyncController<Country>
     {
         public CountriesApiController(ICrudService<Country> service, ILogger<Country> logger) : base(service, logger)
         {

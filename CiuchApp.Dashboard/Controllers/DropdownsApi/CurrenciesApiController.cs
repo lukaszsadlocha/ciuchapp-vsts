@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Currencies")]
     [ApiController]
-    public class CurrenciesApiController : CiuchAppBaseApiController<Currency>
+    public class CurrenciesApiController : CiuchAppBaseApiAsyncController<Currency>
     {
         public CurrenciesApiController(ICrudService<Currency> service, ILogger<Currency> logger) : base(service, logger)
         {

@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/TopCategories")]
     [ApiController]
-    public class TopCategoriesApiController : CiuchAppBaseApiController<TopCategory>
+    public class TopCategoriesApiController : CiuchAppBaseApiAsyncController<TopCategory>
     {
         public TopCategoriesApiController(ICrudService<TopCategory> service, ILogger<TopCategory> logger) : base(service, logger)
         {

@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Components")]
     [ApiController]
-    public class ComponentsApiController : CiuchAppBaseApiController<Component>
+    public class ComponentsApiController : CiuchAppBaseApiAsyncController<Component>
     {
         public ComponentsApiController(ICrudService<Component> service, ILogger<Component> logger) : base(service, logger)
         {
