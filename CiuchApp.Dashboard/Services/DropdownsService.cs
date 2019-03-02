@@ -18,6 +18,7 @@ namespace CiuchApp.Dashboard.Services
         public ICrudService<CodeCn> CodeCnService { get; }
         public ICrudService<Set> SetService { get; }
         public ICrudService<ColorName> ColorNameService { get; }
+        public ICrudService<Size> SizeService { get; }
 
         public DropdownServices(
             ICrudService<Country> countryService,
@@ -33,7 +34,8 @@ namespace CiuchApp.Dashboard.Services
             ICrudService<Supplier> supplierService,
             ICrudService<CodeCn> codeCnService,
             ICrudService<Set> setService,
-            ICrudService<ColorName> colorNameService)
+            ICrudService<ColorName> colorNameService,
+            ICrudService<Size> sizeService)
         {
 
             CountryService = countryService;
@@ -50,6 +52,7 @@ namespace CiuchApp.Dashboard.Services
             CodeCnService = codeCnService;
             SetService = setService;
             ColorNameService = colorNameService;
+            SizeService = sizeService;
         }
     }
 }

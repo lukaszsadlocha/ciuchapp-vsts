@@ -31,6 +31,10 @@ namespace CiuchApp.Dashboard.Services
                     .Include(p => p.Size)
                     .ToList();
         }
+        public async Task<List<SizeAmountPair>> GetAllAsync()
+        {
+            return await _context.SizeAmountPairs.Include(p => p.Size).ToListAsync();
+        }
 
         public bool Update(SizeAmountPair item)
         {
@@ -47,11 +51,6 @@ namespace CiuchApp.Dashboard.Services
         {
             _context.SizeAmountPairs.Remove(_context.SizeAmountPairs.First(x => x.Id == id));
             return _context.SaveChanges() > 0;
-        }
-
-        public async Task<List<SizeAmountPair>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

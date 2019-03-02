@@ -65,6 +65,7 @@ namespace CiuchApp.Dashboard
             AddTransientDropdownService<CodeCn>(services);
             AddTransientDropdownService<Set>(services);
             AddTransientDropdownService<ColorName>(services);
+            AddTransientDropdownService<Size>(services);
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {

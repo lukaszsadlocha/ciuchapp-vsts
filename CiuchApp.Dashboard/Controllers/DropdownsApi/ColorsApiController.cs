@@ -6,7 +6,7 @@ using CiuchApp.Dashboard.Controllers.Base;
 
 namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
-    [Route("api/Color")]
+    [Route("api/Colors")]
     [ApiController]
     public class ColorsApiController : CiuchAppBaseApiAsyncController<Color>
     {
