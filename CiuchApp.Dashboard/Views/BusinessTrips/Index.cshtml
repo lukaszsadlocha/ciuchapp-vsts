@@ -6,7 +6,7 @@
 
     @foreach (var item in Model)
     {
-        var businessTripImage = @"/images/BusinessTripImages/" + item.CountryId + ".PNG";
+        var businessTripImage = @"/images/Cities/" + item.CityId + ".PNG";
 
         <div class="card">
             <div class="card-img-wrapper" style="background-image:url(@businessTripImage)">

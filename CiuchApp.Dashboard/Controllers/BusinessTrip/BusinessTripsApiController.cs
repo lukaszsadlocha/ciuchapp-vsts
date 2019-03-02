@@ -11,7 +11,7 @@ namespace CiuchApp.Dashboard.Controllers
 {
     [ApiController]
     [Route("api/BusinessTrips")]
-    public class BusinessTripsApiController : CiuchAppBaseApiController<BusinessTrip>
+    public class BusinessTripsApiController : CiuchAppBaseApiAsyncController<BusinessTrip>
     {
         public BusinessTripsApiController(ICrudService<BusinessTrip> service, ILogger<BusinessTrip> logger) : base(service, logger)
         {

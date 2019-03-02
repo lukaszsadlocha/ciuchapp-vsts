@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Suppliers")]
     [ApiController]
-    public class SuppliersApiController : CiuchAppBaseApiController<Supplier>
+    public class SuppliersApiController : CiuchAppBaseApiAsyncController<Supplier>
     {
         public SuppliersApiController(ICrudService<Supplier> service, ILogger<Supplier> logger) : base(service, logger)
         {

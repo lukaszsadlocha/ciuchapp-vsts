@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,11 @@ namespace CiuchApp.Dashboard.Services
         public IList<BusinessTrip> GetAll()
         {
             return GetBusinessTripsAndIncludedValues().ToList();
+        }
+
+        public async Task<List<BusinessTrip>> GetAllAsync()
+        {
+            return await GetBusinessTripsAndIncludedValues().ToListAsync();
         }
 
         public bool Add(BusinessTrip item)

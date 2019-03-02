@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/ColorNames")]
     [ApiController]
-    public class ColorNamesApiController : CiuchAppBaseApiController<ColorName>
+    public class ColorNamesApiController : CiuchAppBaseApiAsyncController<ColorName>
     {
         public ColorNamesApiController(ICrudService<ColorName> service, ILogger<ColorName> logger) : base(service, logger)
         {

@@ -3,12 +3,22 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using CiuchApp.Domain;
+using System.Threading.Tasks;
 
 namespace CiuchApp.Dashboard.Services
 {
     public class DropdownService<T> : BaseService<T>, ICrudService<T> where T: CiuchAppBaseModel
     {
         private DbSet<T> _contextSet;
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _contextSet.ToListAsync();
+        }
+        public IList<T> GetAll()
+        {
+            return _contextSet.ToList();
+        }
 
         public DropdownService(ApplicationDbContext context) : base(context)
         {
@@ -33,11 +43,6 @@ namespace CiuchApp.Dashboard.Services
             return _context.SaveChanges() > 0;
         }
 
-        public IList<T> GetAll()
-        {
-            return _contextSet.ToList();
-        }
-
         public T GetById(int id)
         {
             return _contextSet.GetById<T>(id);
@@ -48,6 +53,5 @@ namespace CiuchApp.Dashboard.Services
             _context.Entry(item).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
-
     }
 }

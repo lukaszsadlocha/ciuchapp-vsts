@@ -3,24 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CiuchApp.Dashboard.Services;
 using CiuchApp.Domain;
+using System.Threading.Tasks;
 
 namespace CiuchApp.Dashboard.Controllers.Base
 {
-    public abstract class CiuchAppBaseApiController<T> : ControllerBase where T : CiuchAppBaseModel
+    public abstract class CiuchAppBaseApiAsyncController<T> : ControllerBase where T : CiuchAppBaseModel
     {
         protected readonly ICrudService<T> _service;
         protected readonly ILogger<T> _logger;
 
-        public CiuchAppBaseApiController(ICrudService<T> service, ILogger<T> logger)
+        public CiuchAppBaseApiAsyncController(ICrudService<T> service, ILogger<T> logger)
         {
             _service = service;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<T> Get()
+        public async Task<ActionResult<List<T>>> GetAllAsync()
         {
-            return _service.GetAll();
+            return await _service.GetAllAsync();
         }
 
         [HttpPost]

@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Sizes")]
     [ApiController]
-    public class SizesApiController : CiuchAppBaseApiController<Size>
+    public class SizesApiController : CiuchAppBaseApiAsyncController<Size>
     {
         public SizesApiController(ICrudService<Size> service, ILogger<Size> logger) : base(service, logger)
         {

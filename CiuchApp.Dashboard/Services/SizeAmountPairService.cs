@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CiuchApp.DataAccess;
 using CiuchApp.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,10 @@ namespace CiuchApp.Dashboard.Services
             return _context.SizeAmountPairs
                     .Include(p => p.Size)
                     .ToList();
+        }
+        public async Task<List<SizeAmountPair>> GetAllAsync()
+        {
+            return await _context.SizeAmountPairs.Include(p => p.Size).ToListAsync();
         }
 
         public bool Update(SizeAmountPair item)

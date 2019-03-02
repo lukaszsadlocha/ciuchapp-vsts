@@ -7,7 +7,7 @@ using CiuchApp.Dashboard.Controllers.Base;
 namespace CiuchApp.Dashboard
 {
     [Route("api/SizeAmountPairs")]
-    public class SizeAmountPairsApiController : CiuchAppBaseApiController<SizeAmountPair>
+    public class SizeAmountPairsApiController : CiuchAppBaseApiAsyncController<SizeAmountPair>
     {
         public SizeAmountPairsApiController(ICrudService<SizeAmountPair> serviceProvider, ILogger<SizeAmountPair> logger) : base(serviceProvider, logger)
         {

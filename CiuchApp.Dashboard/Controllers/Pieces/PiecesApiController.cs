@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard
 {
     [ApiController]
     [Route("api/Pieces")]
-    public class PiecesApiController : CiuchAppBaseApiController<Piece>
+    public class PiecesApiController : CiuchAppBaseApiAsyncController<Piece>
     {
         public PiecesApiController(ICrudService<Piece> serviceProvider, ILogger<Piece> logger) : base(serviceProvider, logger)
         {

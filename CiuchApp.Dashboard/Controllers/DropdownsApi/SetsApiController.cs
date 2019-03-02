@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Sets")]
     [ApiController]
-    public class SetsApiController : CiuchAppBaseApiController<Set>
+    public class SetsApiController : CiuchAppBaseApiAsyncController<Set>
     {
         public SetsApiController(ICrudService<Set> service, ILogger<Set> logger) : base(service, logger)
         {

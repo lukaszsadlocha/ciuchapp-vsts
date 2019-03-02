@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Seasons")]
     [ApiController]
-    public class SeasonsApiController : CiuchAppBaseApiController<Season>
+    public class SeasonsApiController : CiuchAppBaseApiAsyncController<Season>
     {
         public SeasonsApiController(ICrudService<Season> service, ILogger<Season> logger) : base(service, logger)
         {

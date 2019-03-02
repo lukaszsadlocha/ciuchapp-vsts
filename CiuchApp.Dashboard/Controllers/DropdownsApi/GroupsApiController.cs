@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/Groups")]
     [ApiController]
-    public class GroupsApiController : CiuchAppBaseApiController<Group>
+    public class GroupsApiController : CiuchAppBaseApiAsyncController<Group>
     {
         public GroupsApiController(ICrudService<Group> service, ILogger<Group> logger) : base(service, logger)
         {

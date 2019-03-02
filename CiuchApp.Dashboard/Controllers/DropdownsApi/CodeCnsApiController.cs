@@ -8,7 +8,7 @@ namespace CiuchApp.Dashboard.Controllers.Dropdowns
 {
     [Route("api/CodeCns")]
     [ApiController]
-    public class CodeCnsApiController : CiuchAppBaseApiController<CodeCn>
+    public class CodeCnsApiController : CiuchAppBaseApiAsyncController<CodeCn>
     {
         public CodeCnsApiController(ICrudService<CodeCn> service, ILogger<CodeCn> logger) : base(service, logger)
         {
