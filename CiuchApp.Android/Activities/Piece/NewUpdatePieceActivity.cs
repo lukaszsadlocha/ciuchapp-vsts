@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Ciuch")]
+    [Activity(Label = "Ciuch", NoHistory = true)]
     public class NewUpdatePieceActivity : CiuchAppBaseActivity
     {
         Button _saveButton;

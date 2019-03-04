@@ -23,7 +23,7 @@ using CiuchApp.ApiClient;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
     public class UpdateBusinessTripActivity : CiuchAppBaseActivity
     {
         protected override void OnCreate(Bundle bundle)

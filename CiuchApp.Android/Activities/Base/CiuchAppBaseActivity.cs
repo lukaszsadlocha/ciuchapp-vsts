@@ -20,7 +20,7 @@ namespace CiuchApp.Mobile.Activities
         public IApiClient _apiClient;
         public IEnvironmentHelper _environmentHelper;
 
-        private CacheContext _cacheContext;
+        protected CacheContext _cacheContext;
         protected CacheContext CacheContext {
             get
             {
@@ -94,11 +94,11 @@ namespace CiuchApp.Mobile.Activities
         /// Try get cacheContext from previous action.
         /// If null then call to api
         /// </summary>
-        protected void EnsureCahceContext()
+        protected async void EnsureCahceContext()
         {
             _cacheContext = CacheContext.Deserialize(Intent.GetStringExtra(CacheContext.JsonKey));
             if (_cacheContext == null)
-                _cacheContext = _apiClient.GetCache();
+                _cacheContext = await _apiClient.GetCacheAsync();
         }
 
         public void Next<T>(int? currentBusinessTrip=null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity

@@ -229,6 +229,7 @@
     <Compile Include="Activities\BusinessTrip\NewBusinessTripActivity.cs" />
     <Compile Include="Activities\SizeAmount\AllSizeAmountActivity.cs" />
     <Compile Include="Activities\SizeAmount\NewUpdateSizeAmountActivity.cs" />
+    <Compile Include="Activities\Splash\SplashActivity.cs" />
     <Compile Include="Adapters\SizeAmountListViewAdapter.cs" />
     <Compile Include="Adapters\PieceListViewAdapter.cs" />
     <Compile Include="Adapters\BusinessTripListViewAdapter.cs" />
@@ -257,7 +258,7 @@
     <AndroidResource Include="Resources\layout\AllPiece.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />
@@ -309,7 +310,7 @@
     <AndroidResource Include="Resources\drawable\answear.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Styles.xml">
+    <AndroidResource Include="Resources\values\style.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -337,6 +338,9 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />

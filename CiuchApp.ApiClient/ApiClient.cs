@@ -21,7 +21,7 @@ namespace CiuchApp.ApiClient
             apiBaseUrl = _settings.Urls.ApiUrl;
         }
 
-        public CacheContext GetCache()
+        public async Task<CacheContext> GetCacheAsync()
         {
             var restApiUri = new Uri($@"{apiBaseUrl}/Cache");
             
@@ -29,8 +29,10 @@ namespace CiuchApp.ApiClient
             {
                 using (var httpClient = new HttpClient())
                 {
-                    var response = httpClient.GetAsync(restApiUri).Result;
-                    var result = response.Content.ReadAsStringAsync().Result;
+                    httpClient.Timeout = new TimeSpan(0, 0, 10);
+                    var response = await httpClient.GetAsync(restApiUri);
+                    response.EnsureSuccessStatusCode();
+                    var result = await response.Content.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<CacheContext>(result);
                 }
