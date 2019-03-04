@@ -235,6 +235,17 @@ namespace CiuchApp.Mobile.Activities
                 value = defaultValue;
             }
 
+            //Bug 1 - in Polish Culture there is comma as double seperator
+            //Double accepts dot as a seperator
+            if (prop.PropertyType == typeof(double))
+            {
+                if(double.TryParse(value.ToString().Replace(",", "."), out var doubleValue))
+                {
+                    prop.SetValue(model, doubleValue, null);
+                }
+                return;
+            }
+
             prop.SetValue(model, Convert.ChangeType(value, prop.PropertyType), null);
         }
 

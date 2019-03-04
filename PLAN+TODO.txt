@@ -7,7 +7,7 @@ Add to git
 |  USER STORIES |
 -----------------
 
-US1: (Mobile,Dashboard) Make calls ASYNC - And whole logic more async
+----------------------------------------------------------------------US1: (Mobile,Dashboard) Make calls ASYNC - And whole logic more async
 ----------------------------------------------------------------------US2: (Mobile) Fix passing bitmap (not serializing but passing path or file) Make bitmap in Clothe Activity
 ----------------------------------------------------------------------US4: (BusinessTrip) Add ApiControllers to all dropdowns + Add Spinners to all dropdows 
 ----------------------------------------------------------------------US5: (Dashboard) Fix issue with "+" adding additional item to list
@@ -39,13 +39,14 @@ US29 + : (Mobile) Add "loading" screen while savings
 ----------------------------------------------------------------------US31 + : (Mobile/Dashboard) Dependency Injection
 ----------------------------------------------------------------------US32 : (MobileTests) Introduce UI tests
 ----------------------------------------------------------------------US33 : (Mobile) Cascade dropdowns
------------------------------------US34 : (Dashboard) Refresh web design
+----------------------------------------------------------------------US34 : (Dashboard) Refresh web design
 
 -----------------
 |     BUGS      |
 -----------------
-BUG1 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
-
+BUG1- After deployment to phisical device - unable to send data (Release mode + RemoteApi)
+	There was an issue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
+BUG2 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
 
 -----------------
 |  DEPRICATED   |
