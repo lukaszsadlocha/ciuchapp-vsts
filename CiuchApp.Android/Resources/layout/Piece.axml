@@ -82,6 +82,7 @@
                 <EditText
                     android:id="@+id/PieceBuyPriceText"
                     android:inputType="numberDecimal"
+                    android:digits="0123456789."
                     android:layout_width="match_parent" />
                 <TextView
                     android:text="Dostawca"
