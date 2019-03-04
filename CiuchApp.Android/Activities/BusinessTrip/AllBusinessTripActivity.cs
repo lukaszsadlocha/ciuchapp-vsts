@@ -20,13 +20,11 @@ using CiuchApp.ApiClient;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "CiuchApp - Answear", MainLauncher = true)]
+    [Activity(Label = "CiuchApp - Answear")]
     public class AllBusinessTripActivity : CiuchAppBaseActivity
     {
-        private TextView loadingText;
         private Button newBusinessTripButton;
         private ListView businessTripsListView;
-        //private List<BusinessTrip> businessTrips;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -34,21 +32,8 @@ namespace CiuchApp.Mobile.Activities
 
             SetContentView(Resource.Layout.AllBusinessTrip);
 
-            loadingText = FindViewById<TextView>(Resource.Id.loadingText);
-            loadingText.Text = $"Łacze z: {_settings.Urls.ApiUrl}";
-
             newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
             newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
-
-            try
-            {
-                EnsureCahceContext();
-            }
-            catch (Exception e)
-            {
-                loadingText.Text = e.Message;
-                return;
-            }
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 

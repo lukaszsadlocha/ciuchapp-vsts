@@ -1,0 +1,15 @@
+<resources>
+  <style name="CiuchAppThemeBase" parent="@android:style/Theme.DeviceDefault.Light">
+  </style>
+
+  <style name="CiuchAppTheme" parent="CiuchAppThemeBase">
+  </style>
+
+  <style name="CiuchAppSplash" parent ="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowActionBar">true</item>
+  </style>
+</resources>

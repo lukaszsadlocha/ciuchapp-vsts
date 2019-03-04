@@ -12,7 +12,3 @@
 
 4. Issue with dlls (package) when run/debug test method
 	Look at NuGet Packages that are refferenced (e.g. Not- Microsoft.Data.Addnotation - BUT- Mictosoft.AspNetCore.Mvc.Data.Addnotatoin)
-
-BUGs
-1. After deployment to phisical device - unable to send data (Release mode + RemoteApi)
-	There was an iisue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
