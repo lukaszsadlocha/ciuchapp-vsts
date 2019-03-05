@@ -24,11 +24,20 @@ namespace CiuchApp.Domain
                     || (property.PropertyType == typeof(Int32) && property.Name != "Id" && property.Name.EndsWith("Id"))
                     || (property.PropertyType == typeof(Double) && property.Name.Contains("Price"))
                     || (property.PropertyType == typeof(Int32) && property.Name.Contains("Amount")) 
-                    || (property.PropertyType == typeof(string) && property.Name == "Name")
-                    || (property.PropertyType == typeof(string) && property.Name == "ImageName"))
+                    || (property.PropertyType == typeof(string) && property.Name == "Name"))
                 {
                     list.Add(new KeyValuePair<string, string>(property.Name, property.GetValue(this).ToString()));
                 }
+
+                if (property.PropertyType == typeof(string) && property.Name == "ImageName")
+                {
+                    var imageNameValue = property.GetValue(this);
+                    if (imageNameValue != null)
+                    {
+                        list.Add(new KeyValuePair<string, string>(property.Name, imageNameValue.ToString()));
+                    }
+                }
+
                 if(property.PropertyType == typeof(DateTime))
                 {
                     list.Add(new KeyValuePair<string, string>(property.Name, ((DateTime)property.GetValue(this)).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")));

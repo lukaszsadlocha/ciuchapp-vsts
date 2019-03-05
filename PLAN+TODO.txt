@@ -47,8 +47,9 @@ US36 + : (Mobile) Theme colors & Alignments
 -----------------
 |     BUGS      |
 -----------------
-----------------------------------------------------------------------BUG1- After deployment to phisical device - unable to send data (Release mode + RemoteApi) [ISSUE] There was an issue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
-----------------------------------------------------------------------BUG2 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
+----------------------------------------------------------------------BUG1 : After deployment to phisical device - unable to send data (Release mode + RemoteApi) [ISSUE] There was an issue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
+----------------------------------------------------------------------BUG2 : Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
+----------------------------------------------------------------------BUG3 : ImageName Cannot be added to some objects (like sizeamount or BusinessTrip)
 
 -----------------
 |  DEPRICATED   |
