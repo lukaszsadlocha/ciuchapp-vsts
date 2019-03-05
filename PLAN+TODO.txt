@@ -40,13 +40,15 @@ US27 + : (Mobile) create different sizes of image + refactor name (add datetime 
 ----------------------------------------------------------------------US32 : (MobileTests) Introduce UI tests
 ----------------------------------------------------------------------US33 : (Mobile) Cascade dropdowns
 ----------------------------------------------------------------------US34 : (Dashboard) Refresh web design
+US35 + : (Mobile/Dashboard) Sync images back to mobile
+US36 + : (Mobile) Theme colors & Alignments
+----------------------------------------------------------------------US37 + : (Mobile) Do not show keyboard when open piece
 
 -----------------
 |     BUGS      |
 -----------------
-BUG1- After deployment to phisical device - unable to send data (Release mode + RemoteApi)
-	There was an issue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
-BUG2 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
+----------------------------------------------------------------------BUG1- After deployment to phisical device - unable to send data (Release mode + RemoteApi) [ISSUE] There was an issue with DateTime Format passed to RemoteApi (issue with "." e.g. 31.10.2018 could not be parsed)
+----------------------------------------------------------------------BUG2 - Buy Pirce - cannot add . (delimiter) on phisical device - need to test on emulator
 
 -----------------
 |  DEPRICATED   |
