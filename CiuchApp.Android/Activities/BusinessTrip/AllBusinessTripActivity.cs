@@ -17,6 +17,7 @@ using CiuchApp.DataAccess;
 using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
 using CiuchApp.ApiClient;
+using Android.Views;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -51,6 +52,23 @@ namespace CiuchApp.Mobile.Activities
 
                 Next<UpdateBusinessTripActivity>(businessTripClicked.Id);
             };
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "My ja jebe";
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
+                ToastLength.Short).Show();
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

@@ -63,6 +63,7 @@ namespace CiuchApp.Mobile.Activities
             saveNewBusinessTrip.Click += (s, e) => {
                 if (_apiClient.Add<BusinessTrip>(model))
                     //TODO: model need to have ID as a result of call to webApi
+                    model.Pieces = new List<Piece>();
                     CacheContext.BusinessTrips.Add(model);
                     Next<AllPieceActivity>(model.Id);
                 // TODO: log error + render error activity
