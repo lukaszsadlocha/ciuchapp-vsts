@@ -27,14 +27,16 @@ namespace CiuchApp.Mobile.Activities
     [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
     public class NewBusinessTrips : CiuchAppBaseActivity
     {
+        BusinessTrip model;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.NewBusinessTrip);
+            SetToolbar("Nowy wyjazd", showSaveMenuItem: true);
 
             //Set default Model that will be pass to call
-            var model = new BusinessTrip
+            model = new BusinessTrip
             {
                 DateFrom = DateTime.Now,
                 DateTo = DateTime.Now,
@@ -54,28 +56,39 @@ namespace CiuchApp.Mobile.Activities
             SpinnerFor<Currency>(Resource.Id.currencySpinner, model, CacheContext.Currencies);
             SpinnerFor<Season>(Resource.Id.seasonSpinner, model, CacheContext.Seasons);
 
-            // BUTTON - GET BUTTON (action in derivered classes)
-            var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
+            //// BUTTON - GET BUTTON (action in derivered classes)
+            //var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
 
 
-            // BUTTON - ADD NEW BUSINESS TRIP
-            saveNewBusinessTrip.Text = "Dodaj Podróż";
-            saveNewBusinessTrip.Click += (s, e) => {
-                if (_apiClient.Add<BusinessTrip>(model))
-                    //TODO: model need to have ID as a result of call to webApi
-                    model.Pieces = new List<Piece>();
-                    CacheContext.BusinessTrips.Add(model);
-                    Next<AllPieceActivity>(model.Id);
-                // TODO: log error + render error activity
-            };
+            //// BUTTON - ADD NEW BUSINESS TRIP
+            //saveNewBusinessTrip.Text = "Dodaj Podróż";
+            //saveNewBusinessTrip.Click += (s, e) =>
+            //{
+            //    if (_apiClient.Add<BusinessTrip>(model))
+            //        //TODO: model need to have ID as a result of call to webApi
+            //        model.Pieces = new List<Piece>();
+            //    CacheContext.BusinessTrips.Add(model);
+            //    Next<AllPieceActivity>(model.Id);
+            //    // TODO: log error + render error activity
+            //};
 
             //TODO: Nice info at the bottom that it was saved:
             //  Spinner spinner = (Spinner)sender;
             //  string toast = string.Format("The planet is {0}", spinner.GetItemAtPosition(e.Position));
             //  Toast.MakeText(this, toast, ToastLength.Long).Show();
-
-
         }
+
+        protected override void OnSaveMenuItemClick()
+        {
+            if (_apiClient.Add<BusinessTrip>(model))
+                //TODO: model need to have ID as a result of call to webApi
+                model.Pieces = new List<Piece>();
+            CacheContext.BusinessTrips.Add(model);
+            Next<AllPieceActivity>(model.Id);
+            // TODO: log error + render error activity
+            base.OnSaveMenuItemClick();
+        }
+
     }
 }
 

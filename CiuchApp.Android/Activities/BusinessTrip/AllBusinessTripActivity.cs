@@ -24,7 +24,7 @@ namespace CiuchApp.Mobile.Activities
     [Activity(Label = "CiuchApp - Answear")]
     public class AllBusinessTripActivity : CiuchAppBaseActivity
     {
-        private Button newBusinessTripButton;
+        //private Button newBusinessTripButton;
         private ListView businessTripsListView;
 
         protected override void OnCreate(Bundle bundle)
@@ -33,8 +33,10 @@ namespace CiuchApp.Mobile.Activities
 
             SetContentView(Resource.Layout.AllBusinessTrip);
 
-            newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
-            newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
+            SetToolbar(toolbarTitle: "Wyjazdy służbowe", showNewMenuItem: true);
+
+            //newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
+            //newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
@@ -52,24 +54,9 @@ namespace CiuchApp.Mobile.Activities
 
                 Next<UpdateBusinessTripActivity>(businessTripClicked.Id);
             };
-
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetActionBar(toolbar);
-            ActionBar.Title = "My ja jebe";
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
-                ToastLength.Short).Show();
-            return base.OnOptionsItemSelected(item);
-        }
+        protected override void OnNewMenuItemClick() => Next<NewBusinessTrips>();
     }
 }
 

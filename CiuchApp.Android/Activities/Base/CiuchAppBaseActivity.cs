@@ -11,6 +11,7 @@ using CiuchApp.Settings;
 using CiuchApp.ApiClient;
 using CiuchApp.Mobile.Helpers;
 using System.Linq.Expressions;
+using Android.Views;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -21,10 +22,11 @@ namespace CiuchApp.Mobile.Activities
         public IEnvironmentHelper _environmentHelper;
 
         protected CacheContext _cacheContext;
-        protected CacheContext CacheContext {
+        protected CacheContext CacheContext
+        {
             get
             {
-                if(_cacheContext == null)
+                if (_cacheContext == null)
                 {
                     EnsureCahceContext();
                 }
@@ -38,7 +40,7 @@ namespace CiuchApp.Mobile.Activities
         {
             get
             {
-                if(_currentbusinessTrip == null && int.TryParse(Intent.GetStringExtra(currentBusinessTripJsonKey), out int id))
+                if (_currentbusinessTrip == null && int.TryParse(Intent.GetStringExtra(currentBusinessTripJsonKey), out int id))
                 {
                     _currentbusinessTrip = CacheContext.BusinessTrips.FirstOrDefault(x => x.Id == id);
                 }
@@ -101,7 +103,7 @@ namespace CiuchApp.Mobile.Activities
                 _cacheContext = await _apiClient.GetCacheAsync();
         }
 
-        public void Next<T>(int? currentBusinessTrip=null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity
+        public void Next<T>(int? currentBusinessTrip = null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity
         {
             var nextActivity = new Intent(this, typeof(T));
 
@@ -239,7 +241,7 @@ namespace CiuchApp.Mobile.Activities
             //Double accepts dot as a seperator
             if (prop.PropertyType == typeof(double))
             {
-                if(double.TryParse(value.ToString().Replace(",", "."), out var doubleValue))
+                if (double.TryParse(value.ToString().Replace(",", "."), out var doubleValue))
                 {
                     prop.SetValue(model, doubleValue, null);
                 }
@@ -266,5 +268,56 @@ namespace CiuchApp.Mobile.Activities
             });
             builder.Show();
         }
+
+        #region TOOLBAR Properites & Methods
+        private bool ShowNewMenuItem { get; set; }
+        private bool ShowSaveMenuItem { get; set; }
+        private bool ShowEditMenuItem { get; set; }
+        private bool ShowAdditionalMenuItem { get; set; }
+
+        protected void SetToolbar(string toolbarTitle, bool showNewMenuItem = false, bool showEditMenuItem = false, bool showSaveMenuItem = false, bool showAdditionalMenuItem = false)
+        {
+            ShowNewMenuItem = showNewMenuItem;
+            ShowEditMenuItem = showEditMenuItem;
+            ShowSaveMenuItem = showSaveMenuItem;
+            ShowAdditionalMenuItem = ShowAdditionalMenuItem;
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = toolbarTitle;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+            if (!ShowNewMenuItem)
+                menu.FindItem(Resource.Id.menu_new).SetVisible(false);
+            if (!ShowEditMenuItem)
+                menu.FindItem(Resource.Id.menu_edit).SetVisible(false);
+            if (!ShowSaveMenuItem)
+                menu.FindItem(Resource.Id.menu_save).SetVisible(false);
+            if (!ShowAdditionalMenuItem)
+                menu.FindItem(Resource.Id.menu_preferences).SetVisible(false);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.menu_new)
+            {
+                OnNewMenuItemClick();
+            }
+            else
+            {
+                Toast.MakeText(this, "Action selected: " + item.TitleFormatted, ToastLength.Short).Show();
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
+        protected virtual void OnNewMenuItemClick() { }
+        protected virtual void OnEditMenuItemClick() { }
+        protected virtual void OnSaveMenuItemClick() { }
+        protected virtual void OnAdditionalMenuItemClick() { } 
+        #endregion
     }
 }

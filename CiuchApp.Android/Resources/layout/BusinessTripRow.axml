@@ -7,19 +7,28 @@
     <TextView
         android:text="Country"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorWhiteText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15.0dp"
+        android:layout_marginRight="15.0dp"
         android:id="@+id/CountryTextView" />
     <TextView
         android:text="City"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorWhiteText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15.0dp"
+        android:layout_marginRight="15.0dp"
         android:id="@+id/CityTextView" />
     <TextView
         android:text="Dates"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhiteText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15.0dp"
+        android:layout_marginRight="15.0dp"
         android:id="@+id/DatesTextView" />
 </LinearLayout>
