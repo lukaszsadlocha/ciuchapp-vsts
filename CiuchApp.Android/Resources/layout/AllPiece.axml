@@ -6,17 +6,17 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
-    <TextView
+<!--<TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/businessTripTextInfo" />
-    <Button
+        android:id="@+id/businessTripTextInfo" />-->
+<!--<Button
         android:text="@string/openCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/newClothe" />
+        android:id="@+id/newClothe" />-->
 <!--<ImageView
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="match_parent"

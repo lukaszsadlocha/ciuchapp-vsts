@@ -2,9 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -12,6 +9,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -149,6 +149,8 @@
             </GridLayout>
             <Button
                 android:text="Button Text"
+                android:layout_margin="15.0dp"
+                android:layout_marginRight="15.0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/savePieceButton" />

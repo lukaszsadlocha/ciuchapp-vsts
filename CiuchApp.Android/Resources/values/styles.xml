@@ -1,9 +1,10 @@
 <resources>
-  <style name="CiuchAppThemeBase" parent="@android:style/Theme.DeviceDefault.Light">
+  <style name="CiuchAppThemeBase" parent="@android:style/Theme.DeviceDefault">
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowActionBar">false</item>
     <item name="android:colorPrimary">#34495e</item>
     <item name="android:background">#5f6f81</item>
+    <item name="android:colorAccent">#ffffff</item>
   </style>
 
   <style name="CiuchAppTheme" parent="CiuchAppThemeBase">

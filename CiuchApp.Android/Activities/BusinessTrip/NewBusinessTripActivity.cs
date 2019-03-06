@@ -24,7 +24,7 @@ using CiuchApp.ApiClient;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
     public class NewBusinessTrips : CiuchAppBaseActivity
     {
         BusinessTrip model;

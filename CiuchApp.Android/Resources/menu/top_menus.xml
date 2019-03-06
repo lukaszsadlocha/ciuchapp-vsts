@@ -5,7 +5,7 @@
          android:icon="@mipmap/ic_action_content_new"
          android:showAsAction="ifRoom"
          android:visibility="invisible"
-         android:title="Edit" />
+         android:title="New" />
   <item
        android:id="@+id/menu_edit"
        android:icon="@mipmap/ic_action_content_create"
@@ -19,7 +19,7 @@
        android:visibility="invisible"
        android:title="Save" />
   <item
-       android:id="@+id/menu_preferences"
+       android:id="@+id/menu_syncImages"
        android:showAsAction="never"
-       android:title="Preferences" />
+       android:title="Synchronizuj zdjęcia" />
 </menu>

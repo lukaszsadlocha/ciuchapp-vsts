@@ -21,10 +21,9 @@ using Android.Views;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "CiuchApp - Answear")]
+    [Activity]
     public class AllBusinessTripActivity : CiuchAppBaseActivity
     {
-        //private Button newBusinessTripButton;
         private ListView businessTripsListView;
 
         protected override void OnCreate(Bundle bundle)
@@ -34,9 +33,6 @@ namespace CiuchApp.Mobile.Activities
             SetContentView(Resource.Layout.AllBusinessTrip);
 
             SetToolbar(toolbarTitle: "Wyjazdy służbowe", showNewMenuItem: true);
-
-            //newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
-            //newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 

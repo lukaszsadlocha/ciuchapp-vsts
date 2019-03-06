@@ -273,14 +273,14 @@ namespace CiuchApp.Mobile.Activities
         private bool ShowNewMenuItem { get; set; }
         private bool ShowSaveMenuItem { get; set; }
         private bool ShowEditMenuItem { get; set; }
-        private bool ShowAdditionalMenuItem { get; set; }
+        private bool ShowSyncImagesMenuItem { get; set; }
 
-        protected void SetToolbar(string toolbarTitle, bool showNewMenuItem = false, bool showEditMenuItem = false, bool showSaveMenuItem = false, bool showAdditionalMenuItem = false)
+        protected void SetToolbar(string toolbarTitle, bool showNewMenuItem = false, bool showEditMenuItem = false, bool showSaveMenuItem = false, bool showSyncImagesMenuItem = true)
         {
             ShowNewMenuItem = showNewMenuItem;
             ShowEditMenuItem = showEditMenuItem;
             ShowSaveMenuItem = showSaveMenuItem;
-            ShowAdditionalMenuItem = ShowAdditionalMenuItem;
+            ShowSyncImagesMenuItem = showSyncImagesMenuItem;
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
@@ -296,8 +296,8 @@ namespace CiuchApp.Mobile.Activities
                 menu.FindItem(Resource.Id.menu_edit).SetVisible(false);
             if (!ShowSaveMenuItem)
                 menu.FindItem(Resource.Id.menu_save).SetVisible(false);
-            if (!ShowAdditionalMenuItem)
-                menu.FindItem(Resource.Id.menu_preferences).SetVisible(false);
+            if (!ShowSyncImagesMenuItem)
+                menu.FindItem(Resource.Id.menu_syncImages).SetVisible(false);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -306,6 +306,18 @@ namespace CiuchApp.Mobile.Activities
             if (item.ItemId == Resource.Id.menu_new)
             {
                 OnNewMenuItemClick();
+            }
+            else if (item.ItemId == Resource.Id.menu_edit)
+            {
+                OnEditMenuItemClick();
+            }
+            else if(item.ItemId == Resource.Id.menu_save)
+            {
+                OnSaveMenuItemClick();
+            }
+            else if (item.ItemId == Resource.Id.menu_syncImages)
+            {
+                OnSyncImagesMenuItemClick();
             }
             else
             {
@@ -317,7 +329,7 @@ namespace CiuchApp.Mobile.Activities
         protected virtual void OnNewMenuItemClick() { }
         protected virtual void OnEditMenuItemClick() { }
         protected virtual void OnSaveMenuItemClick() { }
-        protected virtual void OnAdditionalMenuItemClick() { } 
+        protected virtual void OnSyncImagesMenuItemClick() { } 
         #endregion
     }
 }
