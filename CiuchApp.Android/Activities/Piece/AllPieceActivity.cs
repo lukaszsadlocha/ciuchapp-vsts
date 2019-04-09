@@ -67,12 +67,12 @@ namespace CiuchApp.Mobile.Activities
             }
         }
 
-        protected override void OnNewMenuItemClick()
+        protected override void OnNewMenuItemClick(object sender)
         {
-            TakeAPicture();
+            TakeAPicture(sender, null);
         }
 
-        private void TakeAPicture()
+        private void TakeAPicture(object sender, EventArgs eventArgs)
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             App._file = new File(App._dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));

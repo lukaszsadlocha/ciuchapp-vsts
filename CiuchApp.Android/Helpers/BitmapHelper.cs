@@ -39,6 +39,11 @@ namespace CiuchApp.Mobile.Helpers
             return resizedBitmap;
         }
 
+        public static bool FileExist(this string filePath)
+        {
+            var f = new Java.IO.File(filePath);
+            return f.Exists();
+        }
         public static Bitmap LoadAndSaveBitmap(this string fileName)
         {
             BitmapFactory.Options options = new BitmapFactory.Options

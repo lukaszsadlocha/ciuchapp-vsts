@@ -64,11 +64,11 @@ namespace CiuchApp.Mobile.Activities
 
         }
 
-        protected override void OnSaveMenuItemClick()
+        protected override void OnSaveMenuItemClick(object sender)
         {
             if (_apiClient.Update<BusinessTrip>(CurrentBusinessTrip))
                 Next<AllBusinessTripActivity>();
-            base.OnSaveMenuItemClick();
+            base.OnSaveMenuItemClick(sender);
         }
     }
 }

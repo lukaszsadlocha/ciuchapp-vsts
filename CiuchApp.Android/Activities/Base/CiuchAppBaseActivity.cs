@@ -305,19 +305,19 @@ namespace CiuchApp.Mobile.Activities
         {
             if (item.ItemId == Resource.Id.menu_new)
             {
-                OnNewMenuItemClick();
+                OnNewMenuItemClick(item);
             }
             else if (item.ItemId == Resource.Id.menu_edit)
             {
-                OnEditMenuItemClick();
+                OnEditMenuItemClick(item);
             }
             else if(item.ItemId == Resource.Id.menu_save)
             {
-                OnSaveMenuItemClick();
+                OnSaveMenuItemClick(item);
             }
             else if (item.ItemId == Resource.Id.menu_syncImages)
             {
-                OnSyncImagesMenuItemClick();
+                OnSyncImagesMenuItemClick(item);
             }
             else
             {
@@ -326,10 +326,10 @@ namespace CiuchApp.Mobile.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        protected virtual void OnNewMenuItemClick() { }
-        protected virtual void OnEditMenuItemClick() { }
-        protected virtual void OnSaveMenuItemClick() { }
-        protected virtual void OnSyncImagesMenuItemClick() { } 
+        protected virtual void OnNewMenuItemClick(object sender) { }
+        protected virtual void OnEditMenuItemClick(object sender) { }
+        protected virtual void OnSaveMenuItemClick(object sender) { }
+        protected virtual void OnSyncImagesMenuItemClick(object sender) { } 
         #endregion
     }
 }

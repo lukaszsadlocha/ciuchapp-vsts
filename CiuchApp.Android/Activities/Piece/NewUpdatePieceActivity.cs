@@ -150,7 +150,7 @@ namespace CiuchApp.Mobile.Activities
             //Save button
             _saveButton = FindViewById<Button>(Resource.Id.savePieceButton);
             _saveButton.Text = "Zapisz";
-            _saveButton.Click += (s, e) => OnSaveMenuItemClick();
+            _saveButton.Click += (s, e) => OnSaveMenuItemClick(s);
         }
 
         private TopCategory GetCurrentTopCategory()
@@ -161,7 +161,7 @@ namespace CiuchApp.Mobile.Activities
             return topCategoryValue;
         }
 
-        protected override void OnSaveMenuItemClick()
+        protected override void OnSaveMenuItemClick(object sender)
         {
 
             if (CurrentPiece.Id == 0)
@@ -176,7 +176,7 @@ namespace CiuchApp.Mobile.Activities
             }
             Next<AllPieceActivity>(CurrentBusinessTrip.Id);
 
-            base.OnSaveMenuItemClick();
+            base.OnSaveMenuItemClick(sender);
         }
     }
 }

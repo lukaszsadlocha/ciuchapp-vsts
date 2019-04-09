@@ -78,7 +78,7 @@ namespace CiuchApp.Mobile.Activities
             //  Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
 
-        protected override void OnSaveMenuItemClick()
+        protected override void OnSaveMenuItemClick(object sender)
         {
             if (_apiClient.Add<BusinessTrip>(model))
                 //TODO: model need to have ID as a result of call to webApi
@@ -86,7 +86,7 @@ namespace CiuchApp.Mobile.Activities
             CacheContext.BusinessTrips.Add(model);
             Next<AllPieceActivity>(model.Id);
             // TODO: log error + render error activity
-            base.OnSaveMenuItemClick();
+            base.OnSaveMenuItemClick(sender);
         }
 
     }
