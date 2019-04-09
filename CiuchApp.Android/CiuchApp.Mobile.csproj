@@ -238,8 +238,10 @@
     <Compile Include="Extensions\DatePickerFragment.cs" />
     <Compile Include="Activities\Piece\NewUpdatePieceActivity.cs" />
     <Compile Include="Activities\Piece\AllPieceActivity.cs" />
+    <Compile Include="Helpers\BitmapHelperExtensions.cs" />
     <Compile Include="Helpers\EnvironmentHelper.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
+    <Compile Include="Helpers\IBitmapHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>

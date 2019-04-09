@@ -12,58 +12,81 @@ using Android.Widget;
 
 using System.IO;
 using Android.Graphics;
+using System.Net;
+using CiuchApp.Settings;
+using Android.Media;
 
 namespace CiuchApp.Mobile.Helpers
 {
-    public static class BitmapHelpers
+    public class BitmapHelper : IBitmapHelper
     {
-        public static Bitmap LoadAndResizeBitmap(this string fileName, int width, int height)
+        private readonly IEnvironmentHelper _environmentHelper;
+        private readonly ICiuchAppSettings _settings;
+
+        public BitmapHelper(IEnvironmentHelper environmentHelper, ICiuchAppSettings ciuchAppSettings)
         {
-            BitmapFactory.Options options = new BitmapFactory.Options
-            {
-                InJustDecodeBounds = true
-            };
-            BitmapFactory.DecodeFile(fileName, options);
-            int outHeight = options.OutHeight;
-            int outWidth = options.OutWidth;
-            int inSampleSize = 1;
-            if (outHeight > height || outWidth > width)
-            {
-                inSampleSize = outWidth > outHeight ?
-                    outHeight / height :
-                    outWidth / width;
-            }
-            options.InSampleSize = inSampleSize;
-            options.InJustDecodeBounds = false;
-            Bitmap resizedBitmap = BitmapFactory.DecodeFile(fileName, options);
-            return resizedBitmap;
+            _environmentHelper = environmentHelper;
+            _settings = ciuchAppSettings;
+        }
+        public void SyncPieceImage(string imageName)
+        {
+            //Check if image exisit
+            var imagePath = _environmentHelper.GetImageFullPath(imageName);
+            if (imagePath.FileExist()) return;
+            //Get Image
+            var image = GetImageBitmapFromImageName(imageName);
+
+            if (image == null) return;
+
+            // Save Image
+            SaveBitmapImage(image, imageName);
         }
 
-        public static bool FileExist(this string filePath)
+
+        private Bitmap GetImageBitmapFromImageName(string imageName)
         {
-            var f = new Java.IO.File(filePath);
-            return f.Exists();
+            var imageUrl = $"{_settings.Urls.RemoteUrl}/{_settings.PhotoStorageFolder.Server.Name}/{imageName}";
+            return GetImageBitmapFromUrl(imageUrl);
         }
-        public static Bitmap LoadAndSaveBitmap(this string fileName)
+
+        private Bitmap GetImageBitmapFromUrl(string url)
         {
-            BitmapFactory.Options options = new BitmapFactory.Options
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
             {
-                InJustDecodeBounds = true
-            };
-            //BitmapFactory.DecodeFile(fileName, options);
-            //int outHeight = options.OutHeight;
-            //int outWidth = options.OutWidth;
-            //int inSampleSize = 1;
-            //if (outHeight > height || outWidth > width)
-            //{
-            //    inSampleSize = outWidth > outHeight ?
-            //        outHeight / height :
-            //        outWidth / width;
-            //}
-            //options.InSampleSize = inSampleSize;
-            //options.InJustDecodeBounds = false;
-            Bitmap resizedBitmap = BitmapFactory.DecodeFile(fileName, options);
-            return resizedBitmap;
+                try
+                {
+                    var imageBytes = webClient.DownloadData(url);
+                    if (imageBytes != null && imageBytes.Length > 0)
+                    {
+                        imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    }
+                }
+                catch
+                {
+                    //to do fix it
+                    return null;
+                }
+            }
+
+            return imageBitmap;
+        }
+
+        private void SaveBitmapImage(Bitmap bitmap, string imageName)
+        {
+            var dir = _environmentHelper.GetPhotoStorageFolder();
+            if (!dir.Exists())
+            {
+                dir.Mkdirs();
+            }
+
+            var pathToImage = _environmentHelper.GetImageFullPath(imageName);
+
+            using (var s = new FileStream(pathToImage, FileMode.CreateNew))
+            {
+                bitmap.Compress(Bitmap.CompressFormat.Jpeg, 90, s);
+            }
         }
     }
 }

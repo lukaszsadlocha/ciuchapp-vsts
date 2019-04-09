@@ -12,6 +12,7 @@ using CiuchApp.ApiClient;
 using CiuchApp.Mobile.Helpers;
 using System.Linq.Expressions;
 using Android.Views;
+using Android.Media;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -20,6 +21,7 @@ namespace CiuchApp.Mobile.Activities
         public ICiuchAppSettings _settings;
         public IApiClient _apiClient;
         public IEnvironmentHelper _environmentHelper;
+        public IBitmapHelper _bitmapHelper;
 
         protected CacheContext _cacheContext;
         protected CacheContext CacheContext
@@ -87,9 +89,11 @@ namespace CiuchApp.Mobile.Activities
 
         public CiuchAppBaseActivity()
         {
+            //Done this way to simplify derived classes constructors
             _settings = (ICiuchAppSettings)App.Container.GetService(typeof(ICiuchAppSettings));
             _apiClient = (IApiClient)App.Container.GetService(typeof(IApiClient));
             _environmentHelper = (IEnvironmentHelper)App.Container.GetService(typeof(IEnvironmentHelper));
+            _bitmapHelper = (IBitmapHelper)App.Container.GetService(typeof(IBitmapHelper));
         }
 
         /// <summary>
@@ -311,7 +315,7 @@ namespace CiuchApp.Mobile.Activities
             {
                 OnEditMenuItemClick(item);
             }
-            else if(item.ItemId == Resource.Id.menu_save)
+            else if (item.ItemId == Resource.Id.menu_save)
             {
                 OnSaveMenuItemClick(item);
             }
@@ -329,7 +333,21 @@ namespace CiuchApp.Mobile.Activities
         protected virtual void OnNewMenuItemClick(object sender) { }
         protected virtual void OnEditMenuItemClick(object sender) { }
         protected virtual void OnSaveMenuItemClick(object sender) { }
-        protected virtual void OnSyncImagesMenuItemClick(object sender) { } 
+        protected virtual void OnSyncImagesMenuItemClick(object sender)
+        {
+            Toast.MakeText(this, "All images will be sync", ToastLength.Short).Show();
+
+            foreach (var bt in CacheContext.BusinessTrips)
+            {
+                foreach (var p in bt.Pieces)
+                {
+                    _bitmapHelper.SyncPieceImage(p.ImageName);
+                }
+            }
+
+            // Make sure it shows up in the Photos gallery promptly.
+            MediaScannerConnection.ScanFile(this, new string[] { _environmentHelper.GetPhotoStorageFolder().Path }, new string[] { "image/png", "image/jpeg" }, null);
+        }
         #endregion
     }
 }
