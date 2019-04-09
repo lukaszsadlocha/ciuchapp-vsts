@@ -9,6 +9,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,11 +64,11 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
             </GridLayout>
-            <Button
+        <!--<Button
                 android:text="Button Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/saveNewBusinessTrip" />
+                android:id="@+id/saveNewBusinessTrip" />-->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

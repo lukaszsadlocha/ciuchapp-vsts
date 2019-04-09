@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Rozmiar i ilość")]
+    [Activity(Label = "Rozmiar i ilość", NoHistory = true)]
     public class NewUpdateSizeAmountActivity : CiuchAppBaseActivity
     {
         Button _saveButton;

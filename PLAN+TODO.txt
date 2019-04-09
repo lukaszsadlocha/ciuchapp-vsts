@@ -40,7 +40,7 @@ US27 + : (Mobile) create different sizes of image + refactor name (add datetime 
 ----------------------------------------------------------------------US32 : (MobileTests) Introduce UI tests
 ----------------------------------------------------------------------US33 : (Mobile) Cascade dropdowns
 ----------------------------------------------------------------------US34 : (Dashboard) Refresh web design
-US35 + : (Mobile/Dashboard) Sync images back to mobile
+----------------------------------------------------------------------US35 + : (Mobile) Add toolbar with Sync images back to mobile
 US36 + : (Mobile) Theme colors & Alignments
 ----------------------------------------------------------------------US37 + : (Mobile) Do not show keyboard when open piece
 

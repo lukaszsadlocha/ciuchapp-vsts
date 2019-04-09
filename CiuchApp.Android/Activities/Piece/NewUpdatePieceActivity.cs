@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Ciuch", NoHistory = true)]
+    [Activity(NoHistory = true)]
     public class NewUpdatePieceActivity : CiuchAppBaseActivity
     {
         Button _saveButton;
@@ -24,6 +24,7 @@ namespace CiuchApp.Mobile.Activities
             base.OnCreate(bundle);
             
             SetContentView(Resource.Layout.Piece);
+            SetToolbar("Ciuch z wyjazdu", showSaveMenuItem: true);
 
             if(CacheContext.NewPiece != null)
             {
@@ -111,22 +112,6 @@ namespace CiuchApp.Mobile.Activities
                 };
             };
 
-            //CascadeSpinnersFor<TopCategory, MainCategory>(Resource.Id.pieceTopCategorySpinner, Resource.Id.pieceMainCategorySpinner, x=>x.TopCategoryId, CurrentPiece);
-
-            // MainCategory indicates Group
-            //var mainCategorySpinner = FindViewById<Spinner>(Resource.Id.pieceMainCategorySpinner);
-
-            //mainCategorySpinner.ItemSelected += (s, e) =>
-            //{
-            //    var currentValue = _apiClient.GetList<MainCategory>().ElementAtOrDefault(e.Position);
-            //    if (currentValue != null)
-            //    {
-            //        var allRelatedValues = _apiClient.GetList<Group>().Where(x => x.MainCategoryId == currentValue.Id).Select(x => x.Name).ToList();
-            //        SpinnerFor<Group>(Resource.Id.pieceGroupSpinner, CurrentPiece, allRelatedValues);
-            //    }
-            //};
-
-
             //Set datetimes
             DatePickerFor(Resource.Id.PieceOrderDate, CurrentPiece, nameof(CurrentPiece.OrderDate));
             DatePickerFor(Resource.Id.PieceEstimatedDateOfShipmentDate, CurrentPiece, nameof(CurrentPiece.EstimatedDateOfShipment), DateTime.Now.AddDays(7));
@@ -165,20 +150,7 @@ namespace CiuchApp.Mobile.Activities
             //Save button
             _saveButton = FindViewById<Button>(Resource.Id.savePieceButton);
             _saveButton.Text = "Zapisz";
-            _saveButton.Click += (s, e) =>
-            {
-                if(CurrentPiece.Id==0)
-                {
-                    _apiClient.Add<Piece>(CurrentPiece);
-                    CurrentBusinessTrip.Pieces.Add(CurrentPiece);
-                    CacheContext.NewPiece = null;
-                }
-                else
-                {
-                    _apiClient.Update<Piece>(CurrentPiece);
-                }
-                Next<AllPieceActivity>(CurrentBusinessTrip.Id);
-            };
+            _saveButton.Click += (s, e) => OnSaveMenuItemClick(s);
         }
 
         private TopCategory GetCurrentTopCategory()
@@ -187,6 +159,24 @@ namespace CiuchApp.Mobile.Activities
             int currentTopCategoryValueId = GetValue<TopCategory>(CurrentPiece) == 0 ? 1 : GetValue<TopCategory>(CurrentPiece);
             var topCategoryValue = topCategoryValues.First(x => x.Id == currentTopCategoryValueId);
             return topCategoryValue;
+        }
+
+        protected override void OnSaveMenuItemClick(object sender)
+        {
+
+            if (CurrentPiece.Id == 0)
+            {
+                _apiClient.Add<Piece>(CurrentPiece);
+                CurrentBusinessTrip.Pieces.Add(CurrentPiece);
+                CacheContext.NewPiece = null;
+            }
+            else
+            {
+                _apiClient.Update<Piece>(CurrentPiece);
+            }
+            Next<AllPieceActivity>(CurrentBusinessTrip.Id);
+
+            base.OnSaveMenuItemClick(sender);
         }
     }
 }

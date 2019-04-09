@@ -23,7 +23,7 @@ using CiuchApp.ApiClient;
 namespace CiuchApp.Mobile.Activities
 {
 
-    [Activity(Label = "Nowy wyjazd", Icon = "@drawable/answear", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
     public class UpdateBusinessTripActivity : CiuchAppBaseActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -31,6 +31,8 @@ namespace CiuchApp.Mobile.Activities
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.NewBusinessTrip);
+            SetToolbar("Edytuj Wyjazd", showSaveMenuItem: true);
+
 
             //Date from
 
@@ -43,16 +45,16 @@ namespace CiuchApp.Mobile.Activities
             SpinnerFor<Currency>(Resource.Id.currencySpinner, CurrentBusinessTrip, CacheContext.Currencies);
             SpinnerFor<Season>(Resource.Id.seasonSpinner, CurrentBusinessTrip, CacheContext.Seasons);
 
-            // BUTTON - GET BUTTON (action in derivered classes)
-            var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
+            //// BUTTON - GET BUTTON (action in derivered classes)
+            //var saveNewBusinessTrip = FindViewById<Button>(Resource.Id.saveNewBusinessTrip);
 
-            // BUTTON - ADD/UPDATE BUSINESS TRIP
-            saveNewBusinessTrip.Text = "Zapisz";
-            saveNewBusinessTrip.Click += (s, e) => {
-                if(_apiClient.Update<BusinessTrip>(CurrentBusinessTrip))
-                    Next<AllBusinessTripActivity>();
-                // TODO: log error + render error activity
-            };
+            //// BUTTON - ADD/UPDATE BUSINESS TRIP
+            //saveNewBusinessTrip.Text = "Zapisz";
+            //saveNewBusinessTrip.Click += (s, e) => {
+            //    if(_apiClient.Update<BusinessTrip>(CurrentBusinessTrip))
+            //        Next<AllBusinessTripActivity>();
+            //    // TODO: log error + render error activity
+            //};
 
             //TODO: Nice info at the bottom that it was saved:
             //  Spinner spinner = (Spinner)sender;
@@ -60,6 +62,13 @@ namespace CiuchApp.Mobile.Activities
             //  Toast.MakeText(this, toast, ToastLength.Long).Show();
 
 
+        }
+
+        protected override void OnSaveMenuItemClick(object sender)
+        {
+            if (_apiClient.Update<BusinessTrip>(CurrentBusinessTrip))
+                Next<AllBusinessTripActivity>();
+            base.OnSaveMenuItemClick(sender);
         }
     }
 }

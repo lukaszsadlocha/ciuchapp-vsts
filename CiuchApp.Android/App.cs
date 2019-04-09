@@ -44,6 +44,7 @@ namespace CiuchApp.Mobile
             services.AddTransient<ICiuchAppSettings, CiuchAppSettings>();
             services.AddTransient<ApiClient.IApiClient, ApiClient.ApiClient>();
             services.AddTransient<IEnvironmentHelper, EnvironmentHelper>();
+            services.AddTransient<IBitmapHelper, BitmapHelper>();
 
             Container = services.BuildServiceProvider();
         }

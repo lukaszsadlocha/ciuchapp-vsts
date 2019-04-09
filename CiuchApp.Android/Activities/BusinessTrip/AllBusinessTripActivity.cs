@@ -17,13 +17,18 @@ using CiuchApp.DataAccess;
 using CiuchApp.Mobile.Adapters;
 using CiuchApp.Settings;
 using CiuchApp.ApiClient;
+using Android.Views;
+using System.Net;
+using System.Linq;
+using System.IO;
+using CiuchApp.Mobile.Helpers;
+using Android.Media;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "CiuchApp - Answear")]
+    [Activity]
     public class AllBusinessTripActivity : CiuchAppBaseActivity
     {
-        private Button newBusinessTripButton;
         private ListView businessTripsListView;
 
         protected override void OnCreate(Bundle bundle)
@@ -32,8 +37,7 @@ namespace CiuchApp.Mobile.Activities
 
             SetContentView(Resource.Layout.AllBusinessTrip);
 
-            newBusinessTripButton = FindViewById<Button>(Resource.Id.newBusinessTrip);
-            newBusinessTripButton.Click += (s, e) => { StartActivity(new Intent(this, typeof(NewBusinessTrips))); };
+            SetToolbar(toolbarTitle: "Wyjazdy służbowe", showNewMenuItem: true);
 
             businessTripsListView = FindViewById<ListView>(Resource.Id.businessTripsListView);
 
@@ -52,6 +56,8 @@ namespace CiuchApp.Mobile.Activities
                 Next<UpdateBusinessTripActivity>(businessTripClicked.Id);
             };
         }
+
+        protected override void OnNewMenuItemClick(object sender) => Next<NewBusinessTrips>();
     }
 }
 

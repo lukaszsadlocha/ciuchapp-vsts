@@ -22,8 +22,8 @@ namespace CiuchApp.Settings
             };
             Urls = new Urls()
             {
-                LocalApiUrl = @"http://10.0.2.2:13121/api",
-                RemoteApiUrl = @"http://10.0.2.2:13121/api"
+                LocalUrl = @"http://10.0.2.2:13121",
+                RemoteUrl = @"http://10.0.2.2:13121"
                 //LocalApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api",
                 //RemoteApiUrl = @"http://www.ciuchapp.lukaszsadlocha.pl/api"
             };
@@ -79,8 +79,25 @@ namespace CiuchApp.Settings
             }
         }
 
-        public string LocalApiUrl { get; set; }
-        public string RemoteApiUrl { get; set; }
+        public string LocalUrl { get; set; }
+
+        public string RemoteUrl { get; set; }
+
+        public string LocalApiUrl
+        {
+            get
+            {
+                return $"{LocalUrl}/api";
+            }
+        }
+
+        public string RemoteApiUrl
+        {
+            get
+            {
+                return $"{RemoteUrl}/api";
+            }
+        }
     }
 
     public class PathValue

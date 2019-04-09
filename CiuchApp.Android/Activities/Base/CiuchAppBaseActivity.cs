@@ -11,6 +11,8 @@ using CiuchApp.Settings;
 using CiuchApp.ApiClient;
 using CiuchApp.Mobile.Helpers;
 using System.Linq.Expressions;
+using Android.Views;
+using Android.Media;
 
 namespace CiuchApp.Mobile.Activities
 {
@@ -19,12 +21,14 @@ namespace CiuchApp.Mobile.Activities
         public ICiuchAppSettings _settings;
         public IApiClient _apiClient;
         public IEnvironmentHelper _environmentHelper;
+        public IBitmapHelper _bitmapHelper;
 
         protected CacheContext _cacheContext;
-        protected CacheContext CacheContext {
+        protected CacheContext CacheContext
+        {
             get
             {
-                if(_cacheContext == null)
+                if (_cacheContext == null)
                 {
                     EnsureCahceContext();
                 }
@@ -38,7 +42,7 @@ namespace CiuchApp.Mobile.Activities
         {
             get
             {
-                if(_currentbusinessTrip == null && int.TryParse(Intent.GetStringExtra(currentBusinessTripJsonKey), out int id))
+                if (_currentbusinessTrip == null && int.TryParse(Intent.GetStringExtra(currentBusinessTripJsonKey), out int id))
                 {
                     _currentbusinessTrip = CacheContext.BusinessTrips.FirstOrDefault(x => x.Id == id);
                 }
@@ -85,9 +89,11 @@ namespace CiuchApp.Mobile.Activities
 
         public CiuchAppBaseActivity()
         {
+            //Done this way to simplify derived classes constructors
             _settings = (ICiuchAppSettings)App.Container.GetService(typeof(ICiuchAppSettings));
             _apiClient = (IApiClient)App.Container.GetService(typeof(IApiClient));
             _environmentHelper = (IEnvironmentHelper)App.Container.GetService(typeof(IEnvironmentHelper));
+            _bitmapHelper = (IBitmapHelper)App.Container.GetService(typeof(IBitmapHelper));
         }
 
         /// <summary>
@@ -101,7 +107,7 @@ namespace CiuchApp.Mobile.Activities
                 _cacheContext = await _apiClient.GetCacheAsync();
         }
 
-        public void Next<T>(int? currentBusinessTrip=null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity
+        public void Next<T>(int? currentBusinessTrip = null, int? currentPiece = null, int? currentSizeAmount = null) where T : Activity
         {
             var nextActivity = new Intent(this, typeof(T));
 
@@ -239,7 +245,7 @@ namespace CiuchApp.Mobile.Activities
             //Double accepts dot as a seperator
             if (prop.PropertyType == typeof(double))
             {
-                if(double.TryParse(value.ToString().Replace(",", "."), out var doubleValue))
+                if (double.TryParse(value.ToString().Replace(",", "."), out var doubleValue))
                 {
                     prop.SetValue(model, doubleValue, null);
                 }
@@ -266,5 +272,82 @@ namespace CiuchApp.Mobile.Activities
             });
             builder.Show();
         }
+
+        #region TOOLBAR Properites & Methods
+        private bool ShowNewMenuItem { get; set; }
+        private bool ShowSaveMenuItem { get; set; }
+        private bool ShowEditMenuItem { get; set; }
+        private bool ShowSyncImagesMenuItem { get; set; }
+
+        protected void SetToolbar(string toolbarTitle, bool showNewMenuItem = false, bool showEditMenuItem = false, bool showSaveMenuItem = false, bool showSyncImagesMenuItem = true)
+        {
+            ShowNewMenuItem = showNewMenuItem;
+            ShowEditMenuItem = showEditMenuItem;
+            ShowSaveMenuItem = showSaveMenuItem;
+            ShowSyncImagesMenuItem = showSyncImagesMenuItem;
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = toolbarTitle;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+            if (!ShowNewMenuItem)
+                menu.FindItem(Resource.Id.menu_new).SetVisible(false);
+            if (!ShowEditMenuItem)
+                menu.FindItem(Resource.Id.menu_edit).SetVisible(false);
+            if (!ShowSaveMenuItem)
+                menu.FindItem(Resource.Id.menu_save).SetVisible(false);
+            if (!ShowSyncImagesMenuItem)
+                menu.FindItem(Resource.Id.menu_syncImages).SetVisible(false);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.menu_new)
+            {
+                OnNewMenuItemClick(item);
+            }
+            else if (item.ItemId == Resource.Id.menu_edit)
+            {
+                OnEditMenuItemClick(item);
+            }
+            else if (item.ItemId == Resource.Id.menu_save)
+            {
+                OnSaveMenuItemClick(item);
+            }
+            else if (item.ItemId == Resource.Id.menu_syncImages)
+            {
+                OnSyncImagesMenuItemClick(item);
+            }
+            else
+            {
+                Toast.MakeText(this, "Action selected: " + item.TitleFormatted, ToastLength.Short).Show();
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
+        protected virtual void OnNewMenuItemClick(object sender) { }
+        protected virtual void OnEditMenuItemClick(object sender) { }
+        protected virtual void OnSaveMenuItemClick(object sender) { }
+        protected virtual void OnSyncImagesMenuItemClick(object sender)
+        {
+            Toast.MakeText(this, "All images will be sync", ToastLength.Short).Show();
+
+            foreach (var bt in CacheContext.BusinessTrips)
+            {
+                foreach (var p in bt.Pieces)
+                {
+                    _bitmapHelper.SyncPieceImage(p.ImageName);
+                }
+            }
+
+            // Make sure it shows up in the Photos gallery promptly.
+            MediaScannerConnection.ScanFile(this, new string[] { _environmentHelper.GetPhotoStorageFolder().Path }, new string[] { "image/png", "image/jpeg" }, null);
+        }
+        #endregion
     }
 }

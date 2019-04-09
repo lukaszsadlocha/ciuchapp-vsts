@@ -22,7 +22,7 @@ using Uri = Android.Net.Uri;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Label = "Ciuchy z wyjazdu")]
+    [Activity]
     public class AllPieceActivity : CiuchAppBaseActivity
     {
         //controls
@@ -43,7 +43,9 @@ namespace CiuchApp.Mobile.Activities
             //Set Layout
             SetContentView(Resource.Layout.AllPiece);
 
-            FindViewById<TextView>(Resource.Id.businessTripTextInfo).Text = $"{CurrentBusinessTrip?.City?.Name} | {CurrentBusinessTrip?.DateFrom}";
+            var toolbarTitle = $"{CurrentBusinessTrip?.City?.Name} | {CurrentBusinessTrip?.DateFrom.ToString("dd MM yyyy")}";
+            SetToolbar(toolbarTitle, showNewMenuItem: true);
+
             piecesListView = FindViewById<ListView>(Resource.Id.showClothesListView);
 
             // Load Clothes
@@ -54,7 +56,6 @@ namespace CiuchApp.Mobile.Activities
             piecesListView.ItemClick += (s, e) =>
             {
                 var pieceClicked = pieces[e.Position];
-
                 Next<NewUpdatePieceActivity>(CurrentBusinessTrip.Id, pieceClicked.Id);
             };
 
@@ -63,11 +64,12 @@ namespace CiuchApp.Mobile.Activities
             if (IsThereAnAppToTakePictures())
             {
                 EnsureDirectoryForPictures();
-
-                Button button = FindViewById<Button>(Resource.Id.newClothe);
-                //_imageView = FindViewById<ImageView>(Resource.Id.imageView1);
-                button.Click += TakeAPicture;
             }
+        }
+
+        protected override void OnNewMenuItemClick(object sender)
+        {
+            TakeAPicture(sender, null);
         }
 
         private void TakeAPicture(object sender, EventArgs eventArgs)
