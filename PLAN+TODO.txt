@@ -43,6 +43,7 @@ US27 + : (Mobile) create different sizes of image + refactor name (add datetime 
 ----------------------------------------------------------------------US35 + : (Mobile) Add toolbar with Sync images back to mobile
 US36 + : (Mobile) Theme colors & Alignments
 ----------------------------------------------------------------------US37 + : (Mobile) Do not show keyboard when open piece
+---------------------------US38 + : (Mobile) Use default binding in Xamarin instead on logic that was developed
 
 -----------------
 |     BUGS      |
