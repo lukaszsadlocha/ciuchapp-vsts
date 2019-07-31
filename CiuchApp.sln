@@ -39,7 +39,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Domain.Tests", "Ci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiuchApp.Mobile.UITests", "CiuchApp.Mobile.UITests\CiuchApp.Mobile.UITests.csproj", "{B19C892E-2628-4CA7-AD27-08D406A3B14B}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AndroidBinding", "AndroidBinding\AndroidBinding.shproj", "{AB217C74-6B83-4166-AF5B-12BCD829528E}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		AndroidBinding\AndroidBinding.projitems*{2851daa4-5229-46a6-98e7-24740b49b153}*SharedItemsImports = 4
+		AndroidBinding\AndroidBinding.projitems*{ab217c74-6b83-4166-af5b-12bcd829528e}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

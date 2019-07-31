@@ -50,6 +50,8 @@ using Java.Lang;
 
 using Enum = System.Enum;
 using Exception = System.Exception;
+using Activity = Android.App.Activity;
+
 
 namespace Outcoder.UI.Xaml.Data
 {

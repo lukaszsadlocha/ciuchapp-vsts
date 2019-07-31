@@ -23,6 +23,8 @@ using System.Linq;
 using System.IO;
 using CiuchApp.Mobile.Helpers;
 using Android.Media;
+using Outcoder.UI.Xaml.Data;
+using CiuchApp.Mobile.ViewModels;
 
 namespace CiuchApp.Mobile.Activities
 {

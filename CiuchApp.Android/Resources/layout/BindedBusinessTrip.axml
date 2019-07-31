@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<!--
+  <Button
+      android:id="@+id/MyButton"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/Hello"
+      local:Binding="{Target=Click, Source=HandleClick;Target=Text, Source=ClickCount, Mode=OneWay}" />
+      
+  
+      // list view
+      local:Binding="{
+        Source=HandleItemClick,
+        Target=Adapter, 
+        Source=Posts, 
+        Mode=OneTime, 
+        Converter=ListAdapterConverter, 
+        ConverterParameter=CiuchApp.Mobile.Resource+Layout.ListItemRow;             
+        Target=ItemClick, 
+        Mode=OneTime
+      -->
+    <Spinner
+        android:id="@+id/seasonSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        local:Binding="{Target=Adapter, Source=SeasonSpinnerSource, Mode=OneWay, Converter=SpinnerAdapterConverter}" />
+    <Button
+        android:id="@+id/MyButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello"
+        local:Binding="{Target=Click, Source=IncrementCommand;Target=Text, Source=ClickCount, Mode=OneWay}" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello"
+        local:Binding="{Source=SampleText, Target=Text, Mode=TwoWay}" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello"
+        local:Binding="{Source=SampleText, Target=Text, Mode=OneWay}" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello"
+        local:Binding="{Source=Foo.Text, Target=Text, Mode=OneWay}" />
+    <CheckBox
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        local:Binding="{Source=CheckBox1Checked, Target=Checked, Mode=TwoWay, ChangedEvent=CheckedChange}" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello"
+        local:Binding="{Source=CheckBox1Message, Target=Text, Mode=OneWay}" />
+<!--<ListView
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/ListView"
+      local:Binding="{
+      
+      Target=Adapter, 
+      Source=Posts, 
+      Mode=OneTime, 
+      Converter=ListAdapterConverter, 
+      ConverterParameter=CiuchApp.Mobile.Resource+Layout.ListItemRow;             
+      Target=ItemClick, 
+      Source=HandleItemClick,
+      Mode=OneTime
+      
+}" />-->
+</LinearLayout>
