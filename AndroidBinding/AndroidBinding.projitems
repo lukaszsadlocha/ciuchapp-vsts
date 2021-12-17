@@ -9,6 +9,7 @@
     <Import_RootNamespace>AndroidBinding</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Adapters\BindableSpinnerAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Adapters\BindableListAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\BindingApplicator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\BindingExpression.cs" />
@@ -17,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\PropertyBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Utilities\DelegateUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Utilities\TypeUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ValueConverters\SpinnerAdapterConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ValueConverters\ListAdapterConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\IViewBinder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\ViewBinderRegistry.cs" />

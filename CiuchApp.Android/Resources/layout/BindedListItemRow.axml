@@ -6,7 +6,7 @@
     android:minHeight="50dp"
     android:orientation="horizontal">
     <TextView
-        android:id="@+id/Title"
+        android:id="@+id/TextForId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="3dp"
@@ -15,9 +15,9 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:typeface="sans"
-        local:Binding="{Source=Title, Target=Text, Mode=OneTime}" />
+        local:Binding="{Source=Id, Target=Text, Mode=OneTime}" />
     <TextView
-        android:id="@+id/Description"
+        android:id="@+id/TextForName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Title"
@@ -25,5 +25,5 @@
         android:paddingTop="5dp"
         android:textColor="#fff"
         android:textSize="11sp"
-        local:Binding="{Source=Description, Target=Text, Mode=OneTime}" />
+        local:Binding="{Source=Name, Target=Text, Mode=OneTime}" />
 </RelativeLayout>

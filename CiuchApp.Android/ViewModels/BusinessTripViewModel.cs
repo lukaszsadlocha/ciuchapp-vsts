@@ -16,7 +16,7 @@ namespace CiuchApp.Mobile.ViewModels
             IncrementCommand = new IncrementCounterCommand(this);
 
             var listData = new ObservableCollection<Post>();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var item = new Post { Description = "Description " + i, Title = "Title " + i };
                 listData.Add(item);
