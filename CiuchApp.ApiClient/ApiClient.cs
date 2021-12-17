@@ -13,17 +13,20 @@ namespace CiuchApp.ApiClient
     public class ApiClient : IApiClient
     {
         private readonly ICiuchAppSettings _settings;
-        private readonly string apiBaseUrl;
+        private readonly string _apiBaseUrl;
+        private readonly IUriGenerator _uriGenerator;
 
-        public ApiClient(ICiuchAppSettings settings)
+        public ApiClient(ICiuchAppSettings settings, IUriGenerator urlGenerator)
         {
             _settings = settings;
-            apiBaseUrl = _settings.Urls.ApiUrl;
+            _apiBaseUrl = _settings.Urls.ApiUrl;
+            _uriGenerator = urlGenerator;
+            urlGenerator.Set(_apiBaseUrl);
         }
 
         public async Task<CacheContext> GetCacheAsync()
         {
-            var restApiUri = new Uri($@"{apiBaseUrl}/Cache");
+            Uri restApiUri = _uriGenerator.GetCacheUri();
             
             try
             {
@@ -48,11 +51,11 @@ namespace CiuchApp.ApiClient
             Uri restApiUri;
             if (id != 0 && !string.IsNullOrEmpty(baseController))
             {
-                restApiUri = new Uri($@"{apiBaseUrl}/{baseController}/{id}/{GetNameOfController<T>()}");
+                restApiUri = _uriGenerator.GetDeepUri<T>(baseController, id);
             }
             else
             {
-                restApiUri = new Uri($@"{apiBaseUrl}/{GetNameOfController<T>()}");
+                restApiUri = _uriGenerator.GetUri<T>();
             }
 
             try
@@ -75,8 +78,7 @@ namespace CiuchApp.ApiClient
         {
             if (item.IsValid<T>(newItem: true))
             {
-                string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
+                var restApiUri = _uriGenerator.GetUri<T>();
 
                 using (var httpClient = new HttpClient())
                 {
@@ -102,8 +104,7 @@ namespace CiuchApp.ApiClient
         {
             if (item.IsValid<T>(newItem: false))
             {
-                string nameOfController = GetNameOfController<T>();
-                Uri restApiUri = new Uri($@"{apiBaseUrl}/{nameOfController}");
+                var restApiUri = _uriGenerator.GetUri<T>();
 
                 using (var httpClient = new HttpClient())
                 {
@@ -142,7 +143,8 @@ namespace CiuchApp.ApiClient
 
         public bool UploadImage(string localFilePath, string fileName)
         {
-            var url = apiBaseUrl + "/Images";
+            var uri = _uriGenerator.GetImageUri();
+
             var file = localFilePath;
 
             //read file into upfilebytes array
@@ -158,7 +160,7 @@ namespace CiuchApp.ApiClient
             content.Add(baContent, "File", fileName);
 
             //upload MultipartFormDataContent content async and store response in response var
-            var response = client.PostAsync(url, content);
+            var response = client.PostAsync(uri.ToString(), content);
 
             //read response result as a string async into json var
             return response.Result.IsSuccessStatusCode;
@@ -170,37 +172,5 @@ namespace CiuchApp.ApiClient
         {
             throw new NotImplementedException();
         }
-
-        private string GetNameOfController<T>()
-        {
-            string nameOfClass = typeof(T).Name;
-            string nameOfController = "";
-            if (nameOfClass.EndsWith("y"))
-            {
-                nameOfController = nameOfClass.Substring(0, nameOfClass.Length - 1) + "ies";
-            }
-            else
-            {
-                nameOfController = nameOfClass + "s";
-            }
-
-            return nameOfController;
-        }
-
-        //public async Task<List<BusinessTrip>> GetBusinessTripsAsync()
-        //{
-
-        //    var RestUrl = @"http://10.0.2.2:13121/api/BusinessTrips";
-        //    var uri = new Uri(string.Format(RestUrl, string.Empty));
-        //    var client = new HttpClient();
-        //    var response = await client.GetAsync(uri);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var content = await response.Content.ReadAsStringAsync();
-        //        return await Task.Run(() => JsonConvert.DeserializeObject<List<BusinessTrip>>(content));
-
-        //    }
-        //    return null;
-        //}
     }
 }

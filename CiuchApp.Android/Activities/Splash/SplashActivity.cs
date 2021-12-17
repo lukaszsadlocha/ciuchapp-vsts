@@ -24,7 +24,7 @@ using Android;
 
 namespace CiuchApp.Mobile.Activities
 {
-    [Activity(Theme = "@style/CiuchAppSplash", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/CiuchAppSplash", MainLauncher = false, NoHistory = true)]
     public class SplashActivity : CiuchAppBaseActivity
     {
         protected override void OnCreate(Bundle bundle)

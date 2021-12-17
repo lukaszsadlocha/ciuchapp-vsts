@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ab217c74-6b83-4166-af5b-12bcd829528e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>AndroidBinding</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Adapters\BindableSpinnerAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Adapters\BindableListAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\BindingApplicator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\BindingExpression.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\BindingMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\IValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\PropertyBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Utilities\DelegateUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\Utilities\TypeUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ValueConverters\SpinnerAdapterConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ValueConverters\ListAdapterConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\IViewBinder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\ViewBinderRegistry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\ViewEventBinder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\ViewBinding\ViewValueChangedHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Calcium.UI.Xaml.Data\XmlBindingApplicator.cs" />
+  </ItemGroup>
+</Project>

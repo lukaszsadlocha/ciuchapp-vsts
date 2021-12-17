@@ -22,7 +22,7 @@ namespace CiuchApp.Mobile
 //#endif
 
 
-    [Application(Icon = "@drawable/answear", Label = "@string/app_name")]
+    [Application(Icon = "@drawable/logo", Label = "@string/app_name")]
     public class App : Application
     {
         public static IServiceProvider Container { get; private set; }

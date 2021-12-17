@@ -15,9 +15,9 @@ namespace CiuchApp.Mobile.UITests
 		IApp app;
         private readonly Platform platform;
 
-        private readonly int newBusinessTripButtonId = Resource.Id.newBusinessTrip;
-        private readonly int addNewBusinessTripButtonId = Resource.Id.saveNewBusinessTrip;
-        private readonly int addPiecepButtonId = Resource.Id.newClothe;
+        private readonly int newBusinessTripButtonId = 11;//Resource.Id.newBusinessTrip;
+        private readonly int addNewBusinessTripButtonId = 11;//Resource.Id.saveNewBusinessTrip;
+        private readonly int addPiecepButtonId = 11;//Resource.Id.;
         private readonly int countrySpinnerId = Resource.Id.countrySpinner;
         private readonly int citySpinnerId = Resource.Id.citySpinner;
         private readonly int currencySpinnerId = Resource.Id.currencySpinner;
